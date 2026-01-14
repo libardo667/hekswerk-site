@@ -126,15 +126,15 @@ header {
 }
 
 .brand-mark img {
-    width: 36px;
-    height: 36px;
+    width: 64px;
+    height: 64px;
     display: block;
 }
 
 .brand-name {
     font-family: Fraunces, serif;
     font-weight: 600;
-    font-size: 22px;
+    font-size: 36px;
     letter-spacing: -0.02em;
     color: var(--soft-cream);
 }
@@ -270,18 +270,19 @@ p {
 }
 
 .card {
-    background: rgba(41, 54, 86, 0.35);
+    background: rgba(41, 54, 86, 0.15);
     backdrop-filter: blur(8px);
     border: 1px solid rgba(255, 255, 255, 0.05);
     border-radius: var(--radius);
     padding: 32px;
-    transition: transform 0.2s, box-shadow 0.2s;
+    transition: transform 0.3s, box-shadow 0.3s, background 0.3s, border-color 0.3s;
 }
 
 .card:hover {
+    background: rgba(41, 54, 86, 0.85);
     transform: translateY(-4px);
     box-shadow: var(--shadow);
-    border-color: rgba(140, 118, 153, 0.3);
+    border-color: rgba(140, 118, 153, 0.5);
 }
 
 .card h3 {
