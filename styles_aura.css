@@ -47,11 +47,30 @@ body:before {
     position: fixed;
     inset: 0;
     pointer-events: none;
+    /* Deep twilight aura wash + Large Rainbow Arcs */
     background:
-        radial-gradient(1200px 900px at 50% 0%, rgba(112, 149, 183, .12), transparent 60%),
-        radial-gradient(1000px 800px at 80% 20%, rgba(140, 118, 153, .10), transparent 60%),
+        /* Top simplified rainbow arc */
+        radial-gradient(circle at 50% -20%,
+            transparent 35%,
+            rgba(112, 149, 183, 0.08) 35.5%, rgba(112, 149, 183, 0) 38%,
+            transparent 42%,
+            rgba(140, 118, 153, 0.08) 42.5%, rgba(140, 118, 153, 0) 45%,
+            transparent 49%,
+            rgba(192, 169, 144, 0.08) 49.5%, rgba(192, 169, 144, 0) 52%),
+        /* Bottom simplified rainbow arc */
+        radial-gradient(circle at 80% 120%,
+            transparent 30%,
+            rgba(112, 149, 183, 0.08) 30.5%, rgba(112, 149, 183, 0) 33%,
+            transparent 37%,
+            rgba(140, 118, 153, 0.08) 37.5%, rgba(140, 118, 153, 0) 40%,
+            transparent 45%,
+            rgba(192, 169, 144, 0.08) 45.5%, rgba(192, 169, 144, 0) 48%),
+        /* Original Wash */
+        radial-gradient(1200px 900px at 50% 0%, rgba(112, 149, 183, .05), transparent 60%),
+        radial-gradient(1000px 800px at 80% 20%, rgba(140, 118, 153, .05), transparent 60%),
         linear-gradient(180deg, rgba(9, 9, 14, 0) 0%, rgba(9, 9, 14, 1) 90%);
     z-index: -2;
+
 }
 
 /* Soft Grain */
