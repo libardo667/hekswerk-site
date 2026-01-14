@@ -1,0 +1,60 @@
+Hekswerk — Business Plan (Consolidated)
+1. Executive Summary
+Hekswerk is a solo consultancy offering privacy‑first, maintainable automation for small businesses and independent professionals. The practice focuses on designing and implementing one clearly scoped automated workflow at a time, rather than full operational overhauls or ongoing platform maintenance.
+The core value proposition is simple: clarity, durability, and ownership. Clients receive an automation that solves a specific operational pain point, along with clear documentation and handoff materials that allow them to understand, maintain, and adapt the workflow themselves.
+Hekswerk is intentionally small, high‑touch, and craft‑oriented. It favors correctness and explainability over scale, opacity, or vendor lock‑in.
+2. Founder & Operating Model
+Hekswerk is operated as a sole proprietorship by Levi Banks under an Assumed Business Name (ABN).
+The business is designed to: - Operate remotely - Support location independence (including future residence in the Netherlands) - Maintain low overhead - Scale through pricing and selectivity, not volume
+The consultancy does not employ subcontractors, nor does it offer 24/7 support or monitoring services. Each engagement is finite and deliverable‑based.
+3. Core Product Offering
+Hekswerk Quickstart Automation
+One problem. One workflow. Built to last.
+Each engagement delivers a single, well‑defined automation that replaces or simplifies a manual business process.
+Examples include: - Intake triage and routing (email, form, or document‑based) - Status change notifications - Simple record synchronization between tools - Reminder or follow‑up automation - File organization or handoff workflows
+This offering explicitly excludes: - Full business process redesigns - Multi‑department or enterprise workflows - Ongoing performance tracking or analytics - Continuous maintenance contracts
+4. Deliverables
+Each Quickstart engagement includes:
+Workflow Mapping
+A clear, human‑readable explanation of the process being automated
+Explicit inputs, outputs, and failure modes
+Implemented Automation
+Built using appropriate tooling (often n8n, Make, Zapier, or custom lightweight solutions)
+Preference for privacy‑respecting and self‑hostable tools when feasible
+Documentation
+Plain‑language written documentation
+Visual flow overview
+Notes on how to modify or disable the automation
+Loom Handoff Videos
+Walkthrough of how the automation works
+How to troubleshoot common issues
+How to safely extend or adjust the workflow
+Client Ownership
+Credentials and access remain with the client
+No hidden dependencies
+No proprietary black boxes
+5. Target Clients
+Hekswerk serves: - Small service businesses - Solo professionals - Legal‑adjacent operations (non‑representational) - Consultants and creatives - Administrative‑heavy roles that benefit from automation clarity
+Ideal clients value: - Transparency - Control over their systems - Privacy and data stewardship - Solutions that can be understood, not merely used
+6. Pricing Model
+Pricing is flat‑fee per workflow, based on scope and complexity.
+Indicative structure: - Base Quickstart Automation: fixed price - Optional add‑ons: - Additional documentation - Minor post‑handoff adjustments (within a defined window)
+Hekswerk does not bill hourly for client‑facing work. Internal development and research time is not charged separately.
+7. Tooling Philosophy
+Hekswerk prioritizes: - Self‑hostable or privacy‑respecting platforms - Minimal data exposure - Clear failure modes - Tooling that clients can reasonably maintain
+Common platforms may include: - n8n (self‑hosted where appropriate) - Zapier or Make for simpler client‑managed use cases - Custom scripts or lightweight services when justified
+Tool choice is always explained and documented.
+8. Marketing & Sales Approach
+Hekswerk relies on: - Direct outreach - Referrals - A clear, well‑designed website - Plainspoken explanations of value
+The brand intentionally avoids: - Growth hacking - Overpromising automation outcomes - Surveillance‑style dashboards
+The tone is calm, precise, and confident.
+9. Risk & Scope Control
+To protect both client and operator capacity, Hekswerk enforces: - Clear scope definitions - Explicit exclusions - Written acceptance of deliverables - Finite engagement timelines
+If a request exceeds scope, it is either declined or reframed as a separate engagement.
+10. Future Optional Expansion
+Possible future offerings (not core): - Second‑workflow bundles - Periodic review sessions - Educational materials on automation literacy
+These are optional and do not change the core model.
+11. Guiding Principle
+Hekswerk exists to build automation that respects human understanding.
+No opaque systems. No fragile glue. No mystery behavior.
+Just careful craft, handed over with clarity.
