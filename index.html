@@ -1,4 +1,3 @@
-<!-- index.html -->
 <!doctype html>
 <html lang="en">
 
@@ -6,331 +5,131 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <meta name="color-scheme" content="dark" />
-    <title>Hekswerk -- Calm systems. Luminous results.</title>
-    <meta name="description"
-        content="Hekswerk designs privacy-first automation that is traceable, maintainable, and calm." />
+    <title>Hekswerk -- Aura</title>
+    <meta name="description" content="Privacy-first automation." />
 
-    <!-- Fonts (swap to self-host later if you want) -->
+    <!-- Aura Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-        href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500,650&family=Inter:wght@400;500;600&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;600&family=Inter:wght@400;500&display=swap"
         rel="stylesheet" />
 
-    <link rel="stylesheet" href="./styles.css" />
+    <link rel="stylesheet" href="./styles_aura.css" />
 </head>
 
 <body>
-    <header>
-        <div class="wrap">
-            <div class="nav">
-                <div class="brand">
-                    <div class="brand-mark" aria-hidden="true">
-                        <svg viewBox="0 0 24 24" width="18" height="18">
-                            <circle cx="12" cy="12" r="9" stroke="rgba(112,149,183,.85)" stroke-width="1.4" fill="none">
-                            </circle>
-                            <circle cx="12" cy="12" r="6.6" stroke="rgba(140,118,153,.75)" stroke-width="1.2"
-                                fill="none"></circle>
-                            <circle cx="12" cy="12" r="4.4" stroke="rgba(192,169,144,.65)" stroke-width="1.1"
-                                fill="none"></circle>
-                            <path d="M12 6.5v11M6.5 12h11M8.3 8.3l7.4 7.4M15.7 8.3l-7.4 7.4"
-                                stroke="rgba(245,245,242,.92)" stroke-width="1.5" stroke-linecap="round"></path>
-                        </svg>
-                    </div>
-                    <div class="brand-name">Hekswerk</div>
-                </div>
-
-                <nav class="navlinks" aria-label="Primary">
-                    <a href="#services">Services</a>
-                    <a href="#process">Process</a>
-                    <a href="#principles">Principles</a>
-                    <a href="#contact">Contact</a>
-                </nav>
-
-                <div class="navcta">
-                    <a href="index_aura.html"
-                        style="font-size: 13px; color: var(--muted); margin-right: 12px; text-decoration: none; border:1px solid rgba(255,255,255,0.1); padding: 6px 12px; border-radius: 999px;">
-                        Try Aura Design →
-                    </a>
-                    <!-- Buttons get random accents via JS -->
-                    <a class="btn btn--accent" href="#contact">Contact</a>
-                    <a class="btn primary btn--accent" href="#contact">
-                        <span class="dot" aria-hidden="true"></span> Send a quick brief
-                    </a>
-                </div>
+    <div class="wrap" style="padding-top: 40px;">
+        <a href="#" class="brand" style="margin-bottom: 40px; display: inline-flex;">
+            <div class="brand-mark">
+                <img src="./logo_aura.svg" alt="Hekswerk Aura Logo" />
             </div>
-        </div>
-    </header>
+            <div class="brand-name">Hekswerk</div>
+        </a>
+    </div>
 
     <main>
-        <section class="hero" style="border-top:none;">
+        <section class="hero">
             <div class="wrap">
-                <div class="hero-grid">
-                    <div>
-                        <div class="kicker"><span class="spark" aria-hidden="true"></span> Privacy-first automation for
-                            calm operations</div>
-                        <h1>Calm systems.<br />Luminous results.</h1>
-                        <p class="subhead">
-                            Hekswerk designs automation that is <b>private</b>, <b>traceable</b>, and
-                            <b>maintainable</b>.
-                            We map your workflow, build a reliable prototype, and hand it off with documentation you can
-                            actually use.
-                            No undocumented automations. No brittle glue. Just steady, auditable craft.
-                        </p>
-
-                        <div class="hero-actions">
-                            <a class="btn primary btn--accent" href="#contact"><span class="dot"
-                                    aria-hidden="true"></span> Send a quick brief</a>
-                            <a class="btn btn--accent" href="#services">See how we help</a>
-                        </div>
-
-                        <div class="micro">
-                            Typical outcomes: fewer dropped tasks, cleaner handoffs, clearer status, and a real audit
-                            trail.
-                            Built in your tools, with consent-based access.
-                        </div>
+                <div class="hero-content">
+                    <span class="kicker">One Problem. One Workflow.</span>
+                    <h1>Calm systems.<br />Luminous results.</h1>
+                    <p>
+                        Hekswerk defines and implements privacy-first automation.
+                        No black boxes. No brittle glue. Just clean, auditable craft that respects your data and your
+                        time.
+                    </p>
+                    <div style="display:flex; gap:16px;">
+                        <a class="btn btn-primary" href="#contact">Contact</a>
                     </div>
-
-                    <aside class="aura-panel" aria-label="Highlights">
-                        <div class="aura-stack">
-                            <div class="card">
-                                <h3>What we build</h3>
-                                <p>Email intake, trackers, reminders, client updates, dashboards, and “daily digest”
-                                    status reports that don't lie.</p>
-                            </div>
-                            <div class="card">
-                                <h3>What you get</h3>
-                                <p>A working system + documentation + a handoff walkthrough. You can run it without
-                                    summoning us every week.</p>
-                            </div>
-                            <div class="card">
-                                <h3>What we won't do</h3>
-                                <p>Hype. “Disruption.” Replacing your team. If it can't be maintained, it doesn't ship.
-                                </p>
-                            </div>
-                        </div>
-                    </aside>
                 </div>
             </div>
         </section>
 
+        <!-- Services -->
         <section id="services">
             <div class="wrap">
-                <div class="section-title">
-                    <div>
-                        <h2>Services</h2>
-                        <p>Productized where it helps, bespoke where it matters. We keep accents sparse so the halos
-                            feel special.</p>
-                    </div>
-                </div>
-
-                <div class="grid-3">
-                    <div class="tile">
-                        <div class="icon" aria-hidden="true">
-                            <svg viewBox="0 0 24 24">
-                                <path
-                                    d="M12 2v4M12 18v4M4.9 4.9l2.8 2.8M16.3 16.3l2.8 2.8M2 12h4M18 12h4M4.9 19.1l2.8-2.8M16.3 7.7l2.8-2.8" />
-                                <circle cx="12" cy="12" r="4.5" />
+                <h2>Services</h2>
+                <div class="card-grid">
+                    <div class="card">
+                        <div class="icon-box">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                                <line x1="8" y1="21" x2="16" y2="21"></line>
+                                <line x1="12" y1="17" x2="12" y2="21"></line>
                             </svg>
                         </div>
                         <h3>Automation Quickstart</h3>
-                        <p>A focused build sprint for one workflow: intake, tracking, reminders, and a simple status
-                            view. Includes handoff docs and a walkthrough.</p>
+                        <p>A centered build sprint for one specific workflow. Intake, routing, reminders. Delivered with
+                            handoff docs.</p>
                     </div>
-
-                    <div class="tile">
-                        <div class="icon" aria-hidden="true">
-                            <svg viewBox="0 0 24 24">
-                                <path d="M6 7h12M6 12h12M6 17h8" />
-                                <path
-                                    d="M4 5.5A2.5 2.5 0 0 1 6.5 3h11A2.5 2.5 0 0 1 20 5.5v13A2.5 2.5 0 0 1 17.5 21h-11A2.5 2.5 0 0 1 4 18.5z" />
+                    <div class="card">
+                        <div class="icon-box">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
                             </svg>
                         </div>
                         <h3>Calm Ops Systems</h3>
-                        <p>A workflow map plus improvements across tools: naming conventions, templates, dashboards, and
-                            guardrails that prevent dropped threads.</p>
+                        <p>Audit and improve existing flows. Naming conventions, guardrails, and templates that prevent
+                            chaos.</p>
                     </div>
-
-                    <div class="tile">
-                        <div class="icon" aria-hidden="true">
-                            <svg viewBox="0 0 24 24">
-                                <path d="M4 19V5" />
-                                <path d="M4 19h16" />
-                                <path d="M7 15l3-4 3 2 4-6" />
-                                <path d="M18 7v4h-4" />
+                    <div class="card">
+                        <div class="icon-box">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
                             </svg>
                         </div>
-                        <h3>Reporting and Visibility</h3>
-                        <p>Lightweight analytics: clean trackers, weekly digests, and “what's stuck” views. Designed to
-                            be auditable and easy to maintain.</p>
+                        <h3>Reporting & Visibility</h3>
+                        <p>Lightweight dashboards and "daily digest" emails. Traceability over vibes.</p>
                     </div>
-                </div>
-
-                <div class="spacer"></div>
-
-                <div class="cta">
-                    <div>
-                        <h3>Not sure where to start?</h3>
-                        <p>Describe the workflow that's leaking time or dropping tasks. We'll tell you what's feasible,
-                            what's risky, and what will actually reduce stress.</p>
-                    </div>
-                    <a class="btn primary btn--accent" href="#contact"><span class="dot" aria-hidden="true"></span> Send
-                        a quick brief</a>
                 </div>
             </div>
         </section>
 
+        <!-- Process -->
         <section id="process">
             <div class="wrap">
-                <div class="section-title">
-                    <div>
-                        <h2>Process</h2>
-                        <p>Clear steps, visible progress, and a handoff you can live with. Calm operator energy.</p>
+                <h2>Our Process</h2>
+                <p>Order emerging from mystery.</p>
+                <div class="card-grid">
+                    <div class="card">
+                        <h3>1. Map</h3>
+                        <p>We define inputs, owners, and "done".</p>
                     </div>
-                </div>
-
-                <div class="steps">
-                    <div class="step">
-                        <div class="top">
-                            <span class="badge">1. Map</span>
-                            <h3>We map the workflow</h3>
-                        </div>
-                        <p>Inputs, owners, edge cases, and failure points. We name what “done” means before we touch
-                            tooling.</p>
+                    <div class="card">
+                        <h3>2. Build</h3>
+                        <p>Reliable prototypes in your own tools.</p>
                     </div>
-
-                    <div class="step">
-                        <div class="top">
-                            <span class="badge">2. Build</span>
-                            <h3>We build a reliable prototype</h3>
-                        </div>
-                        <p>We prioritize traceability and maintainability. If it can't be debugged, it doesn't ship.</p>
-                    </div>
-
-                    <div class="step">
-                        <div class="top">
-                            <span class="badge">3. Harden</span>
-                            <h3>We test and harden</h3>
-                        </div>
-                        <p>Error handling, fallback paths, and permissions. Your system should fail gracefully, not
-                            theatrically.</p>
-                    </div>
-
-                    <div class="step">
-                        <div class="top">
-                            <span class="badge">4. Hand off</span>
-                            <h3>We deliver docs and a walkthrough</h3>
-                        </div>
-                        <p>Hand-off docs, screenshots, and a short walkthrough. You keep the keys, not us.</p>
+                    <div class="card">
+                        <h3>3. Handoff</h3>
+                        <p>Docs, videos, and you keep the keys.</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="principles">
+        <section id="contact" style="padding-bottom: 120px;">
             <div class="wrap">
-                <div class="section-title">
-                    <div>
-                        <h2>Principles</h2>
-                        <p>Guardrails that keep the work from turning into glittery chaos.</p>
-                    </div>
+                <div class="card"
+                    style="background: linear-gradient(135deg, var(--midnight-indigo), var(--inky-void)); border-color: var(--aura-cyan);">
+                    <h2>Ready for calm?</h2>
+                    <p>Tell me what is leaking time or dropping threads.</p>
+                    <a class="btn btn-primary" href="mailto:hello@hekswerk.com">Email hello@hekswerk.com</a>
                 </div>
-
-                <div class="grid-3">
-                    <div class="tile">
-                        <div class="icon" aria-hidden="true">
-                            <svg viewBox="0 0 24 24">
-                                <path d="M12 2l7 4v6c0 5-3 9-7 10-4-1-7-5-7-10V6z" />
-                                <path d="M9 12l2 2 4-5" />
-                            </svg>
-                        </div>
-                        <h3>Privacy-first</h3>
-                        <p>Consent-based access, least privilege, and clear credential boundaries. You own your data and
-                            accounts.</p>
-                    </div>
-
-                    <div class="tile">
-                        <div class="icon" aria-hidden="true">
-                            <svg viewBox="0 0 24 24">
-                                <path d="M4 7h16M4 12h10M4 17h16" />
-                                <path d="M18 10v4" />
-                                <path d="M16.5 12H21.5" />
-                            </svg>
-                        </div>
-                        <h3>Audit trail</h3>
-                        <p>Readable logs, durable trackers, and “why did this happen” answers. Traceability over vibes.
-                        </p>
-                    </div>
-
-                    <div class="tile">
-                        <div class="icon" aria-hidden="true">
-                            <svg viewBox="0 0 24 24">
-                                <path d="M6 20h12" />
-                                <path d="M7 20v-6a5 5 0 0 1 10 0v6" />
-                                <path d="M9 11V7a3 3 0 0 1 6 0v4" />
-                            </svg>
-                        </div>
-                        <h3>Maintainable</h3>
-                        <p>Simple patterns, clear naming, and documentation. The system should survive your busiest
-                            week.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="contact">
-            <div class="wrap">
-                <div class="section-title">
-                    <div>
-                        <h2>Contact</h2>
-                        <p>Tell me the workflow that's leaking time. I'll respond with a calm plan and clear boundaries.
-                        </p>
-                    </div>
-                </div>
-
-                <div class="cta cta--left">
-                    <div class="cta-copy">
-                        <h3>Send a quick brief</h3>
-                        <p>Include: what comes in, what “done” looks like, where things get stuck, and what tools you're
-                            using. If you have privacy constraints, say so up front.</p>
-                        <p class="cta-meta">
-                            Email: <a href="mailto:hello@hekswerk.com">hello@hekswerk.com</a><br />
-                        </p>
-                    </div>
-
-                    <div class="cta-actions">
-                        <a class="btn primary btn--accent"
-                            href="mailto:hello@hekswerk.com?subject=Hekswerk%20--%20Quick%20brief&body=Workflow%20summary%3A%0A%0ATools%20involved%3A%0A%0AWhat%20breaks%20today%3A%0A%0AConstraints%20(privacy%2C%20access)%3A%0A">
-                            <span class="dot" aria-hidden="true"></span> Email a brief
-                        </a>
-                        <a class="btn btn--accent" href="#services">Review services</a>
-                    </div>
-                </div>
-
             </div>
         </section>
 
         <footer>
             <div class="wrap">
-                <div class="footgrid">
-                    <div>
-                        <div class="footbrand">Hekswerk</div>
-                        <div class="footdesc">Calm systems, luminous results. Privacy-first automation with traceability
-                            and hand-off docs.</div>
-                        <div class="footcopy">© <span id="y"></span> Hekswerk. All rights reserved.</div>
-                    </div>
-                    <div class="tinylinks">
-                        <a href="#services">Services</a>
-                        <a href="#process">Process</a>
-                        <a href="#principles">Principles</a>
-                        <a href="mailto:hello@hekswerk.com">Email</a>
-                    </div>
-                </div>
+                <p>© <span id="y"></span> Hekswerk. Privacy-first.</p>
             </div>
         </footer>
     </main>
 
-    <script src="./effects.js" defer></script>
+    <script src="./effects.js"></script>
 </body>
 
 </html>
