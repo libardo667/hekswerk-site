@@ -45,5 +45,33 @@
                 window.location.href = "index_aura.html";
             }
         });
-    }
-})();
+    });
+}
+
+    // Carousel Auto-Scroll
+    const carousel = document.querySelector(".carousel-grid");
+if (carousel) {
+    window.addEventListener("scroll", () => {
+        // Only run if we can scroll
+        if (carousel.scrollWidth <= carousel.clientWidth) return;
+
+        const rect = carousel.getBoundingClientRect();
+        const viewportHeight = window.innerHeight;
+
+        // Start scrolling when top of carousel hits middle of screen
+        const startOffset = viewportHeight * 0.6; // Started a bit lower (0.6) so it catches earlier
+        const endOffset = -rect.height * 0.5; // End when it's half past the top
+
+        const totalDistance = startOffset - endOffset;
+        const currentPos = startOffset - rect.top;
+        let progress = currentPos / totalDistance;
+
+        // Clamp 0-1
+        progress = Math.max(0, Math.min(1, progress));
+
+        // Map to scrollLeft
+        const maxScroll = carousel.scrollWidth - carousel.clientWidth;
+        carousel.scrollLeft = maxScroll * progress;
+    });
+}
+}) ();
