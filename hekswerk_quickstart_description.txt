@@ -1,0 +1,149 @@
+Hekswerk Quickstart
+
+Privacy-first automation. One workflow at a time.
+
+Hekswerk builds clear, maintainable automations for small businesses and independent professionals who want fewer loose ends — without handing over control of their systems.
+
+Each Quickstart engagement focuses on one well-scoped operational workflow, built carefully and handed off with documentation you can actually use.
+
+No full operational overhauls.
+No ongoing monitoring retainers.
+No mystery automation you can’t understand.
+
+Just steady craft.
+
+What’s Included (Every Tier)
+
+Each Quickstart delivers:
+
+Workflow Mapping
+A clear, human-readable map of the process being automated, including triggers, outcomes, and edge cases.
+
+Automation Build
+Implementation using the most appropriate tool for the job — often Zapier, Make, or self-hosted n8n — with a preference for privacy-respecting, client-owned systems.
+
+Documentation
+Plain-language written documentation explaining:
+
+what the automation does
+
+how it works
+
+how to modify, pause, or disable it
+
+Loom Handoff Videos
+Recorded walkthroughs covering:
+
+how the workflow operates
+
+how to troubleshoot common issues
+
+how to safely extend it in the future
+
+Client Ownership
+All accounts, credentials, and access remain with the client. No hidden dependencies or vendor lock-in.
+
+Pricing Tiers
+Basic — $750
+
+For simple, low-risk automations.
+
+Typical characteristics:
+
+1 trigger
+
+1–2 connected tools
+
+Minimal branching logic
+
+Low data complexity
+
+Examples:
+
+Form → email + spreadsheet logging
+
+Simple intake routing
+
+Basic reminders or notifications
+
+Standard — $1,500
+
+The most common engagement.
+
+Typical characteristics:
+
+Multi-step workflow
+
+2–4 connected tools
+
+Conditional logic or branching
+
+Light error handling or logging
+
+Examples:
+
+Email intake → parsing → record creation → notification
+
+Status-based follow-ups
+
+Multi-tool coordination with clear handoff points
+
+Complex — $2,500+
+
+For workflows with higher complexity or sensitivity.
+
+Typical characteristics:
+
+Multiple branches and edge cases
+
+Messy or inconsistent data
+
+API usage or advanced logic
+
+Compliance- or risk-sensitive contexts
+
+Examples:
+
+Legal-adjacent intake workflows
+
+Document handling with validation
+
+Multi-actor or approval-based processes
+
+Final pricing is confirmed after scope review.
+
+What’s Explicitly Out of Scope
+
+To keep projects durable and predictable, Quickstart does not include:
+
+Full business process redesigns
+
+Multi-department or enterprise systems
+
+Ongoing monitoring, analytics, or maintenance retainers
+
+“Always-on” automation supervision
+
+Additional workflows can be scoped as separate engagements.
+
+Who This Is For
+
+Hekswerk Quickstart is a good fit if you want:
+
+clarity over cleverness
+
+systems you can understand and own
+
+automation that reduces cognitive load without creating fragility
+
+It’s especially well-suited to small service businesses and legal-adjacent operations.
+
+The Hekswerk Philosophy
+
+Automation should respect human understanding.
+
+No opaque systems.
+No brittle glue.
+No surprise behavior.
+
+Just careful work — designed, built, and handed over with intention.
