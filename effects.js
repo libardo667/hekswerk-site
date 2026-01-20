@@ -45,33 +45,34 @@
                 window.location.href = "index_aura.html";
             }
         });
-    });
-}
+    }
 
     // Carousel Auto-Scroll
     const carousel = document.querySelector(".carousel-grid");
-if (carousel) {
-    window.addEventListener("scroll", () => {
-        // Only run if we can scroll
-        if (carousel.scrollWidth <= carousel.clientWidth) return;
+    if (carousel) {
+        window.addEventListener("scroll", () => {
+            // Only run if we can scroll
+            if (carousel.scrollWidth <= carousel.clientWidth) return;
 
-        const rect = carousel.getBoundingClientRect();
-        const viewportHeight = window.innerHeight;
+            const rect = carousel.getBoundingClientRect();
+            const viewportHeight = window.innerHeight;
 
-        // Start scrolling when top of carousel hits middle of screen
-        const startOffset = viewportHeight * 0.6; // Started a bit lower (0.6) so it catches earlier
-        const endOffset = -rect.height * 0.5; // End when it's half past the top
+            // Trigger as soon as it enters the bottom of the viewport
+            const startOffset = viewportHeight * 0.95;
 
-        const totalDistance = startOffset - endOffset;
-        const currentPos = startOffset - rect.top;
-        let progress = currentPos / totalDistance;
+            // Stop scrolling when it's well past the top
+            const endOffset = -rect.height * 0.5;
 
-        // Clamp 0-1
-        progress = Math.max(0, Math.min(1, progress));
+            const totalDistance = startOffset - endOffset;
+            const currentPos = startOffset - rect.top;
+            let progress = currentPos / totalDistance;
 
-        // Map to scrollLeft
-        const maxScroll = carousel.scrollWidth - carousel.clientWidth;
-        carousel.scrollLeft = maxScroll * progress;
-    });
-}
-}) ();
+            // Clamp 0-1
+            progress = Math.max(0, Math.min(1, progress));
+
+            // Map to scrollLeft
+            const maxScroll = carousel.scrollWidth - carousel.clientWidth;
+            carousel.scrollLeft = maxScroll * progress;
+        });
+    }
+})();

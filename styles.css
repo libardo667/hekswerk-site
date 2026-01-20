@@ -281,7 +281,7 @@ p {
 
 /* Force 2-column for experience section on larger screens for 2x2 symmetry */
 #experience .card-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, 1fr) !important;
 }
 
 @media (max-width: 768px) {
