@@ -35,10 +35,10 @@ body {
 
 body {
     margin: 0;
-    font-family: Inter, system-ui, -apple-system, Segoe UI, sans-serif;
+    font-family: Outfit, system-ui, -apple-system, Segoe UI, sans-serif;
     background: var(--inky-void);
     color: var(--text);
-    overflow-x: hidden;
+    text-align: center;
 }
 
 /* Deep twilight aura wash */
@@ -121,8 +121,10 @@ header {
 
 .brand {
     display: flex;
+    gap: 16px;
     align-items: center;
-    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
 }
 
 .brand-mark img {
@@ -249,6 +251,8 @@ p {
 
 .hero-content {
     max-width: 600px;
+    margin: 0 auto;
+    text-align: center;
 }
 
 .kicker {
