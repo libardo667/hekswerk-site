@@ -450,6 +450,16 @@ ol {
     text-transform: uppercase;
 }
 
+.pricing-support {
+    max-width: 900px;
+    margin-top: 28px;
+}
+
+.pricing-strong {
+    color: var(--soft-cream);
+    font-weight: 700;
+}
+
 .step-card h3,
 .phase-card h3,
 .artifact-card h3,
