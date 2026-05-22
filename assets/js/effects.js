@@ -1,4 +1,4 @@
-// effects_aura.js
+// Shared Hekswerk page effects.
 (function () {
     // Smoother Aura Field
     const aura = document.createElement("div");
@@ -32,20 +32,6 @@
     // Footer Year
     const y = document.getElementById("y");
     if (y) y.textContent = new Date().getFullYear();
-
-    // Switch Logic (if on index_aura.html)
-    const toggle = document.getElementById("design-toggle");
-    if (toggle) {
-        toggle.addEventListener("click", (e) => {
-            e.preventDefault();
-            // Check current file and swap
-            if (window.location.pathname.includes("index_aura.html")) {
-                window.location.href = "index.html";
-            } else {
-                window.location.href = "index_aura.html";
-            }
-        });
-    }
 
     // Carousel Auto-Scroll
     const carousel = document.querySelector(".carousel-grid");
