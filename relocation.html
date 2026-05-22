@@ -5,6 +5,11 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <meta name="color-scheme" content="dark" />
+    <script>
+        if (location.protocol === "http:" && location.hostname !== "localhost" && location.hostname !== "127.0.0.1") {
+            location.replace("https://" + location.host + location.pathname + location.search + location.hash);
+        }
+    </script>
     <title>Relocation Systems Planning - Hekswerk</title>
     <meta name="description" content="A systems-architecture approach to leaving the United States and planning an international move." />
     <link rel="icon" type="image/svg+xml" href="./assets/img/logo_aura.svg" />

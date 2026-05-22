@@ -5,6 +5,11 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <meta name="color-scheme" content="dark" />
+    <script>
+        if (location.protocol === "http:" && location.hostname !== "localhost" && location.hostname !== "127.0.0.1") {
+            location.replace("https://" + location.host + location.pathname + location.search + location.hash);
+        }
+    </script>
     <title>Relocation Intake - Hekswerk</title>
     <meta name="description" content="Start a private relocation intake with Hekswerk." />
     <link rel="icon" type="image/svg+xml" href="./assets/img/logo_aura.svg" />
@@ -66,7 +71,11 @@
                 </div>
 
                 <div class="intake-card">
-                    <form class="intake-form" id="relocation-intake" action="mailto:levi@hekswerk.com" method="post" enctype="text/plain">
+                    <form
+                        class="intake-form"
+                        id="relocation-intake"
+                        action="https://hekswerk-intake.levi-020.workers.dev/"
+                        method="post">
                         <div class="field-grid">
                             <label>
                                 Name
@@ -125,6 +134,11 @@
                             <textarea name="urgent_or_sensitive" placeholder="Deadlines, health constraints, pets, safety concerns, legal handoffs, family complexity, or anything else relevant."></textarea>
                         </label>
 
+                        <label class="form-honeypot" aria-hidden="true">
+                            Website
+                            <input name="website" tabindex="-1" autocomplete="off" />
+                        </label>
+
                         <label class="checkbox-label">
                             <input type="checkbox" name="wants_roadmap_description" />
                             <span>I would like to receive a detailed description of what the relocation roadmap would look like.</span>
@@ -136,10 +150,14 @@
                         </label>
 
                         <button class="btn btn-primary" type="submit">Send my relocation intake</button>
-                        <p class="form-note">
-                            This opens a prefilled email to levi@hekswerk.com so you can review the message before
-                            sending.
+                        <p class="form-note" id="form-status" role="status" aria-live="polite">
+                            This sends your intake securely over HTTPS. I'll read it myself and reply directly.
                         </p>
+                        <noscript>
+                            <p class="form-note">
+                                JavaScript is required to submit this form. You can also email levi@hekswerk.com directly.
+                            </p>
+                        </noscript>
                     </form>
                 </div>
             </div>
@@ -164,32 +182,61 @@
             const form = document.getElementById("relocation-intake");
             if (!form) return;
 
-            form.addEventListener("submit", function (event) {
+            const status = document.getElementById("form-status");
+            const submit = form.querySelector("button[type='submit']");
+            const endpoint = form.action;
+
+            form.addEventListener("submit", async function (event) {
                 event.preventDefault();
 
                 const data = new FormData(form);
-                const fields = [
-                    ["Name", data.get("name")],
-                    ["Email", data.get("email")],
-                    ["Current location", data.get("current_location")],
-                    ["Target location", data.get("target_location")],
-                    ["Timeline", data.get("timeline")],
-                    ["Household", data.get("household")],
-                    ["What is hardest right now", data.get("hardest_part")],
-                    ["Urgent or sensitive context", data.get("urgent_or_sensitive")],
-                    ["Wants detailed roadmap description", data.get("wants_roadmap_description") ? "Yes" : "No"],
-                    ["Privacy acknowledgement", data.get("privacy_acknowledged") ? "Yes" : "No"]
-                ];
+                const payload = {
+                    name: data.get("name"),
+                    email: data.get("email"),
+                    current_location: data.get("current_location"),
+                    target_location: data.get("target_location"),
+                    timeline: data.get("timeline"),
+                    household: data.get("household"),
+                    hardest_part: data.get("hardest_part"),
+                    urgent_or_sensitive: data.get("urgent_or_sensitive"),
+                    wants_roadmap_description: data.has("wants_roadmap_description"),
+                    privacy_acknowledged: data.has("privacy_acknowledged"),
+                    website: data.get("website")
+                };
 
-                const body = fields
-                    .map(function (field) {
-                        return field[0] + ":\n" + (field[1] || "") + "\n";
-                    })
-                    .join("\n");
+                if (status) {
+                    status.className = "form-note";
+                    status.textContent = "Sending your intake...";
+                }
 
-                const subject = "Relocation intake";
-                window.location.href = "mailto:levi@hekswerk.com?subject=" +
-                    encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
+                if (submit) submit.disabled = true;
+
+                try {
+                    const response = await fetch(endpoint, {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify(payload)
+                    });
+
+                    if (!response.ok) {
+                        throw new Error("Submission failed");
+                    }
+
+                    form.reset();
+                    if (status) {
+                        status.className = "form-note form-success";
+                        status.textContent = "Thank you. Your intake was sent, and I'll reply directly if it looks like there may be a fit.";
+                    }
+                } catch (error) {
+                    if (status) {
+                        status.className = "form-note form-error";
+                        status.textContent = "Something went wrong sending the form. Please email levi@hekswerk.com directly.";
+                    }
+                } finally {
+                    if (submit) submit.disabled = false;
+                }
             });
         })();
     </script>

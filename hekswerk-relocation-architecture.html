@@ -6,6 +6,11 @@
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <meta name="color-scheme" content="dark" />
     <meta name="robots" content="noindex,nofollow" />
+    <script>
+        if (location.protocol === "http:" && location.hostname !== "localhost" && location.hostname !== "127.0.0.1") {
+            location.replace("https://" + location.host + location.pathname + location.search + location.hash);
+        }
+    </script>
     <title>Relocation Engagement Architecture - Hekswerk</title>
     <meta name="description" content="The Hekswerk relocation engagement structure: four phases, seven deliverables, and a clear handoff." />
     <link rel="icon" type="image/svg+xml" href="./assets/img/logo_aura.svg" />
