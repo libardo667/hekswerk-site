@@ -412,8 +412,8 @@ ol {
     grid-template-columns: repeat(4, minmax(0, 1fr));
 }
 
-.artifact-grid{
-    grid-template-columns: repeat(5, minmax(0, 1fr));
+.artifact-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
 }
 .fit-grid {
     grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -485,7 +485,7 @@ ol {
 }
 
 .artifact-card {
-    min-height: 170px;
+    min-height: 150px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
