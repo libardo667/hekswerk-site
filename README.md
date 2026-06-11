@@ -1,6 +1,6 @@
-﻿# hekswerk-site
+# hekswerk-site
 
-Static Hekswerk website.
+Static Hekswerk website. The front door (`index.html`) is the consultancy umbrella with three doors — Quickstart Automation, Relocation Systems Planning (`relocation.html`), and AI Verification & Research (`research.html`).
 
 ## Structure
 
