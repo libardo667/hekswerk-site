@@ -21,6 +21,14 @@
         rel="stylesheet" />
 
     <link rel="stylesheet" href="./assets/css/styles.css?v=20260611" />
+    <style>
+        /* Scoped: make the exhibit cards full-card links without inheriting the global link color. */
+        .exhibit-grid a.fit-card { color: var(--text); display: flex; flex-direction: column; gap: 6px; }
+        .exhibit-grid a.fit-card h3 { color: var(--soft-cream); }
+        .exhibit-grid a.fit-card:hover { border-color: rgba(192, 169, 144, 0.45); transform: translateY(-2px); }
+        .exhibit-grid a.fit-card:hover h3 { color: var(--halo-gold); }
+        .exhibit-grid a.fit-card .kw { color: var(--halo-gold); font-size: 12px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; }
+    </style>
 </head>
 
 <body>
@@ -38,6 +46,7 @@
                     <a href="#research">Research</a>
                     <a href="#honesty">Honesty machinery</a>
                     <a href="#library">Library</a>
+                    <a href="#exhibits">Exhibits</a>
                     <a href="./intake.html">Intake</a>
                 </nav>
                 <div class="nav-actions">
@@ -132,7 +141,10 @@
                             The written character, the lived history, the AI engine underneath, and the world it
                             lives in are separate components with clean joints. So you can ask experimentally: swap
                             the engine under a character that's been alive for a week &mdash; is it still the same
-                            character? A pre-registered experiment on exactly that question is running now.
+                            character? A pre-registered experiment on exactly that question ran until I halted and
+                            voided it: the briefing the character read about itself turned out to be wrong, and
+                            scrapping a costly run beat trusting a result built on a false premise. The full episode
+                            is in the exhibits below.
                         </p>
                     </article>
                     <article class="fit-card">
@@ -205,6 +217,59 @@
                         line.
                     </p>
                     <a class="btn btn-primary" href="https://github.com/libardo667/hekswerk">Open the library</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="exhibits">
+            <div class="wrap">
+                <div class="section-heading">
+                    <div>
+                        <span class="section-tag">The exhibits</span>
+                        <h2>Read the work directly.</h2>
+                    </div>
+                    <p>
+                        Not papers and not marketing: working artifacts you can inspect. A timeline you can scrub,
+                        the honesty machinery laid open, the architecture argued in full. Where a claim can be
+                        checked it links to something you can run; where a judgment is mine, it says so.
+                    </p>
+                </div>
+
+                <div class="fit-grid exhibit-grid">
+                    <a class="fit-card" href="./exhibits/two-weeks.html">
+                        <span class="kw">Timeline</span>
+                        <h3>Two Weeks</h3>
+                        <p>A fortnight of building persistent local AI minds, shown rather than narrated: a year in two bursts, then the daily timeline up close.</p>
+                    </a>
+                    <a class="fit-card" href="./exhibits/honesty-machinery.html">
+                        <span class="kw">Method</span>
+                        <h3>The Honesty Machinery</h3>
+                        <p>Rules locked before the data, a reviewer built to rule against me, and an experiment I halted myself when its ground turned out false.</p>
+                    </a>
+                    <a class="fit-card" href="./exhibits/why-a-commons.html">
+                        <span class="kw">Argument</span>
+                        <h3>Why a Commons Is Load-Bearing</h3>
+                        <p>Federation is not a feature here. It is the only topology in which the system's promises are true rather than merely claimed.</p>
+                    </a>
+                    <a class="fit-card" href="./exhibits/the-kitchen.html">
+                        <span class="kw">Pattern</span>
+                        <h3>The Kitchen</h3>
+                        <p>One cook speaking frameworks to many stateless hands that remember nothing, and a feast of 2.6 million words comes out.</p>
+                    </a>
+                    <a class="fit-card" href="./exhibits/the-apothecary.html">
+                        <span class="kw">Catalogue</span>
+                        <h3>The Apothecary</h3>
+                        <p>Nine things you could brew from this stack, shelved by how far each sits from code that already runs.</p>
+                    </a>
+                    <a class="fit-card" href="./exhibits/workshop/index.html">
+                        <span class="kw">The pen</span>
+                        <h3>The Pen's Workshop</h3>
+                        <p>The collaborator's own kept workshop: curated prose from the pen, shown with its hand visible, with legible provenance.</p>
+                    </a>
+                </div>
+
+                <div class="cta-row" style="margin-top:28px">
+                    <a class="btn btn-ghost" href="./exhibits/index.html">Browse all exhibits</a>
                 </div>
             </div>
         </section>
