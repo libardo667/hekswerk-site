@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="color-scheme" content="dark" />
+    <script>
+        if (location.protocol === "http:" && location.hostname !== "localhost" && location.hostname !== "127.0.0.1") {
+            location.replace("https://" + location.host + location.pathname + location.search + location.hash);
+        }
+    </script>
+    <title>Contact - Hekswerk</title>
+    <meta name="description" content="Get in touch with Hekswerk about the AI research, an automation build, or anything else. A short, private contact form." />
+    <link rel="icon" type="image/svg+xml" href="./assets/img/logo_aura.svg" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;500;600&family=Outfit:wght@300;400;500;600&display=swap"
+        rel="stylesheet" />
+
+    <link rel="stylesheet" href="./assets/css/styles.css?v=20260611" />
+</head>
+
+<body>
+    <header>
+        <div class="wrap">
+            <div class="nav">
+                <a href="./index.html" class="brand" style="text-decoration:none;">
+                    <div class="brand-mark">
+                        <img src="./assets/img/logo_aura.svg" alt="Hekswerk" />
+                    </div>
+                    <div class="brand-name">Hekswerk</div>
+                </a>
+                <nav class="navlinks" aria-label="Primary">
+                    <a href="./research.html">Research</a>
+                    <a href="./relocation.html">Relocation</a>
+                    <a href="./index.html#services">Services</a>
+                    <a href="./contact.html">Contact</a>
+                </nav>
+                <div class="nav-actions">
+                    <a class="btn btn-primary nav-cta" href="./research.html">See the research</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="intake-section">
+            <div class="wrap intake-grid">
+                <div>
+                    <div class="breadcrumb">
+                        <a href="./index.html">Hekswerk</a> &nbsp;/&nbsp; Contact
+                    </div>
+                    <span class="section-tag">Get in touch</span>
+                    <h1>Tell me what's on your mind.</h1>
+                    <p class="section-subhead">
+                        Research collaboration, a question about the program, an automation build, or anything
+                        else. Plain language is enough; messy is fine. I read it myself and reply directly.
+                    </p>
+                    <div class="privacy-card">
+                        <h3>Privacy promise</h3>
+                        <p>
+                            I only use this to understand what you need and write back to you directly. I won't
+                            sell it or add you to a marketing list. This form sends everything securely over
+                            HTTPS and forwards it to me by email. Prefer plain email? Write to
+                            <a href="mailto:levi@hekswerk.com">levi@hekswerk.com</a>.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="intake-card">
+                    <form
+                        class="intake-form"
+                        id="contact-form"
+                        action="https://hekswerk-intake.levi-020.workers.dev/"
+                        method="post">
+                        <div class="field-grid">
+                            <label>
+                                Name
+                                <input name="name" autocomplete="name" required />
+                            </label>
+                            <label>
+                                Email
+                                <input type="email" name="email" autocomplete="email" required />
+                            </label>
+                        </div>
+
+                        <label>
+                            What's this about?
+                            <select name="topic" id="contact-topic" required>
+                                <option value="">Choose one</option>
+                                <option value="Research collaboration">Research collaboration or a question about the program</option>
+                                <option value="Quickstart Automation">Quickstart Automation build</option>
+                                <option value="Relocation planning">Relocation planning</option>
+                                <option value="Something else">Something else</option>
+                            </select>
+                        </label>
+
+                        <label>
+                            What would you like to say?
+                            <textarea name="message" required placeholder="A few sentences is enough. You can be messy here."></textarea>
+                        </label>
+
+                        <label class="form-honeypot" aria-hidden="true">
+                            Website
+                            <input name="website" tabindex="-1" autocomplete="off" />
+                        </label>
+
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="privacy_acknowledged" required />
+                            <span>I understand this message is used only for direct follow-up from Hekswerk. It will not be sold or added to a marketing list.</span>
+                        </label>
+
+                        <button class="btn btn-primary" type="submit">Send message</button>
+                        <p class="form-note" id="form-status" role="status" aria-live="polite">
+                            This sends your message securely over HTTPS. I'll read it myself and reply directly.
+                        </p>
+                        <noscript>
+                            <p class="form-note">
+                                JavaScript is required to submit this form. You can also email levi@hekswerk.com directly.
+                            </p>
+                        </noscript>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <div class="wrap">
+                <p class="location-line">Currently in Portland, OR &middot; Relocating to The Hague, late 2026.</p>
+                <p>&copy; <span id="y"></span> Hekswerk. Privacy-first.</p>
+                <nav aria-label="Footer">
+                    <a href="./index.html">Home</a>
+                    <a href="./research.html">Research</a>
+                    <a href="./relocation.html">Relocation</a>
+                </nav>
+            </div>
+        </footer>
+    </main>
+
+    <script src="./assets/js/effects.js"></script>
+    <script>
+        (function () {
+            // Pre-select the topic from a ?topic= query param (research / automation / relocation),
+            // so a "Get in touch" button can land here with the right subject already chosen.
+            const params = new URLSearchParams(location.search);
+            const wanted = (params.get("topic") || "").toLowerCase();
+            const map = {
+                research: "Research collaboration",
+                automation: "Quickstart Automation",
+                relocation: "Relocation planning"
+            };
+            const topic = document.getElementById("contact-topic");
+            if (topic && map[wanted]) topic.value = map[wanted];
+
+            const form = document.getElementById("contact-form");
+            if (!form) return;
+
+            const status = document.getElementById("form-status");
+            const submit = form.querySelector("button[type='submit']");
+            const endpoint = form.action;
+
+            form.addEventListener("submit", async function (event) {
+                event.preventDefault();
+
+                const data = new FormData(form);
+                const payload = {
+                    form_type: "contact",
+                    name: data.get("name"),
+                    email: data.get("email"),
+                    topic: data.get("topic"),
+                    message: data.get("message"),
+                    privacy_acknowledged: data.has("privacy_acknowledged"),
+                    website: data.get("website")
+                };
+
+                if (status) {
+                    status.className = "form-note";
+                    status.textContent = "Sending your message...";
+                }
+
+                if (submit) submit.disabled = true;
+
+                try {
+                    const response = await fetch(endpoint, {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify(payload)
+                    });
+
+                    if (!response.ok) {
+                        throw new Error("Submission failed");
+                    }
+
+                    form.reset();
+                    if (status) {
+                        status.className = "form-note form-success";
+                        status.textContent = "Thank you. Your message is on its way; I'll reply directly.";
+                    }
+                } catch (error) {
+                    if (status) {
+                        status.className = "form-note form-error";
+                        status.textContent = "Something went wrong sending the form. Please email levi@hekswerk.com directly.";
+                    }
+                } finally {
+                    if (submit) submit.disabled = false;
+                }
+            });
+        })();
+    </script>
+</body>
+
+</html>
