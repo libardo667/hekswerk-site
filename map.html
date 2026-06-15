@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="color-scheme" content="dark" />
+<script>
+  if (location.protocol === "http:" && location.hostname !== "localhost" && location.hostname !== "127.0.0.1") {
+    location.replace("https://" + location.host + location.pathname + location.search + location.hash);
+  }
+</script>
+<title>The Map - Hekswerk</title>
+<meta name="description" content="Hekswerk in one picture: where the private substrate lives, how it safely becomes public, and what you can read." />
+<link rel="icon" type="image/svg+xml" href="./assets/img/logo_aura.svg" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;500;600&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="./assets/css/styles.css?v=20260611" />
+<style>
+  .map-wrap{max-width:1120px;margin:0 auto;padding:0 clamp(18px,4vw,30px)}
+  .map-orient{max-width:70ch;color:var(--text,#e9e9ee);font-size:1.05rem;margin:1.2rem 0 1.8rem}
+  .mermaid{margin:1rem 0 2.4rem;min-height:120px}
+  .map-note{color:#9a9ab0;font-size:.82rem;margin:.4rem 0 2rem}
+  .map-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1rem;margin:1.5rem 0 3rem}
+  .map-list .zone{border:1px solid rgba(140,118,153,.25);border-radius:14px;padding:1.1rem 1.3rem;background:rgba(41,54,86,.18)}
+  .map-list .zone h2{font-family:Fraunces,serif;font-size:1.15rem;margin:.1rem 0 .2rem;color:#F5F5F2}
+  .map-list .zone .zb{color:#b9b9c8;font-size:.82rem;margin:0 0 .8rem}
+  .map-list ul{list-style:none;margin:0;padding:0} .map-list li{margin:.45rem 0;font-size:.88rem;line-height:1.45}
+  .map-list ul ul{margin:.3rem 0 .3rem .9rem;padding-left:.7rem;border-left:1px solid rgba(140,118,153,.25)}
+  .map-list a{color:#C0A990;text-decoration:none} .map-list a:hover{text-decoration:underline}
+  .map-list span{color:#a9a9bc;display:block}
+  .z-membrane{border-color:rgba(192,169,144,.5)!important}
+</style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <div class="nav">
+        <a href="./index.html" class="brand" style="text-decoration:none;">
+          <div class="brand-mark"><img src="./assets/img/logo_aura.svg" alt="Hekswerk" /></div>
+          <div class="brand-name">Hekswerk</div>
+        </a>
+        <nav class="navlinks" aria-label="Primary">
+          <a href="./research.html">Research</a>
+          <a href="./relocation.html">Relocation</a>
+          <a href="./map.html">The Map</a>
+          <a href="./contact.html">Contact</a>
+        </nav>
+        <div class="nav-actions"><a class="btn btn-primary nav-cta" href="./research.html">See the research</a></div>
+      </div>
+    </div>
+  </header>
+  <main>
+    <section class="map-wrap">
+      <span class="section-tag">How it fits together</span>
+      <h1 style="font-family:Fraunces,serif;font-size:clamp(2rem,4.5vw,3rem);margin:.2em 0 .1em">The Map</h1>
+      <p class="map-orient">Hekswerk in one picture: where the work runs, how it becomes something you can trust, and what you can read. The only path from the private substrate to the public surface runs through the membrane.</p>
+      <div class="mermaid">
+flowchart LR
+  subgraph substrate["The substrate"]
+    direction TB
+    ww["worldweaver"]:::substrate
+    stable["the-stable"]:::substrate
+    prune["prune"]:::substrate
+    memmgmt["memory-management"]:::substrate
+    revsched["review-scheduler"]:::substrate
+    record["the research record"]:::substrate
+  end
+  subgraph membrane["The membrane"]
+    direction TB
+    curation["curation + leak-sweep"]:::membrane
+    provenance["provenance"]:::membrane
+  end
+  subgraph public["The public surface"]
+    direction TB
+    site["hekswerk.com"]:::public
+    research["the research wing"]:::public
+    library["the library"]:::public
+    exhibits["the exhibits"]:::public
+    subgraph exhibits_grp[" "]
+      ex_two["Two Weeks"]:::publickid
+      ex_honesty["The Honesty Machinery"]:::publickid
+      ex_commons["Why a Commons"]:::publickid
+      ex_kitchen["The Kitchen"]:::publickid
+      ex_apoth["The Apothecary"]:::publickid
+      ex_pen["The Pen's Workshop"]:::publickid
+      ex_mono["Fifteen Strangers"]:::publickid
+    end
+    exhibits --- exhibits_grp
+    relocation["relocation"]:::public
+    contact["contact"]:::public
+  end
+  prune --> ww
+  prune --> stable
+  memmgmt --> record
+  revsched --> record
+  ww --> curation
+  stable --> curation
+  record --> curation
+  curation --> provenance
+  provenance --> research
+  provenance --> library
+  site --> research
+  site --> relocation
+  site --> contact
+  research --> exhibits
+  research --> library
+  click ww href "https://github.com/libardo667/worldweaver" "the persistent shared world and its residents"
+  click stable href "https://github.com/libardo667/the-stable" "the familiar runtime, where the local minds live"
+  click prune href "https://github.com/libardo667/prune" "write it down, build it, prune the living set"
+  click memmgmt href "https://github.com/libardo667/memory-management" "reusable external memory for any project"
+  click revsched href "https://github.com/libardo667/review-scheduler" "a cold reviewer that can't be charmed"
+  click record href "https://github.com/libardo667/worldweaver/tree/main/research" "locked pre-registrations and the cold-review history"
+  click curation href "https://github.com/libardo667/memory-management" "raw work trimmed to legible artifacts; private data excluded (e.g. the public stubs)"
+  click provenance href "./exhibits/honesty-machinery.html" "every public page records how it was made and whose words are whose"
+  click site href "./index.html" "one-person practice: research, relocation, automation"
+  click research href "./research.html" "the research, methods-first, in the open"
+  click library href "https://github.com/libardo667/hekswerk" "methodology + research wings, the sourced record"
+  click exhibits href "./exhibits/index.html" "walkable proofs you can inspect"
+  click relocation href "./relocation.html" "structured planning for US-to-Europe moves"
+  click contact href "./contact.html" "a short, private contact form"
+  click ex_two href "./exhibits/two-weeks.html" "the work, counted across six dimensions"
+  click ex_honesty href "./exhibits/honesty-machinery.html" "the verdicts that went against me, kept"
+  click ex_commons href "./exhibits/why-a-commons.html" "why federation is the only honest topology"
+  click ex_kitchen href "./exhibits/the-kitchen.html" "2.6M words from stateless hands"
+  click ex_apoth href "./exhibits/the-apothecary.html" "nine things you could build, graded by effort"
+  click ex_pen href "./exhibits/workshop/index.html" "the collaborator's own kept prose"
+  click ex_mono href "./exhibits/topic-monoculture.html" "a topic-monoculture null, kept and shown"
+  classDef substrate fill:#293656,stroke:#8C7699,color:#F5F5F2;
+  classDef membrane fill:#3a2f22,stroke:#C0A990,stroke-width:2px,color:#F5F5F2;
+  classDef public fill:#F5F5F2,stroke:#C0A990,color:#1a1a2e;
+  classDef publickid fill:#e7e2d8,stroke:#8C7699,color:#1a1a2e,font-size:11px;
+      </div>
+      <p class="map-note">The same map as a list, every node links to something real:</p>
+      <div class="map-list">
+<section class="zone z-substrate"><h2>The substrate</h2><p class="zb">Where the work runs and is recorded.</p><ul>
+<li><a href="https://github.com/libardo667/worldweaver"><b>worldweaver</b></a> <span>the persistent shared world and its residents</span>
+</li>
+<li><a href="https://github.com/libardo667/the-stable"><b>the-stable</b></a> <span>the familiar runtime, where the local minds live</span>
+</li>
+<li><a href="https://github.com/libardo667/prune"><b>prune</b></a> <span>write it down, build it, prune the living set</span>
+</li>
+<li><a href="https://github.com/libardo667/memory-management"><b>memory-management</b></a> <span>reusable external memory for any project</span>
+</li>
+<li><a href="https://github.com/libardo667/review-scheduler"><b>review-scheduler</b></a> <span>a cold reviewer that can&#x27;t be charmed</span>
+</li>
+<li><a href="https://github.com/libardo667/worldweaver/tree/main/research"><b>the research record</b></a> <span>locked pre-registrations and the cold-review history</span>
+</li>
+</ul></section>
+<section class="zone z-membrane"><h2>The membrane</h2><p class="zb">How raw work becomes legible and trustworthy: curation, leak-sweep, provenance.</p><ul>
+<li><a href="https://github.com/libardo667/memory-management"><b>curation + leak-sweep</b></a> <span>raw work trimmed to legible artifacts; private data excluded (e.g. the public stubs)</span>
+</li>
+<li><a href="./exhibits/honesty-machinery.html"><b>provenance</b></a> <span>every public page records how it was made and whose words are whose</span>
+</li>
+</ul></section>
+<section class="zone z-public"><h2>The public surface</h2><p class="zb">hekswerk.com, what anyone can read.</p><ul>
+<li><a href="./index.html"><b>hekswerk.com</b></a> <span>one-person practice: research, relocation, automation</span>
+</li>
+<li><a href="./research.html"><b>the research wing</b></a> <span>the research, methods-first, in the open</span>
+</li>
+<li><a href="https://github.com/libardo667/hekswerk"><b>the library</b></a> <span>methodology + research wings, the sourced record</span>
+</li>
+<li><a href="./exhibits/index.html"><b>the exhibits</b></a> <span>walkable proofs you can inspect</span>
+<ul>
+<li><a href="./exhibits/two-weeks.html"><b>Two Weeks</b></a> <span>the work, counted across six dimensions</span></li>
+<li><a href="./exhibits/honesty-machinery.html"><b>The Honesty Machinery</b></a> <span>the verdicts that went against me, kept</span></li>
+<li><a href="./exhibits/why-a-commons.html"><b>Why a Commons</b></a> <span>why federation is the only honest topology</span></li>
+<li><a href="./exhibits/the-kitchen.html"><b>The Kitchen</b></a> <span>2.6M words from stateless hands</span></li>
+<li><a href="./exhibits/the-apothecary.html"><b>The Apothecary</b></a> <span>nine things you could build, graded by effort</span></li>
+<li><a href="./exhibits/workshop/index.html"><b>The Pen&#x27;s Workshop</b></a> <span>the collaborator&#x27;s own kept prose</span></li>
+<li><a href="./exhibits/topic-monoculture.html"><b>Fifteen Strangers</b></a> <span>a topic-monoculture null, kept and shown</span></li>
+</ul>
+</li>
+<li><a href="./relocation.html"><b>relocation</b></a> <span>structured planning for US-to-Europe moves</span>
+</li>
+<li><a href="./contact.html"><b>contact</b></a> <span>a short, private contact form</span>
+</li>
+</ul></section>
+</div>
+    </section>
+    <footer>
+      <div class="wrap">
+        <p class="location-line">Currently in Portland, OR &middot; Relocating to The Hague, late 2026.</p>
+        <p>&copy; <span id="y"></span> Hekswerk. Privacy-first.</p>
+        <nav aria-label="Footer"><a href="./index.html">Home</a><a href="./research.html">Research</a><a href="./contact.html">Contact</a></nav>
+      </div>
+    </footer>
+  </main>
+  <script type="module">
+    import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
+    mermaid.initialize({
+      startOnLoad: true, securityLevel: "loose", theme: "base",
+      themeVariables: {
+        fontFamily: "Outfit, system-ui, sans-serif",
+        lineColor: "#8C7699", primaryBorderColor: "#8C7699",
+        clusterBkg: "rgba(9,9,14,0.35)", clusterBorder: "rgba(140,118,153,0.35)"
+      }
+    });
+    const y = document.getElementById("y"); if (y) y.textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
