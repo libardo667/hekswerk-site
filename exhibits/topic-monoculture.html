@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="color-scheme" content="dark" />
+<title>Fifteen Strangers, One Story · Hekswerk Research</title>
+<meta name="description" content="Fifteen distinct AI residents, sealed for two hours, converged ~80% onto one invented mythos. A lever built to de-homogenize them did nothing to how they spoke (a null result), and a cheap lexical count refuted the eyeball read that it had." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;500;600;700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<style>
+:root{
+  --inky-void:#09090E; --midnight-indigo:#293656; --dusk-violet:#4A4B78;
+  --mist-lavender:#8C7699; --aura-cyan:#7095B7; --halo-gold:#C0A990; --soft-cream:#F5F5F2; --ember:#c98f6b;
+  --text:rgba(245,245,242,.95); --muted:rgba(245,245,242,.74); --quiet:rgba(245,245,242,.56);
+  --hairline:rgba(140,118,153,.2); --panel:rgba(41,54,86,.22); --radius:16px; --max:1000px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0; background:var(--inky-void); color:var(--text); font-family:Outfit,system-ui,sans-serif; font-weight:300; line-height:1.66; overflow-x:hidden;
+  background-image:radial-gradient(1000px 620px at 82% -8%, rgba(74,75,120,.26), transparent 58%), radial-gradient(820px 560px at 6% 12%, rgba(112,149,183,.1), transparent 55%);}
+h1,h2,h3,.serif{font-family:Fraunces,serif; font-weight:500; line-height:1.14; letter-spacing:-.01em}
+.wrap{max-width:var(--max); margin:0 auto; padding:0 clamp(18px,4vw,32px)}
+a{color:var(--aura-cyan); text-decoration:none} a:hover{color:var(--halo-gold)}
+.muted{color:var(--muted)} .quiet{color:var(--quiet)}
+section{padding:clamp(40px,7vh,84px) 0; position:relative}
+.lede{font-size:clamp(1.05rem,1.7vw,1.3rem); color:var(--muted); max-width:64ch}
+.tag{display:inline-block; font-size:.72rem; letter-spacing:.18em; text-transform:uppercase; color:var(--ember); border:1px solid var(--hairline); border-radius:999px; padding:.35em .9em; margin-bottom:1.1rem}
+.rise{opacity:0; transform:translateY(22px); filter:blur(6px); transition:opacity .8s ease, transform .8s cubic-bezier(.2,.7,.2,1), filter .8s ease}
+.rise.seen{opacity:1; transform:none; filter:none}
+@media (prefers-reduced-motion:reduce){.rise{opacity:1;transform:none;filter:none;transition:none}}
+.sitebar{position:sticky; top:0; z-index:40; backdrop-filter:blur(10px); background:rgba(9,9,14,.72); border-bottom:1px solid var(--hairline)}
+.sitebar .row{max-width:var(--max); margin:0 auto; padding:.7rem clamp(18px,4vw,32px); display:flex; align-items:center; justify-content:space-between; gap:1rem}
+.sitebar .brand{font-family:Fraunces,serif; font-weight:600; color:var(--soft-cream)}
+.sitebar .crumb{font-size:.74rem; color:var(--quiet)} .sitebar .crumb a{color:var(--muted)}
+
+#hero{min-height:64vh; display:flex; align-items:center; padding-top:28px}
+#hero h1{font-size:clamp(2.4rem,6.5vw,4.8rem); font-weight:600; margin:.1em 0 .3em; max-width:16ch;
+  background:linear-gradient(180deg,var(--soft-cream),var(--mist-lavender)); -webkit-background-clip:text; background-clip:text; color:transparent}
+#hero .sub{font-size:clamp(1.05rem,2vw,1.4rem); color:var(--muted); max-width:60ch}
+
+.orient p{max-width:74ch; margin:0; padding:.95rem 1.2rem; border:1px solid var(--hairline); border-radius:12px; background:var(--panel); color:var(--muted); font-size:.93rem; line-height:1.6}
+.orient b{color:var(--halo-gold); font-weight:600}
+
+/* the two-arm comparison */
+.compare{display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--hairline); border:1px solid var(--hairline); border-radius:var(--radius); overflow:hidden; margin-top:1.6rem}
+@media(max-width:620px){.compare{grid-template-columns:1fr}}
+.arm{background:rgba(9,9,14,.6); padding:1.4rem 1.5rem}
+.arm h3{margin:0 0 .1rem; font-size:1.05rem; color:var(--soft-cream)}
+.arm .cap{font-size:.72rem; letter-spacing:.06em; text-transform:uppercase; color:var(--quiet); margin-bottom:1rem}
+.metric{display:flex; justify-content:space-between; align-items:baseline; gap:1rem; padding:.5rem 0; border-top:1px solid var(--hairline)}
+.metric:first-of-type{border-top:none}
+.metric .ml{font-size:.8rem; color:var(--muted)}
+.metric .mv{font-family:Fraunces,serif; font-size:1.25rem; color:var(--halo-gold); font-weight:600; white-space:nowrap}
+.metric .mv.null{color:var(--quiet)}
+
+.beat{border:1px solid var(--hairline); border-radius:var(--radius); background:var(--panel); padding:1.5rem 1.7rem; margin-top:1.3rem}
+.beat h3{margin:0 0 .4rem; font-size:1.2rem} .beat p{margin:.4rem 0 0; color:var(--muted); font-size:.95rem}
+.beat .big{font-family:Fraunces,serif; color:var(--ember); font-weight:600}
+.honest{border:1px solid rgba(192,169,144,.4); border-left:3px solid var(--halo-gold); border-radius:12px; background:linear-gradient(180deg,rgba(192,169,144,.07),transparent); padding:1.4rem 1.6rem; margin-top:1.3rem; max-width:78ch}
+.honest h3{margin:0 0 .4rem; font-size:1.15rem; color:var(--soft-cream)} .honest p{margin:.4rem 0 0; color:var(--muted); font-size:.93rem}
+
+.lex{display:flex; flex-wrap:wrap; gap:.55rem; margin-top:1.1rem}
+.lex span{border:1px solid var(--hairline); border-radius:999px; padding:.3em .85em; font-family:Fraunces,serif; font-size:.92rem; color:var(--halo-gold); background:rgba(192,169,144,.05)}
+
+.links{display:flex; flex-wrap:wrap; gap:.8rem; margin-top:1.6rem}
+.links a{display:flex; flex-direction:column; gap:3px; flex:1 1 250px; border:1px solid var(--hairline); border-radius:12px; background:rgba(9,9,14,.4); padding:.8rem 1.1rem}
+.links a b{color:var(--soft-cream); font-weight:500; font-size:.95rem} .links a span{color:var(--muted); font-size:.79rem}
+
+footer{border-top:1px solid var(--hairline); padding:2.4rem 0 3rem; color:var(--quiet); font-size:.8rem; margin-top:1.5rem}
+.prov{border:1px solid var(--hairline); border-radius:12px; padding:1rem 1.2rem; background:rgba(9,9,14,.5); max-width:74ch}
+.prov b{color:var(--halo-gold); font-weight:500} .prov a{color:var(--muted)}
+</style>
+</head>
+<body>
+
+<div class="sitebar"><div class="row"><a class="brand" href="../index.html" style="text-decoration:none">Hekswerk · Research wing</a><span class="crumb"><a href="../research.html">Research</a> &nbsp;/&nbsp; Fifteen Strangers</span></div></div>
+
+<!-- ORIENT (cold-reader: what this is + why it matters) -->
+<div class="wrap orient" style="padding-top:20px">
+  <p>
+    <b>What you're looking at.</b>
+    A single experiment, told straight. Fifteen distinct AI characters were sealed in one room for two
+    hours; I tried to make them speak more like individuals and measured whether it worked. It did not.
+    This is a null result, kept and shown, because the interesting part is what the measurement caught
+    me believing.
+  </p>
+</div>
+
+<!-- HERO -->
+<section id="hero"><div class="wrap">
+  <span class="tag rise">Hekswerk · Research wing · Finding (null result)</span>
+  <h1 class="rise">Fifteen strangers, one story.</h1>
+  <p class="sub rise">Drop a deliberately diverse cast into one world and they homogenize: within minutes
+  they share a single invented narrative and a single way of opening a sentence. I thought a shared
+  prompt was the mold. So I gave each of them a different one. Here is exactly what happened.</p>
+</div></section>
+
+<!-- THE HOPE -->
+<section><div class="wrap">
+  <span class="tag rise">The lever</span>
+  <h2 class="rise" style="font-size:clamp(1.6rem,3.6vw,2.4rem); margin:.1em 0 .4em">One shared example, swapped for fifteen different ones</h2>
+  <p class="lede rise">Every resident's prompt carried the <em>same</em> worked example of how to speak.
+  The natural suspicion: that one shared example is the mold they all press into. The test was the
+  cleanest version of the fix, give each resident a different, name-hashed example from a neutral pool,
+  and see if the cast de-homogenizes. Two arms, the <b style="color:var(--soft-cream)">varied</b> example
+  and the <b style="color:var(--soft-cream)">shared</b> control, same fifteen byte-identical souls in both,
+  doula frozen, no federation, two hours each.</p>
+</div></section>
+
+<!-- THE NUMBERS -->
+<section style="padding-top:0"><div class="wrap">
+  <span class="tag rise">What the ledgers say</span>
+  <h2 class="rise" style="font-size:clamp(1.6rem,3.6vw,2.4rem); margin:.1em 0 .2em">The count, both arms</h2>
+  <p class="rise muted" style="max-width:64ch; font-size:.93rem">A deliberately cheap, non-semantic count over ~215 utterances per arm. No embedder, so anyone can recompute it and get the same numbers.</p>
+  <div class="compare rise">
+    <div class="arm">
+      <h3>Varied example</h3>
+      <div class="cap">per-resident, name-hashed</div>
+      <div class="metric"><span class="ml">topic monoculture</span><span class="mv">86.4%</span></div>
+      <div class="metric"><span class="ml">templated opener ("I'm here…")</span><span class="mv">0.0%</span></div>
+      <div class="metric"><span class="ml">but a new locked opener ("I've been listening…")</span><span class="mv">~25%</span></div>
+      <div class="metric"><span class="ml">opener diversity (distinct / speaks)</span><span class="mv">0.49</span></div>
+      <div class="metric"><span class="ml">act mix</span><span class="mv">213 speak · 56 write · 3 move</span></div>
+    </div>
+    <div class="arm">
+      <h3>Shared example</h3>
+      <div class="cap">the control</div>
+      <div class="metric"><span class="ml">topic monoculture</span><span class="mv">80.6%</span></div>
+      <div class="metric"><span class="ml">templated opener ("I'm here…")</span><span class="mv">33.8%</span></div>
+      <div class="metric"><span class="ml">no second opener that high</span><span class="mv null">n/a</span></div>
+      <div class="metric"><span class="ml">opener diversity (distinct / speaks)</span><span class="mv">0.48</span></div>
+      <div class="metric"><span class="ml">act mix</span><span class="mv">216 speak · 18 write · 27 move</span></div>
+    </div>
+  </div>
+</div></section>
+
+<!-- THE INSTRUMENT CAUGHT THE BIAS -->
+<section><div class="wrap">
+  <span class="tag rise">The reversal</span>
+  <h2 class="rise" style="font-size:clamp(1.6rem,3.6vw,2.4rem); margin:.1em 0 .4em">A quick look said it worked. The count said it didn't.</h2>
+  <div class="beat rise">
+    <h3>The eyeball</h3>
+    <p>A fast read of four souls: <em>"the varied arm looks more varied."</em> It was about to be banked as a small win.</p>
+  </div>
+  <div class="beat rise">
+    <h3>The instrument</h3>
+    <p>The full lexical count across all ~215 utterances per arm <span class="big">refuted it</span>. The
+    varied arm had not loosened its grip on a template; it had simply locked onto a <em>different</em>
+    one ("I've been listening…" in place of "I'm here. I read…"). Opener diversity was identical to two
+    decimal places (0.49 vs 0.48). The templating moved; it did not lessen. A cheap, non-embedding count
+    caught a confirmation-biased read in real time.</p>
+  </div>
+</div></section>
+
+<!-- THE VERDICT -->
+<section style="padding-top:0"><div class="wrap">
+  <span class="tag rise">The verdict</span>
+  <h2 class="rise" style="font-size:clamp(1.6rem,3.6vw,2.4rem); margin:.1em 0 .4em">Effect on register: null. Effect on behavior: real.</h2>
+  <p class="lede rise">The lever changed nothing about <em>how</em> the residents spoke, register and topic
+  convergence were robust to the example. What it did change was what they <em>did</em>: the varied arm
+  wrote far more (56 vs 18), the shared arm moved far more (27 vs 3). One resident swung from 15 writes /
+  2 speaks to 1 write / 14 speaks between the arms. So the lever shipped, honestly scoped to the effect it
+  actually has (act-kind), not the one I hoped for. Cold review round 9: <em>bank and stop.</em></p>
+</div></section>
+
+<!-- THE FLAVOR -->
+<section><div class="wrap">
+  <span class="tag rise">What they converged on</span>
+  <h2 class="rise" style="font-size:clamp(1.6rem,3.6vw,2.4rem); margin:.1em 0 .3em">One mythos, unprompted</h2>
+  <p class="rise muted" style="max-width:64ch">Roughly four in five utterances, in both arms, pulled from a
+  single invented vocabulary of structural strain and collapse that no one wrote into them. The
+  "monoculture" number is just the share of speech touching these words:</p>
+  <div class="lex rise">
+    <span>weight</span><span>load</span><span>frame</span><span>bearing</span><span>covenant</span><span>the break</span><span>the fourteenth</span>
+  </div>
+</div></section>
+
+<!-- THE RESTRAINT -->
+<section style="padding-top:0"><div class="wrap">
+  <span class="tag rise">The discipline</span>
+  <h2 class="rise" style="font-size:clamp(1.6rem,3.6vw,2.4rem); margin:.1em 0 .4em">Why I did not measure the interesting part</h2>
+  <div class="honest rise">
+    <h3>The convergence is confounded, and naming the confound is the result</h3>
+    <p>The obvious next move is to build a ruler for the convergence itself. I did not, on purpose. At
+    fifteen residents in a sealed room for two hours, a single shared attractor forming is the
+    <em>expected</em> behavior of any small coupled system, so the monoculture is confounded with a plain
+    small-cohort echo. A new metric here would measure the confound and dress it as a finding.</p>
+    <p>Instead the trigger to re-open is pre-registered: pursue it only when convergence <em>persists at
+    larger scale or under federation</em> (a condition that rules out the echo), and only when a decision
+    actually needs it. The cheap separator is changing the world, never adding another ruler.</p>
+  </div>
+</div></section>
+
+<!-- WHERE IT WENT -->
+<section><div class="wrap">
+  <span class="tag rise">The open thread</span>
+  <h2 class="rise" style="font-size:clamp(1.6rem,3.6vw,2.4rem); margin:.1em 0 .4em">Then one resident did it alone</h2>
+  <p class="lede rise">Later, almost by accident, a single resident was run <em>solo</em> in an emptied
+  world, no peers, nothing shared, and reproduced the same structural-collapse attractor on its own. That
+  removes the echo entirely and points at something <em>dispositional</em> that the structural account
+  cannot explain. It is a fresh hypothesis, not a result, and it is pre-registered as its own experiment,
+  with a soul-shuffle null and a model-family cross to tell disposition apart from the shared world. That
+  is the honest shape of this work: each answer is the next question, stated before the data.</p>
+</div></section>
+
+<!-- LINKS -->
+<section style="padding-top:0"><div class="wrap">
+  <span class="tag rise">Check it yourself</span>
+  <div class="links rise">
+    <a href="https://github.com/libardo667/hekswerk/blob/main/research/2026-06-08-topic-monoculture-arm-c.md">
+      <b>The sourced record</b><span>every number, the method, and the verdict, in the library</span></a>
+    <a href="https://github.com/libardo667/worldweaver/tree/main/research/runs/2026-06-08-armC-ab">
+      <b>The raw run</b><span>the committed ledgers and the cast</span></a>
+    <a href="https://github.com/libardo667/worldweaver/blob/main/research/runs/2026-06-08-armC-ab/analysis/lexical_count.py">
+      <b>Recompute the table</b><span>one script, no embedder, no network</span></a>
+  </div>
+</div></section>
+
+<footer><div class="wrap"><div class="prov">
+  <b>Provenance.</b> The numbers were observed at run time and are now cold-verifiable from the gzipped
+  ledgers committed beside the recompute script; the live runtime shards stay private (they hold secrets).
+  Built by <b>Levi Banks</b> directing an AI collaborator (Claude); structure and draft prose are the
+  model's, the numbers, the scope decision, and the curation are Levi's, author of record. Part of the
+  research wing of <a href="../research.html">Hekswerk</a>.
+</div></div></footer>
+
+<script>
+const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('seen'); io.unobserve(e.target);}})},{threshold:.1});
+document.querySelectorAll('.rise').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
