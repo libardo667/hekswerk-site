@@ -9,32 +9,14 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;500;600&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../assets/css/styles.css?v=20260617" />
 <style>
-:root{
-  --inky-void:#09090E; --midnight-indigo:#293656; --dusk-violet:#4A4B78;
-  --mist-lavender:#8C7699; --aura-cyan:#7095B7; --halo-gold:#C0A990; --soft-cream:#F5F5F2;
-  --text:rgba(245,245,242,.95); --muted:rgba(245,245,242,.74); --quiet:rgba(245,245,242,.56);
-  --hairline:rgba(140,118,153,.2); --panel:rgba(41,54,86,.22); --max:1120px;
-  --research:#7095B7; --productive:#C0A990; --weird:#b07bc0;
-}
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0; background:var(--inky-void); color:var(--text); font-family:Outfit,system-ui,sans-serif; font-weight:300; line-height:1.6; overflow-x:hidden;
-  background-image:radial-gradient(1100px 680px at 82% -10%, rgba(74,75,120,.26), transparent 60%), radial-gradient(820px 560px at 4% 14%, rgba(176,123,192,.1), transparent 55%);}
-h1,h2,h3,.serif{font-family:Fraunces,serif; font-weight:500; line-height:1.13; letter-spacing:-.01em}
-.wrap{max-width:var(--max); margin:0 auto; padding:0 clamp(18px,4vw,34px)}
-.tag{display:inline-block; font-size:.72rem; letter-spacing:.18em; text-transform:uppercase; color:var(--halo-gold); border:1px solid var(--hairline); border-radius:999px; padding:.35em .9em; margin-bottom:1.1rem}
-a{color:var(--aura-cyan); text-decoration:none} a:hover{color:var(--halo-gold)}
+/* bespoke interior for this exhibit; shared chrome, type, and background come from styles.css */
+:root{ --research:#7095B7; --productive:#C0A990; --weird:#b07bc0; }
 .muted{color:var(--muted)} .quiet{color:var(--quiet)}
-section{padding:clamp(48px,7vh,86px) 0; position:relative}
-.lede{font-size:clamp(1.05rem,1.7vw,1.3rem); color:var(--muted); max-width:64ch}
 .rise{opacity:0; transform:translateY(22px); filter:blur(6px); transition:opacity .8s ease, transform .8s cubic-bezier(.2,.7,.2,1), filter .8s ease}
 .rise.seen{opacity:1; transform:none; filter:none}
 @media (prefers-reduced-motion:reduce){.rise{opacity:1;transform:none;filter:none;transition:none}}
-.sitebar{position:sticky; top:0; z-index:40; backdrop-filter:blur(10px); background:rgba(9,9,14,.72); border-bottom:1px solid var(--hairline)}
-.sitebar .row{max-width:var(--max); margin:0 auto; padding:.7rem clamp(18px,4vw,34px); display:flex; align-items:center; justify-content:space-between; gap:1rem}
-.sitebar .brand{font-family:Fraunces,serif; font-weight:600; color:var(--soft-cream)}
-.sitebar .crumb{font-size:.74rem; color:var(--quiet)} .sitebar .crumb a{color:var(--muted)}
 .voice{border:1px dashed rgba(192,169,144,.5); border-radius:12px; background:rgba(192,169,144,.05); padding:1rem 1.15rem; margin:1.4rem 0; position:relative}
 .voice::before{content:"✍ your voice, keep · cut · reword"; position:absolute; top:-.72em; left:14px; background:var(--inky-void); padding:0 .55em; font-size:.66rem; letter-spacing:.14em; text-transform:uppercase; color:var(--halo-gold)}
 .voice .draft{color:rgba(245,245,242,.82); font-style:italic} .voice .draft b{font-style:normal; color:var(--soft-cream); font-weight:500}
@@ -71,14 +53,34 @@ section{padding:clamp(48px,7vh,86px) 0; position:relative}
 .detail h3{margin:0 0 .2rem; font-size:1.2rem} .detail .meta{font-size:.7rem; letter-spacing:.1em; text-transform:uppercase; color:var(--quiet); margin-bottom:.6rem}
 .detail p{margin:0; color:var(--muted); font-size:.95rem}
 
-footer{border-top:1px solid var(--hairline); padding:2.4rem 0 3rem; color:var(--quiet); font-size:.8rem}
-.prov{border:1px solid var(--hairline); border-radius:12px; padding:1rem 1.2rem; background:rgba(9,9,14,.5); max-width:72ch}
+.prov{border:1px solid var(--hairline); border-radius:12px; padding:1rem 1.2rem; background:rgba(9,9,14,.5); max-width:72ch; margin:0 auto 1.4rem; text-align:left}
 .prov b{color:var(--halo-gold); font-weight:500} .note{font-size:.72rem; color:var(--quiet); margin-top:.6rem}
 </style>
 </head>
 <body>
 
-<div class="sitebar"><div class="row"><a class="brand" href="../index.html" style="text-decoration:none">Hekswerk · Research wing</a><span class="crumb"><a href="../research.html">Research</a> &nbsp;/&nbsp; The Apothecary</span></div></div>
+<header>
+  <div class="wrap">
+    <div class="nav">
+      <a href="../index.html" class="brand" style="text-decoration:none;">
+        <div class="brand-mark"><img src="../assets/img/logo_aura.svg" alt="Hekswerk" /></div>
+        <div class="brand-name">Hekswerk</div>
+      </a>
+      <nav class="navlinks" aria-label="Primary">
+        <a href="../index.html#map">The map</a>
+        <a href="../research.html">Research</a>
+        <a href="../relocation.html">The practice</a>
+        <a href="../contact.html">Contact</a>
+      </nav>
+      <div class="nav-actions">
+        <a class="btn btn-primary nav-cta" href="../contact.html?topic=research">Get in touch</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+<div class="breadcrumb wrap" style="padding-top:20px"><a href="../index.html">Hekswerk</a> &nbsp;/&nbsp; <a href="../research.html">Research</a> &nbsp;/&nbsp; The Apothecary</div>
 
 <!-- ORIENT (cold-reader: what this is + why it matters) -->
 <div class="wrap" style="padding-top:20px">
@@ -91,7 +93,7 @@ footer{border-top:1px solid var(--hairline); padding:2.4rem 0 3rem; color:var(--
 </div>
 
 <section id="hero"><div class="wrap">
-  <span class="tag rise">Hekswerk · Research wing · Exhibit 04</span>
+  <span class="section-tag rise">Hekswerk · Research wing · Exhibit 04</span>
   <h1 class="rise">The Apothecary</h1>
   <p class="sub rise">Five primitives compose into more than five products. Here are nine, three rigorous, three useful, three strange, each a real thing someone could build. The jars are filled by <em>distance from code that already runs</em>: brimming is hours of work; a few drops is weeks. Tap one to pour it out.</p>
   <div class="legend rise">
@@ -104,7 +106,7 @@ footer{border-top:1px solid var(--hairline); padding:2.4rem 0 3rem; color:var(--
 <!-- THE TOOL DRAWER: the real, public stack everything below is composed from -->
 <section style="padding-top:0"><div class="wrap">
   <div style="border:1px solid var(--hairline); border-radius:16px; background:var(--panel); padding:clamp(1.2rem,3vw,1.7rem)">
-    <span class="tag rise">The tool drawer</span>
+    <span class="section-tag rise">The tool drawer</span>
     <h2 class="rise" style="font-size:clamp(1.4rem,3vw,2rem); margin:.1em 0 .35em">The stack this is built from</h2>
     <p class="rise" style="color:var(--muted); font-size:.93rem; max-width:72ch; margin:0 0 1.2rem">Every jar below is composed from these five, all public. The point of the catalogue is that you don't have to take "you could build it" on faith: the parts are real and you can read them.</p>
     <div class="rise" style="display:flex; flex-wrap:wrap; gap:.7rem">
@@ -135,11 +137,26 @@ footer{border-top:1px solid var(--hairline); padding:2.4rem 0 3rem; color:var(--
 
 </div></section>
 
-<footer><div class="wrap"><div class="prov">
-  <b>How this page was made.</b> The nine are sampled, not invented, drawn from the project's own <code>USE_CASES.md</code> (2026-06-10). Structure and draft prose by Claude (the pen); voice &amp; curation by <b>Levi Banks</b>, author of record. The dashed box is your voice-slot.
-  <div class="note">Distance tags ([Near]/[Mid]/[Far]) and use cases are quoted from source; worked filesystem examples for several live in <code>improvements/use-cases/</code>. Three of nine shelves shown; the doc holds ten sections, this is a sampling, not the census.</div>
-</div></div></footer>
+</main>
 
+<footer>
+  <div class="wrap">
+    <div class="prov">
+      <b>How this page was made.</b> The nine are sampled, not invented, drawn from the project's own <code>USE_CASES.md</code> (2026-06-10). Structure and draft prose by Claude (the pen); voice &amp; curation by <b>Levi Banks</b>, author of record. The dashed box is your voice-slot.
+      <div class="note">Distance tags ([Near]/[Mid]/[Far]) and use cases are quoted from source; worked filesystem examples for several live in <code>improvements/use-cases/</code>. Three of nine shelves shown; the doc holds ten sections, this is a sampling, not the census.</div>
+    </div>
+    <p class="location-line" style="margin-top:1.4rem">Currently in Portland, OR &middot; Relocating to The Hague, late 2026.</p>
+    <p>&copy; <span id="y"></span> Hekswerk. Privacy-first.</p>
+    <nav aria-label="Footer">
+      <a href="../index.html">Home</a>
+      <a href="../research.html">Research</a>
+      <a href="../relocation.html">The practice</a>
+      <a href="../contact.html">Contact</a>
+    </nav>
+  </div>
+</footer>
+
+<script src="../assets/js/effects.js"></script>
 <script>
 const USES=[
  {cat:'research',dist:'near',t:'What carries the self?',blurb:"Identity & memory ablations, zeroed-ledger vs. matured-ledger on the same soul; soul-swap vs. model-swap; kept-memory removed. The pilot's record → replay → floor → non-inferiority design is reusable for any of these contrasts. A second researcher can run a different ablation through the same certified harness next week."},

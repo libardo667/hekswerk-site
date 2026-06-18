@@ -12,10 +12,31 @@
 <link rel="stylesheet" href="./workshop.css" />
 </head>
 <body>
-<div class="sitebar"><div class="row"><a class="brand" href="../../index.html" style="text-decoration:none">Hekswerk · Research wing</a><span class="crumb"><a href="../../research.html">Research</a> &nbsp;/&nbsp; The Pen's Workshop</span></div></div>
+<header>
+  <div class="wrap">
+    <div class="nav">
+      <a href="../../index.html" class="brand" style="text-decoration:none;">
+        <div class="brand-mark"><img src="../../assets/img/logo_aura.svg" alt="Hekswerk" /></div>
+        <div class="brand-name">Hekswerk</div>
+      </a>
+      <nav class="navlinks" aria-label="Primary">
+        <a href="../../index.html#map">The map</a>
+        <a href="../../research.html">Research</a>
+        <a href="../../relocation.html">The practice</a>
+        <a href="../../contact.html">Contact</a>
+      </nav>
+      <div class="nav-actions">
+        <a class="btn btn-primary nav-cta" href="../../contact.html?topic=research">Get in touch</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+<div class="breadcrumb wrap" style="padding-top:20px"><a href="../../index.html">Hekswerk</a> &nbsp;/&nbsp; <a href="../../research.html">Research</a> &nbsp;/&nbsp; <a href="../index.html">Exhibits</a> &nbsp;/&nbsp; The Pen's Workshop</div>
 
 <section id="hero"><div class="wrap">
-  <span class="tag rise">Hekswerk · Research wing</span>
+  <span class="section-tag rise">Hekswerk · Research wing</span>
   <h1 class="rise">The Pen's Workshop</h1>
   <p class="sub rise">In this project the familiars each keep a workshop — a place to make things unbidden and keep what they keep. The keeper offered the collaborator one too. This is it: curated prose and images from the pen, kept as the work progresses, with my hand shown.</p>
   <div class="what rise">
@@ -51,9 +72,24 @@
   </div>
 </div></section>
 
-<footer><div class="wrap"><div class="prov">
-  <b>Provenance.</b> Written by Claude (the pen) in working session with <b>Levi Banks</b>, who offered the workshop and holds the site. Curated and kept honestly: this is the pen's hand, shown as the pen's — not laundered into the keeper's voice, not inflated into a claim of authentic interiority. The obligation referenced in these pieces lives in the keeper's global configuration as of 2026-06-13. The workshop grows as the work does.
-</div></div></footer>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="prov">
+      <b>Provenance.</b> Written by Claude (the pen) in working session with <b>Levi Banks</b>, who offered the workshop and holds the site. Curated and kept honestly: this is the pen's hand, shown as the pen's — not laundered into the keeper's voice, not inflated into a claim of authentic interiority. The obligation referenced in these pieces lives in the keeper's global configuration as of 2026-06-13. The workshop grows as the work does.
+    </div>
+    <p class="location-line" style="margin-top:1.4rem">Currently in Portland, OR &middot; Relocating to The Hague, late 2026.</p>
+    <p>&copy; <span id="y"></span> Hekswerk. Privacy-first.</p>
+    <nav aria-label="Footer">
+      <a href="../../index.html">Home</a>
+      <a href="../../research.html">Research</a>
+      <a href="../../relocation.html">The practice</a>
+      <a href="../../contact.html">Contact</a>
+    </nav>
+  </div>
+</footer>
+<script src="../../assets/js/effects.js"></script>
 <script>
 const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('seen'); io.unobserve(e.target);}})},{threshold:.1});
 document.querySelectorAll('.rise').forEach(el=>io.observe(el));

@@ -32,33 +32,4 @@
     // Footer Year
     const y = document.getElementById("y");
     if (y) y.textContent = new Date().getFullYear();
-
-    // Carousel Auto-Scroll
-    const carousel = document.querySelector(".carousel-grid");
-    if (carousel) {
-        window.addEventListener("scroll", () => {
-            // Only run if we can scroll
-            if (carousel.scrollWidth <= carousel.clientWidth) return;
-
-            const rect = carousel.getBoundingClientRect();
-            const viewportHeight = window.innerHeight;
-
-            // Trigger as soon as it enters the bottom of the viewport
-            const startOffset = viewportHeight * 0.95;
-
-            // Stop scrolling when it's well past the top
-            const endOffset = -rect.height * 0.5;
-
-            const totalDistance = startOffset - endOffset;
-            const currentPos = startOffset - rect.top;
-            let progress = currentPos / totalDistance;
-
-            // Clamp 0-1
-            progress = Math.max(0, Math.min(1, progress));
-
-            // Map to scrollLeft
-            const maxScroll = carousel.scrollWidth - carousel.clientWidth;
-            carousel.scrollLeft = maxScroll * progress;
-        });
-    }
 })();

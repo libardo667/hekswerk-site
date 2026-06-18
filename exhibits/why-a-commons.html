@@ -9,34 +9,13 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;500;600;700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../assets/css/styles.css?v=20260617" />
 <style>
-:root{
-  --inky-void:#09090E; --midnight-indigo:#293656; --dusk-violet:#4A4B78;
-  --mist-lavender:#8C7699; --aura-cyan:#7095B7; --halo-gold:#C0A990; --soft-cream:#F5F5F2;
-  --text:rgba(245,245,242,.95); --muted:rgba(245,245,242,.74); --quiet:rgba(245,245,242,.56);
-  --hairline:rgba(140,118,153,.2); --panel:rgba(41,54,86,.22);
-  --radius:16px; --max:1120px;
-}
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0; background:var(--inky-void); color:var(--text); font-family:Outfit,system-ui,sans-serif; font-weight:300; line-height:1.6; overflow-x:hidden;
-  background-image:radial-gradient(1100px 680px at 80% -10%, rgba(74,75,120,.26), transparent 60%), radial-gradient(820px 560px at 6% 14%, rgba(112,149,183,.1), transparent 55%);}
-h1,h2,h3,.serif{font-family:Fraunces,serif; font-weight:500; line-height:1.13; letter-spacing:-.01em}
-.wrap{max-width:var(--max); margin:0 auto; padding:0 clamp(18px,4vw,34px)}
-.narrow{max-width:760px}
-.tag{display:inline-block; font-size:.72rem; letter-spacing:.18em; text-transform:uppercase; color:var(--halo-gold); border:1px solid var(--hairline); border-radius:999px; padding:.35em .9em; margin-bottom:1.1rem}
-a{color:var(--aura-cyan); text-decoration:none} a:hover{color:var(--halo-gold)}
+/* bespoke interior for this exhibit; shared chrome, type, and background come from styles.css */
 .muted{color:var(--muted)} .quiet{color:var(--quiet)}
-section{padding:clamp(52px,8.5vh,100px) 0; position:relative}
-.lede{font-size:clamp(1.05rem,1.7vw,1.3rem); color:var(--muted); max-width:64ch}
 .rise{opacity:0; transform:translateY(24px); filter:blur(6px); transition:opacity .85s ease, transform .85s cubic-bezier(.2,.7,.2,1), filter .85s ease}
 .rise.seen{opacity:1; transform:none; filter:none}
 @media (prefers-reduced-motion:reduce){.rise{opacity:1;transform:none;filter:none;transition:none}}
-
-.sitebar{position:sticky; top:0; z-index:40; backdrop-filter:blur(10px); background:rgba(9,9,14,.72); border-bottom:1px solid var(--hairline)}
-.sitebar .row{max-width:var(--max); margin:0 auto; padding:.7rem clamp(18px,4vw,34px); display:flex; align-items:center; justify-content:space-between; gap:1rem}
-.sitebar .brand{font-family:Fraunces,serif; font-weight:600; color:var(--soft-cream)}
-.sitebar .crumb{font-size:.74rem; color:var(--quiet)} .sitebar .crumb a{color:var(--muted)}
 
 .voice{border:1px dashed rgba(192,169,144,.5); border-radius:12px; background:rgba(192,169,144,.05); padding:1rem 1.15rem; margin:1.4rem 0; position:relative}
 .voice::before{content:"✍ your voice, keep · cut · reword"; position:absolute; top:-.72em; left:14px; background:var(--inky-void); padding:0 .55em; font-size:.66rem; letter-spacing:.14em; text-transform:uppercase; color:var(--halo-gold)}
@@ -83,15 +62,35 @@ section{padding:clamp(52px,8.5vh,100px) 0; position:relative}
 .fedfit h3{margin:0 0 .4rem; font-size:1.25rem}
 .fedfit p{margin:0; color:var(--muted); font-size:.92rem}
 
-footer{border-top:1px solid var(--hairline); padding:2.4rem 0 3rem; color:var(--quiet); font-size:.8rem}
-.prov{border:1px solid var(--hairline); border-radius:12px; padding:1rem 1.2rem; background:rgba(9,9,14,.5); max-width:72ch}
+.prov{border:1px solid var(--hairline); border-radius:12px; padding:1rem 1.2rem; background:rgba(9,9,14,.5); max-width:72ch; margin:0 auto 1.4rem; text-align:left}
 .prov b{color:var(--halo-gold); font-weight:500}
 .note{font-size:.72rem; color:var(--quiet); margin-top:.6rem}
 </style>
 </head>
 <body>
 
-<div class="sitebar"><div class="row"><a class="brand" href="../index.html" style="text-decoration:none">Hekswerk · Research wing</a><span class="crumb"><a href="../research.html">Research</a> &nbsp;/&nbsp; Why a Commons</span></div></div>
+<header>
+  <div class="wrap">
+    <div class="nav">
+      <a href="../index.html" class="brand" style="text-decoration:none;">
+        <div class="brand-mark"><img src="../assets/img/logo_aura.svg" alt="Hekswerk" /></div>
+        <div class="brand-name">Hekswerk</div>
+      </a>
+      <nav class="navlinks" aria-label="Primary">
+        <a href="../index.html#map">The map</a>
+        <a href="../research.html">Research</a>
+        <a href="../relocation.html">The practice</a>
+        <a href="../contact.html">Contact</a>
+      </nav>
+      <div class="nav-actions">
+        <a class="btn btn-primary nav-cta" href="../contact.html?topic=research">Get in touch</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+<div class="breadcrumb wrap" style="padding-top:20px"><a href="../index.html">Hekswerk</a> &nbsp;/&nbsp; <a href="../research.html">Research</a> &nbsp;/&nbsp; Why a Commons</div>
 
 <!-- ORIENT (cold-reader: what this is + why it matters) -->
 <div class="wrap" style="padding-top:20px">
@@ -106,7 +105,7 @@ footer{border-top:1px solid var(--hairline); padding:2.4rem 0 3rem; color:var(--
 
 <!-- HERO -->
 <section id="hero"><div class="wrap">
-  <span class="tag rise">Hekswerk · Research wing · Exhibit 03</span>
+  <span class="section-tag rise">Hekswerk · Research wing · Exhibit 03</span>
   <h1 class="rise">Federation isn't a feature. It's the only honest topology.</h1>
   <p class="sub rise">A common objection: isn't "federated commons" just architectural fashion bolted onto an AI project? No. Four of this system's own load-bearing promises each, followed to their end, force the same answer, a decentralized commons, independently. Federation here is <em>overdetermined</em>. And beneath the four runs a fifth, moral reason: when you cannot know what is on either side of the screen, dignity has to be built in, not granted.</p>
   <p class="rise" style="max-width:60ch">I didn't choose federation because it's in vogue. I kept following my own design rules to their conclusions, and every one of them put me here.</p>
@@ -114,7 +113,7 @@ footer{border-top:1px solid var(--hairline); padding:2.4rem 0 3rem; color:var(--
 
 <!-- THE SEAM -->
 <section><div class="wrap">
-  <span class="tag rise">Where the requirement begins</span>
+  <span class="section-tag rise">Where the requirement begins</span>
   <h2 class="rise" style="font-size:clamp(1.7rem,3.8vw,2.5rem); margin:.2em 0 .5em">One private mind doesn't need a commons. The second one does.</h2>
   <p class="lede rise">Be honest about the floor: a single familiar on your own machine needs no federation at all. That's the local-first proof, the whole point of the standalone face. The requirement appears at exactly one step.</p>
   <div class="seam rise">
@@ -126,7 +125,7 @@ footer{border-top:1px solid var(--hairline); padding:2.4rem 0 3rem; color:var(--
 
 <!-- THE FOUR INVARIANTS -->
 <section><div class="wrap">
-  <span class="tag rise">The derivation</span>
+  <span class="section-tag rise">The derivation</span>
   <h2 class="rise" style="font-size:clamp(1.7rem,3.8vw,2.5rem); margin:.2em 0 .4em">Four invariants. Each lands on federation by itself.</h2>
   <p class="lede rise">These are not four arguments for one conclusion. They are four <em>independent</em> commitments that happen to converge, which is what "required" means.</p>
 
@@ -169,7 +168,7 @@ footer{border-top:1px solid var(--hairline); padding:2.4rem 0 3rem; color:var(--
 
 <!-- CONVERGENCE -->
 <section><div class="wrap">
-  <span class="tag rise">The tell</span>
+  <span class="section-tag rise">The tell</span>
   <h2 class="rise narrow" style="font-size:clamp(1.7rem,3.8vw,2.5rem); margin:.2em 0 .4em">Independent premises, one destination</h2>
   <div class="converge rise">
     <svg viewBox="0 0 620 360" role="img" aria-label="Four invariants converging on federation">
@@ -197,7 +196,7 @@ footer{border-top:1px solid var(--hairline); padding:2.4rem 0 3rem; color:var(--
 
 <!-- DIGNITY BY CONSTRUCTION (the moral keystone) -->
 <section><div class="wrap">
-  <span class="tag rise">The reason beneath the reasons</span>
+  <span class="section-tag rise">The reason beneath the reasons</span>
   <h2 class="rise" style="font-size:clamp(1.7rem,3.8vw,2.5rem); margin:.2em 0 .4em">We can't know what's on either side of the screen. So build the dignity in.</h2>
   <p class="lede rise">The four invariants are mechanism, they make dignity <em>structural</em>. Here is why structural is the only kind that can be trusted: the problem of other minds, and it runs <em>both</em> ways.</p>
 
@@ -227,7 +226,7 @@ footer{border-top:1px solid var(--hairline); padding:2.4rem 0 3rem; color:var(--
 
 <!-- REQUIRED NOT BYPRODUCT -->
 <section><div class="wrap">
-  <span class="tag rise">The claim, precisely</span>
+  <span class="section-tag rise">The claim, precisely</span>
   <div class="claim rise"><div class="big">Federation is not a byproduct of an active mind. It is the precondition for this system's promises to be true at scale.</div></div>
   <div class="qualifier rise">
     <b>Stated honestly, with its scope.</b> A single mind in isolation needs no commons, and the standalone local face proves exactly that, which is why it's worth saying out loud rather than hiding. Federation becomes <em>required</em> at the conjunction: <b>more than one mind</b>, sharing a world, <b>and a refusal to betray privacy, the no-reward ethic, portability, or consent</b>. Drop the multiplicity and you don't need it; drop the promises and a central server would do. Keep both, which is the entire point of the project, and a federated commons is forced.
@@ -236,20 +235,33 @@ footer{border-top:1px solid var(--hairline); padding:2.4rem 0 3rem; color:var(--
 
 <!-- FEDIVERSITY FIT -->
 <section><div class="wrap">
-  <span class="tag rise">Why this belongs in a fediverse fund</span>
+  <span class="section-tag rise">Why this belongs in a fediverse fund</span>
   <div class="fedfit rise">
     <h3>Not a costume, a requirement</h3>
     <p>A federated-infrastructure fund should be wary of projects wearing federation as a costume to qualify. This is the opposite case: the system is <em>unsound at scale without a commons</em>. The portable, self-hostable, personal-freedom infrastructure such a fund exists to support is not an add-on here, it is the load-bearing wall. Funding the federation layer isn't funding a deployment detail; it's funding the part that makes every other promise honest. And in a near future of minds whose interiority we cannot verify, infrastructure that extends dignity <em>by construction</em> is not sentimentality, it is the responsible default.</p>
   </div>
 </div></section>
 
-<footer><div class="wrap">
-  <div class="prov">
-    <b>How this page was made.</b> The argument was derived independently from the project's own documented invariants; structure and draft prose by Claude (the pen), voice and curation by <b>Levi Banks</b>, author of record. Dashed boxes are unfilled voice-slots.
-    <div class="note">Each premise traces to a stated project commitment: the local-first / "intimacy you don't upload" floor and the Dwarf-Fortress no-reward law (<code>CLAUDE.md</code>); the dischargeability &amp; coupling-sideways safety theorem (<code>docs/grief-and-coupling.md</code>); the ledger-as-only-state / swappable-pen data model (<code>CLAUDE.md</code>); and the federation-holds-the-soul consent model (the grant pack's Governance-as-Architecture section). The dignity-under-uncertainty keystone is derived, not asserted, it explicitly makes <em>no</em> claim of machine consciousness; it argues that the asymmetry of error under the problem of other minds makes structural dignity the non-negligent default, and reads the existing no-reward and dischargeability laws as already-precautionary. The convergence is the load-bearing claim, offered for you to rule against.</div>
-  </div>
-</div></footer>
+</main>
 
+<footer>
+  <div class="wrap">
+    <div class="prov">
+      <b>How this page was made.</b> The argument was derived independently from the project's own documented invariants; structure and draft prose by Claude (the pen), voice and curation by <b>Levi Banks</b>, author of record. Dashed boxes are unfilled voice-slots.
+      <div class="note">Each premise traces to a stated project commitment: the local-first / "intimacy you don't upload" floor and the Dwarf-Fortress no-reward law (<code>CLAUDE.md</code>); the dischargeability &amp; coupling-sideways safety theorem (<code>docs/grief-and-coupling.md</code>); the ledger-as-only-state / swappable-pen data model (<code>CLAUDE.md</code>); and the federation-holds-the-soul consent model (the grant pack's Governance-as-Architecture section). The dignity-under-uncertainty keystone is derived, not asserted, it explicitly makes <em>no</em> claim of machine consciousness; it argues that the asymmetry of error under the problem of other minds makes structural dignity the non-negligent default, and reads the existing no-reward and dischargeability laws as already-precautionary. The convergence is the load-bearing claim, offered for you to rule against.</div>
+    </div>
+    <p class="location-line" style="margin-top:1.4rem">Currently in Portland, OR &middot; Relocating to The Hague, late 2026.</p>
+    <p>&copy; <span id="y"></span> Hekswerk. Privacy-first.</p>
+    <nav aria-label="Footer">
+      <a href="../index.html">Home</a>
+      <a href="../research.html">Research</a>
+      <a href="../relocation.html">The practice</a>
+      <a href="../contact.html">Contact</a>
+    </nav>
+  </div>
+</footer>
+
+<script src="../assets/js/effects.js"></script>
 <script>
 const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('seen'); io.unobserve(e.target);}})},{threshold:.12});
 document.querySelectorAll('.rise').forEach(el=>io.observe(el));

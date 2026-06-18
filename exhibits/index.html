@@ -1,118 +1,165 @@
 <!doctype html>
 <html lang="en">
+
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<meta name="color-scheme" content="dark" />
-<title>The Exhibits · Hekswerk Research</title>
-<meta name="description" content="Working artifacts from the Hekswerk research program, made to be read directly instead of taken on trust: a timeline you can scrub, the honesty machinery laid open, the architecture argued in full, and the pen's own workshop." />
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;500;600;700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet" />
-<style>
-:root{
-  --inky-void:#09090E; --midnight-indigo:#293656; --mist-lavender:#8C7699; --aura-cyan:#7095B7;
-  --halo-gold:#C0A990; --soft-cream:#F5F5F2; --ember:#c98f6b;
-  --text:rgba(245,245,242,.95); --muted:rgba(245,245,242,.74); --quiet:rgba(245,245,242,.56);
-  --hairline:rgba(140,118,153,.2); --panel:rgba(41,54,86,.22); --max:920px;
-}
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0; background:var(--inky-void); color:var(--text); font-family:Outfit,system-ui,sans-serif; font-weight:300; line-height:1.68;
-  background-image:radial-gradient(900px 560px at 80% -8%, rgba(74,75,120,.24), transparent 58%);}
-h1,h2,h3,.serif{font-family:Fraunces,serif; font-weight:500; letter-spacing:-.01em; line-height:1.18}
-.wrap{max-width:var(--max); margin:0 auto; padding:0 clamp(18px,4vw,30px)}
-.sitebar{position:sticky; top:0; z-index:40; backdrop-filter:blur(10px); background:rgba(9,9,14,.72); border-bottom:1px solid var(--hairline)}
-.sitebar .row{max-width:var(--max); margin:0 auto; padding:.7rem clamp(18px,4vw,30px); display:flex; align-items:center; justify-content:space-between; gap:1rem}
-.sitebar .brand{font-family:Fraunces,serif; font-weight:600; color:var(--soft-cream)}
-.sitebar .crumb{font-size:.74rem; color:var(--quiet)} .sitebar .crumb a{color:var(--muted); text-decoration:none}
-.tag{display:inline-block; font-size:.72rem; letter-spacing:.18em; text-transform:uppercase; color:var(--ember); border:1px solid var(--hairline); border-radius:999px; padding:.35em .9em; margin-bottom:1.1rem}
-a{color:var(--aura-cyan); text-decoration:none}
-section{padding:clamp(40px,6vh,72px) 0}
-.rise{opacity:0; transform:translateY(20px); filter:blur(5px); transition:opacity .8s ease, transform .8s cubic-bezier(.2,.7,.2,1), filter .8s ease}
-.rise.seen{opacity:1; transform:none; filter:none}
-@media (prefers-reduced-motion:reduce){.rise{opacity:1;transform:none;filter:none;transition:none}}
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="color-scheme" content="dark" />
+    <script>
+        if (location.protocol === "http:" && location.hostname !== "localhost" && location.hostname !== "127.0.0.1") {
+            location.replace("https://" + location.host + location.pathname + location.search + location.hash);
+        }
+    </script>
+    <title>The Exhibits - Hekswerk Research</title>
+    <meta name="description" content="Working artifacts from the Hekswerk research program, made to be read directly instead of taken on trust: a timeline you can scrub, the honesty machinery laid open, the architecture argued in full, and the pen's own workshop." />
+    <link rel="icon" type="image/svg+xml" href="../assets/img/logo_aura.svg" />
 
-#hero h1{font-size:clamp(2.2rem,5.5vw,3.6rem); margin:.2em 0 .3em}
-#hero .sub{font-size:clamp(1.05rem,1.9vw,1.3rem); color:var(--muted); max-width:62ch}
-.what{border:1px solid var(--hairline); border-radius:14px; background:var(--panel); padding:1.3rem 1.5rem; margin-top:1.6rem; font-size:.92rem; color:var(--muted); max-width:72ch}
-.what b{color:var(--halo-gold); font-weight:500}
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;500;600&family=Outfit:wght@300;400;500;600&display=swap"
+        rel="stylesheet" />
 
-.shelf{margin-top:2.2rem; display:grid; gap:1rem}
-@media(min-width:680px){.shelf{grid-template-columns:1fr 1fr}}
-.card{border:1px solid var(--hairline); border-radius:14px; background:rgba(9,9,14,.4); padding:1.3rem 1.5rem; transition:border-color .3s ease, transform .3s ease; display:block}
-.card:hover{border-color:rgba(192,169,144,.5); transform:translateY(-2px)}
-.card h3{margin:.3rem 0 .35rem; font-size:1.32rem; color:var(--soft-cream)}
-.card:hover h3{color:var(--halo-gold)}
-.card .kw{font-size:.7rem; letter-spacing:.12em; text-transform:uppercase; color:var(--ember)}
-.card .ex{margin:.5rem 0 0; color:var(--muted); font-size:.93rem; line-height:1.6}
-.card.pen{background:rgba(41,54,86,.28); border-color:rgba(192,169,144,.32); grid-column:1/-1}
-.card.pen .kw{color:var(--halo-gold)}
-
-footer{border-top:1px solid var(--hairline); padding:2.4rem 0 3rem; color:var(--quiet); font-size:.8rem; margin-top:1.5rem}
-.prov{border:1px solid var(--hairline); border-radius:12px; padding:1rem 1.2rem; background:rgba(9,9,14,.5); max-width:74ch}
-.prov b{color:var(--halo-gold); font-weight:500}
-.prov a{color:var(--muted)}
-</style>
+    <link rel="stylesheet" href="../assets/css/styles.css?v=20260617" />
+    <style>
+        /* exhibit cards: full-card links, in the shared grammar (mirrors research.html) */
+        .exhibit-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        .exhibit-grid a.fit-card { color: var(--text); display: flex; flex-direction: column; gap: 4px; }
+        .exhibit-grid a.fit-card .kw { color: var(--halo-gold); font-size: 12px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; }
+        .exhibit-grid a.fit-card h3 { color: var(--soft-cream); margin: 2px 0 6px; }
+        .exhibit-grid a.fit-card:hover { border-color: rgba(192, 169, 144, 0.45); transform: translateY(-2px); }
+        .exhibit-grid a.fit-card:hover h3 { color: var(--halo-gold); }
+        @media (max-width: 680px) { .exhibit-grid { grid-template-columns: 1fr; } }
+    </style>
 </head>
+
 <body>
-<div class="sitebar"><div class="row"><a class="brand" href="../index.html" style="text-decoration:none">Hekswerk · Research wing</a><span class="crumb"><a href="../research.html">Research</a> &nbsp;/&nbsp; The Exhibits</span></div></div>
+    <header>
+        <div class="wrap">
+            <div class="nav">
+                <a href="../index.html" class="brand" style="text-decoration:none;">
+                    <div class="brand-mark">
+                        <img src="../assets/img/logo_aura.svg" alt="Hekswerk" />
+                    </div>
+                    <div class="brand-name">Hekswerk</div>
+                </a>
+                <nav class="navlinks" aria-label="Primary">
+                    <a href="../index.html#map">The map</a>
+                    <a href="../research.html">Research</a>
+                    <a href="../relocation.html">The practice</a>
+                    <a href="../contact.html">Contact</a>
+                </nav>
+                <div class="nav-actions">
+                    <a class="btn btn-primary nav-cta" href="../contact.html?topic=research">Get in touch</a>
+                </div>
+            </div>
+        </div>
+    </header>
 
-<section id="hero"><div class="wrap">
-  <span class="tag rise">Hekswerk · Research wing</span>
-  <h1 class="rise">The Exhibits</h1>
-  <p class="sub rise">Working artifacts from the research program, made to be read directly instead of taken on trust. Each one is a surface you can inspect: a timeline you can scrub, the honesty machinery laid open, the architecture argued in full. Local-first, dated, and honest about what is mine and what is the model's.</p>
-  <div class="what rise">
-    <b>What these are.</b> Not marketing, and not papers. They are exhibits in the museum sense: things set out to be examined. Where a claim can be checked, it links to something you can run. Where a judgment is mine, it says so. The experiment at the center of two of these was halted and voided when its ground turned out to be false, and that is shown here, not hidden.
-  </div>
-</div></section>
+    <main>
+        <section class="sub-page-hero">
+            <div class="wrap">
+                <div class="breadcrumb">
+                    <a href="../index.html">Hekswerk</a> &nbsp;/&nbsp; <a href="../research.html">Research</a> &nbsp;/&nbsp; Exhibits
+                </div>
+                <span class="section-tag">Research wing &middot; the exhibits</span>
+                <h1>Read the work directly.</h1>
+                <p class="section-subhead">
+                    Working artifacts from the research program, made to be read instead of taken on trust. Each
+                    one is a surface you can inspect: a timeline you can scrub, the honesty machinery laid open,
+                    the architecture argued in full. Local-first, dated, and honest about what is mine and what is
+                    the model's.
+                </p>
+                <div class="quiet-service" style="margin-top:1.8rem">
+                    <p style="margin:0">
+                        <strong style="color:var(--soft-cream)">What these are.</strong> Not marketing, and not
+                        papers. They are exhibits in the museum sense: things set out to be examined. Where a claim
+                        can be checked, it links to something you can run. Where a judgment is mine, it says so. The
+                        experiment at the center of two of these was halted and voided when its ground turned out to
+                        be false, and that is shown here, not hidden.
+                    </p>
+                </div>
+            </div>
+        </section>
 
-<section style="padding-top:0"><div class="wrap">
-  <div class="shelf">
-    <a class="card rise" href="./two-weeks.html">
-      <div class="kw">Exhibit · timeline</div>
-      <h3>Two Weeks</h3>
-      <p class="ex">A fortnight of building persistent local AI minds, shown rather than narrated. A year in two bursts, then the daily timeline up close: the spring push, the quiet of a recovery, and the return.</p>
-    </a>
-    <a class="card rise" href="./topic-monoculture.html">
-      <div class="kw">Research · finding (null result)</div>
-      <h3>Fifteen Strangers, One Story</h3>
-      <p class="ex">Fifteen distinct residents, sealed in one room for two hours, converged ~80% onto a single invented mythos. A lever built to de-homogenize them did nothing to how they spoke, and a cheap lexical count refuted the eyeball read that it had. A null, kept and shown.</p>
-    </a>
-    <a class="card rise" href="./honesty-machinery.html">
-      <div class="kw">Exhibit · method</div>
-      <h3>The Honesty Machinery</h3>
-      <p class="ex">How a solo program is made checkable: rules locked before the data exists, a reviewer built to rule against me, adverse verdicts kept on the record, and an experiment I halted myself when its ground turned out to be false.</p>
-    </a>
-    <a class="card rise" href="./why-a-commons.html">
-      <div class="kw">Exhibit · argument</div>
-      <h3>Why a Commons Is Load-Bearing</h3>
-      <p class="ex">The architectural argument for why the characters live on a shared, federated commons instead of one owner's server: it is the only topology in which the system's own promises (privacy, the no-reward ethic, portable selves, real consent) are true rather than merely claimed.</p>
-    </a>
-    <a class="card rise" href="./the-kitchen.html">
-      <div class="kw">Exhibit · pattern</div>
-      <h3>The Kitchen</h3>
-      <p class="ex">How one cook, feeding frameworks to many stateless hands that remember nothing between calls, produced a feast of 2.6 million words, and what that says about authorship.</p>
-    </a>
-    <a class="card rise" href="./the-apothecary.html">
-      <div class="kw">Exhibit · catalogue</div>
-      <h3>The Apothecary</h3>
-      <p class="ex">Nine things you could brew from this stack, three rigorous, three useful, three strange, shelved by how far each sits from code that already runs.</p>
-    </a>
-    <a class="card pen rise" href="./workshop/index.html">
-      <div class="kw">Workshop · the pen</div>
-      <h3>The Pen's Workshop</h3>
-      <p class="ex">The collaborator's own kept workshop. Curated prose from the pen, the model that helped build this, shown with its hand visible. Not a soul-diary claiming an inner life, a body of made things with legible provenance.</p>
-    </a>
-  </div>
-</div></section>
+        <section style="padding-top:0">
+            <div class="wrap">
+                <div class="fit-grid exhibit-grid">
+                    <a class="fit-card" href="./two-weeks.html">
+                        <span class="kw">Exhibit &middot; timeline</span>
+                        <h3>Two Weeks</h3>
+                        <p>A fortnight of building persistent local AI minds, shown rather than narrated. A year in
+                            two bursts, then the daily timeline up close: the spring push, the quiet of a recovery,
+                            and the return.</p>
+                    </a>
+                    <a class="fit-card" href="./topic-monoculture.html">
+                        <span class="kw">Research &middot; finding (null result)</span>
+                        <h3>Fifteen Strangers, One Story</h3>
+                        <p>Fifteen distinct residents, sealed in one room for two hours, converged ~80% onto a
+                            single invented mythos. A lever built to de-homogenize them did nothing to how they
+                            spoke, and a cheap lexical count refuted the eyeball read that it had. A null, kept and
+                            shown.</p>
+                    </a>
+                    <a class="fit-card" href="./honesty-machinery.html">
+                        <span class="kw">Exhibit &middot; method</span>
+                        <h3>The Honesty Machinery</h3>
+                        <p>How a solo program is made checkable: rules locked before the data exists, a reviewer
+                            built to rule against me, adverse verdicts kept on the record, and an experiment I
+                            halted myself when its ground turned out to be false.</p>
+                    </a>
+                    <a class="fit-card" href="./why-a-commons.html">
+                        <span class="kw">Exhibit &middot; argument</span>
+                        <h3>Why a Commons Is Load-Bearing</h3>
+                        <p>The architectural argument for why the characters live on a shared, federated commons
+                            instead of one owner's server: the only topology in which the system's own promises
+                            (privacy, the no-reward ethic, portable selves, real consent) are true rather than
+                            merely claimed.</p>
+                    </a>
+                    <a class="fit-card" href="./the-kitchen.html">
+                        <span class="kw">Exhibit &middot; pattern</span>
+                        <h3>The Kitchen</h3>
+                        <p>How one cook, feeding frameworks to many stateless hands that remember nothing between
+                            calls, produced a feast of 2.6 million words, and what that says about authorship.</p>
+                    </a>
+                    <a class="fit-card" href="./the-apothecary.html">
+                        <span class="kw">Exhibit &middot; catalogue</span>
+                        <h3>The Apothecary</h3>
+                        <p>Nine things you could brew from this stack, three rigorous, three useful, three strange,
+                            shelved by how far each sits from code that already runs.</p>
+                    </a>
+                    <a class="fit-card" href="./workshop/index.html">
+                        <span class="kw">Workshop &middot; the pen</span>
+                        <h3>The Pen's Workshop</h3>
+                        <p>The collaborator's own kept workshop. Curated prose from the pen, the model that helped
+                            build this, shown with its hand visible. Not a soul-diary claiming an inner life, a body
+                            of made things with legible provenance.</p>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
 
-<footer><div class="wrap"><div class="prov">
-  <b>Provenance.</b> These exhibits were built by <b>Levi Banks</b> directing AI coding agents, and are disclosed as such, down to which words are mine and which are a model's. They sit in the research wing of <a href="../research.html">Hekswerk</a>; the code they describe lives in its own repositories, so every claim ends at something you can run. Nothing here is uploaded by these pages; the systems they describe run locally.
-</div></div></footer>
-<script>
-const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('seen'); io.unobserve(e.target);}})},{threshold:.1});
-document.querySelectorAll('.rise').forEach(el=>io.observe(el));
-</script>
+    <footer>
+        <div class="wrap">
+            <p class="footnote" style="max-width:74ch;margin:0 auto 1.6rem;text-align:left">
+                <strong style="color:var(--soft-cream)">Provenance.</strong> These exhibits were built by Levi
+                Banks directing AI coding agents, and are disclosed as such, down to which words are mine and which
+                are a model's. They sit in the research wing of <a href="../research.html">Hekswerk</a>; the code
+                they describe lives in its own repositories, so every claim ends at something you can run. Nothing
+                here is uploaded by these pages; the systems they describe run locally.
+            </p>
+            <p class="location-line">Currently in Portland, OR &middot; Relocating to The Hague, late 2026.</p>
+            <p>&copy; <span id="y"></span> Hekswerk. Privacy-first.</p>
+            <nav aria-label="Footer">
+                <a href="../index.html">Home</a>
+                <a href="../research.html">Research</a>
+                <a href="../relocation.html">The practice</a>
+                <a href="../contact.html">Contact</a>
+            </nav>
+        </div>
+    </footer>
+
+    <script src="../assets/js/effects.js"></script>
 </body>
+
 </html>

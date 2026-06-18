@@ -1,24 +1,7 @@
-/* Hekswerk aura system */
+/* Hekswerk aura system. Brand tokens (colours, surfaces, shadows) live in tokens.css —
+   the single source of truth — imported first. Only main-site layout values remain here. */
+@import url("tokens.css?v=20260617");
 :root {
-    --inky-void: #09090E;
-    --midnight-indigo: #293656;
-    --dusk-violet: #4A4B78;
-    --mist-lavender: #8C7699;
-    --aura-cyan: #7095B7;
-    --halo-gold: #C0A990;
-    --soft-cream: #F5F5F2;
-
-    --text: rgba(245, 245, 242, 0.95);
-    --muted: rgba(245, 245, 242, 0.74);
-    --quiet: rgba(245, 245, 242, 0.58);
-    --hairline: rgba(140, 118, 153, 0.2);
-    --panel: rgba(41, 54, 86, 0.22);
-    --panel-strong: rgba(41, 54, 86, 0.52);
-
-    --radius: 16px;
-    --shadow: 0 18px 46px rgba(0, 0, 0, 0.55);
-    --shadow-soft: 0 12px 34px rgba(0, 0, 0, 0.35);
-
     --max: 1120px;
     --content: 780px;
     --pad: clamp(18px, 2.6vw, 30px);

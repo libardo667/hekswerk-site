@@ -10,8 +10,8 @@
             location.replace("https://" + location.host + location.pathname + location.search + location.hash);
         }
     </script>
-    <title>Hekswerk - Systems Consultancy</title>
-    <meta name="description" content="A one-person systems consultancy with a self-funded AI research program at its heart, plus relocation systems planning and privacy-first automation." />
+    <title>Hekswerk - the map</title>
+    <meta name="description" content="A one-person practice with a self-funded AI research program at its heart. The whole thing in one picture: the practice that funds it, the research it powers, and the gate between private work and the public surface." />
     <link rel="icon" type="image/svg+xml" href="./assets/img/logo_aura.svg" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -20,7 +20,57 @@
         href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;500;600&family=Outfit:wght@300;400;500;600&display=swap"
         rel="stylesheet" />
 
-    <link rel="stylesheet" href="./assets/css/styles.css?v=20260611" />
+    <link rel="stylesheet" href="./assets/css/styles.css?v=20260617" />
+    <style>
+        /* --- the map (quipu x circuit schematic) --- */
+        .map-hero { padding-top: clamp(40px, 6vw, 72px); padding-bottom: clamp(32px, 4vw, 56px); min-height: 0; display: block; }
+        .map-orient { max-width: 76ch; color: var(--muted); font-size: 1.05rem; margin: 1.4rem 0 .6rem; }
+        .circuit-wrap { margin: 1rem 0 1.4rem; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+        svg.circuit { width: 100%; min-width: 740px; height: auto; display: block; }
+        .circuit .rail { stroke: var(--hairline); stroke-width: 2; }
+        .circuit .cord { stroke: rgba(140, 118, 153, .35); stroke-width: 1.5; }
+        .circuit .trace { fill: none; stroke: var(--mist-lavender); stroke-width: 1.6; opacity: .7; transition: stroke .2s, opacity .2s, stroke-width .2s; }
+        .circuit .trace.power { stroke: var(--ember, #c98f6b); stroke-width: 2.6; opacity: .9; }
+        .circuit .trace.lit { stroke: var(--halo-gold); stroke-width: 3; opacity: 1; }
+        .circuit .junction { fill: var(--mist-lavender); opacity: .7; }
+        .circuit .knot { fill: var(--soft-cream); opacity: .45; }
+        .circuit .source circle { fill: var(--ember, #c98f6b); }
+        .circuit .source text { fill: var(--halo-gold); font-family: Outfit, sans-serif; letter-spacing: .08em; }
+        .circuit .zone-label { fill: var(--quiet); font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; font-family: Outfit, sans-serif; }
+        .circuit .chip rect { fill: var(--panel-strong); stroke: var(--hairline); stroke-width: 1; transition: stroke .2s, fill .2s; }
+        .circuit .chip text { fill: var(--text); font-family: Outfit, sans-serif; text-anchor: middle; pointer-events: none; }
+        .circuit .chip:hover rect, .circuit .chip.lit rect, .circuit .chip:focus rect { stroke: var(--halo-gold); stroke-width: 1.7; }
+        .circuit .chip.z-practice rect { fill: rgba(201, 143, 107, .18); stroke: rgba(201, 143, 107, .5); }
+        .circuit .chip.z-substrate rect { fill: rgba(41, 54, 86, .58); }
+        .circuit .chip.z-membrane rect { fill: rgba(58, 47, 34, .9); stroke: rgba(192, 169, 144, .55); }
+        .circuit .chip.z-public rect { fill: rgba(245, 245, 242, .92); }
+        .circuit .chip.z-public text { fill: #1a1a2e; }
+        .circuit .chip.kid rect { fill: rgba(231, 226, 216, .9); }
+        .circuit .chip.kid text { fill: #1a1a2e; }
+        /* the JS-free fallback list (accessible / no-JS layer) */
+        .map-note { color: var(--quiet); font-size: .86rem; margin: 1.4rem 0 .6rem; }
+        .map-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem; margin: .6rem 0 0; }
+        .map-list .zone { border: 1px solid var(--hairline); border-radius: 14px; padding: 1.1rem 1.3rem; background: var(--panel); }
+        .map-list .zone h2 { font-family: Fraunces, serif; font-size: 1.1rem; margin: .1rem 0 .2rem; color: var(--soft-cream); }
+        .map-list .zone .zb { color: var(--muted); font-size: .82rem; margin: 0 0 .8rem; }
+        .map-list ul { list-style: none; margin: 0; padding: 0; }
+        .map-list li { margin: .45rem 0; font-size: .88rem; line-height: 1.45; }
+        .map-list ul ul { margin: .3rem 0 .3rem .9rem; padding-left: .7rem; border-left: 1px solid var(--hairline); }
+        .map-list a { color: var(--halo-gold); }
+        .map-list span { color: var(--quiet); display: block; }
+        .map-list .z-membrane { border-color: rgba(192, 169, 144, .5); }
+        /* typed doors (research vs the practice) */
+        .signage { max-width: 78ch; color: var(--text); font-size: 1.06rem; line-height: 1.55; border-left: 3px solid var(--halo-gold); padding: 6px 0 6px 18px; margin: 0 0 24px; }
+        .signage b { color: var(--soft-cream); }
+        .typed-doors { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+        .door { border: 1px solid var(--hairline); border-radius: var(--radius); background: var(--panel); padding: 26px; }
+        .door.research { border-color: rgba(192, 169, 144, .4); }
+        .door-tag { display: block; color: var(--halo-gold); font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; margin-bottom: 10px; }
+        .door h3 { font-size: 24px; margin-bottom: 8px; }
+        .door p { font-size: 16px; margin-bottom: 14px; }
+        .door-links { display: flex; flex-wrap: wrap; gap: 16px; }
+        @media (max-width: 680px) { .typed-doors { grid-template-columns: 1fr; } }
+    </style>
 </head>
 
 <body>
@@ -34,156 +84,171 @@
                     <div class="brand-name">Hekswerk</div>
                 </a>
                 <nav class="navlinks" aria-label="Primary">
-                    <a href="#services">Services</a>
+                    <a href="#map">The map</a>
                     <a href="./research.html">Research</a>
-                    <a href="./relocation.html">Relocation</a>
-                    <a href="./map.html">The Map</a>
-                    <a href="#about">About</a>
+                    <a href="./relocation.html">The practice</a>
                     <a href="./contact.html">Contact</a>
                 </nav>
                 <div class="nav-actions">
-                    <a class="btn btn-primary nav-cta" href="#services">See the work</a>
+                    <a class="btn btn-primary nav-cta" href="./research.html">See the research</a>
                 </div>
             </div>
         </div>
     </header>
 
     <main id="top">
-        <section class="hero">
-            <div class="wrap home-hero-grid">
-                <div class="hero-content">
-                    <span class="kicker">Systems Consultancy</span>
-                    <h1>Careful systems work, done out loud.</h1>
-                    <p>
-                        Hekswerk is a one-person systems consultancy. The work is always the same shape: take a
-                        complex situation, map what depends on what, build something durable, and hand you
-                        documentation you own. It currently runs in three rooms: AI research, relocation
-                        planning, and automation builds.
-                    </p>
-                    <div class="cta-row">
-                        <a class="btn btn-primary" href="#services">Pick a door</a>
-                        <a class="btn btn-ghost" href="#about">About Levi</a>
-                    </div>
-                    <div class="trust-strip" aria-label="Practice commitments">
-                        <span>Published methodology</span>
-                        <span>Clear scope boundaries</span>
-                        <span>Privacy-first handling</span>
-                    </div>
-                </div>
-
-                <aside class="calm-panel">
-                    <img src="./assets/img/logo_aura.svg" alt="" />
-                    <h2>Order emerging from mystery.</h2>
-                    <p>
-                        "Hekswerk" is Dutch for a witch's work, the kind of thing that looks like magic from the
-                        outside. The actual work is the least mysterious thing I can make it.
-                    </p>
-                    <p class="muted-note">- Levi Banks, founder</p>
-                </aside>
-            </div>
-        </section>
-
-        <section id="services" class="soft-band">
+        <section class="hero map-hero" id="map">
             <div class="wrap">
-                <div class="section-heading">
-                    <div>
-                        <span class="section-tag">Three doors</span>
-                        <h2>One craft, three rooms.</h2>
-                    </div>
-                    <p>
-                        Each service stands on its own, with its own scope and pricing. What they share is the
-                        method: mapping, dependencies, durable structure, and handoff.
-                    </p>
-                </div>
-
-                <div class="card-grid">
-                    <article class="card">
-                        <span class="price-line">AI Research</span>
-                        <h3>Persistent AI characters, studied in the open.</h3>
-                        <p>
-                            A self-funded research program: persistent AI characters that run continuously on my
-                            own hardware, studied with pre-registered experiments and published methods. Freelance
-                            AI-evaluation work for quality-assurance platforms is the engine that funds it.
-                        </p>
-                        <a href="./research.html">Enter the research wing</a>
-                    </article>
-                    <article class="card">
-                        <span class="price-line">Relocation Systems Planning</span>
-                        <h3>A move this big deserves a plan that can hold all of it.</h3>
-                        <p>
-                            Structured planning for Americans making complex moves to Europe, mapping the whole
-                            move so nothing falls through the gaps between your specialists. Currently in a
-                            founding-cohort beta; formal launch in 2027.
-                        </p>
-                        <a href="./relocation.html">See the relocation service</a>
-                    </article>
-                    <article class="card">
-                        <span class="price-line">Quickstart Automation</span>
-                        <h3>One workflow, built well.</h3>
-                        <p>
-                            Fixed-scope, privacy-first automation builds for small businesses and independent
-                            professionals. One scoped workflow per engagement, delivered with documentation,
-                            walkthrough recordings, and full credential handoff. From $750.
-                        </p>
-                        <a href="./contact.html?topic=automation">Ask about an automation build</a>
-                    </article>
-                </div>
+                <span class="kicker">Hekswerk</span>
+                <h1>Careful systems work, done out loud.</h1>
+                <p class="lede">A one-person practice with a self-funded AI research program at its heart. Here is
+                    the whole thing in one picture: the part with customers powers the research, and the research
+                    only reaches the public by passing through a gate built to keep me honest.</p>
+                <!-- MAP:START (generated by tools/build_map.py - do not edit between markers) -->
+<p class="map-orient">Hekswerk in one picture. The practice - the part with customers - funds the software where the research runs; that work only becomes public after passing through one honest gate (curation, leak-sweep, provenance). The practice is sold; the research is funded and published.</p>
+<div class="circuit-wrap">
+<svg class="circuit" viewBox="0 0 1120 600" role="img" aria-label="System map: the practice funds the software, which becomes public through one honest publishing gate.">
+<line class="rail" x1="20" y1="58" x2="884" y2="58"/>
+<path class="trace power t-from-practice t-to-substrate" d="M20,58 H316 V86"/>
+<g class="source"><circle cx="20" cy="58" r="6"/></g>
+<line class="cord z-practice" x1="20" y1="58" x2="20" y2="314"/>
+<text class="zone-label z-practice" x="104" y="46" text-anchor="middle">Practice</text>
+<line class="cord z-substrate" x1="316" y1="58" x2="316" y2="454"/>
+<text class="zone-label z-substrate" x="400" y="46" text-anchor="middle">Software</text>
+<line class="cord z-membrane" x1="606" y1="58" x2="606" y2="174"/>
+<text class="zone-label z-membrane" x="690" y="46" text-anchor="middle">Publishing</text>
+<line class="cord z-public" x1="884" y1="58" x2="884" y2="494"/>
+<text class="zone-label z-public" x="968" y="46" text-anchor="middle">Research</text>
+<path class="trace t-from-ww t-to-curation" d="M484,104 H545 V104 H606"/><circle class="junction" cx="545" cy="104" r="3"/><circle class="junction" cx="606" cy="104" r="3.5"/>
+<path class="trace t-from-stable t-to-curation" d="M484,174 H545 V104 H606"/><circle class="junction" cx="545" cy="104" r="3"/><circle class="junction" cx="606" cy="104" r="3.5"/>
+<path class="trace t-from-record t-to-curation" d="M484,454 H545 V104 H606"/><circle class="junction" cx="545" cy="104" r="3"/><circle class="junction" cx="606" cy="104" r="3.5"/>
+<path class="trace t-from-provenance t-to-research" d="M774,174 H829 V104 H884"/><circle class="junction" cx="829" cy="104" r="3"/><circle class="junction" cx="884" cy="104" r="3.5"/>
+<path class="trace t-from-provenance t-to-library" d="M774,174 H829 V174 H884"/><circle class="junction" cx="829" cy="174" r="3"/><circle class="junction" cx="884" cy="174" r="3.5"/>
+<a class="chip z-practice" href="./relocation.html" data-node="relocation"><title>relocation - structured planning for US-to-Europe moves</title><rect x="20" y="84" width="168" height="40" rx="9"/><circle class="knot" cx="20" cy="104" r="4"/><text x="104" y="108" font-size="12">relocation</text></a>
+<a class="chip z-practice" href="./contact.html?topic=automation" data-node="automation"><title>automation - fixed-scope, privacy-first automation builds</title><rect x="20" y="154" width="168" height="40" rx="9"/><circle class="knot" cx="20" cy="174" r="4"/><text x="104" y="178" font-size="12">automation</text></a>
+<a class="chip z-practice" href="./research.html#funding" data-node="evalwork"><title>freelance eval - AI-evaluation contract work - the engine behind the research</title><rect x="20" y="224" width="168" height="40" rx="9"/><circle class="knot" cx="20" cy="244" r="4"/><text x="104" y="248" font-size="12">freelance eval</text></a>
+<a class="chip z-practice" href="./contact.html" data-node="contact"><title>contact - a short, private contact form</title><rect x="20" y="294" width="168" height="40" rx="9"/><circle class="knot" cx="20" cy="314" r="4"/><text x="104" y="318" font-size="12">contact</text></a>
+<a class="chip z-substrate" href="https://github.com/libardo667/worldweaver" data-node="ww"><title>worldweaver - the persistent shared world and its residents</title><rect x="316" y="84" width="168" height="40" rx="9"/><circle class="knot" cx="316" cy="104" r="4"/><text x="400" y="108" font-size="12">worldweaver</text></a>
+<a class="chip z-substrate" href="https://github.com/libardo667/the-stable" data-node="stable"><title>the-stable - the familiar runtime, where the local minds live</title><rect x="316" y="154" width="168" height="40" rx="9"/><circle class="knot" cx="316" cy="174" r="4"/><text x="400" y="178" font-size="12">the-stable</text></a>
+<a class="chip z-substrate" href="https://github.com/libardo667/prune" data-node="prune"><title>prune - write it down, build it, prune the living set</title><rect x="316" y="224" width="168" height="40" rx="9"/><circle class="knot" cx="316" cy="244" r="4"/><text x="400" y="248" font-size="12">prune</text></a>
+<a class="chip z-substrate" href="https://github.com/libardo667/memory-management" data-node="memmgmt"><title>memory-management - reusable external memory for any project</title><rect x="316" y="294" width="168" height="40" rx="9"/><circle class="knot" cx="316" cy="314" r="4"/><text x="400" y="318" font-size="12">memory-management</text></a>
+<a class="chip z-substrate" href="https://github.com/libardo667/review-scheduler" data-node="revsched"><title>review-scheduler - a cold reviewer that can&#x27;t be charmed</title><rect x="316" y="364" width="168" height="40" rx="9"/><circle class="knot" cx="316" cy="384" r="4"/><text x="400" y="388" font-size="12">review-scheduler</text></a>
+<a class="chip z-substrate" href="https://github.com/libardo667/worldweaver/tree/main/research" data-node="record"><title>the research record - locked pre-registrations and the cold-review history</title><rect x="316" y="434" width="168" height="40" rx="9"/><circle class="knot" cx="316" cy="454" r="4"/><text x="400" y="458" font-size="12">the research record</text></a>
+<a class="chip z-membrane" href="https://github.com/libardo667/memory-management" data-node="curation"><title>curation + leak-sweep - raw work trimmed to legible artifacts; private data excluded</title><rect x="606" y="84" width="168" height="40" rx="9"/><circle class="knot" cx="606" cy="104" r="4"/><text x="690" y="108" font-size="12">curation + leak-sweep</text></a>
+<a class="chip z-membrane" href="./exhibits/honesty-machinery.html" data-node="provenance"><title>provenance - every public page records how it was made and whose words are whose</title><rect x="606" y="154" width="168" height="40" rx="9"/><circle class="knot" cx="606" cy="174" r="4"/><text x="690" y="178" font-size="12">provenance</text></a>
+<a class="chip z-public" href="./research.html" data-node="research"><title>the research wing - the research, methods-first, in the open</title><rect x="884" y="84" width="168" height="40" rx="9"/><circle class="knot" cx="884" cy="104" r="4"/><text x="968" y="108" font-size="12">the research wing</text></a>
+<a class="chip z-public" href="https://github.com/libardo667/hekswerk" data-node="library"><title>the library - methodology + research wings, the sourced record</title><rect x="884" y="154" width="168" height="40" rx="9"/><circle class="knot" cx="884" cy="174" r="4"/><text x="968" y="178" font-size="12">the library</text></a>
+<a class="chip z-public" href="./exhibits/index.html" data-node="exhibits"><title>the exhibits - walkable proofs you can inspect</title><rect x="884" y="224" width="168" height="40" rx="9"/><circle class="knot" cx="884" cy="244" r="4"/><text x="968" y="248" font-size="12">the exhibits</text></a>
+<a class="chip kid z-public" href="./exhibits/two-weeks.html" data-node="ex_two"><title>Two Weeks - the work, counted across six dimensions</title><rect x="918" y="280" width="152" height="32" rx="9"/><circle class="knot" cx="918" cy="296" r="4"/><text x="994" y="300" font-size="11">Two Weeks</text></a>
+<a class="chip kid z-public" href="./exhibits/topic-monoculture.html" data-node="ex_mono"><title>Fifteen Strangers - a topic-monoculture null, kept and shown</title><rect x="918" y="313" width="152" height="32" rx="9"/><circle class="knot" cx="918" cy="329" r="4"/><text x="994" y="333" font-size="11">Fifteen Strangers</text></a>
+<a class="chip kid z-public" href="./exhibits/honesty-machinery.html" data-node="ex_honesty"><title>The Honesty Machinery - the verdicts that went against me, kept</title><rect x="918" y="346" width="152" height="32" rx="9"/><circle class="knot" cx="918" cy="362" r="4"/><text x="994" y="366" font-size="11">The Honesty Machinery</text></a>
+<a class="chip kid z-public" href="./exhibits/why-a-commons.html" data-node="ex_commons"><title>Why a Commons - why federation is the only honest topology</title><rect x="918" y="379" width="152" height="32" rx="9"/><circle class="knot" cx="918" cy="395" r="4"/><text x="994" y="399" font-size="11">Why a Commons</text></a>
+<a class="chip kid z-public" href="./exhibits/the-kitchen.html" data-node="ex_kitchen"><title>The Kitchen - 2.6M words from stateless hands</title><rect x="918" y="412" width="152" height="32" rx="9"/><circle class="knot" cx="918" cy="428" r="4"/><text x="994" y="432" font-size="11">The Kitchen</text></a>
+<a class="chip kid z-public" href="./exhibits/the-apothecary.html" data-node="ex_apoth"><title>The Apothecary - nine things you could build, graded by effort</title><rect x="918" y="445" width="152" height="32" rx="9"/><circle class="knot" cx="918" cy="461" r="4"/><text x="994" y="465" font-size="11">The Apothecary</text></a>
+<a class="chip kid z-public" href="./exhibits/workshop/index.html" data-node="ex_pen"><title>The Pen&#x27;s Workshop - the collaborator&#x27;s own kept prose</title><rect x="918" y="478" width="152" height="32" rx="9"/><circle class="knot" cx="918" cy="494" r="4"/><text x="994" y="498" font-size="11">The Pen&#x27;s Workshop</text></a>
+</svg>
+<script>
+(function(){
+  var svg=document.currentScript.previousElementSibling;
+  if(!svg||!svg.querySelector)return;
+  svg.querySelectorAll('.chip').forEach(function(c){
+    var id=c.getAttribute('data-node');
+    function set(on){
+      svg.querySelectorAll('.t-from-'+id+',.t-to-'+id).forEach(function(t){t.classList.toggle('lit',on);});
+      c.classList.toggle('lit',on);
+    }
+    c.addEventListener('mouseenter',function(){set(true);});
+    c.addEventListener('mouseleave',function(){set(false);});
+    c.addEventListener('focus',function(){set(true);});
+    c.addEventListener('blur',function(){set(false);});
+  });
+})();
+</script>
+</div>
+<p class="map-note">The same map as a list - every node links to something real:</p>
+<div class="map-list">
+<section class="zone z-practice"><h2>Practice</h2><p class="zb">What funds it - the part with customers. The power source.</p><ul>
+<li><a href="./relocation.html"><b>relocation</b></a> <span>structured planning for US-to-Europe moves</span>
+</li>
+<li><a href="./contact.html?topic=automation"><b>automation</b></a> <span>fixed-scope, privacy-first automation builds</span>
+</li>
+<li><a href="./research.html#funding"><b>freelance eval</b></a> <span>AI-evaluation contract work - the engine behind the research</span>
+</li>
+<li><a href="./contact.html"><b>contact</b></a> <span>a short, private contact form</span>
+</li>
+</ul></section>
+<section class="zone z-substrate"><h2>Software</h2><p class="zb">Where the research runs and is recorded.</p><ul>
+<li><a href="https://github.com/libardo667/worldweaver"><b>worldweaver</b></a> <span>the persistent shared world and its residents</span>
+</li>
+<li><a href="https://github.com/libardo667/the-stable"><b>the-stable</b></a> <span>the familiar runtime, where the local minds live</span>
+</li>
+<li><a href="https://github.com/libardo667/prune"><b>prune</b></a> <span>write it down, build it, prune the living set</span>
+</li>
+<li><a href="https://github.com/libardo667/memory-management"><b>memory-management</b></a> <span>reusable external memory for any project</span>
+</li>
+<li><a href="https://github.com/libardo667/review-scheduler"><b>review-scheduler</b></a> <span>a cold reviewer that can&#x27;t be charmed</span>
+</li>
+<li><a href="https://github.com/libardo667/worldweaver/tree/main/research"><b>the research record</b></a> <span>locked pre-registrations and the cold-review history</span>
+</li>
+</ul></section>
+<section class="zone z-membrane"><h2>Publishing</h2><p class="zb">The one honest gate from private work to public: curation, leak-sweep, provenance.</p><ul>
+<li><a href="https://github.com/libardo667/memory-management"><b>curation + leak-sweep</b></a> <span>raw work trimmed to legible artifacts; private data excluded</span>
+</li>
+<li><a href="./exhibits/honesty-machinery.html"><b>provenance</b></a> <span>every public page records how it was made and whose words are whose</span>
+</li>
+</ul></section>
+<section class="zone z-public"><h2>Research</h2><p class="zb">What anyone can read.</p><ul>
+<li><a href="./research.html"><b>the research wing</b></a> <span>the research, methods-first, in the open</span>
+</li>
+<li><a href="https://github.com/libardo667/hekswerk"><b>the library</b></a> <span>methodology + research wings, the sourced record</span>
+</li>
+<li><a href="./exhibits/index.html"><b>the exhibits</b></a> <span>walkable proofs you can inspect</span>
+<ul>
+<li><a href="./exhibits/two-weeks.html"><b>Two Weeks</b></a> <span>the work, counted across six dimensions</span></li>
+<li><a href="./exhibits/topic-monoculture.html"><b>Fifteen Strangers</b></a> <span>a topic-monoculture null, kept and shown</span></li>
+<li><a href="./exhibits/honesty-machinery.html"><b>The Honesty Machinery</b></a> <span>the verdicts that went against me, kept</span></li>
+<li><a href="./exhibits/why-a-commons.html"><b>Why a Commons</b></a> <span>why federation is the only honest topology</span></li>
+<li><a href="./exhibits/the-kitchen.html"><b>The Kitchen</b></a> <span>2.6M words from stateless hands</span></li>
+<li><a href="./exhibits/the-apothecary.html"><b>The Apothecary</b></a> <span>nine things you could build, graded by effort</span></li>
+<li><a href="./exhibits/workshop/index.html"><b>The Pen&#x27;s Workshop</b></a> <span>the collaborator&#x27;s own kept prose</span></li>
+</ul>
+</li>
+</ul></section>
+</div>
+<!-- MAP:END -->
             </div>
         </section>
 
-        <section id="how">
+        <section class="soft-band">
             <div class="wrap">
-                <div class="section-heading">
-                    <div>
-                        <span class="section-tag">How it works</span>
-                        <h2>Start with the shape of the problem.</h2>
-                    </div>
-                    <p>
-                        The front door is intentionally plain: tell me what is going on, choose the engagement that
-                        fits, and we build from there.
-                    </p>
-                </div>
-
-                <div class="step-grid">
-                    <article class="step-card">
-                        <span class="step-num">01</span>
-                        <h3>Tell me what's going on.</h3>
-                        <p>An intake for relocation, a contact form for research or an automation build. Plain language is enough; messy is fine.</p>
+                <span class="section-tag">Two things under one roof</span>
+                <p class="signage">The research is <b>funded and published, not sold</b> - no product, no customer,
+                    no engagement target. The practice is the part with clients, and it is how the research is
+                    sustained. Different economies, one craft: map what depends on what, build something durable,
+                    and show the wiring.</p>
+                <div class="typed-doors">
+                    <article class="door research">
+                        <span class="door-tag">Funded, not sold</span>
+                        <h3>The research</h3>
+                        <p>Persistent AI characters studied in the open: pre-registered experiments, an adversarial
+                            reviewer built to rule against me, and everything cold-verifiable without trusting my
+                            prose.</p>
+                        <div class="door-links">
+                            <a href="./research.html">Enter the research wing &rarr;</a>
+                            <a href="./exhibits/index.html">Browse the exhibits</a>
+                        </div>
                     </article>
-                    <article class="step-card">
-                        <span class="step-num">02</span>
-                        <h3>Choose the right scope.</h3>
-                        <p>Every engagement is fixed-scope with visible pricing before it begins. If it's not a fit, I'll say so honestly.</p>
+                    <article class="door practice">
+                        <span class="door-tag">The part with clients</span>
+                        <h3>The practice</h3>
+                        <p>Relocation systems planning for complex international moves, and fixed-scope,
+                            privacy-first automation builds. Real services, transparent pricing, written artifacts
+                            you keep.</p>
+                        <div class="door-links">
+                            <a href="./relocation.html">Relocation planning &rarr;</a>
+                            <a href="./contact.html?topic=automation">Automation builds</a>
+                        </div>
                     </article>
-                    <article class="step-card">
-                        <span class="step-num">03</span>
-                        <h3>Leave with artifacts.</h3>
-                        <p>The work produces written deliverables you keep and own: maps, timelines, documentation, working systems.</p>
-                    </article>
-                </div>
-            </div>
-        </section>
-
-        <section id="methodology" class="soft-band">
-            <div class="wrap split-grid">
-                <div>
-                    <span class="section-tag">Methodology</span>
-                    <h2>You can read how I think before you ever pay me.</h2>
-                    <p>
-                        I publish my methodology in the open: how I find the systems hiding in a complex
-                        situation, how I label what's confirmed versus what's still a guess, how I check evidence,
-                        and how I treat real human capacity as a planning fact rather than something to pathologize.
-                        The same library is growing a research wing: the essays and findings from the research
-                        program.
-                    </p>
-                </div>
-                <div class="privacy-card">
-                    <h3>Read it before you decide.</h3>
-                    <p>
-                        If the way I work doesn't match what you need, that's genuinely useful to know early; the
-                        library is the fastest way to find out, before you've committed to anything.
-                    </p>
-                    <a class="btn btn-primary" href="https://github.com/libardo667/hekswerk">Open the library</a>
                 </div>
             </div>
         </section>
@@ -194,15 +259,15 @@
                     <span class="section-tag">About Levi</span>
                     <h2>A builder who shows the wiring.</h2>
                     <p>
-                        I'm Levi Banks, a systems consultant in Portland, relocating to the Netherlands in late 2026,
-                        which means the relocation service is something I'm living in real time, not theory.
-                        I run a self-funded AI research program on my own hardware, I build automation for small
-                        teams, and I've done freelance AI-evaluation work since 2024.
+                        I'm Levi Banks, a systems consultant in Portland relocating to the Netherlands in late 2026,
+                        so the relocation service is something I'm living in real time, not theory. I run the AI
+                        research on my own hardware, build automation for small teams, and have done freelance
+                        AI-evaluation work since 2024, the engine that funds the research.
                     </p>
                     <p>
-                        The thread through all of it: I take things that feel like an impossible tangle and turn them
-                        into something you can see, hold, and act on. The magic, if there's any, is just careful
-                        systems work done out loud: method published, scope stated, evidence checkable.
+                        "Hekswerk" is Dutch for a witch's work, the kind of thing that looks like magic from the
+                        outside. The actual work is the least mysterious thing I can make it: method published,
+                        scope stated, evidence checkable.
                     </p>
                     <p>
                         I'm autistic and ADHD, and I live with chronic illness. That's not a footnote; it's why the
@@ -211,13 +276,14 @@
                     </p>
                 </div>
                 <div class="privacy-card">
-                    <span class="section-tag">Privacy posture</span>
-                    <h3>What you tell me stays with me.</h3>
+                    <span class="section-tag">Read before you decide</span>
+                    <h3>The method is public.</h3>
                     <p>
-                        I use what you share only to understand your situation and write back to you directly. I
-                        don't sell it, and I won't add you to a marketing list.
+                        The methodology library, how I find the systems hiding in a complex situation, label
+                        evidence, and handle confidence, is open, and the research wing publishes alongside it. You
+                        can read how I think before you ever pay me, or before you trust a single research claim.
                     </p>
-                    <a class="btn btn-primary" href="./intake.html">Start a relocation intake</a>
+                    <a class="btn btn-primary" href="https://github.com/libardo667/hekswerk">Open the library</a>
                 </div>
             </div>
         </section>
@@ -227,9 +293,10 @@
                 <p class="location-line">Currently in Portland, OR &middot; Relocating to The Hague, late 2026.</p>
                 <p>&copy; <span id="y"></span> Hekswerk. Privacy-first.</p>
                 <nav aria-label="Footer">
-                    <a href="./relocation.html">Relocation</a>
+                    <a href="#top">Home</a>
                     <a href="./research.html">Research</a>
-                    <a href="./intake.html">Intake</a>
+                    <a href="./relocation.html">The practice</a>
+                    <a href="./contact.html">Contact</a>
                 </nav>
             </div>
         </footer>

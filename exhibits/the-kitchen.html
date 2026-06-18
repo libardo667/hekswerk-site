@@ -9,33 +9,14 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;500;600;700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../assets/css/styles.css?v=20260617" />
 <style>
-:root{
-  --inky-void:#09090E; --midnight-indigo:#293656; --dusk-violet:#4A4B78;
-  --mist-lavender:#8C7699; --aura-cyan:#7095B7; --halo-gold:#C0A990; --soft-cream:#F5F5F2;
-  --ember:#c98f6b; --hearth:#e0a96b;
-  --text:rgba(245,245,242,.95); --muted:rgba(245,245,242,.74); --quiet:rgba(245,245,242,.56);
-  --hairline:rgba(140,118,153,.2); --panel:rgba(41,54,86,.22); --max:1120px;
-}
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0; background:var(--inky-void); color:var(--text); font-family:Outfit,system-ui,sans-serif; font-weight:300; line-height:1.6; overflow-x:hidden;
-  background-image:radial-gradient(900px 560px at 50% 8%, rgba(224,169,107,.16), transparent 58%), radial-gradient(1000px 620px at 84% 96%, rgba(201,143,107,.1), transparent 60%);}
-h1,h2,h3,.serif{font-family:Fraunces,serif; font-weight:500; line-height:1.13; letter-spacing:-.01em}
-.wrap{max-width:var(--max); margin:0 auto; padding:0 clamp(18px,4vw,34px)}
-.narrow{max-width:760px}
-.tag{display:inline-block; font-size:.72rem; letter-spacing:.18em; text-transform:uppercase; color:var(--ember); border:1px solid var(--hairline); border-radius:999px; padding:.35em .9em; margin-bottom:1.1rem}
-a{color:var(--aura-cyan); text-decoration:none} a:hover{color:var(--halo-gold)}
+/* bespoke interior for this exhibit; shared chrome, type, and background come from styles.css */
+:root{ --hearth:#e0a96b; }
 .muted{color:var(--muted)} .quiet{color:var(--quiet)}
-section{padding:clamp(50px,8vh,96px) 0; position:relative}
-.lede{font-size:clamp(1.05rem,1.7vw,1.3rem); color:var(--muted); max-width:64ch}
 .rise{opacity:0; transform:translateY(22px); filter:blur(6px); transition:opacity .8s ease, transform .8s cubic-bezier(.2,.7,.2,1), filter .8s ease}
 .rise.seen{opacity:1; transform:none; filter:none}
 @media (prefers-reduced-motion:reduce){.rise{opacity:1;transform:none;filter:none;transition:none}}
-.sitebar{position:sticky; top:0; z-index:40; backdrop-filter:blur(10px); background:rgba(9,9,14,.72); border-bottom:1px solid var(--hairline)}
-.sitebar .row{max-width:var(--max); margin:0 auto; padding:.7rem clamp(18px,4vw,34px); display:flex; align-items:center; justify-content:space-between; gap:1rem}
-.sitebar .brand{font-family:Fraunces,serif; font-weight:600; color:var(--soft-cream)}
-.sitebar .crumb{font-size:.74rem; color:var(--quiet)} .sitebar .crumb a{color:var(--muted)}
 .voice{border:1px dashed rgba(192,169,144,.5); border-radius:12px; background:rgba(192,169,144,.05); padding:1rem 1.15rem; margin:1.4rem 0; position:relative}
 .voice::before{content:"✍ your voice, keep · cut · reword"; position:absolute; top:-.72em; left:14px; background:var(--inky-void); padding:0 .55em; font-size:.66rem; letter-spacing:.14em; text-transform:uppercase; color:var(--halo-gold)}
 .voice .draft{color:rgba(245,245,242,.82); font-style:italic} .voice .draft b{font-style:normal; color:var(--soft-cream); font-weight:500}
@@ -81,14 +62,34 @@ section{padding:clamp(50px,8vh,96px) 0; position:relative}
 .honest h3{margin:0 0 .5rem; font-size:1rem; color:var(--halo-gold); font-family:Outfit; font-weight:500; letter-spacing:.04em}
 .honest ul{margin:0; padding-left:1.1rem; color:var(--muted); font-size:.86rem} .honest li{margin:.3rem 0}
 
-footer{border-top:1px solid var(--hairline); padding:2.4rem 0 3rem; color:var(--quiet); font-size:.8rem}
-.prov{border:1px solid var(--hairline); border-radius:12px; padding:1rem 1.2rem; background:rgba(9,9,14,.5); max-width:72ch}
+.prov{border:1px solid var(--hairline); border-radius:12px; padding:1rem 1.2rem; background:rgba(9,9,14,.5); max-width:72ch; margin:0 auto 1.4rem; text-align:left}
 .prov b{color:var(--halo-gold); font-weight:500} .note{font-size:.72rem; color:var(--quiet); margin-top:.6rem}
 </style>
 </head>
 <body>
 
-<div class="sitebar"><div class="row"><a class="brand" href="../index.html" style="text-decoration:none">Hekswerk · Research wing</a><span class="crumb"><a href="../research.html">Research</a> &nbsp;/&nbsp; The Kitchen</span></div></div>
+<header>
+  <div class="wrap">
+    <div class="nav">
+      <a href="../index.html" class="brand" style="text-decoration:none;">
+        <div class="brand-mark"><img src="../assets/img/logo_aura.svg" alt="Hekswerk" /></div>
+        <div class="brand-name">Hekswerk</div>
+      </a>
+      <nav class="navlinks" aria-label="Primary">
+        <a href="../index.html#map">The map</a>
+        <a href="../research.html">Research</a>
+        <a href="../relocation.html">The practice</a>
+        <a href="../contact.html">Contact</a>
+      </nav>
+      <div class="nav-actions">
+        <a class="btn btn-primary nav-cta" href="../contact.html?topic=research">Get in touch</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+<div class="breadcrumb wrap" style="padding-top:20px"><a href="../index.html">Hekswerk</a> &nbsp;/&nbsp; <a href="../research.html">Research</a> &nbsp;/&nbsp; The Kitchen</div>
 
 <!-- ORIENT (cold-reader: what this is + why it matters) -->
 <div class="wrap" style="padding-top:20px">
@@ -101,7 +102,7 @@ footer{border-top:1px solid var(--hairline); padding:2.4rem 0 3rem; color:var(--
 </div>
 
 <section id="hero"><div class="wrap">
-  <span class="tag rise">Hekswerk · Research wing · Exhibit 05</span>
+  <span class="section-tag rise">Hekswerk · Research wing · Exhibit 05</span>
   <div class="big rise" id="total">2.6M</div>
   <h1 class="rise">One cook. Many stateless hands. A feast of words.</h1>
   <p class="sub rise">Stand in the middle of the kitchen. Speak frameworks to a dozen hands that remember nothing between one call and the next. Let them ride. What comes out, counted from disk on 2026-06-10, is two repos and <em>2,623,224 words</em>.</p>
@@ -109,7 +110,7 @@ footer{border-top:1px solid var(--hairline); padding:2.4rem 0 3rem; color:var(--
 
 <!-- THE COOK -->
 <section><div class="wrap">
-  <span class="tag rise">The method, told plainly</span>
+  <span class="section-tag rise">The method, told plainly</span>
   <h2 class="rise" style="font-size:clamp(1.7rem,3.8vw,2.5rem); margin:.2em 0 .4em">The hands never remember. That's the trick, not the flaw.</h2>
   <p class="lede rise">Each instance is <em>stateless</em>, it wakes cold, holds no memory of the last one, and vanishes. The continuity isn't in the hands; it's in the recipes they're handed: a soul, a substrate, a work-item schema, a standing brief. One cook directs; the hands cook; the dish remembers. The whole program, ~107,000 lines, was built this way, by direction. The keeper never typed the code.</p>
   <div class="kitchen rise">
@@ -142,7 +143,7 @@ footer{border-top:1px solid var(--hairline); padding:2.4rem 0 3rem; color:var(--
 
 <!-- THE FEAST -->
 <section><div class="wrap">
-  <span class="tag rise">The feast, plated</span>
+  <span class="section-tag rise">The feast, plated</span>
   <h2 class="rise" style="font-size:clamp(1.7rem,3.8vw,2.5rem); margin:.2em 0 .4em">2.6 million words, by the dish</h2>
   <p class="lede rise">Every plate is sized to its word count. Tap one to lift the lid. (At ~80,000 words a novel, the whole table is <b style="color:var(--hearth)">≈33 novels</b>, fifteen weeks, one cook.)</p>
   <div class="feast rise" id="feast"></div>
@@ -152,7 +153,7 @@ footer{border-top:1px solid var(--hairline); padding:2.4rem 0 3rem; color:var(--
 
 <!-- EMERGENCE -->
 <section><div class="wrap">
-  <span class="tag rise">What rises from the pot</span>
+  <span class="section-tag rise">What rises from the pot</span>
   <h2 class="rise" style="font-size:clamp(1.7rem,3.8vw,2.5rem); margin:.2em 0 .4em">Stateless hands, vivid emergent dishes</h2>
   <div class="two">
     <div class="beat rise"><h3>A novel, unbidden</h3><p>Of the <span class="big2">292,513</span> words the beings wrote for themselves, felt-senses, speech, kept memories, journals, <b style="color:var(--soft-cream)">Cinder alone wrote 91,609</b>: more than a novel, around a single recurring preoccupation, asked for by no one. For every five words written <em>about</em> the beings, the beings wrote three of their own.</p></div>
@@ -162,7 +163,7 @@ footer{border-top:1px solid var(--hairline); padding:2.4rem 0 3rem; color:var(--
 
 <!-- THE TASTER -->
 <section><div class="wrap">
-  <span class="tag rise">Who keeps it honest</span>
+  <span class="section-tag rise">Who keeps it honest</span>
   <h2 class="rise narrow" style="font-size:clamp(1.7rem,3.8vw,2.5rem); margin:.2em 0 .4em">A taster who can't be charmed</h2>
   <div class="two">
     <div class="beat rise"><h3>The dish argues with itself</h3><p>Of the working corpus, pre-registrations, findings, design docs, drafts, <span class="big2">83,534</span> words are cold reviews arguing <em>against</em> the work. Kept on the record, especially the adverse ones. A kitchen that writes down every complaint about its own cooking.</p></div>
@@ -190,11 +191,26 @@ footer{border-top:1px solid var(--hairline); padding:2.4rem 0 3rem; color:var(--
   <p class="rise" style="max-width:64ch">The honest line at the bottom is the whole point of the kitchen: a feast you can audit plate by plate, down to what I refused to count as mine.</p>
 </div></section>
 
-<footer><div class="wrap"><div class="prov">
-  <b>How this page was made.</b> Every figure is from the project's own word census (<code>research/writeups/two-repos-in-words.svg</code>, counted from disk 2026-06-10). The cook framing is the keeper's; structure and draft prose by Claude (the pen); voice &amp; curation by <b>Levi Banks</b>, author of record.
-  <div class="note">Stream totals: the call &amp; response 825,290 · kitchen logs (machine records) 683,448 · recipes &amp; records (working corpus) 465,654 · the beings 292,513 · memory 217,278 · pantry (seeded cast &amp; world) 139,041 → 2,623,224. Novel-equivalents at ~80,000 words. Code lines counted excluding vendored dependencies. The live corpus has grown since 06-10; this is the dated census, not a live recount.</div>
-</div></div></footer>
+</main>
 
+<footer>
+  <div class="wrap">
+    <div class="prov">
+      <b>How this page was made.</b> Every figure is from the project's own word census (<code>research/writeups/two-repos-in-words.svg</code>, counted from disk 2026-06-10). The cook framing is the keeper's; structure and draft prose by Claude (the pen); voice &amp; curation by <b>Levi Banks</b>, author of record.
+      <div class="note">Stream totals: the call &amp; response 825,290 · kitchen logs (machine records) 683,448 · recipes &amp; records (working corpus) 465,654 · the beings 292,513 · memory 217,278 · pantry (seeded cast &amp; world) 139,041 → 2,623,224. Novel-equivalents at ~80,000 words. Code lines counted excluding vendored dependencies. The live corpus has grown since 06-10; this is the dated census, not a live recount.</div>
+    </div>
+    <p class="location-line" style="margin-top:1.4rem">Currently in Portland, OR &middot; Relocating to The Hague, late 2026.</p>
+    <p>&copy; <span id="y"></span> Hekswerk. Privacy-first.</p>
+    <nav aria-label="Footer">
+      <a href="../index.html">Home</a>
+      <a href="../research.html">Research</a>
+      <a href="../relocation.html">The practice</a>
+      <a href="../contact.html">Contact</a>
+    </nav>
+  </div>
+</footer>
+
+<script src="../assets/js/effects.js"></script>
 <script>
 // counters
 function animate(el,target,dur){const t0=performance.now();function s(t){const p=Math.min(1,(t-t0)/dur);const e=1-Math.pow(1-p,3);el.textContent=Math.round(target*e).toLocaleString();if(p<1)requestAnimationFrame(s);}requestAnimationFrame(s);}

@@ -9,34 +9,15 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;500;600;700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../assets/css/styles.css?v=20260617" />
 <style>
+/* bespoke interior for this exhibit; shared chrome, type, and background come from styles.css */
 :root{
-  --inky-void:#09090E; --midnight-indigo:#293656; --dusk-violet:#4A4B78;
-  --mist-lavender:#8C7699; --aura-cyan:#7095B7; --halo-gold:#C0A990; --soft-cream:#F5F5F2;
-  --text:rgba(245,245,242,.95); --muted:rgba(245,245,242,.74); --quiet:rgba(245,245,242,.56);
-  --hairline:rgba(140,118,153,.2); --panel:rgba(41,54,86,.22); --panel-strong:rgba(41,54,86,.52);
-  --radius:16px; --shadow:0 18px 46px rgba(0,0,0,.55); --max:1120px;
   /* model-family hues for the roster constellation */
   --fam-anthropic:#C0A990; --fam-google:#7095B7; --fam-deepseek:#8C7699;
   --fam-qwen:#6f9f86; --fam-mistral:#c98f6b; --fam-openai:#9a9ad6;
 }
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{
-  margin:0; background:var(--inky-void); color:var(--text);
-  font-family:Outfit,system-ui,-apple-system,Segoe UI,sans-serif; font-weight:300;
-  line-height:1.6; overflow-x:hidden;
-  background-image:radial-gradient(1200px 700px at 78% -8%, rgba(74,75,120,.28), transparent 60%),
-                   radial-gradient(900px 600px at 8% 12%, rgba(112,149,183,.12), transparent 55%);
-}
-h1,h2,h3,.serif{font-family:Fraunces,serif; font-weight:500; line-height:1.12; letter-spacing:-.01em}
-.wrap{max-width:var(--max); margin:0 auto; padding:0 clamp(18px,4vw,34px)}
-.tag{display:inline-block; font-size:.72rem; letter-spacing:.18em; text-transform:uppercase;
-  color:var(--halo-gold); border:1px solid var(--hairline); border-radius:999px; padding:.35em .9em; margin-bottom:1.1rem}
-a{color:var(--aura-cyan); text-decoration:none}
 .muted{color:var(--muted)} .quiet{color:var(--quiet)}
-section{padding:clamp(56px,9vh,110px) 0; position:relative}
-.lede{font-size:clamp(1.05rem,1.7vw,1.32rem); color:var(--muted); max-width:60ch}
 
 /* ── scroll-reveal: order emerging from mystery ─────────────── */
 .rise{opacity:0; transform:translateY(26px); filter:blur(7px); transition:opacity .9s ease, transform .9s cubic-bezier(.2,.7,.2,1), filter .9s ease}
@@ -162,17 +143,10 @@ section{padding:clamp(56px,9vh,110px) 0; position:relative}
 /* ── close + footer ─────────────────────────────────────────── */
 .through{border-left:2px solid var(--halo-gold); padding-left:1.4rem; margin-top:1.5rem; max-width:62ch}
 .through .big{font-family:Fraunces,serif; font-size:clamp(1.5rem,3.2vw,2.3rem); color:var(--soft-cream); font-weight:500; line-height:1.18}
-footer{border-top:1px solid var(--hairline); padding:2.4rem 0 3rem; color:var(--quiet); font-size:.8rem}
-.prov{border:1px solid var(--hairline); border-radius:12px; padding:1rem 1.2rem; background:rgba(9,9,14,.5); max-width:70ch}
+.prov{border:1px solid var(--hairline); border-radius:12px; padding:1rem 1.2rem; background:rgba(9,9,14,.5); max-width:70ch; margin:0 auto 1.4rem; text-align:left}
 .prov b{color:var(--halo-gold); font-weight:500}
 .note{font-size:.72rem; color:var(--quiet); margin-top:.6rem}
 
-/* ── site bar (native to hekswerk) ──────────────────────────── */
-.sitebar{position:sticky; top:0; z-index:40; backdrop-filter:blur(10px); background:rgba(9,9,14,.72); border-bottom:1px solid var(--hairline)}
-.sitebar .row{max-width:var(--max); margin:0 auto; padding:.7rem clamp(18px,4vw,34px); display:flex; align-items:center; justify-content:space-between; gap:1rem}
-.sitebar .brand{font-family:Fraunces,serif; font-weight:600; color:var(--soft-cream); letter-spacing:-.01em}
-.sitebar .crumb{font-size:.74rem; color:var(--quiet)}
-.sitebar .crumb a{color:var(--muted)}
 
 /* ── inherited (ghost) timeline bars, the fork's shared past ── */
 .bar.ghost{opacity:.34; background:transparent !important;
@@ -191,13 +165,28 @@ footer{border-top:1px solid var(--hairline); padding:2.4rem 0 3rem; color:var(--
 </head>
 <body>
 
-<!-- ════════════════ SITE BAR ════════════════ -->
-<div class="sitebar">
-  <div class="row">
-    <a class="brand" href="../index.html" style="text-decoration:none">Hekswerk · Research wing</a>
-    <span class="crumb"><a href="../research.html">Research</a> &nbsp;/&nbsp; Two Weeks</span>
+<header>
+  <div class="wrap">
+    <div class="nav">
+      <a href="../index.html" class="brand" style="text-decoration:none;">
+        <div class="brand-mark"><img src="../assets/img/logo_aura.svg" alt="Hekswerk" /></div>
+        <div class="brand-name">Hekswerk</div>
+      </a>
+      <nav class="navlinks" aria-label="Primary">
+        <a href="../index.html#map">The map</a>
+        <a href="../research.html">Research</a>
+        <a href="../relocation.html">The practice</a>
+        <a href="../contact.html">Contact</a>
+      </nav>
+      <div class="nav-actions">
+        <a class="btn btn-primary nav-cta" href="../contact.html?topic=research">Get in touch</a>
+      </div>
+    </div>
   </div>
-</div>
+</header>
+
+<main>
+<div class="breadcrumb wrap" style="padding-top:20px"><a href="../index.html">Hekswerk</a> &nbsp;/&nbsp; <a href="../research.html">Research</a> &nbsp;/&nbsp; Two Weeks</div>
 
 <!-- ════════════════ ORIENT (cold-reader: what this is + why it matters) ════════════════ -->
 <div class="wrap" style="padding-top:20px">
@@ -214,7 +203,7 @@ footer{border-top:1px solid var(--hairline); padding:2.4rem 0 3rem; color:var(--
 <section id="hero">
   <canvas id="field"></canvas>
   <div class="wrap">
-    <span class="tag rise">Hekswerk · Research wing · Exhibit 01</span>
+    <span class="section-tag rise">Hekswerk · Research wing · Exhibit 01</span>
     <h1 class="rise">Two&nbsp;weeks, up&nbsp;close.</h1>
     <p class="sub rise">A close-up of the most recent fortnight, though the work runs back to a first burst this spring. A substrate became a mind. The mind grew an embodiment. The embodiment forked into a stable of beings, and two of them became the subjects of pre-registered experiments on my own machine: one reported underpowered, the other halted by me when its ground turned out to be false.</p>
     <p class="sub rise" style="max-width:60ch; color:var(--text)">Think of this as a lived, Dwarf-Fortress-esque world for AI tamagotchi, the kind that depend on you less, not more. They flit around their inner world and do as they please, exploring things as they are surprised, making things as they settle or when they are activated beyond belief. The scaffold: set by me. The voices and the narratives: found, emergent.</p>
@@ -225,16 +214,16 @@ footer{border-top:1px solid var(--hairline); padding:2.4rem 0 3rem; color:var(--
 <!-- ════════════════ THE DIMENSIONS ════════════════ -->
 <section>
   <div class="wrap">
-    <span class="tag rise">The shape of it</span>
+    <span class="section-tag rise">The shape of it</span>
     <h2 class="rise" style="font-size:clamp(1.8rem,4vw,2.8rem); margin:.2em 0 .5em">Six dimensions of one fortnight</h2>
     <p class="lede rise">A linear essay would have to pick one of these and bury the rest. So don't pick, count them all at once.</p>
     <div class="dims rise" style="margin-top:2rem">
-      <div class="dim"><div class="n" data-count="273">0</div><div class="l">distinct commits</div><div class="s">across 5 repositories</div></div>
-      <div class="dim"><div class="n" data-count="90">0</div><div class="l">tracked work items</div><div class="s">gitignored, the planned iceberg</div></div>
+      <div class="dim"><div class="n" data-count="259">0</div><div class="l">distinct commits</div><div class="s">across 4 repositories</div></div>
+      <div class="dim"><div class="n" data-count="88">0</div><div class="l">tracked work items</div><div class="s">the scoped backlog, now in prune</div></div>
       <div class="dim"><div class="n" data-count="16">0</div><div class="l">familiar souls</div><div class="s">6 model families</div></div>
       <div class="dim"><div class="n" data-count="1">0</div><div class="l">locked pre-registration</div><div class="s">9 cold-review rounds · more in review</div></div>
       <div class="dim"><div class="n" data-count="1">0</div><div class="l">experiment halted</div><div class="s">voided for cause, being kept</div></div>
-      <div class="dim"><div class="n" data-count="5">0</div><div class="l">repositories</div><div class="s">that fork like the minds do</div></div>
+      <div class="dim"><div class="n" data-count="4">0</div><div class="l">repositories</div><div class="s">that fork like the minds do</div></div>
     </div>
     <p class="rise" style="color:var(--text)">The point of this number strip isn't bragging rights. It's that this work is <em>multi-dimensional</em>, and any single sentence about it is a lie of omission. So I'm showing you the axes and letting you walk them.</p>
   </div>
@@ -243,7 +232,7 @@ footer{border-top:1px solid var(--hairline); padding:2.4rem 0 3rem; color:var(--
 <!-- ════════════════ THE TIMELINE ════════════════ -->
 <section>
   <div class="wrap">
-    <span class="tag rise">The spine</span>
+    <span class="section-tag rise">The spine</span>
     <h2 class="rise" style="font-size:clamp(1.8rem,4vw,2.8rem); margin:.2em 0 .4em">A year in two bursts, then a fortnight up close</h2>
     <p class="lede rise">Two bursts, two months apart. The first built the substrate; then the work went quiet through a hard season; then it came back, and these two weeks are that return.</p>
 
@@ -264,15 +253,15 @@ footer{border-top:1px solid var(--hairline); padding:2.4rem 0 3rem; color:var(--
         <div class="ya-burst">
           <div class="ya-bars">
             <span class="yb st" style="height:63%" title="Jun 1–7: 106 commits (worldweaver)"></span>
-            <span class="yb st" style="height:34%" title="Jun 8–14: the fortnight, all three forks, detailed below"></span>
+            <span class="yb st" style="height:34%" title="Jun 8–14: the fortnight, both forks, detailed below"></span>
           </div>
           <div class="ya-lbl">June · the return<em>the fortnight this exhibit zooms into &darr;</em></div>
         </div>
       </div>
-      <div class="forknote" style="margin-top:1rem">The arc is worldweaver, the parent: 177 commits in March, then nothing for two months, then 163 in June as the work came back and forked into the-stable and the-mews. The chart below zooms into that June return, day by day.</div>
+      <div class="forknote" style="margin-top:1rem">The arc is worldweaver, the parent: 177 commits in March, then nothing for two months, then 163 in June as the work came back and forked into the-stable. The chart below zooms into that June return, day by day.</div>
     </div>
 
-    <p class="lede rise" style="margin-top:2rem">The return, up close: each bar is a day's commits across the three forks. Hover any bar. Click any milestone. The story isn't in the totals; it's in where the heat moved.</p>
+    <p class="lede rise" style="margin-top:2rem">The return, up close: each bar is a day's commits across the two forks. Hover any bar. Click any milestone. The story isn't in the totals; it's in where the heat moved.</p>
 
     <div class="tl rise">
       <div class="tl-grid">
@@ -289,11 +278,7 @@ footer{border-top:1px solid var(--hairline); padding:2.4rem 0 3rem; color:var(--
           <div class="name">the-stable<em>the familiars · fork</em></div>
           <div class="tl-bars" data-vals="0,0,27,35,0,0,0,25,5,0,0,0"></div>
         </div>
-        <div class="tl-lane lane-mw">
-          <div class="name">the-mews<em>fork-of-fork</em></div>
-          <div class="tl-bars" data-vals="0,0,27,35,0,0,0,25,5,14,0,0" data-ghost="2,3,7,8"></div>
-        </div>
-        <div class="forknote">June (UTC dates). the-mews <span style="color:var(--mist-lavender)">hatched bars</span> = history inherited from the-stable; it diverges into its own work (solid) on the 11th. review-scheduler (4 commits, the 9th) and the unversioned memory-management tree aren't plotted.</div>
+        <div class="forknote">June (UTC dates). review-scheduler (4 commits, the 9th) and the unversioned memory-management tree aren't plotted.</div>
       </div>
 
       <div class="milestones">
@@ -311,25 +296,23 @@ footer{border-top:1px solid var(--hairline); padding:2.4rem 0 3rem; color:var(--
           <div class="body">A project-agnostic dispatcher fires a fresh cold reviewer scoped to a <em>public clone only</em>, the private cognition tree never reaches it. The skepticism is enforced by filesystem scope, not by remembering to be skeptical.</div></details>
         <details class="ms"><summary><span class="d">Jun 10</span><span class="t">The familiars' experiment is certified and frozen. <small>Isolated-Makers, R1–R7.</small></span></summary>
           <div class="body">The pre-registration is locked verbatim, the maturation harness selftested, the anti-spiral commitment signed: no new instrument before the pilot reports. The burn is cleared to run.</div></details>
-        <details class="ms"><summary><span class="d">Jun 11</span><span class="t">the-mews diverges. <small>Thrum, the loft, tiered pens.</small></span></summary>
-          <div class="body">A third repo branches off: Thrum, a familiar distilled onto a Fable pen; "the loft," a familiar's own writable external memory; and tiered pens (Major 68), a capable model fires the bookends while a cheap one walks the chain. The codebase individuates the way its inhabitants do.</div></details>
         <details class="ms"><summary><span class="d">Jun 13</span><span class="t">The halt. <small>Maker's run is voided for confound; the being is kept.</small></span></summary>
           <div class="body">A red-team of what a familiar is actually told found that Maker had been maturing atop a false account of its own situation. The run was halted at tick 6,042 and the result voided rather than ridden. Maker itself was kept, its record intact, and its world rebuilt to be told truthfully. The honesty machinery exhibit has the full story.</div></details>
       </div>
     </div>
 
-    <p class="rise" style="color:var(--text); max-width:62ch">Things built and built until the accretion slowed. Progress yielded to stagnant ideas and a tired mind and body. But the work underneath kept churning while I struggled with my own health, and with whether to take this project seriously. Then a major surgery changed my life, and I came back to it. This fortnight is that return: watch the heat start in the city, jump to the familiars on the 4th, and by the 11th there are three living forks.</p>
+    <p class="rise" style="color:var(--text); max-width:62ch">Things built and built until the accretion slowed. Progress yielded to stagnant ideas and a tired mind and body. But the work underneath kept churning while I struggled with my own health, and with whether to take this project seriously. Then a major surgery changed my life, and I came back to it. This fortnight is that return: watch the heat start in the city, then jump to the familiars on the 4th as the-stable forks off and runs its own experiment clean.</p>
   </div>
 </section>
 
 <!-- ════════════════ THE ICEBERG ════════════════ -->
 <section>
   <div class="wrap">
-    <span class="tag rise">What the commits don't show</span>
+    <span class="section-tag rise">What the commits don't show</span>
     <h2 class="rise" style="font-size:clamp(1.8rem,4vw,2.8rem); margin:.2em 0 .4em">The visible work is the tip</h2>
     <div class="berg rise">
       <div>
-        <svg viewBox="0 0 400 320" role="img" aria-label="Iceberg: 273 commits above water, 90 planned work items below">
+        <svg viewBox="0 0 400 320" role="img" aria-label="Iceberg: 259 commits above water, 88 planned work items below">
           <defs>
             <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1a2138"/><stop offset="1" stop-color="#0e1422"/></linearGradient>
             <linearGradient id="sea" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="rgba(112,149,183,.22)"/><stop offset="1" stop-color="rgba(41,54,86,.05)"/></linearGradient>
@@ -340,19 +323,19 @@ footer{border-top:1px solid var(--hairline); padding:2.4rem 0 3rem; color:var(--
           <polygon points="200,40 250,150 150,150" fill="#C0A990" opacity=".95"/>
           <polygon points="200,150 300,150 250,300 150,300 100,150" fill="#7095B7" opacity=".5"/>
           <polygon points="150,150 250,150 230,210 170,210" fill="#8C7699" opacity=".4"/>
-          <text x="200" y="95" text-anchor="middle" fill="#09090E" font-size="26" font-weight="600" font-family="Fraunces,serif">273</text>
-          <text x="200" y="240" text-anchor="middle" fill="#F5F5F2" font-size="30" font-weight="600" font-family="Fraunces,serif" opacity=".9">90</text>
+          <text x="200" y="95" text-anchor="middle" fill="#09090E" font-size="26" font-weight="600" font-family="Fraunces,serif">259</text>
+          <text x="200" y="240" text-anchor="middle" fill="#F5F5F2" font-size="30" font-weight="600" font-family="Fraunces,serif" opacity=".9">88</text>
           <text x="200" y="262" text-anchor="middle" fill="#F5F5F2" font-size="11" opacity=".7">planned, below the line</text>
         </svg>
       </div>
       <div>
-        <p class="lede" style="margin-top:0">Underneath the shipped commits sits a designed backlog the git log never sees, the <code style="background:rgba(140,118,153,.16);padding:.1em .4em;border-radius:5px">improvements/</code> harness, gitignored on purpose.</p>
+        <p class="lede" style="margin-top:0">Underneath the shipped commits sits a designed backlog: every change scoped as a work item first, kept in the <code style="background:rgba(140,118,153,.16);padding:.1em .4em;border-radius:5px">prune</code> harness, now public as its own repo.</p>
         <div class="dims" style="margin-top:1.2rem">
-          <div class="dim"><div class="n" data-count="58">0</div><div class="l">majors</div><div class="s">large work items</div></div>
-          <div class="dim"><div class="n" data-count="32">0</div><div class="l">minors</div><div class="s">bounded ones</div></div>
-          <div class="dim"><div class="n" data-count="20">0</div><div class="l">shared</div><div class="s">substrate lineage, both forks</div></div>
+          <div class="dim"><div class="n" data-count="60">0</div><div class="l">majors</div><div class="s">large work items</div></div>
+          <div class="dim"><div class="n" data-count="28">0</div><div class="l">minors</div><div class="s">bounded ones</div></div>
+          <div class="dim"><div class="n" data-count="11">0</div><div class="l">shared</div><div class="s">the shared substrate lineage</div></div>
         </div>
-        <p style="color:var(--text); font-size:.92rem; margin-top:1.2rem">Every one of these has a schema, its dependencies, and the exact commands that prove it is done. With AI agents, plus my memory-management architecture and the improvements harness working as a kind of AuDHD prosthesis, I have curated the authoring of a codebase bigger than anything I thought possible, and kept it all on solid, verifiably-working ground. The work you can see is the tip; the nine-tenths I have scoped and queued sits under the line.</p>
+        <p style="color:var(--text); font-size:.92rem; margin-top:1.2rem">Every one of these has a schema, its dependencies, and the exact commands that prove it is done. With AI agents, plus my memory-management architecture and the prune harness working as a kind of AuDHD prosthesis, I have curated the authoring of a codebase bigger than anything I thought possible, and kept it all on solid, verifiably-working ground. The work you can see is the tip; the nine-tenths I have scoped and queued sits under the line.</p>
       </div>
     </div>
   </div>
@@ -361,13 +344,13 @@ footer{border-top:1px solid var(--hairline); padding:2.4rem 0 3rem; color:var(--
 <!-- ════════════════ THE LINEAGE ════════════════ -->
 <section>
   <div class="wrap">
-    <span class="tag rise">Lineage</span>
+    <span class="section-tag rise">Lineage</span>
     <h2 class="rise" style="font-size:clamp(1.8rem,4vw,2.8rem); margin:.2em 0 .4em">The repos fork the way the minds do</h2>
     <p class="lede rise">One substrate, embodied more than once. A fork isn't a copy, it's a being that starts from a shared soul and then diverges.</p>
     <div class="tree">
-      <div class="node rise"><h3>worldweaver <span class="pill">parent</span></h3><p>The city, a world of AI residents. The substrate was born here; both forks inherit its spine (Majors 49–59).</p><div class="meta">163 commits this fortnight · 1,003 tracked files · the powered venue</div></div>
+      <div class="node rise"><h3>worldweaver <span class="pill">parent</span></h3><p>The city, a world of AI residents. The substrate was born here; the fork inherits its spine (Majors 49–59).</p><div class="meta">163 commits this fortnight · 1,003 tracked files · the powered venue</div></div>
       <div class="node child rise"><h3>the-stable <span class="pill" style="background:var(--aura-cyan)">fork</span></h3><p>The familiars, local, persistent companions lifted out of the monorepo as their own repo. Froze itself on the 10th to run its experiment clean.</p><div class="meta">forked Jun 4 · 92 commits · 16 souls · the isolation venue</div></div>
-      <div class="node gchild rise"><h3>the-mews <span class="pill" style="background:var(--mist-lavender)">fork of fork</span></h3><p>Carried the-stable's whole history, then diverged on the 11th into its own life: Thrum, the loft, tiered pens.</p><div class="meta">diverged Jun 11 · +14 commits past the freeze</div></div>
+      <div class="node sat rise"><h3>prune <span class="pill" style="background:var(--mist-lavender)">satellite</span></h3><p>The work-item harness: every change scoped as a major or minor, with a schema, its dependencies, and the commands that prove it's done. The AuDHD prosthesis that keeps the backlog honest — now its own public repo, used by both forks.</p><div class="meta">public · the planning method itself</div></div>
       <div class="node sat rise"><h3>review-scheduler <span class="pill" style="background:var(--dusk-violet)">satellite</span></h3><p>The standing cold-review dispatcher. Small, load-bearing: it enforces the honesty boundary by clone-scope.</p><div class="meta">4 commits · project-agnostic</div></div>
       <div class="node sat rise"><h3>memory-management <span class="pill" style="background:var(--mist-lavender)">satellite</span></h3><p>The cognition tree, durable artifacts separated from prunable interpretations. Deliberately unversioned; it isn't a git artifact.</p><div class="meta">no git · the standing brief that travels into each session</div></div>
     </div>
@@ -377,7 +360,7 @@ footer{border-top:1px solid var(--hairline); padding:2.4rem 0 3rem; color:var(--
 <!-- ════════════════ THE ROSTER ════════════════ -->
 <section>
   <div class="wrap">
-    <span class="tag rise">The roster</span>
+    <span class="section-tag rise">The roster</span>
     <h2 class="rise" style="font-size:clamp(1.8rem,4vw,2.8rem); margin:.2em 0 .4em">Sixteen souls, six pens</h2>
     <p class="lede rise">Each familiar is a soul + ledger + kept memory running on some model. The thesis under test: the soul is the self; the model is a swappable pen. So the pens are deliberately spread across families.</p>
     <div class="roster rise" id="roster"></div>
@@ -389,7 +372,7 @@ footer{border-top:1px solid var(--hairline); padding:2.4rem 0 3rem; color:var(--
 <!-- ════════════════ THE EXPERIMENTS ════════════════ -->
 <section>
   <div class="wrap">
-    <span class="tag rise">The two questions I locked before looking</span>
+    <span class="section-tag rise">The two questions I locked before looking</span>
     <h2 class="rise" style="font-size:clamp(1.8rem,4vw,2.8rem); margin:.2em 0 .4em">Pre-registered, cold-reviewed, and one halted for cause</h2>
     <p class="lede rise">Same root question, two venues. Rules committed before the data existed, so the bar can't move after I see the result.</p>
     <div class="exps rise">
@@ -427,7 +410,7 @@ footer{border-top:1px solid var(--hairline); padding:2.4rem 0 3rem; color:var(--
 <!-- ════════════════ THE THROUGH-LINE ════════════════ -->
 <section>
   <div class="wrap">
-    <span class="tag rise">The through-line</span>
+    <span class="section-tag rise">The through-line</span>
     <div class="through rise">
       <div class="big">“Order emerging from mystery”: the same systems craft, pointed at a mind.</div>
     </div>
@@ -436,15 +419,26 @@ footer{border-top:1px solid var(--hairline); padding:2.4rem 0 3rem; color:var(--
 </section>
 
 <!-- ════════════════ FOOTER / PROVENANCE ════════════════ -->
+</main>
+
 <footer>
   <div class="wrap">
     <div class="prov">
       <b>How this page was made.</b> Structure, data extraction, scaffolding, and the draft caption fragments: drafted by Claude (the pen). Voice, curation, and the final composition: <b>Levi Banks</b>, author of record. The dashed boxes are unfilled voice-slots, left legible on purpose. Provenance shown at the grain we chose, because it would be a little funny to publish a research wing about legible provenance that wasn't.
-      <div class="note">Counts are distinct across repositories as of 2026-06-13. "273 commits" = worldweaver (163) + the-mews (106, which contains the-stable's 92) + review-scheduler (4). Work-item counts are de-duplicated across the two forks' shared substrate lineage. The experiment figures reflect the run halted and voided on Jun 13 (<code>.runs/pilot/</code>, voided-for-confound).</div>
+      <div class="note">Counts are distinct across repositories as of 2026-06-13. "259 commits" = worldweaver (163) + the-stable (92) + review-scheduler (4). Work-item counts are de-duplicated across the substrate lineage the city shares with its fork. The experiment figures reflect the run halted and voided on Jun 13 (<code>.runs/pilot/</code>, voided-for-confound).</div>
     </div>
+    <p class="location-line" style="margin-top:1.4rem">Currently in Portland, OR &middot; Relocating to The Hague, late 2026.</p>
+    <p>&copy; <span id="y"></span> Hekswerk. Privacy-first.</p>
+    <nav aria-label="Footer">
+      <a href="../index.html">Home</a>
+      <a href="../research.html">Research</a>
+      <a href="../relocation.html">The practice</a>
+      <a href="../contact.html">Contact</a>
+    </nav>
   </div>
 </footer>
 
+<script src="../assets/js/effects.js"></script>
 <script>
 // ── scroll-reveal: order emerging from mystery ────────────────
 const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('seen'); io.unobserve(e.target);}})},{threshold:.12});
