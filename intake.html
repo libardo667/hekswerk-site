@@ -5,251 +5,29 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <meta name="color-scheme" content="dark" />
+    <!-- The intake now lives on the unified contact form (one face, relocation revealed by topic).
+         This page is kept only to redirect any existing links/bookmarks there. -->
+    <link rel="canonical" href="https://www.hekswerk.com/contact.html?topic=relocation" />
+    <meta http-equiv="refresh" content="0; url=./contact.html?topic=relocation" />
     <script>
-        if (location.protocol === "http:" && location.hostname !== "localhost" && location.hostname !== "127.0.0.1") {
-            location.replace("https://" + location.host + location.pathname + location.search + location.hash);
-        }
+        location.replace("./contact.html?topic=relocation");
     </script>
     <title>Relocation Intake - Hekswerk</title>
-    <meta name="description" content="Start a private relocation intake with Hekswerk." />
     <link rel="icon" type="image/svg+xml" href="./assets/img/logo_aura.svg" />
-
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-        href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;500;600&family=Outfit:wght@300;400;500;600&display=swap"
-        rel="stylesheet" />
-
     <link rel="stylesheet" href="./assets/css/styles.css?v=20260617" />
 </head>
 
 <body>
-    <header>
-        <div class="wrap">
-            <div class="nav">
-                <a href="./index.html" class="brand" style="text-decoration:none;">
-                    <div class="brand-mark">
-                        <img src="./assets/img/logo_aura.svg" alt="Hekswerk" />
-                    </div>
-                    <div class="brand-name">Hekswerk</div>
-                </a>
-                <nav class="navlinks" aria-label="Primary">
-                    <a href="./index.html#map">The map</a>
-                    <a href="./research.html">Research</a>
-                    <a href="./relocation.html">The practice</a>
-                    <a href="./contact.html">Contact</a>
-                </nav>
-                <div class="nav-actions">
-                    <a class="btn btn-primary nav-cta" href="./relocation.html">Service details</a>
-                </div>
-            </div>
-        </div>
-    </header>
-
     <main>
         <section class="intake-section">
-            <div class="wrap intake-grid">
-                <div>
-                    <div class="breadcrumb">
-                        <a href="./index.html">Hekswerk</a> &nbsp;/&nbsp; Relocation Intake
-                    </div>
-                    <span class="section-tag">Start here</span>
-                    <h1>Tell me what kind of move you're trying to plan.</h1>
-                    <p class="section-subhead">
-                        This is a short, private intake for anyone exploring an international move from the United
-                        States. Share the basics, which engagement you're considering, and what feels hardest right now.
-                    </p>
-                    <div class="privacy-card">
-                        <h3>Privacy promise</h3>
-                        <p>
-                            I only use this intake to understand your situation and write back to you directly. I won't
-                            sell it or add you to a marketing list. I do keep your intake and engagement information
-                            locally on my own computer for the duration of the engagement. This form sends everything
-                            securely over HTTPS and forwards it to me by email.
-                        </p>
-                    </div>
-                </div>
-
-                <div class="intake-card">
-                    <form
-                        class="intake-form"
-                        id="relocation-intake"
-                        action="https://hekswerk-intake.levi-020.workers.dev/"
-                        method="post">
-                        <div class="field-grid">
-                            <label>
-                                Name
-                                <input name="name" autocomplete="name" required />
-                            </label>
-                            <label>
-                                Email
-                                <input type="email" name="email" autocomplete="email" required />
-                            </label>
-                        </div>
-
-                        <label>
-                            Which engagement are you considering?
-                            <select name="engagement_interest" required>
-                                <option value="">Choose one</option>
-                                <option>Discovery Session ($450)</option>
-                                <option>Foundation Package ($3,000)</option>
-                                <option>Roadmap Standard ($6,500)</option>
-                                <option>Roadmap Ranging ($8,500)</option>
-                                <option>Beta or community slot, if available</option>
-                                <option>Not sure yet</option>
-                            </select>
-                        </label>
-
-                        <div class="field-grid">
-                            <label>
-                                Current location
-                                <input name="current_location" placeholder="City, state, country" />
-                            </label>
-                            <label>
-                                Where are you hoping to go?
-                                <input name="target_location" placeholder="Country or city, if known" />
-                            </label>
-                        </div>
-
-                        <div class="field-grid">
-                            <label>
-                                Target timeline
-                                <select name="timeline">
-                                    <option value="">Choose one</option>
-                                    <option>As soon as possible</option>
-                                    <option>Within 6 months</option>
-                                    <option>6-12 months</option>
-                                    <option>1-2 years</option>
-                                    <option>Still exploring</option>
-                                </select>
-                            </label>
-                            <label>
-                                Household shape
-                                <select name="household">
-                                    <option value="">Choose one</option>
-                                    <option>Solo</option>
-                                    <option>Couple</option>
-                                    <option>Family with children</option>
-                                    <option>Pets involved</option>
-                                    <option>Multiple adults or complex household</option>
-                                    <option>Not sure how to describe it</option>
-                                </select>
-                            </label>
-                        </div>
-
-                        <label>
-                            What is making this hardest right now?
-                            <textarea name="hardest_part" required placeholder="A few sentences is enough. You can be messy here."></textarea>
-                        </label>
-
-                        <label>
-                            Anything urgent or sensitive I should know?
-                            <textarea name="urgent_or_sensitive" placeholder="Deadlines, health constraints, pets, safety concerns, legal handoffs, family complexity, or anything else relevant."></textarea>
-                        </label>
-
-                        <label class="form-honeypot" aria-hidden="true">
-                            Website
-                            <input name="website" tabindex="-1" autocomplete="off" />
-                        </label>
-
-                        <label class="checkbox-label">
-                            <input type="checkbox" name="privacy_acknowledged" required />
-                            <span>I understand this intake is used only for direct relocation follow-up from Hekswerk. It will not be sold or added to a marketing list, and intake or engagement information may be saved locally on Levi's computer for the duration of the engagement.</span>
-                        </label>
-
-                        <button class="btn btn-primary" type="submit">Send my relocation intake</button>
-                        <p class="form-note" id="form-status" role="status" aria-live="polite">
-                            This sends your intake securely over HTTPS. I'll read it myself and reply directly.
-                        </p>
-                        <noscript>
-                            <p class="form-note">
-                                JavaScript is required to submit this form. You can also email levi@hekswerk.com directly.
-                            </p>
-                        </noscript>
-                    </form>
-                </div>
+            <div class="wrap">
+                <p>
+                    The relocation intake has moved to the
+                    <a href="./contact.html?topic=relocation">contact form</a>. Redirecting you there now&hellip;
+                </p>
             </div>
         </section>
-
-        <footer>
-            <div class="wrap">
-                <p class="location-line">Currently in Portland, OR &middot; Relocating to The Hague, late 2026.</p>
-                <p>&copy; <span id="y"></span> Hekswerk. Privacy-first.</p>
-                <nav aria-label="Footer">
-                    <a href="./index.html">Home</a>
-                    <a href="./research.html">Research</a>
-                    <a href="./relocation.html">The practice</a>
-                    <a href="./contact.html">Contact</a>
-                </nav>
-            </div>
-        </footer>
     </main>
-
-    <script src="./assets/js/effects.js"></script>
-    <script>
-        (function () {
-            const form = document.getElementById("relocation-intake");
-            if (!form) return;
-
-            const status = document.getElementById("form-status");
-            const submit = form.querySelector("button[type='submit']");
-            const endpoint = form.action;
-
-            form.addEventListener("submit", async function (event) {
-                event.preventDefault();
-
-                const data = new FormData(form);
-                const payload = {
-                    form_type: "relocation",
-                    name: data.get("name"),
-                    email: data.get("email"),
-                    engagement_interest: data.get("engagement_interest"),
-                    current_location: data.get("current_location"),
-                    target_location: data.get("target_location"),
-                    timeline: data.get("timeline"),
-                    household: data.get("household"),
-                    hardest_part: data.get("hardest_part"),
-                    urgent_or_sensitive: data.get("urgent_or_sensitive"),
-                    privacy_acknowledged: data.has("privacy_acknowledged"),
-                    website: data.get("website")
-                };
-
-                if (status) {
-                    status.className = "form-note";
-                    status.textContent = "Sending your intake...";
-                }
-
-                if (submit) submit.disabled = true;
-
-                try {
-                    const response = await fetch(endpoint, {
-                        method: "POST",
-                        headers: {
-                            "Content-Type": "application/json"
-                        },
-                        body: JSON.stringify(payload)
-                    });
-
-                    if (!response.ok) {
-                        throw new Error("Submission failed");
-                    }
-
-                    form.reset();
-                    if (status) {
-                        status.className = "form-note form-success";
-                        status.textContent = "Thank you. Your intake is on its way; I'll reply directly if it looks like there might be a fit.";
-                    }
-                } catch (error) {
-                    if (status) {
-                        status.className = "form-note form-error";
-                        status.textContent = "Something went wrong sending the form. Please email levi@hekswerk.com directly.";
-                    }
-                } finally {
-                    if (submit) submit.disabled = false;
-                }
-            });
-        })();
-    </script>
 </body>
 
 </html>

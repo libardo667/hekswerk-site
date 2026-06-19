@@ -47,15 +47,17 @@ ZONES = [
 # Local hrefs start with "./"; --check resolves them (query/anchor stripped first).
 NODES = [
     # --- the practice (power source) ---
+    # evalwork leads: it is the live root (the engine, running now); relocation + automation
+    # are real but un-pursued optionality, taken by inquiry.
+    {"id": "evalwork", "zone": "practice", "label": "freelance eval",
+     "plain": "AI-evaluation contract work - the engine, running now",
+     "href": "./research.html#funding"},
     {"id": "relocation", "zone": "practice", "label": "relocation",
-     "plain": "structured planning for US-to-Europe moves",
+     "plain": "structured planning for US-to-Europe moves - by inquiry",
      "href": "./relocation.html"},
     {"id": "automation", "zone": "practice", "label": "automation",
-     "plain": "fixed-scope, privacy-first automation builds",
+     "plain": "fixed-scope, privacy-first automation builds - by inquiry",
      "href": "./contact.html?topic=automation"},
-    {"id": "evalwork", "zone": "practice", "label": "freelance eval",
-     "plain": "AI-evaluation contract work - the engine behind the research",
-     "href": "./research.html#funding"},
     {"id": "contact", "zone": "practice", "label": "contact",
      "plain": "a short, private contact form",
      "href": "./contact.html"},

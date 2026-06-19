@@ -11,7 +11,7 @@
         }
     </script>
     <title>Contact - Hekswerk</title>
-    <meta name="description" content="Get in touch with Hekswerk about the AI research, an automation build, or anything else. A short, private contact form." />
+    <meta name="description" content="Get in touch with Hekswerk about the AI research, an automation build, a relocation, or anything else. One short, private form." />
     <link rel="icon" type="image/svg+xml" href="./assets/img/logo_aura.svg" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -21,6 +21,13 @@
         rel="stylesheet" />
 
     <link rel="stylesheet" href="./assets/css/styles.css?v=20260617" />
+    <style>
+        /* The relocation block is revealed only when "Relocation planning" is chosen, so one
+           face serves a short message and a full intake without ever showing both at once. */
+        #relocation-fields[hidden] { display: none; }
+        #relocation-fields { margin-top: 4px; padding-top: 16px; border-top: 1px solid var(--hairline); }
+        #relocation-fields .reloc-note { color: var(--quiet); font-size: .86rem; margin: 0 0 14px; }
+    </style>
 </head>
 
 <body>
@@ -56,8 +63,10 @@
                     <span class="section-tag">Get in touch</span>
                     <h1>Tell me what's on your mind.</h1>
                     <p class="section-subhead">
-                        Research collaboration, a question about the program, an automation build, or anything
-                        else. Plain language is enough; messy is fine. I read it myself and reply directly.
+                        Research collaboration, a question about the program, an automation build, a relocation, or
+                        anything else. Pick a topic and the form fits itself to it &mdash; a couple of lines for most
+                        things, a fuller intake if you're planning a move. Plain language is enough; messy is fine. I
+                        read it myself and reply directly.
                     </p>
                     <div class="privacy-card">
                         <h3>Privacy promise</h3>
@@ -92,14 +101,61 @@
                             <select name="topic" id="contact-topic" required>
                                 <option value="">Choose one</option>
                                 <option value="Research collaboration">Research collaboration or a question about the program</option>
-                                <option value="Quickstart Automation">Quickstart Automation build</option>
+                                <option value="Quickstart Automation">Automation build</option>
                                 <option value="Relocation planning">Relocation planning</option>
                                 <option value="Something else">Something else</option>
                             </select>
                         </label>
 
+                        <!-- Revealed only for "Relocation planning" - the full intake, on the same face. -->
+                        <div id="relocation-fields" hidden>
+                            <p class="reloc-note">
+                                A few more details help me tell quickly whether a move is a fit. All optional &mdash;
+                                share what's easy.
+                            </p>
+                            <div class="field-grid">
+                                <label>
+                                    Current location
+                                    <input name="current_location" placeholder="City, state, country" />
+                                </label>
+                                <label>
+                                    Where are you hoping to go?
+                                    <input name="target_location" placeholder="Country or city, if known" />
+                                </label>
+                            </div>
+                            <div class="field-grid">
+                                <label>
+                                    Target timeline
+                                    <select name="timeline">
+                                        <option value="">Choose one</option>
+                                        <option>As soon as possible</option>
+                                        <option>Within 6 months</option>
+                                        <option>6-12 months</option>
+                                        <option>1-2 years</option>
+                                        <option>Still exploring</option>
+                                    </select>
+                                </label>
+                                <label>
+                                    Household shape
+                                    <select name="household">
+                                        <option value="">Choose one</option>
+                                        <option>Solo</option>
+                                        <option>Couple</option>
+                                        <option>Family with children</option>
+                                        <option>Pets involved</option>
+                                        <option>Multiple adults or complex household</option>
+                                        <option>Not sure how to describe it</option>
+                                    </select>
+                                </label>
+                            </div>
+                            <label>
+                                Anything urgent or sensitive I should know?
+                                <textarea name="urgent_or_sensitive" placeholder="Deadlines, health constraints, pets, safety concerns, legal handoffs, family complexity, or anything else relevant."></textarea>
+                            </label>
+                        </div>
+
                         <label>
-                            What would you like to say?
+                            <span id="message-label">What would you like to say?</span>
                             <textarea name="message" required placeholder="A few sentences is enough. You can be messy here."></textarea>
                         </label>
 
@@ -144,6 +200,27 @@
     <script src="./assets/js/effects.js"></script>
     <script>
         (function () {
+            const form = document.getElementById("contact-form");
+            if (!form) return;
+
+            const topic = document.getElementById("contact-topic");
+            const relocBlock = document.getElementById("relocation-fields");
+            const messageLabel = document.getElementById("message-label");
+            const status = document.getElementById("form-status");
+            const submit = form.querySelector("button[type='submit']");
+            const endpoint = form.action;
+
+            // Show the full relocation intake only when the relocation topic is selected.
+            function syncTopic() {
+                const isReloc = topic.value === "Relocation planning";
+                if (relocBlock) relocBlock.hidden = !isReloc;
+                if (messageLabel) {
+                    messageLabel.textContent = isReloc
+                        ? "What's making this hardest right now?"
+                        : "What would you like to say?";
+                }
+            }
+
             // Pre-select the topic from a ?topic= query param (research / automation / relocation),
             // so a "Get in touch" button can land here with the right subject already chosen.
             const params = new URLSearchParams(location.search);
@@ -153,29 +230,45 @@
                 automation: "Quickstart Automation",
                 relocation: "Relocation planning"
             };
-            const topic = document.getElementById("contact-topic");
-            if (topic && map[wanted]) topic.value = map[wanted];
-
-            const form = document.getElementById("contact-form");
-            if (!form) return;
-
-            const status = document.getElementById("form-status");
-            const submit = form.querySelector("button[type='submit']");
-            const endpoint = form.action;
+            if (map[wanted]) topic.value = map[wanted];
+            syncTopic();
+            topic.addEventListener("change", syncTopic);
 
             form.addEventListener("submit", async function (event) {
                 event.preventDefault();
 
                 const data = new FormData(form);
-                const payload = {
-                    form_type: "contact",
-                    name: data.get("name"),
-                    email: data.get("email"),
-                    topic: data.get("topic"),
-                    message: data.get("message"),
-                    privacy_acknowledged: data.has("privacy_acknowledged"),
-                    website: data.get("website")
-                };
+                const isReloc = data.get("topic") === "Relocation planning";
+
+                // Two payload shapes, one form: a relocation intake carries the situational
+                // fields; everything else is a short contact note. Both go to the same Worker.
+                let payload;
+                if (isReloc) {
+                    payload = {
+                        form_type: "relocation",
+                        name: data.get("name"),
+                        email: data.get("email"),
+                        topic: data.get("topic"),
+                        current_location: data.get("current_location"),
+                        target_location: data.get("target_location"),
+                        timeline: data.get("timeline"),
+                        household: data.get("household"),
+                        hardest_part: data.get("message"),
+                        urgent_or_sensitive: data.get("urgent_or_sensitive"),
+                        privacy_acknowledged: data.has("privacy_acknowledged"),
+                        website: data.get("website")
+                    };
+                } else {
+                    payload = {
+                        form_type: "contact",
+                        name: data.get("name"),
+                        email: data.get("email"),
+                        topic: data.get("topic"),
+                        message: data.get("message"),
+                        privacy_acknowledged: data.has("privacy_acknowledged"),
+                        website: data.get("website")
+                    };
+                }
 
                 if (status) {
                     status.className = "form-note";
@@ -198,6 +291,7 @@
                     }
 
                     form.reset();
+                    syncTopic();
                     if (status) {
                         status.className = "form-note form-success";
                         status.textContent = "Thank you. Your message is on its way; I'll reply directly.";
