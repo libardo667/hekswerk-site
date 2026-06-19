@@ -596,6 +596,71 @@ ol {
     margin-top: 36px;
 }
 
+/* Plain-language notes: the body reads plain; the precise research terms live here,
+   footnote-style, so rigor stays legible to a researcher without taxing a general reader. */
+sup.fn-ref {
+    line-height: 0;
+    font-size: 0.7em;
+    white-space: nowrap;
+}
+
+sup.fn-ref a {
+    color: var(--halo-gold);
+    text-decoration: none;
+    padding: 0 1px;
+}
+
+sup.fn-ref a:hover,
+sup.fn-ref a:focus {
+    text-decoration: underline;
+}
+
+.footnotes {
+    border-top: 1px solid var(--hairline);
+}
+
+.footnotes .wrap {
+    padding-top: 30px;
+    padding-bottom: 10px;
+}
+
+.footnotes-title {
+    font-family: Outfit, sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--quiet);
+    margin: 0 0 14px;
+}
+
+.footnotes ol {
+    color: var(--quiet);
+    font-size: 14px;
+    line-height: 1.6;
+    max-width: 78ch;
+    margin: 0;
+    padding-left: 1.3em;
+}
+
+.footnotes li {
+    margin: 0.5rem 0;
+}
+
+.footnotes li b {
+    color: var(--muted);
+}
+
+.footnotes a.fn-back {
+    color: var(--halo-gold);
+    text-decoration: none;
+    margin-left: 6px;
+}
+
+:target {
+    scroll-margin-top: 84px;
+}
+
 .intake-section {
     padding-top: clamp(56px, 7vw, 88px);
 }

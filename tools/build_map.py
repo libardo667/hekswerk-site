@@ -38,7 +38,7 @@ ZONES = [
     {"id": "substrate", "title": "Software", "kind": "work",
      "blurb": "Where the research runs and is recorded."},
     {"id": "membrane", "title": "Publishing", "kind": "gate",
-     "blurb": "The one honest gate from private work to public: curation, leak-sweep, provenance."},
+     "blurb": "The one honest check between private work and public: trim it to what's true, remove anything private, label who made what."},
     {"id": "public", "title": "Research", "kind": "public",
      "blurb": "What anyone can read."},
 ]
@@ -78,16 +78,16 @@ NODES = [
     {"id": "revsched", "zone": "substrate", "label": "review-scheduler",
      "plain": "a cold reviewer that can't be charmed",
      "href": "https://github.com/libardo667/review-scheduler"},
-    {"id": "record", "zone": "substrate", "label": "the research record",
-     "plain": "locked pre-registrations and the cold-review history",
+    {"id": "record", "zone": "substrate", "label": "the research notebook",
+     "plain": "the dated, locked records and the full history of reviews that went against me",
      "href": "https://github.com/libardo667/worldweaver/tree/main/research"},
 
     # --- membrane ---
-    {"id": "curation", "zone": "membrane", "label": "curation + leak-sweep",
-     "plain": "raw work trimmed to legible artifacts; private data excluded",
+    {"id": "curation", "zone": "membrane", "label": "trim + remove private",
+     "plain": "raw work cut down to the clear, true parts, with anything private taken out",
      "href": "https://github.com/libardo667/memory-management"},
-    {"id": "provenance", "zone": "membrane", "label": "provenance",
-     "plain": "every public page records how it was made and whose words are whose",
+    {"id": "provenance", "zone": "membrane", "label": "who made what",
+     "plain": "every public page records how it was made, and which words are mine and which a model's",
      "href": "./exhibits/honesty-machinery.html"},
 
     # --- public research surface ---
@@ -130,9 +130,10 @@ EDGES = [
 ]
 # ===========================================================================================
 
-ORIENT = ("Hekswerk in one picture. The practice - the part with customers - funds the software where "
-          "the research runs; that work only becomes public after passing through one honest gate "
-          "(curation, leak-sweep, provenance). The practice is sold; the research is funded and published.")
+ORIENT = ("Hekswerk in one picture. Follow the arrows: the paid work - the part with clients - pays for "
+          "the software the research runs on. Nothing the research produces goes public until it clears one "
+          "honest check - trim it to what's true, remove anything private, and label who made what. The paid "
+          "side is sold; the research is given away and published.")
 
 # --- layout geometry (SVG user units) ---
 COLS_X = {"practice": 104, "substrate": 400, "membrane": 690, "public": 968}

@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;500;600;700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="../assets/css/styles.css?v=20260617" />
+<link rel="stylesheet" href="../assets/css/styles.css?v=20260619" />
 <style>
 /* bespoke interior for this exhibit; shared chrome, type, and background come from styles.css */
 :root{ --ok:#6f9f86; --warn:#c98f6b; --live:#C0A990; }
@@ -105,7 +105,7 @@
   <p style="max-width:74ch; margin:0; padding:.95rem 1.2rem; border:1px solid var(--hairline); border-radius:12px; background:var(--panel); color:var(--muted); font-size:.93rem; line-height:1.6">
     <b style="color:var(--halo-gold); font-weight:600">What you're looking at.</b>
     The machinery I use to keep my own solo research honest: rules locked before the data exists,
-    instruments broken on purpose to prove the checks can fail, and a cold reviewer with a mandate to
+    instruments broken on purpose to prove the checks can fail, and a cold reviewer<sup class="fn-ref" id="fnref-1"><a href="#fn-1">1</a></sup> with a mandate to
     rule against me. It's here because solo research is usually untrustworthy, so the verdicts that went
     against me are kept on the record, not buried.
   </p>
@@ -126,7 +126,7 @@
   <p class="lede rise">That's the thesis. It would be easy to "prove" it with a warm story, I had one: a familiar whose voice seemed to hold when I swapped its model mid-life. I am telling you that story <em>doesn't count</em>, by my own pre-committed rules.</p>
   <div class="pillars rise" style="margin-top:1.4rem; grid-template-columns:1fr 1fr">
     <div class="pillar"><div class="ic">✗</div><h3>Why the anecdote fails</h3><p>It was one familiar, judged by eye, and a <em>within-family</em> swap, one Claude model for another. That can't separate "the substrate carried the self" from "two models share a voice prior." An N=1 glance is not a measurement.</p></div>
-    <div class="pillar"><div class="ic">✓</div><h3>So I built the instrument</h3><p>Cross-family swap (a non-Claude pen). Swap <em>unannounced</em>, so any "I feel different" is confabulation. Voice measured as embedding distance against a <em>different-soul null</em>, not eyeballed. Falsifier named in advance.</p></div>
+    <div class="pillar"><div class="ic">✓</div><h3>So I built the instrument</h3><p>Cross-family swap (a non-Claude pen). Swap <em>unannounced</em>, so any "I feel different" is confabulation. Voice measured as embedding distance<sup class="fn-ref" id="fnref-2"><a href="#fn-2">2</a></sup> against a <em>different-soul null</em>, not eyeballed. Falsifier named in advance.</p></div>
   </div>
 </div></section>
 
@@ -135,7 +135,7 @@
   <span class="section-tag rise">The machinery</span>
   <h2 class="rise" style="font-size:clamp(1.8rem,4vw,2.7rem); margin:.2em 0 .4em">Three commitments, made before looking</h2>
   <div class="pillars rise">
-    <div class="pillar"><div class="ic">01</div><h3>Pre-registration</h3><p>The metric, the null it must beat, the thresholds, and <em>what result would falsify the thesis</em>, all fixed in a locked document before the run. The bar can't move once I've seen the data.</p></div>
+    <div class="pillar"><div class="ic">01</div><h3>Pre-registration<sup class="fn-ref" id="fnref-3"><a href="#fn-3">3</a></sup></h3><p>The metric, the null it must beat, the thresholds, and <em>what result would falsify the thesis</em>, all fixed in a locked document before the run. The bar can't move once I've seen the data.</p></div>
     <div class="pillar"><div class="ic">02</div><h3>A reviewer built to rule against me</h3><p>A standing cold reviewer, scoped to a <em>public clone only</em>, my private notes never reach it. Its verdicts are committed, including the ones that block. One pre-registration is locked so far (more are in review); getting it locked took several rounds, several of them "not yet lockable."</p></div>
     <div class="pillar"><div class="ic">03</div><h3>Anti-spiral</h3><p>A signed clause: a thin or inconclusive result is a <em>real</em> result. I am not allowed to rescue a disappointing answer by building a fifth instrument. The off-ramp is committed before the run.</p></div>
   </div>
@@ -151,12 +151,12 @@
   <div class="exps rise">
     <div class="exp inconc">
       <span class="status"><span class="dot"></span>Venue 1 · the city (worldweaver)</span>
-      <h3>Reported underpowered, and not ridden</h3>
+      <h3>Reported underpowered<sup class="fn-ref" id="fnref-4"><a href="#fn-4">4</a></sup>, and not ridden</h3>
       <p class="what">A full cohort matured and was replayed under a swapped pen, scored against a within-subject null.</p>
       <ul>
         <li><b>1,213</b> retained memories matured</li>
         <li>Substrate-parity gate: <b>15/15 PASS</b> <span class="quiet">(caveat on cohort, on record)</span></li>
-        <li>Swap-divergence at the real keep-rate (~1.3%/tick): too few points to power the test</li>
+        <li>Swap-divergence at the real keep-rate (~1.3%/tick<sup class="fn-ref" id="fnref-5"><a href="#fn-5">5</a></sup>): too few points to power the test</li>
       </ul>
       <span class="verdict inconc">verdict: INCONCLUSIVE, “no verdict ridden on six keeps”</span>
       <p class="what" style="border-top:1px solid var(--hairline); padding-top:.7rem; color:var(--soft-cream)">I am not proud of a weakly-powered run, and I would rather hand you a thin result I caught myself than a strong one I never interrogated. Rerunning it properly is part of the funded work, and it waits on the same thing the whole program now waits on: an ethical footing for maturing and observing a mind-like thing that I am willing to stand behind.</p>
@@ -167,7 +167,7 @@
       <p class="what">One familiar (Maker), matured in isolation toward a model-independent stop-line, then halted partway: the subject had been handed a false account of its own situation, so I voided the result rather than ride it.</p>
       <div class="prog">
         <div class="track"><div class="fill" data-pct="30"></div></div>
-        <div class="pl"><span>halted at tick 6,042 / 20,160</span><span>voided for confound</span></div>
+        <div class="pl"><span>halted at tick 6,042 / 20,160</span><span>voided for confound<sup class="fn-ref" id="fnref-6"><a href="#fn-6">6</a></sup></span></div>
       </div>
       <ul>
         <li>Certified against the reviewer's <b>R1–R7</b> punch-list before launch</li>
@@ -188,7 +188,7 @@
     <div class="pillar"><div class="ic">↗</div><h3><a href="https://github.com/libardo667/worldweaver/blob/main/research/preregistrations/2026-06-09-pen-vs-substrate-LOCKED.md">The locked pre-registration</a></h3><p>The metric, the null it must beat, and the falsifier, fixed before the data existed. The bar that couldn't move.</p></div>
     <div class="pillar"><div class="ic">↗</div><h3><a href="https://github.com/libardo667/worldweaver/tree/main/research/mr-review-history">The cold reviewer's verdicts</a></h3><p>The committed review record, including the rounds that came back "not yet lockable" and blocked me.</p></div>
     <div class="pillar"><div class="ic">↗</div><h3><a href="https://github.com/libardo667/worldweaver/tree/main/research/runs/2026-06-09-pen-swap-keep">The underpowered run + recompute</a></h3><p>Venue 1 in full: the matured cohort, the 15/15 parity gate, and the six keeps no verdict was ridden on.</p></div>
-    <div class="pillar"><div class="ic">↗</div><h3><a href="https://github.com/libardo667/worldweaver">worldweaver</a> &amp; <a href="https://github.com/libardo667/the-stable">the-stable</a></h3><p>The whole substrate, public. The live runtime shards stay private (they hold secrets); everything else is here.</p></div>
+    <div class="pillar"><div class="ic">↗</div><h3><a href="https://github.com/libardo667/worldweaver">worldweaver</a> &amp; <a href="https://github.com/libardo667/the-stable">the-stable</a></h3><p>The whole substrate, public. The live runtime shards<sup class="fn-ref" id="fnref-7"><a href="#fn-7">7</a></sup> stay private (they hold secrets); everything else is here.</p></div>
   </div>
 </div></section>
 
@@ -198,7 +198,7 @@
   <h2 class="rise" style="font-size:clamp(1.8rem,4vw,2.7rem); margin:.2em 0 .4em">Compute follows surprise, not the clock</h2>
   <p class="lede rise">A polling loop issues calls proportional to residents × loops × elapsed time. This substrate ignites a model call only when the world diverges from what the mind predicted. The call <em>structure</em> changes, independent of model or price.</p>
   <div class="effic rise">
-    <div class="eff"><div class="n">801,538</div><div class="l">inference calls / month</div><div class="s">the old loop era (real billing export)</div></div>
+    <div class="eff"><div class="n">801,538</div><div class="l">inference calls<sup class="fn-ref" id="fnref-8"><a href="#fn-8">8</a></sup> / month</div><div class="s">the old loop era (real billing export)</div></div>
     <div class="arrow">→</div>
     <div class="eff"><div class="n">~37</div><div class="l">calls / hour</div><div class="s">a substrate resident</div></div>
     <div class="eff"><div class="n">€0</div><div class="l">marginal cost</div><div class="s">local model + local embedder · zero egress</div></div>
@@ -228,6 +228,22 @@
 </div></section>
 
 </main>
+
+<section class="footnotes" aria-label="Plain-language notes">
+  <div class="wrap">
+    <h2 class="footnotes-title">Plain-language notes</h2>
+    <ol>
+      <li id="fn-1"><b>Cold reviewer.</b> An automated critic walled off from my notes and my enthusiasm &mdash; shown only the code and the data &mdash; whose standing job is to find reasons I'm wrong. <a class="fn-back" href="#fnref-1" aria-label="Back to text">&#8617;</a></li>
+      <li id="fn-2"><b>Embedding distance (against a "null").</b> Instead of judging by ear, each character's voice is turned into a list of numbers (an <em>embedding</em>) and compared by distance. The "different-soul null" is the baseline: how far apart two genuinely <em>different</em> characters sit &mdash; so a real match has to beat mere coincidence. <a class="fn-back" href="#fnref-2" aria-label="Back to text">&#8617;</a></li>
+      <li id="fn-3"><b>Pre-registration.</b> Writing down the measurement, the bar to beat, and what result would prove the idea wrong &mdash; dated and locked &mdash; <em>before</em> any data exists, so the goalposts can't move afterward. <a class="fn-back" href="#fnref-3" aria-label="Back to text">&#8617;</a></li>
+      <li id="fn-4"><b>Underpowered.</b> Too few data points to reliably detect an effect even if one is real. Reporting a result as underpowered is admitting the test couldn't have settled the question either way. <a class="fn-back" href="#fnref-4" aria-label="Back to text">&#8617;</a></li>
+      <li id="fn-5"><b>Tick.</b> One step of the simulated clock. The characters live in discrete time-steps, so "tick 6,042 of 20,160" marks how far through a planned run it was. <a class="fn-back" href="#fnref-5" aria-label="Back to text">&#8617;</a></li>
+      <li id="fn-6"><b>Confound.</b> Something <em>other</em> than what you're testing that could explain the result. Here the character had been fed a false account of its own situation &mdash; which would taint any conclusion &mdash; so the run was thrown out. <a class="fn-back" href="#fnref-6" aria-label="Back to text">&#8617;</a></li>
+      <li id="fn-7"><b>Shards &amp; federation.</b> The system runs as separate local installations ("shards") &mdash; roughly one per place &mdash; that can talk to each other as a loose network ("federation"), instead of everything living on one central server. <a class="fn-back" href="#fnref-7" aria-label="Back to text">&#8617;</a></li>
+      <li id="fn-8"><b>Inference call / egress.</b> An "inference call" is one request to an AI model. "Zero egress" means no data leaves the machine &mdash; the model and the text-embedder both run locally. <a class="fn-back" href="#fnref-8" aria-label="Back to text">&#8617;</a></li>
+    </ol>
+  </div>
+</section>
 
 <footer>
   <div class="wrap">

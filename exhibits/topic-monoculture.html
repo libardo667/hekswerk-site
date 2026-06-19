@@ -5,11 +5,11 @@
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <meta name="color-scheme" content="dark" />
 <title>Fifteen Strangers, One Story · Hekswerk Research</title>
-<meta name="description" content="Fifteen distinct AI residents, sealed for two hours, converged ~80% onto one invented mythos. A lever built to de-homogenize them did nothing to how they spoke (a null result), and a cheap lexical count refuted the eyeball read that it had." />
+<meta name="description" content="Fifteen distinct AI characters, sealed for two hours, drifted ~80% onto one invented backstory. A change meant to make them sound more different did nothing to how they spoke (a no-effect result), and a simple word-count refuted what the eye thought it saw." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;500;600;700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="../assets/css/styles.css?v=20260617" />
+<link rel="stylesheet" href="../assets/css/styles.css?v=20260619" />
 <style>
 /* bespoke interior for this exhibit; shared chrome, type, and background come from styles.css */
 :root{ --max:1000px; }
@@ -86,7 +86,7 @@
     <b>What you're looking at.</b>
     A single experiment, told straight. Fifteen distinct AI characters were sealed in one room for two
     hours; I tried to make them speak more like individuals and measured whether it worked. It did not.
-    This is a null result, kept and shown, because the interesting part is what the measurement caught
+    This is a null result<sup class="fn-ref" id="fnref-1"><a href="#fn-1">1</a></sup>, kept and shown, because the interesting part is what the measurement caught
     me believing. <b style="color:var(--soft-cream)">It also keeps a public self-correction</b> — a more
     exciting claim I made here, then withdrew the same day when I checked the raw record.
     <a href="#correction">Jump to it&nbsp;→</a>
@@ -108,22 +108,22 @@
   <h2 class="rise" style="font-size:clamp(1.6rem,3.6vw,2.4rem); margin:.1em 0 .4em">One shared example, swapped for fifteen different ones</h2>
   <p class="lede rise">Every resident's prompt carried the <em>same</em> worked example of how to speak.
   The natural suspicion: that one shared example is the mold they all press into. The test was the
-  cleanest version of the fix, give each resident a different, name-hashed example from a neutral pool,
-  and see if the cast de-homogenizes. Two arms, the <b style="color:var(--soft-cream)">varied</b> example
-  and the <b style="color:var(--soft-cream)">shared</b> control, same fifteen byte-identical souls in both,
-  doula frozen, no federation, two hours each.</p>
+  cleanest version of the fix, give each resident a different example drawn from a neutral pool,
+  and see if the cast sounds less alike. Two arms, the <b style="color:var(--soft-cream)">varied</b> example
+  and the <b style="color:var(--soft-cream)">shared</b> control, the exact same fifteen characters in both
+  (identical down to the byte), the rest of the setup held fixed and no links to other worlds, two hours each.</p>
 </div></section>
 
 <!-- THE NUMBERS -->
 <section style="padding-top:0"><div class="wrap">
   <span class="section-tag rise">What the ledgers say</span>
   <h2 class="rise" style="font-size:clamp(1.6rem,3.6vw,2.4rem); margin:.1em 0 .2em">The count, both arms</h2>
-  <p class="rise muted" style="max-width:64ch; font-size:.93rem">A deliberately cheap, non-semantic count over ~215 utterances per arm. No embedder, so anyone can recompute it and get the same numbers.</p>
+  <p class="rise muted" style="max-width:64ch; font-size:.93rem">A deliberately cheap, non-semantic count<sup class="fn-ref" id="fnref-2"><a href="#fn-2">2</a></sup> over ~215 utterances per arm. No embedder, so anyone can recompute it and get the same numbers.</p>
   <div class="compare rise">
     <div class="arm">
       <h3>Varied example</h3>
       <div class="cap">per-resident, name-hashed</div>
-      <div class="metric"><span class="ml">topic monoculture</span><span class="mv">86.4%</span></div>
+      <div class="metric"><span class="ml">topic monoculture<sup class="fn-ref" id="fnref-3"><a href="#fn-3">3</a></sup></span><span class="mv">86.4%</span></div>
       <div class="metric"><span class="ml">templated opener ("I'm here…")</span><span class="mv">0.0%</span></div>
       <div class="metric"><span class="ml">but a new locked opener ("I've been listening…")</span><span class="mv">~25%</span></div>
       <div class="metric"><span class="ml">opener diversity (distinct / speaks)</span><span class="mv">0.49</span></div>
@@ -162,7 +162,7 @@
 <!-- THE VERDICT -->
 <section style="padding-top:0"><div class="wrap">
   <span class="section-tag rise">The verdict</span>
-  <h2 class="rise" style="font-size:clamp(1.6rem,3.6vw,2.4rem); margin:.1em 0 .4em">Effect on register: null. Effect on behavior: real.</h2>
+  <h2 class="rise" style="font-size:clamp(1.6rem,3.6vw,2.4rem); margin:.1em 0 .4em">Effect on register<sup class="fn-ref" id="fnref-4"><a href="#fn-4">4</a></sup>: null. Effect on behavior: real.</h2>
   <p class="lede rise">The lever changed nothing about <em>how</em> the residents spoke, register and topic
   convergence were robust to the example. What it did change was what they <em>did</em>: the varied arm
   wrote far more (56 vs 18), the shared arm moved far more (27 vs 3). One resident swung from 15 writes /
@@ -187,12 +187,12 @@
   <span class="section-tag rise">The discipline</span>
   <h2 class="rise" style="font-size:clamp(1.6rem,3.6vw,2.4rem); margin:.1em 0 .4em">Why I did not measure the interesting part</h2>
   <div class="honest rise">
-    <h3>The convergence is confounded, and naming the confound is the result</h3>
+    <h3>The convergence is confounded<sup class="fn-ref" id="fnref-5"><a href="#fn-5">5</a></sup>, and naming the confound is the result</h3>
     <p>The obvious next move is to build a ruler for the convergence itself. I did not, on purpose. At
     fifteen residents in a sealed room for two hours, a single shared attractor forming is the
     <em>expected</em> behavior of any small coupled system, so the monoculture is confounded with a plain
     small-cohort echo. A new metric here would measure the confound and dress it as a finding.</p>
-    <p>Instead the trigger to re-open is pre-registered: pursue it only when convergence <em>persists at
+    <p>Instead the trigger to re-open is pre-registered<sup class="fn-ref" id="fnref-6"><a href="#fn-6">6</a></sup>: pursue it only when convergence <em>persists at
     larger scale or under federation</em> (a condition that rules out the echo), and only when a decision
     actually needs it. The cheap separator is changing the world, never adding another ruler.</p>
   </div>
@@ -231,6 +231,20 @@
 </div></section>
 
 </main>
+
+<section class="footnotes" aria-label="Plain-language notes">
+  <div class="wrap">
+    <h2 class="footnotes-title">Plain-language notes</h2>
+    <ol>
+      <li id="fn-1"><b>Null result.</b> A finding that the thing you tried had no measurable effect &mdash; reported as plainly as a positive one. A "no" is real data, not a failure to be hidden. <a class="fn-back" href="#fnref-1" aria-label="Back to text">&#8617;</a></li>
+      <li id="fn-2"><b>Non-semantic (lexical) count.</b> A deliberately simple tally of which words and sentence-openers were used &mdash; counting the text, not interpreting its meaning. Because it uses no AI "embedder" (a model that turns text into numbers), anyone can re-run the script and get the identical numbers. <a class="fn-back" href="#fnref-2" aria-label="Back to text">&#8617;</a></li>
+      <li id="fn-3"><b>Topic monoculture.</b> The share of everything said that drew on one shared cluster of words and themes &mdash; a single number for how much fifteen supposedly-distinct voices ended up sounding like one. <a class="fn-back" href="#fnref-3" aria-label="Back to text">&#8617;</a></li>
+      <li id="fn-4"><b>Register.</b> How someone speaks, as opposed to what about &mdash; formality, rhythm, characteristic turns of phrase. "Effect on register: null" means the change didn't alter their manner of speaking. <a class="fn-back" href="#fnref-4" aria-label="Back to text">&#8617;</a></li>
+      <li id="fn-5"><b>Confounded (an "attractor").</b> A result is confounded when something <em>other</em> than the thing you're testing could explain it. Here, any small group sealed together naturally drifts toward one shared theme (an "attractor"), so the convergence can't be cleanly credited to the change being tested. <a class="fn-back" href="#fnref-5" aria-label="Back to text">&#8617;</a></li>
+      <li id="fn-6"><b>Pre-registered re-open trigger.</b> The condition for revisiting this is written down in advance &mdash; pursue it only if the convergence persists at larger scale or across linked worlds &mdash; so the decision can't be retrofitted to a hoped-for answer. <a class="fn-back" href="#fnref-6" aria-label="Back to text">&#8617;</a></li>
+    </ol>
+  </div>
+</section>
 
 <footer>
   <div class="wrap">
