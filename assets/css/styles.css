@@ -1,5 +1,5 @@
-/* Hekswerk aura system. Brand tokens (colours, surfaces, shadows) live in tokens.css —
-   the single source of truth — imported first. Only main-site layout values remain here. */
+/* Hekswerk aura system. Brand tokens (colours, surfaces, shadows) live in tokens.css,
+   the single source of truth, imported first. Only main-site layout values remain here. */
 @import url("tokens.css?v=20260617");
 :root {
     --max: 1120px;
