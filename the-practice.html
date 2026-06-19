@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="color-scheme" content="dark" />
+    <script>
+        if (location.protocol === "http:" && location.hostname !== "localhost" && location.hostname !== "127.0.0.1") {
+            location.replace("https://" + location.host + location.pathname + location.search + location.hash);
+        }
+    </script>
+    <title>The Practice - Hekswerk</title>
+    <meta name="description" content="The part of Hekswerk with clients - the work that funds the research. Three streams, in order of how much they carry the work: freelance AI evaluation (the engine, running now), relocation planning, and automation builds." />
+    <link rel="icon" type="image/svg+xml" href="./assets/img/logo_aura.svg" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;500;600&family=Outfit:wght@300;400;500;600&display=swap"
+        rel="stylesheet" />
+
+    <link rel="stylesheet" href="./assets/css/styles.css?v=20260619" />
+    <style>
+        /* The root stream gets visual primacy; the two by-inquiry streams sit below as a pair. */
+        .root-stream { border: 1px solid rgba(192, 169, 144, .45); border-left: 3px solid var(--halo-gold); border-radius: var(--radius); background: linear-gradient(180deg, rgba(192, 169, 144, .08), transparent); padding: clamp(22px, 3.4vw, 34px); }
+        .root-stream .now { display: inline-flex; align-items: center; gap: .5em; color: var(--halo-gold); font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; margin-bottom: 10px; }
+        .root-stream .now::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--halo-gold); box-shadow: 0 0 0 0 rgba(192, 169, 144, .5); animation: ps 2.2s ease-in-out infinite; }
+        @keyframes ps { 50% { box-shadow: 0 0 0 7px rgba(192, 169, 144, 0); } }
+        @media (prefers-reduced-motion: reduce) { .root-stream .now::before { animation: none; } }
+        .by-inquiry { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 18px; }
+        @media (max-width: 680px) { .by-inquiry { grid-template-columns: 1fr; } }
+        .by-inquiry .fit-card .tag { display: block; color: var(--quiet); font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; margin-bottom: 6px; }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="wrap">
+            <div class="nav">
+                <a href="./index.html" class="brand" style="text-decoration:none;">
+                    <div class="brand-mark">
+                        <img src="./assets/img/logo_aura.svg" alt="Hekswerk" />
+                    </div>
+                    <div class="brand-name">Hekswerk</div>
+                </a>
+                <nav class="navlinks" aria-label="Primary">
+                    <a href="./index.html#map">The map</a>
+                    <a href="./research.html">Research</a>
+                    <a href="./the-practice.html">The practice</a>
+                    <a href="./contact.html">Contact</a>
+                </nav>
+                <div class="nav-actions">
+                    <a class="btn btn-primary nav-cta" href="./contact.html">Get in touch</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="sub-page-hero">
+            <div class="wrap">
+                <div class="breadcrumb">
+                    <a href="./index.html">Hekswerk</a> &nbsp;/&nbsp; The practice
+                </div>
+                <span class="section-tag">The practice</span>
+                <h1>The part with clients - and what keeps the lights on.</h1>
+                <p class="section-subhead">
+                    Hekswerk's research is <b>funded and published, not sold</b>. The practice is the part with
+                    clients, and it's how the research is sustained. Three streams, listed in order of how much they
+                    actually carry the work right now - not how loud they are.
+                </p>
+            </div>
+        </section>
+
+        <section style="padding-top:0">
+            <div class="wrap">
+                <article class="root-stream" id="eval">
+                    <span class="now">The engine, running now</span>
+                    <h2>Freelance AI evaluation</h2>
+                    <p style="max-width:64ch">
+                        The financial anchor, and the live root of everything else. Since 2024 I've done
+                        human-in-the-loop AI-evaluation work for US-based AI quality-assurance platforms - judging
+                        model output for honesty, safety, and subtle failure, and debugging AI-generated code. It is
+                        steady, detailed judgment work, it is the skill the research is built on, and it is what pays
+                        for the research. It's the engine, not a service I'm selling you here.
+                    </p>
+                    <div class="door-links" style="margin-top:14px">
+                        <a href="./research.html#funding">How it funds the research &rarr;</a>
+                        <a href="./contact.html?topic=research">Talk about evaluation work</a>
+                    </div>
+                </article>
+
+                <div class="by-inquiry">
+                    <article class="fit-card">
+                        <span class="tag">By inquiry</span>
+                        <h3>Relocation systems planning</h3>
+                        <p>
+                            Structured planning for complex international moves - mapped systems, sequenced
+                            timelines, written artifacts you keep. Offered for the people it genuinely fits, not as a
+                            productized program.
+                        </p>
+                        <p style="margin-top:12px"><a href="./relocation.html">See how I'd help &rarr;</a></p>
+                    </article>
+                    <article class="fit-card">
+                        <span class="tag">By inquiry</span>
+                        <h3>Automation builds</h3>
+                        <p>
+                            Fixed-scope, privacy-first automation: self-hosted pipelines and local AI so a small team
+                            can use these tools without handing its data to public models. Taken case by case.
+                        </p>
+                        <p style="margin-top:12px"><a href="./contact.html?topic=automation">Tell me what you need &rarr;</a></p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="soft-band">
+            <div class="wrap">
+                <div class="sub-page-cta">
+                    <h2>Not sure which fits?</h2>
+                    <p>
+                        Tell me what you're trying to do in plain language. I read it myself and reply directly, and
+                        I'll say honestly if it isn't something I'm the right person for.
+                    </p>
+                    <div class="cta-row">
+                        <a class="btn btn-primary" href="./contact.html">Get in touch</a>
+                        <a class="btn btn-ghost" href="./index.html">Back to the map</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <div class="wrap">
+                <p class="location-line">Currently in Portland, OR &middot; Relocating to The Hague, late 2026.</p>
+                <p>&copy; <span id="y"></span> Hekswerk. Privacy-first.</p>
+                <nav aria-label="Footer">
+                    <a href="./index.html">Home</a>
+                    <a href="./research.html">Research</a>
+                    <a href="./the-practice.html">The practice</a>
+                    <a href="./contact.html">Contact</a>
+                </nav>
+            </div>
+        </footer>
+    </main>
+
+    <script src="./assets/js/effects.js"></script>
+</body>
+
+</html>

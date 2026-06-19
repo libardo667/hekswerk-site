@@ -58,7 +58,9 @@
         .map-list ul ul { margin: .3rem 0 .3rem .9rem; padding-left: .7rem; border-left: 1px solid var(--hairline); }
         .map-list a { color: var(--halo-gold); }
         .map-list span { color: var(--quiet); display: block; }
+        .map-list .ext { display: inline; color: var(--halo-gold); font-size: .76rem; letter-spacing: .02em; }
         .map-list .z-membrane { border-color: rgba(192, 169, 144, .5); }
+        .circuit .ext-mark { fill: var(--halo-gold); font-family: Outfit, sans-serif; font-size: 11px; opacity: .85; pointer-events: none; }
         /* typed doors (research vs the practice) */
         .signage { max-width: 78ch; color: var(--text); font-size: 1.06rem; line-height: 1.55; border-left: 3px solid var(--halo-gold); padding: 6px 0 6px 18px; margin: 0 0 24px; }
         .signage b { color: var(--soft-cream); }
@@ -86,7 +88,7 @@
                 <nav class="navlinks" aria-label="Primary">
                     <a href="#map">The map</a>
                     <a href="./research.html">Research</a>
-                    <a href="./relocation.html">The practice</a>
+                    <a href="./the-practice.html">The practice</a>
                     <a href="./contact.html">Contact</a>
                 </nav>
                 <div class="nav-actions">
@@ -124,25 +126,25 @@
 <path class="trace t-from-record t-to-curation" d="M484,454 H545 V104 H606"/><circle class="junction" cx="545" cy="104" r="3"/><circle class="junction" cx="606" cy="104" r="3.5"/>
 <path class="trace t-from-provenance t-to-research" d="M774,174 H829 V104 H884"/><circle class="junction" cx="829" cy="104" r="3"/><circle class="junction" cx="884" cy="104" r="3.5"/>
 <path class="trace t-from-provenance t-to-library" d="M774,174 H829 V174 H884"/><circle class="junction" cx="829" cy="174" r="3"/><circle class="junction" cx="884" cy="174" r="3.5"/>
-<a class="chip z-practice" href="./research.html#funding" data-node="evalwork"><title>freelance eval - AI-evaluation contract work - the engine, running now</title><rect x="20" y="84" width="168" height="40" rx="9"/><circle class="knot" cx="20" cy="104" r="4"/><text x="104" y="108" font-size="12">freelance eval</text></a>
+<a class="chip z-practice" href="./the-practice.html#eval" data-node="evalwork"><title>freelance eval - AI-evaluation contract work - the engine, running now</title><rect x="20" y="84" width="168" height="40" rx="9"/><circle class="knot" cx="20" cy="104" r="4"/><text x="104" y="108" font-size="12">freelance eval</text></a>
 <a class="chip z-practice" href="./relocation.html" data-node="relocation"><title>relocation - structured planning for US-to-Europe moves - by inquiry</title><rect x="20" y="154" width="168" height="40" rx="9"/><circle class="knot" cx="20" cy="174" r="4"/><text x="104" y="178" font-size="12">relocation</text></a>
 <a class="chip z-practice" href="./contact.html?topic=automation" data-node="automation"><title>automation - fixed-scope, privacy-first automation builds - by inquiry</title><rect x="20" y="224" width="168" height="40" rx="9"/><circle class="knot" cx="20" cy="244" r="4"/><text x="104" y="248" font-size="12">automation</text></a>
 <a class="chip z-practice" href="./contact.html" data-node="contact"><title>contact - a short, private contact form</title><rect x="20" y="294" width="168" height="40" rx="9"/><circle class="knot" cx="20" cy="314" r="4"/><text x="104" y="318" font-size="12">contact</text></a>
-<a class="chip z-substrate" href="https://github.com/libardo667/worldweaver" data-node="ww"><title>worldweaver - the persistent shared world and its residents</title><rect x="316" y="84" width="168" height="40" rx="9"/><circle class="knot" cx="316" cy="104" r="4"/><text x="400" y="108" font-size="12">worldweaver</text></a>
-<a class="chip z-substrate" href="https://github.com/libardo667/the-stable" data-node="stable"><title>the-stable - the familiar runtime, where the local minds live</title><rect x="316" y="154" width="168" height="40" rx="9"/><circle class="knot" cx="316" cy="174" r="4"/><text x="400" y="178" font-size="12">the-stable</text></a>
-<a class="chip z-substrate" href="https://github.com/libardo667/prune" data-node="prune"><title>prune - write it down, build it, prune the living set</title><rect x="316" y="224" width="168" height="40" rx="9"/><circle class="knot" cx="316" cy="244" r="4"/><text x="400" y="248" font-size="12">prune</text></a>
-<a class="chip z-substrate" href="https://github.com/libardo667/memory-management" data-node="memmgmt"><title>memory-management - reusable external memory for any project</title><rect x="316" y="294" width="168" height="40" rx="9"/><circle class="knot" cx="316" cy="314" r="4"/><text x="400" y="318" font-size="12">memory-management</text></a>
-<a class="chip z-substrate" href="https://github.com/libardo667/review-scheduler" data-node="revsched"><title>review-scheduler - a cold reviewer that can&#x27;t be charmed</title><rect x="316" y="364" width="168" height="40" rx="9"/><circle class="knot" cx="316" cy="384" r="4"/><text x="400" y="388" font-size="12">review-scheduler</text></a>
-<a class="chip z-substrate" href="https://github.com/libardo667/worldweaver/tree/main/research" data-node="record"><title>the research notebook - the dated, locked records and the full history of reviews that went against me</title><rect x="316" y="434" width="168" height="40" rx="9"/><circle class="knot" cx="316" cy="454" r="4"/><text x="400" y="458" font-size="12">the research notebook</text></a>
-<a class="chip z-membrane" href="https://github.com/libardo667/memory-management" data-node="curation"><title>trim + remove private - raw work cut down to the clear, true parts, with anything private taken out</title><rect x="606" y="84" width="168" height="40" rx="9"/><circle class="knot" cx="606" cy="104" r="4"/><text x="690" y="108" font-size="12">trim + remove private</text></a>
+<a class="chip z-substrate" href="https://github.com/libardo667/worldweaver" data-node="ww" target="_blank" rel="noopener"><title>worldweaver - the persistent shared world and its residents · opens GitHub</title><rect x="316" y="84" width="168" height="40" rx="9"/><circle class="knot" cx="316" cy="104" r="4"/><text x="400" y="108" font-size="12">worldweaver</text><text class="ext-mark" x="475" y="96">↗</text></a>
+<a class="chip z-substrate" href="https://github.com/libardo667/the-stable" data-node="stable" target="_blank" rel="noopener"><title>the-stable - the familiar runtime, where the local minds live · opens GitHub</title><rect x="316" y="154" width="168" height="40" rx="9"/><circle class="knot" cx="316" cy="174" r="4"/><text x="400" y="178" font-size="12">the-stable</text><text class="ext-mark" x="475" y="166">↗</text></a>
+<a class="chip z-substrate" href="https://github.com/libardo667/prune" data-node="prune" target="_blank" rel="noopener"><title>prune - write it down, build it, prune the living set · opens GitHub</title><rect x="316" y="224" width="168" height="40" rx="9"/><circle class="knot" cx="316" cy="244" r="4"/><text x="400" y="248" font-size="12">prune</text><text class="ext-mark" x="475" y="236">↗</text></a>
+<a class="chip z-substrate" href="https://github.com/libardo667/memory-management" data-node="memmgmt" target="_blank" rel="noopener"><title>memory-management - reusable external memory for any project · opens GitHub</title><rect x="316" y="294" width="168" height="40" rx="9"/><circle class="knot" cx="316" cy="314" r="4"/><text x="400" y="318" font-size="12">memory-management</text><text class="ext-mark" x="475" y="306">↗</text></a>
+<a class="chip z-substrate" href="https://github.com/libardo667/review-scheduler" data-node="revsched" target="_blank" rel="noopener"><title>review-scheduler - a cold reviewer that can&#x27;t be charmed · opens GitHub</title><rect x="316" y="364" width="168" height="40" rx="9"/><circle class="knot" cx="316" cy="384" r="4"/><text x="400" y="388" font-size="12">review-scheduler</text><text class="ext-mark" x="475" y="376">↗</text></a>
+<a class="chip z-substrate" href="https://github.com/libardo667/worldweaver/tree/main/research" data-node="record" target="_blank" rel="noopener"><title>the research notebook - the dated, locked records and the full history of reviews that went against me · opens GitHub</title><rect x="316" y="434" width="168" height="40" rx="9"/><circle class="knot" cx="316" cy="454" r="4"/><text x="400" y="458" font-size="12">the research notebook</text><text class="ext-mark" x="475" y="446">↗</text></a>
+<a class="chip z-membrane" href="https://github.com/libardo667/memory-management" data-node="curation" target="_blank" rel="noopener"><title>trim + remove private - raw work cut down to the clear, true parts, with anything private taken out · opens GitHub</title><rect x="606" y="84" width="168" height="40" rx="9"/><circle class="knot" cx="606" cy="104" r="4"/><text x="690" y="108" font-size="12">trim + remove private</text><text class="ext-mark" x="765" y="96">↗</text></a>
 <a class="chip z-membrane" href="./exhibits/honesty-machinery.html" data-node="provenance"><title>who made what - every public page records how it was made, and which words are mine and which a model&#x27;s</title><rect x="606" y="154" width="168" height="40" rx="9"/><circle class="knot" cx="606" cy="174" r="4"/><text x="690" y="178" font-size="12">who made what</text></a>
 <a class="chip z-public" href="./research.html" data-node="research"><title>the research wing - the research, methods-first, in the open</title><rect x="884" y="84" width="168" height="40" rx="9"/><circle class="knot" cx="884" cy="104" r="4"/><text x="968" y="108" font-size="12">the research wing</text></a>
-<a class="chip z-public" href="https://github.com/libardo667/hekswerk" data-node="library"><title>the library - methodology + research wings, the sourced record</title><rect x="884" y="154" width="168" height="40" rx="9"/><circle class="knot" cx="884" cy="174" r="4"/><text x="968" y="178" font-size="12">the library</text></a>
+<a class="chip z-public" href="https://github.com/libardo667/hekswerk" data-node="library" target="_blank" rel="noopener"><title>the library - the methodology + research record, in full, on GitHub · opens GitHub</title><rect x="884" y="154" width="168" height="40" rx="9"/><circle class="knot" cx="884" cy="174" r="4"/><text x="968" y="178" font-size="12">the library</text><text class="ext-mark" x="1043" y="166">↗</text></a>
 <a class="chip z-public" href="./exhibits/index.html" data-node="exhibits"><title>the exhibits - walkable proofs you can inspect</title><rect x="884" y="224" width="168" height="40" rx="9"/><circle class="knot" cx="884" cy="244" r="4"/><text x="968" y="248" font-size="12">the exhibits</text></a>
 <a class="chip kid z-public" href="./exhibits/two-weeks.html" data-node="ex_two"><title>Two Weeks - the work, counted across six dimensions</title><rect x="918" y="280" width="152" height="32" rx="9"/><circle class="knot" cx="918" cy="296" r="4"/><text x="994" y="300" font-size="11">Two Weeks</text></a>
 <a class="chip kid z-public" href="./exhibits/topic-monoculture.html" data-node="ex_mono"><title>Fifteen Strangers - a topic-monoculture null, kept and shown</title><rect x="918" y="313" width="152" height="32" rx="9"/><circle class="knot" cx="918" cy="329" r="4"/><text x="994" y="333" font-size="11">Fifteen Strangers</text></a>
 <a class="chip kid z-public" href="./exhibits/honesty-machinery.html" data-node="ex_honesty"><title>The Honesty Machinery - the verdicts that went against me, kept</title><rect x="918" y="346" width="152" height="32" rx="9"/><circle class="knot" cx="918" cy="362" r="4"/><text x="994" y="366" font-size="11">The Honesty Machinery</text></a>
-<a class="chip kid z-public" href="./exhibits/why-a-commons.html" data-node="ex_commons"><title>Why a Commons - why federation is the only honest topology</title><rect x="918" y="379" width="152" height="32" rx="9"/><circle class="knot" cx="918" cy="395" r="4"/><text x="994" y="399" font-size="11">Why a Commons</text></a>
+<a class="chip kid z-public" href="./exhibits/why-a-commons.html" data-node="ex_commons"><title>Why a Commons - why federation is the only honest structure</title><rect x="918" y="379" width="152" height="32" rx="9"/><circle class="knot" cx="918" cy="395" r="4"/><text x="994" y="399" font-size="11">Why a Commons</text></a>
 <a class="chip kid z-public" href="./exhibits/the-kitchen.html" data-node="ex_kitchen"><title>The Kitchen - 2.6M words from stateless hands</title><rect x="918" y="412" width="152" height="32" rx="9"/><circle class="knot" cx="918" cy="428" r="4"/><text x="994" y="432" font-size="11">The Kitchen</text></a>
 <a class="chip kid z-public" href="./exhibits/the-apothecary.html" data-node="ex_apoth"><title>The Apothecary - nine things you could build, graded by effort</title><rect x="918" y="445" width="152" height="32" rx="9"/><circle class="knot" cx="918" cy="461" r="4"/><text x="994" y="465" font-size="11">The Apothecary</text></a>
 <a class="chip kid z-public" href="./exhibits/workshop/index.html" data-node="ex_pen"><title>The Pen&#x27;s Workshop - the collaborator&#x27;s own kept prose</title><rect x="918" y="478" width="152" height="32" rx="9"/><circle class="knot" cx="918" cy="494" r="4"/><text x="994" y="498" font-size="11">The Pen&#x27;s Workshop</text></a>
@@ -168,7 +170,7 @@
 <p class="map-note">The same map as a list - every node links to something real:</p>
 <div class="map-list">
 <section class="zone z-practice"><h2>Practice</h2><p class="zb">What funds it - the part with customers. The power source.</p><ul>
-<li><a href="./research.html#funding"><b>freelance eval</b></a> <span>AI-evaluation contract work - the engine, running now</span>
+<li><a href="./the-practice.html#eval"><b>freelance eval</b></a> <span>AI-evaluation contract work - the engine, running now</span>
 </li>
 <li><a href="./relocation.html"><b>relocation</b></a> <span>structured planning for US-to-Europe moves - by inquiry</span>
 </li>
@@ -178,21 +180,21 @@
 </li>
 </ul></section>
 <section class="zone z-substrate"><h2>Software</h2><p class="zb">Where the research runs and is recorded.</p><ul>
-<li><a href="https://github.com/libardo667/worldweaver"><b>worldweaver</b></a> <span>the persistent shared world and its residents</span>
+<li><a href="https://github.com/libardo667/worldweaver" target="_blank" rel="noopener"><b>worldweaver</b></a> <span>the persistent shared world and its residents <span class="ext">↗ GitHub</span></span>
 </li>
-<li><a href="https://github.com/libardo667/the-stable"><b>the-stable</b></a> <span>the familiar runtime, where the local minds live</span>
+<li><a href="https://github.com/libardo667/the-stable" target="_blank" rel="noopener"><b>the-stable</b></a> <span>the familiar runtime, where the local minds live <span class="ext">↗ GitHub</span></span>
 </li>
-<li><a href="https://github.com/libardo667/prune"><b>prune</b></a> <span>write it down, build it, prune the living set</span>
+<li><a href="https://github.com/libardo667/prune" target="_blank" rel="noopener"><b>prune</b></a> <span>write it down, build it, prune the living set <span class="ext">↗ GitHub</span></span>
 </li>
-<li><a href="https://github.com/libardo667/memory-management"><b>memory-management</b></a> <span>reusable external memory for any project</span>
+<li><a href="https://github.com/libardo667/memory-management" target="_blank" rel="noopener"><b>memory-management</b></a> <span>reusable external memory for any project <span class="ext">↗ GitHub</span></span>
 </li>
-<li><a href="https://github.com/libardo667/review-scheduler"><b>review-scheduler</b></a> <span>a cold reviewer that can&#x27;t be charmed</span>
+<li><a href="https://github.com/libardo667/review-scheduler" target="_blank" rel="noopener"><b>review-scheduler</b></a> <span>a cold reviewer that can&#x27;t be charmed <span class="ext">↗ GitHub</span></span>
 </li>
-<li><a href="https://github.com/libardo667/worldweaver/tree/main/research"><b>the research notebook</b></a> <span>the dated, locked records and the full history of reviews that went against me</span>
+<li><a href="https://github.com/libardo667/worldweaver/tree/main/research" target="_blank" rel="noopener"><b>the research notebook</b></a> <span>the dated, locked records and the full history of reviews that went against me <span class="ext">↗ GitHub</span></span>
 </li>
 </ul></section>
 <section class="zone z-membrane"><h2>Publishing</h2><p class="zb">The one honest check between private work and public: trim it to what&#x27;s true, remove anything private, label who made what.</p><ul>
-<li><a href="https://github.com/libardo667/memory-management"><b>trim + remove private</b></a> <span>raw work cut down to the clear, true parts, with anything private taken out</span>
+<li><a href="https://github.com/libardo667/memory-management" target="_blank" rel="noopener"><b>trim + remove private</b></a> <span>raw work cut down to the clear, true parts, with anything private taken out <span class="ext">↗ GitHub</span></span>
 </li>
 <li><a href="./exhibits/honesty-machinery.html"><b>who made what</b></a> <span>every public page records how it was made, and which words are mine and which a model&#x27;s</span>
 </li>
@@ -200,14 +202,14 @@
 <section class="zone z-public"><h2>Research</h2><p class="zb">What anyone can read.</p><ul>
 <li><a href="./research.html"><b>the research wing</b></a> <span>the research, methods-first, in the open</span>
 </li>
-<li><a href="https://github.com/libardo667/hekswerk"><b>the library</b></a> <span>methodology + research wings, the sourced record</span>
+<li><a href="https://github.com/libardo667/hekswerk" target="_blank" rel="noopener"><b>the library</b></a> <span>the methodology + research record, in full, on GitHub <span class="ext">↗ GitHub</span></span>
 </li>
 <li><a href="./exhibits/index.html"><b>the exhibits</b></a> <span>walkable proofs you can inspect</span>
 <ul>
 <li><a href="./exhibits/two-weeks.html"><b>Two Weeks</b></a> <span>the work, counted across six dimensions</span></li>
 <li><a href="./exhibits/topic-monoculture.html"><b>Fifteen Strangers</b></a> <span>a topic-monoculture null, kept and shown</span></li>
 <li><a href="./exhibits/honesty-machinery.html"><b>The Honesty Machinery</b></a> <span>the verdicts that went against me, kept</span></li>
-<li><a href="./exhibits/why-a-commons.html"><b>Why a Commons</b></a> <span>why federation is the only honest topology</span></li>
+<li><a href="./exhibits/why-a-commons.html"><b>Why a Commons</b></a> <span>why federation is the only honest structure</span></li>
 <li><a href="./exhibits/the-kitchen.html"><b>The Kitchen</b></a> <span>2.6M words from stateless hands</span></li>
 <li><a href="./exhibits/the-apothecary.html"><b>The Apothecary</b></a> <span>nine things you could build, graded by effort</span></li>
 <li><a href="./exhibits/workshop/index.html"><b>The Pen&#x27;s Workshop</b></a> <span>the collaborator&#x27;s own kept prose</span></li>
@@ -295,7 +297,7 @@
                 <nav aria-label="Footer">
                     <a href="#top">Home</a>
                     <a href="./research.html">Research</a>
-                    <a href="./relocation.html">The practice</a>
+                    <a href="./the-practice.html">The practice</a>
                     <a href="./contact.html">Contact</a>
                 </nav>
             </div>

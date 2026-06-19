@@ -23,6 +23,7 @@ import html
 import os
 import re
 import sys
+from urllib.parse import urlparse
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 SITE = os.path.normpath(os.path.join(HERE, ".."))
@@ -51,7 +52,7 @@ NODES = [
     # are real but un-pursued optionality, taken by inquiry.
     {"id": "evalwork", "zone": "practice", "label": "freelance eval",
      "plain": "AI-evaluation contract work - the engine, running now",
-     "href": "./research.html#funding"},
+     "href": "./the-practice.html#eval"},
     {"id": "relocation", "zone": "practice", "label": "relocation",
      "plain": "structured planning for US-to-Europe moves - by inquiry",
      "href": "./relocation.html"},
@@ -95,7 +96,7 @@ NODES = [
      "plain": "the research, methods-first, in the open",
      "href": "./research.html"},
     {"id": "library", "zone": "public", "label": "the library",
-     "plain": "methodology + research wings, the sourced record",
+     "plain": "the methodology + research record, in full, on GitHub",
      "href": "https://github.com/libardo667/hekswerk"},
     {"id": "exhibits", "zone": "public", "label": "the exhibits",
      "plain": "walkable proofs you can inspect",
@@ -109,7 +110,7 @@ NODES = [
     {"id": "ex_honesty", "zone": "public", "label": "The Honesty Machinery", "parent": "exhibits",
      "plain": "the verdicts that went against me, kept", "href": "./exhibits/honesty-machinery.html"},
     {"id": "ex_commons", "zone": "public", "label": "Why a Commons", "parent": "exhibits",
-     "plain": "why federation is the only honest topology", "href": "./exhibits/why-a-commons.html"},
+     "plain": "why federation is the only honest structure", "href": "./exhibits/why-a-commons.html"},
     {"id": "ex_kitchen", "zone": "public", "label": "The Kitchen", "parent": "exhibits",
      "plain": "2.6M words from stateless hands", "href": "./exhibits/the-kitchen.html"},
     {"id": "ex_apoth", "zone": "public", "label": "The Apothecary", "parent": "exhibits",
@@ -174,6 +175,14 @@ def layout():
     return pos, max_y
 
 
+def ext_host(href):
+    """Human label for an off-site href ('GitHub', or the bare domain), else None for on-site."""
+    if not href.startswith("http"):
+        return None
+    host = urlparse(href).netloc.lower().removeprefix("www.")
+    return "GitHub" if "github.com" in host else (host or "an external site")
+
+
 def _chip(n, x, y, kid=False):
     w = CHIP_W if not kid else CHIP_W - 16
     h = CHIP_H if not kid else CHIP_H - 8
@@ -182,12 +191,19 @@ def _chip(n, x, y, kid=False):
     label = html.escape(n["label"])
     title = html.escape(n["plain"])
     fs = 12 if not kid else 11
+    host = ext_host(n["href"])
+    # off-site nodes: a corner ↗ glyph (visible cue), a "opens GitHub" tooltip, and open in a new tab
+    # so a visitor who clicks into a raw repo doesn't lose the site.
+    ext_attr = ' target="_blank" rel="noopener"' if host else ""
+    title_full = f"{label} - {title}" + (f" · opens {html.escape(host)}" if host else "")
+    mark = f'<text class="ext-mark" x="{x+half-9:.0f}" y="{y-h/2+12:.0f}">↗</text>' if host else ""
     return (
-        f'<a class="{cls} z-{n["zone"]}" href="{html.escape(n["href"])}" data-node="{n["id"]}">'
-        f'<title>{label} - {title}</title>'
+        f'<a class="{cls} z-{n["zone"]}" href="{html.escape(n["href"])}" data-node="{n["id"]}"{ext_attr}>'
+        f'<title>{title_full}</title>'
         f'<rect x="{x-half:.0f}" y="{y-h/2:.0f}" width="{w:.0f}" height="{h:.0f}" rx="9"/>'
         f'<circle class="knot" cx="{x-half:.0f}" cy="{y:.0f}" r="4"/>'
         f'<text x="{x:.0f}" y="{y+fs*0.35:.0f}" font-size="{fs}">{label}</text>'
+        f'{mark}'
         f'</a>'
     )
 
@@ -257,14 +273,20 @@ def fallback() -> str:
         out.append(f'<section class="zone z-{z["id"]}"><h2>{html.escape(z["title"])}</h2>'
                    f'<p class="zb">{html.escape(z["blurb"])}</p><ul>')
         for n in _by_zone(z["id"]):
-            out.append(f'<li><a href="{html.escape(n["href"])}"><b>{html.escape(n["label"])}</b></a> '
-                       f'<span>{html.escape(n["plain"])}</span>')
+            host = ext_host(n["href"])
+            ext_attr = ' target="_blank" rel="noopener"' if host else ""
+            cue = f' <span class="ext">↗ {html.escape(host)}</span>' if host else ""
+            out.append(f'<li><a href="{html.escape(n["href"])}"{ext_attr}><b>{html.escape(n["label"])}</b></a> '
+                       f'<span>{html.escape(n["plain"])}{cue}</span>')
             kids = _children(n["id"])
             if kids:
                 out.append("<ul>")
                 for k in kids:
-                    out.append(f'<li><a href="{html.escape(k["href"])}"><b>{html.escape(k["label"])}</b></a> '
-                               f'<span>{html.escape(k["plain"])}</span></li>')
+                    khost = ext_host(k["href"])
+                    kext = ' target="_blank" rel="noopener"' if khost else ""
+                    kcue = f' <span class="ext">↗ {html.escape(khost)}</span>' if khost else ""
+                    out.append(f'<li><a href="{html.escape(k["href"])}"{kext}><b>{html.escape(k["label"])}</b></a> '
+                               f'<span>{html.escape(k["plain"])}{kcue}</span></li>')
                 out.append("</ul>")
             out.append("</li>")
         out.append("</ul></section>")
