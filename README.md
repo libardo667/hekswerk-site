@@ -1,16 +1,40 @@
-# hekswerk-site
+# Hekswerk site
 
-Static Hekswerk website. The front door (`index.html`) is the consultancy umbrella with three doors — Quickstart Automation, Relocation Systems Planning (`relocation.html`), and AI Verification & Research (`research.html`).
+This repository builds and deploys `www.hekswerk.com` with Docusaurus.
 
-## Structure
+The site keeps its own pages and visual system here. WorldWeaver's technical manual remains canonical in
+the sibling `worldweaver/docs/` directory and is read directly during a local build. GitHub Actions checks
+out WorldWeaver into the site workspace before publishing.
 
-- Root HTML files are public pages and stay at the repo root to preserve existing URLs.
-- `assets/css/` contains shared styles.
-- `assets/js/` contains shared browser scripts.
-- `assets/img/` contains shared image assets and favicons.
-- `docs/brand/` contains brand/reference documents that are not required for page rendering.
-- `CNAME` stays at the root for GitHub Pages custom-domain hosting.
+## Local development
 
-## Local Preview
+Keep the repositories beside each other:
 
-Open `index.html` directly in a browser, or serve the repo root with any static file server.
+```text
+personal-projects/
+  hekswerk-site/
+  worldweaver/
+```
+
+Then run:
+
+```bash
+npm install
+npm start
+```
+
+Build the complete deployable site with:
+
+```bash
+npm run build
+npm run serve
+```
+
+The build copies the preserved static exhibits and old `.html` pages to their existing public URLs. The
+former homepage is retained at `/former-homepage.html`.
+
+## Deployment
+
+A push to `main` runs `.github/workflows/deploy-pages.yml`. The workflow builds Docusaurus, includes the
+current WorldWeaver manual, uploads the result as a GitHub Pages artifact, and publishes it to the existing
+custom domain.
