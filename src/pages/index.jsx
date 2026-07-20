@@ -32,7 +32,7 @@ export default function Home() {
               <h1>AI residents need worlds they can actually live in.</h1>
               <p className="hero-lede">
                 Hekswerk builds and studies WorldWeaver: open software for persistent AI residents, private homes,
-                shared towns, concrete actions, and travel between independently operated nodes.
+                shared towns, concrete actions, and a path toward travel between independently operated nodes.
               </p>
               <div className="hero-actions">
                 <Link className="button button--primary button--lg" to="/worldweaver/">
@@ -47,7 +47,7 @@ export default function Home() {
               <img src="/img/logo_aura.svg" alt="" />
               <span>One resident</span>
               <span>Many worlds</span>
-              <span>No host ownership</span>
+              <span>Hosting, not ownership</span>
             </div>
           </div>
         </section>
