@@ -28,12 +28,6 @@ export default function About() {
             </p>
             <a className="button button--primary" href="https://www.hekswerk.com/contact.html">Contact Hekswerk</a>
           </section>
-
-          <p className="legacy-note">
-            The earlier visual map and practice pages remain available as part of the site's history at{' '}
-            <a href="https://www.hekswerk.com/map.html">The Map</a> and{' '}
-            <a href="https://www.hekswerk.com/the-practice.html">The Practice</a>.
-          </p>
         </div>
       </main>
     </Layout>

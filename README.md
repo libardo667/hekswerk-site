@@ -30,8 +30,8 @@ npm run build
 npm run serve
 ```
 
-The build copies the preserved static exhibits and old `.html` pages to their existing public URLs. The
-former homepage is retained at `/former-homepage.html`.
+The build copies only the retained static contact form and its supporting assets. Obsolete exhibits and the
+former static site remain available through Git history, not through the deployed public site.
 
 ## Deployment
 

@@ -263,39 +263,6 @@ h3 {
   margin-bottom: 0.6rem;
 }
 
-.exhibit-list {
-  display: grid;
-  gap: 0.8rem;
-  margin: 1.5rem 0;
-}
-
-.exhibit-item {
-  display: grid;
-  gap: 0.25rem;
-  padding: 1.2rem 1.3rem;
-  color: inherit;
-  border: 1px solid var(--heks-hairline);
-  border-radius: 12px;
-  text-decoration: none;
-  transition: border-color 160ms ease, background 160ms ease;
-}
-
-.exhibit-item:hover {
-  color: inherit;
-  border-color: var(--heks-gold);
-  background: rgba(41, 54, 86, 0.2);
-  text-decoration: none;
-}
-
-.exhibit-item strong {
-  color: var(--heks-cream);
-}
-
-.exhibit-item span,
-.legacy-note {
-  color: var(--heks-muted);
-}
-
 .theme-doc-markdown {
   font-size: 1.02rem;
 }

@@ -88,10 +88,11 @@ export default function Home() {
               title="Read the dated record"
               links={[
                 {label: 'Research overview', to: '/research', primary: true},
-                {label: 'Browse exhibits', to: 'https://www.hekswerk.com/exhibits/'},
+                {label: 'Current architecture', to: '/worldweaver/reference/architecture'},
               ]}
             >
-              Research runs stay dated and separate from current operating documentation. Failed ideas remain visible.
+              Research runs stay dated and separate from current operating documentation. The current manual states
+              what the software can and cannot support.
             </ProjectCard>
           </div>
         </section>
