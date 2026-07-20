@@ -35,6 +35,7 @@ former static site remain available through Git history, not through the deploye
 
 ## Deployment
 
-A push to `main` runs `.github/workflows/deploy-pages.yml`. The workflow builds Docusaurus, includes the
-current WorldWeaver manual, uploads the result as a GitHub Pages artifact, and publishes it to the existing
-custom domain.
+A push to `main` runs `.github/workflows/deploy-pages.yml`. The workflow also runs every six hours so a
+WorldWeaver-only documentation change cannot leave the public manual stale indefinitely. Each build records
+and links the exact WorldWeaver commit in the footer, uploads the result as a GitHub Pages artifact, and
+publishes it to the existing custom domain.

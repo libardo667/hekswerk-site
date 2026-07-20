@@ -5,6 +5,21 @@ const docsPath = path.resolve(
   process.cwd(),
   process.env.WORLDWEAVER_DOCS_DIR || '../worldweaver/docs',
 );
+const worldweaverCommit = String(process.env.WORLDWEAVER_COMMIT || '').trim();
+const worldweaverVersion = worldweaverCommit ? worldweaverCommit.slice(0, 7) : 'local checkout';
+const worldweaverVersionUrl = worldweaverCommit
+  ? `https://github.com/libardo667/worldweaver/tree/${worldweaverCommit}/docs`
+  : 'https://github.com/libardo667/worldweaver/tree/main/docs';
+
+function worldweaverEditUrl({docPath}) {
+  const normalized = String(docPath).replaceAll('\\', '/');
+  const docsMarker = '/docs/';
+  const markerIndex = normalized.lastIndexOf(docsMarker);
+  const relativePath = markerIndex >= 0
+    ? normalized.slice(markerIndex + docsMarker.length)
+    : normalized.replace(/^(\.\.\/)+/, '');
+  return `https://github.com/libardo667/worldweaver/edit/main/docs/${relativePath}`;
+}
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
@@ -16,6 +31,9 @@ const config = {
   organizationName: 'libardo667',
   projectName: 'hekswerk-site',
   trailingSlash: false,
+  customFields: {
+    worldweaverCommit: worldweaverCommit || null,
+  },
   staticDirectories: ['static', 'legacy-static'],
   onBrokenLinks: 'throw',
   markdown: {
@@ -36,7 +54,7 @@ const config = {
           path: docsPath,
           routeBasePath: 'worldweaver',
           sidebarPath: './sidebars.js',
-          editUrl: 'https://github.com/libardo667/worldweaver/edit/main/docs/',
+          editUrl: worldweaverEditUrl,
           showLastUpdateTime: true,
         },
         blog: false,
@@ -108,7 +126,9 @@ const config = {
           ],
         },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} Hekswerk. WorldWeaver source is AGPL-3.0-or-later.`,
+      copyright:
+        `Copyright © ${new Date().getFullYear()} Hekswerk. WorldWeaver source is AGPL-3.0-or-later. ` +
+        `Manual source: <a href="${worldweaverVersionUrl}">${worldweaverVersion}</a>.`,
     },
     prism: {
       theme: prismThemes.github,

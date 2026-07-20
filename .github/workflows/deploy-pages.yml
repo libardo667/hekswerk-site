@@ -4,6 +4,8 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
+  schedule:
+    - cron: "17 */6 * * *"
 
 permissions:
   contents: read
@@ -27,6 +29,10 @@ jobs:
           repository: libardo667/worldweaver
           path: worldweaver-source
 
+      - name: Record WorldWeaver documentation version
+        id: worldweaver
+        run: echo "commit=$(git -C worldweaver-source rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+
       - name: Set up Node
         uses: actions/setup-node@v6
         with:
@@ -43,6 +49,7 @@ jobs:
         run: npm run build
         env:
           WORLDWEAVER_DOCS_DIR: ./worldweaver-source/docs
+          WORLDWEAVER_COMMIT: ${{ steps.worldweaver.outputs.commit }}
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v4
