@@ -21,7 +21,11 @@ const sidebars = {
     {
       type: 'category',
       label: 'Reference',
-      items: ['reference/architecture', 'reference/commands'],
+      items: [
+        'reference/architecture',
+        'reference/dependency-atlas',
+        'reference/commands',
+      ],
     },
     {
       type: 'category',
