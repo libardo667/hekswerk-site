@@ -23,6 +23,8 @@ migration.
 - `site/pages/404.astro`: custom not-found document served with HTTP 404 by Static Assets.
 - `.github/workflows/deploy-cloudflare.yml`: production workflow. It runs the complete `npm run check` gate before it
   can deploy.
+- `.github/workflows/deploy-pages-fallback.yml`: temporary cutover fallback for clients whose recursive resolver still
+  uses the former GoDaddy authority. It deploys the same checked build, but it does not make Pages authoritative.
 
 The Worker has no script, secrets, database, storage binding, or server-side application state. Cloudflare serves the
 built HTML, CSS, JavaScript, images, and locally bundled fonts directly from Static Assets.
@@ -87,8 +89,15 @@ custom domain was attached, and the apex redirect was enabled. Direct checks aga
 - Cloudflare response headers rather than GitHub Pages headers.
 
 The repository's former GitHub Pages workflow, `CNAME`, and `.nojekyll` marker were removed only after those production
-observations. The repository Pages service is disabled as the final external step after the committed Cloudflare
-workflow and production suite pass. Pages is not part of the ongoing rollback design.
+observations. Pages was then disabled. That retirement happened before the old delegation's cached lifetime had
+elapsed. The former GoDaddy nameservers still answered `www` with `libardo667.github.io` and the apex with GitHub Pages
+addresses, so resolvers retaining that delegation reached the disabled Pages service and received a GitHub 404.
+
+GitHub Pages is temporarily re-enabled as a propagation fallback with `www.hekswerk.com` configured in Pages settings.
+The fallback workflow publishes the same checked `build/` artifact on each push to `main`. No `CNAME` or `.nojekyll`
+file is added to the source or Cloudflare artifact because custom-domain configuration for an Actions-published Pages
+site is repository state, not artifact state. Cloudflare remains the delegated authority and normal production host.
+Pages must be retired again only after the removal gate in `docs/DNS_CUTOVER.md` passes.
 
 ## Production verification
 
@@ -129,5 +138,5 @@ If the Worker custom-domain mapping or apex redirect fails, repair that Cloudfla
 
 If the Cloudflare zone itself becomes unusable, the original GoDaddy nameservers are recorded in
 `docs/DNS_CUTOVER.md`, but switching authority is an emergency operation, not an instant website rollback. Before any
-such switch, reproduce the signed-off mail records at the destination and provide a working site origin. After GitHub
-Pages is retired, its old DNS records are not a valid recovery plan.
+such switch, reproduce the signed-off mail records at the destination and provide a working site origin. The temporary
+Pages fallback covers only cached pre-cutover delegation and is not a long-term recovery design.

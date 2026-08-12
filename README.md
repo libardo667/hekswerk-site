@@ -48,8 +48,9 @@ Git history, not through the deployed public site.
 
 A pull request runs `.github/workflows/check.yml`. A push to `main` runs
 `.github/workflows/deploy-cloudflare.yml`, which must pass the same full quality gate before it can deploy the
-Cloudflare Static Assets Worker serving `www.hekswerk.com`. Both workflows can also be run manually from GitHub
-Actions. Read `docs/CLOUDFLARE_HOSTING.md` and `docs/DNS_CUTOVER.md` before changing hosting or DNS.
+Cloudflare Static Assets Worker serving `www.hekswerk.com`. During the documented DNS-cutover safety window, the same
+push also updates a temporary GitHub Pages fallback for resolvers that cached the former GoDaddy authority. Cloudflare
+remains authoritative. Read `docs/CLOUDFLARE_HOSTING.md` and `docs/DNS_CUTOVER.md` before changing hosting or DNS.
 
 The contact endpoint is a separate Cloudflare Worker whose source and Wrangler configuration live under
 `workers/intake/`. Read `docs/CONTACT_ENDPOINT.md` before deploying it. `npm run worker:deploy` updates that external

@@ -30,6 +30,31 @@ Direct HTTPS checks against both Cloudflare edge addresses observed `www` return
 headers. Apex HTTP and HTTPS requests returned HTTP 301 to `www`, preserving the tested path and query string. The old
 `www` CNAME to `libardo667.github.io` was deleted after the Worker custom domain was attached.
 
+## Cached-delegation outage and temporary fallback
+
+The initial GitHub Pages retirement was too early for the delegation change. The parent `.com` delegation has a
+one-day TTL. Both former GoDaddy nameservers also continued to answer their retained zone with a one-hour `www` CNAME
+to `libardo667.github.io` and the four GitHub Pages apex addresses. A recursive resolver that cached the old delegation
+therefore continued sending visitors to GitHub after Pages had been disabled, producing the GitHub Pages 404 reported
+on 2026-08-12. At the same time, resolvers using the new authority correctly reached Cloudflare. This was a split-view
+DNS propagation failure, not a missing Cloudflare Worker deployment.
+
+GitHub Pages is temporarily enabled again with `www.hekswerk.com` as its repository-level custom domain.
+`.github/workflows/deploy-pages-fallback.yml` deploys the same checked Astro artifact on pushes to `main`. Cloudflare's
+nameservers, Worker custom domain, apex redirect, proxy records, and mail records remain unchanged and authoritative.
+
+Do not remove the fallback before all of these conditions hold:
+
+1. It is later than `2026-08-14T16:20:00Z`, providing a full extra day beyond the observed one-day parent NS TTL.
+2. Cloudflare, Google, Quad9, and the operator's affected resolver all return only the Cloudflare delegation and edge
+   addresses for apex and `www`.
+3. `www` returns the Cloudflare Worker, apex redirects to `www`, TLS is valid, and the production browser suite passes.
+4. Mail and verification records still match on both Cloudflare nameservers.
+
+After the gate passes, remove the fallback workflow in one commit, disable the repository Pages service, and verify
+that GitHub reports Pages disabled while production continues to return Cloudflare responses. The old GoDaddy zone is
+not a valid rollback source even though it may still answer direct, non-delegated queries.
+
 The final production browser suite passed 81 of 84 desktop and mobile cases, with 3 project-specific cases intentionally
 skipped. Every public route then matched the checked local build byte for byte. Cloudflare, Google, and Quad9 resolvers
 returned the Cloudflare delegation. The `.com` RDAP service continued to identify GoDaddy.com, LLC as the registrar.
