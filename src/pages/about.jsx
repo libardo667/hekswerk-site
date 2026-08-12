@@ -1,6 +1,7 @@
 import Link from '@docusaurus/Link';
 import Layout from '@theme/Layout';
 import {BoundaryBox, CallToAction, Hero, ProcessSteps} from '../components/SitePrimitives';
+import {projectLanguageSnapshot} from '../data/projectLanguageSnapshot';
 
 export default function About() {
   return (
@@ -81,7 +82,7 @@ export default function About() {
               <article className="about-background-card">
                 <span>Software systems</span>
                 <h3>Build in public where I can</h3>
-                <p>I use Python and JavaScript in my technical work.</p>
+                <p>The selected-work page separates inspectable public systems from commercial experience.</p>
                 <Link className="text-link" to="/work/selected-work">Inspect selected work</Link>
               </article>
             </div>
@@ -184,27 +185,71 @@ export default function About() {
         <section className="section-block" id="technologies">
           <div className="shell">
             <div className="section-heading">
-              <span className="eyebrow">Technologies, by capability</span>
-              <h2>A working set, not a keyword wall</h2>
-              <p>I choose tools after the process and boundary are clear.</p>
+              <span className="eyebrow">Current working mix</span>
+              <h2>One evidence-based view of the technologies</h2>
+              <p>
+                My current local project checkouts are Python-heavy. TypeScript and JavaScript form the next-largest
+                source-file groups, with smaller project-specific work in HTML and CSS, GDScript, shell and
+                PowerShell, C and C++, Rust, and SQL.
+              </p>
             </div>
+            <section className="language-snapshot" aria-labelledby="language-snapshot-title">
+              <div className="language-snapshot__header">
+                <div>
+                  <span className="eyebrow">Tracked source snapshot</span>
+                  <h3 id="language-snapshot-title">Repository footprint by file ending</h3>
+                  <p>
+                    Measured {projectLanguageSnapshot.measuredOn}. This shows the shape of the current checkouts, not
+                    expertise, effort, client use, or production experience.
+                  </p>
+                </div>
+                <div className="language-snapshot__total">
+                  <strong>{projectLanguageSnapshot.sourceFiles.toLocaleString('en-US')}</strong>
+                  <span>source files across {projectLanguageSnapshot.projectCheckouts} project checkouts</span>
+                </div>
+              </div>
+              <ol className="language-bars">
+                {projectLanguageSnapshot.groups.map((group) => {
+                  const percentage = (group.files / projectLanguageSnapshot.sourceFiles) * 100;
+                  return (
+                    <li
+                      key={group.label}
+                      aria-label={`${group.label}: ${group.files} tracked source files, ${percentage.toFixed(1)} percent`}
+                    >
+                      <div className="language-bar__label">
+                        <span>{group.label}</span>
+                        <b>{percentage.toFixed(1)}%</b>
+                      </div>
+                      <div className="language-bar__track" aria-hidden="true">
+                        <span style={{'--language-share': `${percentage}%`}} />
+                      </div>
+                    </li>
+                  );
+                })}
+              </ol>
+              <p className="language-snapshot__method">
+                Generated from Git-tracked filenames in locally owned or local-only repositories. Dependency,
+                generated, cache, build, and third-party upstream paths are excluded. The inventory reads filenames
+                only and copies no private source content.
+              </p>
+            </section>
             <div className="capability-grid">
               <article className="capability-card">
                 <h3>Workflow automation</h3>
                 <p>I use n8n for self-hosted workflow automation. I use Python and JavaScript in my technical work.</p>
               </article>
               <article className="capability-card">
+                <h3>Web and application systems</h3>
+                <p>
+                  My public systems work includes FastAPI, React, TypeScript, Python runtimes, and native
+                  integrations.
+                </p>
+              </article>
+              <article className="capability-card">
                 <h3>Operational data</h3>
                 <p>
                   I use Excel and Google Sheets for operational data work. In a healthcare data-quality role, I used
                   Python, Excel VBA, and Power BI.
-                </p>
-              </article>
-              <article className="capability-card">
-                <h3>Public software systems</h3>
-                <p>
-                  My public systems work includes FastAPI, React, TypeScript, Python runtimes, and native
-                  integrations.
                 </p>
               </article>
             </div>

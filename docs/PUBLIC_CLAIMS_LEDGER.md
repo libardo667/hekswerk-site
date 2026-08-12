@@ -45,6 +45,7 @@ An entry marked **Hold** must not appear publicly until Levi supplies the named 
 | R1 | Private December 2026 The Hague housing-booking correspondence reviewed in Gmail on 2026-08-11. No property, address, booking, contact, household, or financial detail is reproduced here. | Private |
 | R2 | Current private business CV reviewed in Google Drive on 2026-08-11. It states Portland, Oregon. No contact detail is reproduced here. | Private |
 | L3 | Levi confirms the December 2026 relocation to The Hague and approves that month and city for public use, confirmed 2026-08-11. | Private |
+| F1 | Extension-only inventory produced by [`scripts/project-language-inventory.mjs`](../scripts/project-language-inventory.mjs) on 2026-08-11 across local Git project checkouts. It excludes dependency, generated, cache, build, vendored, and third-party upstream paths. Only aggregate filename-extension counts are retained; no private source content or private repository name is published. | Public method with public and private aggregate inputs |
 
 The private `research-runway` repository was used only as a cross-check for Levi-authored statements. Its application drafts, personal details, references, finances, and unpublished research claims are not public evidence for this site.
 
@@ -187,8 +188,9 @@ EvoGen and Kenshi Agent Environment may be prominent, inspectable technical work
 | TECH-06 | Kenshi stack. | Kenshi Agent Environment uses a Python runtime and a native mod. | K1, K2 | Public | None | Yes |
 | TECH-07 | Zapier and Make as representative systems in the offer. | An unreliable Zapier, Make, or n8n workflow may be a representative sprint scope. | H1 | Public | None | Yes, only as an offer example, not a completed-work or experience claim |
 | TECH-08 | A technology is secure, private, compliant, enterprise-ready, or production-proven merely because Levi has used it. | None. | No adequate source | Private or client-confidential | Unverified | No |
-| TECH-09 | RAG systems, local language models, SQL, Selenium, or any other named tool not approved above. | None. | Levi-authored private resumes without a reviewed public artifact for the intended claim | Private | Unverified | Hold. Levi must identify a current artifact or other primary evidence and the exact public wording. |
+| TECH-09 | RAG systems, local language models, Selenium, or any other named tool not approved above. | None. | Levi-authored private resumes without a reviewed public artifact for the intended claim | Private | Unverified | Hold. Levi must identify a current artifact or other primary evidence and the exact public wording. |
 | TECH-10 | Web and systems technologies used in public engineering work. | My public systems work includes FastAPI, React, TypeScript, Python runtimes, and native integrations. | W1, W3, K1, K2, E1, E2 | Public | None | Yes. Keep this grouped as public systems work, not commercial deployment experience. |
+| TECH-11 | Current language and file-ending mix. | My current local project checkouts are Python-heavy. TypeScript and JavaScript form the next-largest source-file groups, with smaller project-specific work in HTML and CSS, GDScript, shell and PowerShell, C and C++, Rust, and SQL. | F1 | Public method with public and private aggregate inputs | Relative ordering verified on 2026-08-11 | Yes. Present only with the snapshot method and its limits. |
 
 The automation offer may also name email, forms, documents, spreadsheets, customer relationship management systems, task systems, and recurring reports as typical workflow inputs. Those are examples defined by H1, not claims that every integration has already been delivered.
 
@@ -216,6 +218,7 @@ No client outcome metric is currently approved. Offer parameters are allowed onl
 | NUM-03 | Hekswerk revenue, AI-evaluation income, hourly rate, invoice totals, platform count, or client count. | None. | P2 and private planning material | Private and client-confidential | Exact or approximate | No |
 | NUM-04 | Research spend, personal reserves, relocation budget, partner income, or household finances. | None. | Private research and business-planning material | Private | Exact or approximate | No |
 | NUM-05 | Repository commits, tests, features, actions, live runs, stars, users, or performance measurements. | None. | Public repositories | Public | Exact but volatile | Hold. Use the relevant live source directly or add a pinned ledger claim if a site page truly needs the number. |
+| NUM-06 | Dated local source-file distribution. | On August 11, 2026, the extension-only inventory counted 1,597 tracked source files across 25 included project checkouts: Python 1,197; TypeScript 129; JavaScript 96; HTML and CSS 63; GDScript 46; shell and PowerShell 37; C and C++ 21; and Rust and SQL 8. | F1 | Public method with public and private aggregate inputs | Exact for the dated snapshot | Yes. Label it as a dated repository-footprint snapshot, not a live measure of skill, effort, client use, or production experience. |
 
 ## Dates
 
