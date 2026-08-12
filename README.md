@@ -1,6 +1,6 @@
 # Hekswerk site
 
-This repository builds and deploys `www.hekswerk.com` with Docusaurus.
+This repository builds and deploys `www.hekswerk.com` as a static Astro site.
 
 The site keeps its pages, visual system, and public project orientation here. Project implementation and
 technical documentation remain in their respective source repositories rather than being republished as
@@ -37,7 +37,7 @@ npm run check
 ```
 
 The gate checks formatting, ESLint rules for React, Hooks, and accessibility, focused form-contract tests,
-the production Docusaurus build, built metadata and link integrity, desktop and mobile browser behavior, and
+the production Astro build, built metadata and link integrity, desktop and mobile browser behavior, and
 automated Axe accessibility results. `npm run audit:languages` remains a separate content inventory task.
 
 Obsolete exhibits, the former static site, and the former WorldWeaver manual mount remain available through

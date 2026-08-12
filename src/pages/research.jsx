@@ -1,5 +1,5 @@
-import Link from '@docusaurus/Link';
-import Layout from '@theme/Layout';
+import Link from '../components/Link';
+import Layout from '../components/PageContent';
 import {BoundaryBox, Hero, ProofCards} from '../components/SitePrimitives';
 
 const evogenUrl = 'https://github.com/libardo667/evogen';

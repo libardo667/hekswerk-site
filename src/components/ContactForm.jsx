@@ -1,14 +1,18 @@
-import Link from '@docusaurus/Link';
-import {useLocation} from '@docusaurus/router';
-import {useEffect, useState} from 'react';
+import {useEffect, useState, useSyncExternalStore} from 'react';
 import {defaultTopic, messageLabelForTopic, payloadFromForm, topicFromSearch, topicOptions} from '../data/contactForm';
 import {contactEmail} from '../data/site';
+import Link from './Link';
 
 const endpoint = 'https://hekswerk-intake.levi-020.workers.dev/';
 
 export default function ContactForm() {
-  const {search} = useLocation();
-  const [topic, setTopic] = useState(() => topicFromSearch(search));
+  const queryTopic = useSyncExternalStore(
+    () => () => {},
+    () => topicFromSearch(window.location.search),
+    () => defaultTopic,
+  );
+  const [selectedTopic, setSelectedTopic] = useState(null);
+  const topic = selectedTopic ?? queryTopic;
   const [status, setStatus] = useState({kind: '', message: ''});
 
   useEffect(() => {
@@ -37,7 +41,7 @@ export default function ContactForm() {
         throw new Error(result.error || 'The form could not be sent.');
       }
       formElement.reset();
-      setTopic(defaultTopic);
+      setSelectedTopic(defaultTopic);
       setStatus({kind: 'success', message: 'Thank you. Your inquiry has been sent.'});
     } catch (error) {
       setStatus({
@@ -65,7 +69,7 @@ export default function ContactForm() {
 
       <label>
         Topic
-        <select name="topic" value={topic} onChange={(event) => setTopic(event.target.value)}>
+        <select name="topic" value={topic} onChange={(event) => setSelectedTopic(event.target.value)}>
           {topicOptions.map((option) => (
             <option value={option.value} key={option.value}>
               {option.label}

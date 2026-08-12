@@ -1,11 +1,10 @@
 # Hekswerk site baseline
 
-Status: historical capture from before the August 2026 public-identity revisions. It records the former
-WorldWeaver documentation mount and is not current route or deployment authority.
+Status: historical evidence captured before the August 2026 public-identity revisions and the later Astro migration.
+It records the former WorldWeaver documentation mount and Docusaurus implementation. It is not current route,
+framework, or deployment authority.
 
-Status: evidence baseline for the August 2026 contract-work relaunch.
-
-This document records the site as it exists before public relaunch work begins. It complements [CONTRACT_WORK_RELAUNCH.md](./CONTRACT_WORK_RELAUNCH.md), which is authoritative for the new positioning and required route structure. This baseline is authoritative for current technical behavior, compatibility obligations, useful historical material, and known gaps.
+This document records the site as it existed before public relaunch work began. It complements [CONTRACT_WORK_RELAUNCH.md](./CONTRACT_WORK_RELAUNCH.md), which is authoritative for the current positioning and required route structure. This baseline remains useful historical evidence, not current technical authority.
 
 ## Snapshot and evidence
 

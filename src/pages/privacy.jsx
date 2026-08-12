@@ -1,5 +1,5 @@
-import Layout from '@theme/Layout';
 import {BoundaryBox, Hero} from '../components/SitePrimitives';
+import Layout from '../components/PageContent';
 import {contactEmail} from '../data/site';
 
 export default function Privacy() {

@@ -1,5 +1,5 @@
-import Link from '@docusaurus/Link';
-import Layout from '@theme/Layout';
+import Link from '../components/Link';
+import Layout from '../components/PageContent';
 import {BoundaryBox, CallToAction, Hero, ProcessSteps} from '../components/SitePrimitives';
 import StructuredData from '../components/StructuredData';
 import {projectLanguageSnapshot} from '../data/projectLanguageSnapshot';

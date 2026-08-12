@@ -1,6 +1,7 @@
 node_modules/
 build/
 .docusaurus/
+.astro/
 .cache-loader/
 playwright-report/
 test-results/

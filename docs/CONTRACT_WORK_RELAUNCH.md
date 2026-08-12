@@ -2,7 +2,7 @@
 
 Status: authoritative for the August 2026 public-site relaunch.
 
-This document defines the positioning, offer, route structure, and completion standard for the relaunch. It is the authority for this work. If older site copy, retired pages, or prior positioning conflicts with this document, follow this document. The current Docusaurus source remains authoritative for the site, while each public project repository remains authoritative for its implementation and technical documentation.
+This document defines the positioning, offer, route structure, and completion standard for the relaunch. It is the authority for this work. If older site copy, retired pages, or prior positioning conflicts with this document, follow this document. The current Astro source remains authoritative for the site, while each public project repository remains authoritative for its implementation and technical documentation.
 
 ## The practice
 
@@ -128,7 +128,7 @@ The relaunch uses the existing site rather than creating a microsite or parallel
 | `/work/selected-work` | Claims-ledger-controlled evidence page. Separate professional work, independent engineering, and open research. Give paid employer automation visual primacy, identify provenance and limits for every case, and do not present independent projects as commercial deployments. |
 | `/research` | Orientation page for independent engineering and open research. Present EvoGen and Kenshi Agent Environment as the current active agent-system work, with their source, verification paths, maturity, and explicit limits. Present WorldWeaver as established open research through the same project-source pattern, without a dedicated Hekswerk documentation subtree. Keep all three separate from the commercial offer. |
 | `/about` | Explain the one-person practice, its two lanes, the working method, and the client-ownership posture without inflating credentials or experience. Link to the primary offer and contact route. |
-| `/contact` | Docusaurus contact page using the existing private submission endpoint. Make automation the primary commercial topic and support `/contact?topic=automation` from offer calls to action. Keep research, relocation, and general-contact paths available without presenting them as equal commercial offers. |
+| `/contact` | Contact page using the existing private submission endpoint. Make automation the primary commercial topic and support `/contact?topic=automation` from offer calls to action. Keep research, relocation, and general-contact paths available without presenting them as equal commercial offers. |
 
 The primary navigation should reflect the two lanes rather than elevating one project: **Contract Work**, **Selected Work**, **Engineering & Research**, **About**. A prominent **Start a conversation** action appears separately. Individual projects do not appear in primary navigation. Their repositories belong in Selected Work, Engineering & Research, relevant project sections, and the footer. The general GitHub profile belongs in the footer rather than displacing the commercial action.
 
@@ -171,16 +171,16 @@ Public copy must not invent or imply:
 
 ## Architecture and identity invariants
 
-The relaunch must preserve:
+The public site must preserve:
 
-- Docusaurus as the site framework;
+- one static build with no parallel site or application;
 - the current GitHub Pages build and deployment workflow;
 - `www.hekswerk.com` and the existing custom-domain configuration;
 - source links to EvoGen, Kenshi Agent Environment, and WorldWeaver without mounting one project's documentation inside the Hekswerk route tree;
-- the Docusaurus contact form and its existing submission endpoint unless a separately scoped change is approved; and
+- the contact form and its existing submission endpoint unless a separately scoped change is approved; and
 - the established aura mark, typography, palette, and overall visual character.
 
-New public pages should live in the current Docusaurus source tree. Do not create a second site, restore the former static homepage, or build on withdrawn research exhibits.
+New public pages should live in the current Astro source tree. Do not create a second site, restore the former static homepage, or build on withdrawn research exhibits.
 
 ## Explicit non-goals
 
@@ -205,13 +205,13 @@ The August relaunch does not include:
 
 The public relaunch is complete only when all of the following are true:
 
-1. The route structure above is implemented in the existing Docusaurus site, with no parallel site or application.
+1. The route structure above is implemented in the existing static site, with no parallel site or application.
 2. The homepage and metadata make contract operations automation the primary commercial front door.
 3. The `/work` page states the full promise, audience, process, ownership model, price tiers, and scope boundaries without unsupported claims.
 4. The contact form names the Operations Automation Sprint, accepts preselection through `?topic=automation`, and still supports research, relocation, and general inquiries.
 5. Independent engineering and open research remain visible through the lane-level navigation, homepage, `/research`, Selected Work, relevant project links, and footer. EvoGen and Kenshi Agent Environment are presented as current agent-system work. WorldWeaver remains visible as open research, but no individual project occupies primary navigation, receives a dedicated documentation subtree, or is framed as the service being sold.
 6. Relocation planning is absent from the primary navigation and public offer hierarchy, with no restored landing page or August launch claim.
-7. The current Docusaurus framework, GitHub Pages workflow, custom domain, project source links, and contact submission endpoint remain intact.
+7. The current static framework, GitHub Pages workflow, custom domain, project source links, and contact submission endpoint remain intact.
 8. The existing visual identity is preserved and the changed pages are readable at desktop and mobile widths.
 9. All public copy passes a manual claims audit and a repository search for em dashes. It uses one-person language and contains no invented clients, metrics, testimonials, certifications, compliance claims, or production experience.
 10. A production build succeeds with broken-link checks enabled. The built output contains the required Hekswerk routes, omits the retired WorldWeaver documentation subtree, and retains the custom-domain file.

@@ -1,0 +1,12 @@
+---
+import SiteLayout from '../layouts/SiteLayout.astro';
+import Contact from '../../src/pages/contact.jsx';
+---
+
+<SiteLayout
+  title="Contact | Hekswerk"
+  description="Contact Hekswerk about an Operations Automation Sprint, research, or another inquiry."
+  canonicalPath="/contact"
+>
+  <Contact client:load />
+</SiteLayout>

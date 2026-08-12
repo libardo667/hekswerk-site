@@ -1,0 +1,219 @@
+---
+import '../../src/css/custom.css';
+
+const {title, description, canonicalPath} = Astro.props;
+
+const siteUrl = 'https://www.hekswerk.com';
+const canonical = `${siteUrl}${canonicalPath}`;
+const socialImage = `${siteUrl}/img/hekswerk-social-card.png`;
+const practiceDescription =
+  "Hekswerk is Levi Banks's one-person systems practice for contract operations automation, independent engineering, and open research.";
+const currentPath = canonicalPath === '/' ? '/' : canonicalPath.replace(/\/$/, '');
+const isActive = (path) => currentPath === path || (path !== '/' && currentPath.startsWith(`${path}/`));
+const navItems = [
+  {href: '/work', label: 'Contract Work'},
+  {href: '/work/selected-work', label: 'Selected Work'},
+  {href: '/research', label: 'Engineering & Research'},
+  {href: '/about', label: 'About'},
+];
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Organization',
+      '@id': `${siteUrl}/#organization`,
+      name: 'Hekswerk',
+      url: siteUrl,
+      description: practiceDescription,
+      logo: `${siteUrl}/img/logo_aura.svg`,
+      founder: {'@id': `${siteUrl}/about#levi-banks`},
+    },
+    {
+      '@type': 'WebSite',
+      '@id': `${siteUrl}/#website`,
+      url: siteUrl,
+      name: 'Hekswerk',
+      description: practiceDescription,
+      inLanguage: 'en-US',
+      publisher: {'@id': `${siteUrl}/#organization`},
+    },
+  ],
+};
+---
+
+<!doctype html>
+<html lang="en" dir="ltr" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content="Astro" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" href="/img/logo_aura.svg" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Hekswerk" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={socialImage} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={socialImage} />
+    <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
+  </head>
+  <body>
+    <div id="site-root">
+      <div class="skip-to-content" role="region" aria-label="Skip to main content">
+        <a href="#main-content">Skip to main content</a>
+      </div>
+      <nav aria-label="Main" class="theme-layout-navbar navbar navbar--fixed-top">
+        <div class="navbar__inner">
+          <div class="navbar__items">
+            <button class="navbar__toggle" type="button" aria-label="Open navigation menu" aria-expanded="false">
+              <span></span><span></span><span></span>
+            </button>
+            <a class="navbar__brand" href="/">
+              <span class="navbar__logo"><img src="/img/logo_aura.svg" alt="Hekswerk aura mark" /></span>
+              <b class="navbar__title">Hekswerk</b>
+            </a>
+            <div class="navbar__desktop-links">
+              {
+                navItems.map((item) => (
+                  <a
+                    class:list={['navbar__item', 'navbar__link', {'navbar__link--active': isActive(item.href)}]}
+                    aria-current={isActive(item.href) ? 'page' : undefined}
+                    href={item.href}
+                  >
+                    {item.label}
+                  </a>
+                ))
+              }
+            </div>
+          </div>
+          <div class="navbar__items navbar__items--right">
+            <a
+              class:list={[
+                'navbar__item',
+                'navbar__link',
+                'navbar__cta',
+                {'navbar__cta--active': isActive('/contact')},
+              ]}
+              aria-current={isActive('/contact') ? 'page' : undefined}
+              href="/contact"
+            >
+              Start a conversation
+            </a>
+          </div>
+        </div>
+        <div class="navbar-sidebar" aria-hidden="true">
+          <div class="navbar-sidebar__brand">
+            <a class="navbar__brand" href="/">
+              <span class="navbar__logo"><img src="/img/logo_aura.svg" alt="" /></span>
+              <b class="navbar__title">Hekswerk</b>
+            </a>
+            <button class="navbar-sidebar__close" type="button" aria-label="Close navigation menu">×</button>
+          </div>
+          <div class="navbar-sidebar__items">
+            {
+              navItems.map((item) => (
+                <a
+                  class:list={['menu__link', {'menu__link--active': isActive(item.href)}]}
+                  aria-current={isActive(item.href) ? 'page' : undefined}
+                  href={item.href}
+                >
+                  {item.label}
+                </a>
+              ))
+            }
+            <a class:list={['menu__link', {'menu__link--active': isActive('/contact')}]} href="/contact">
+              Start a conversation
+            </a>
+          </div>
+        </div>
+      </nav>
+
+      <div id="main-content" class="main-wrapper">
+        <slot />
+      </div>
+
+      <footer class="footer footer--dark">
+        <div class="container container-fluid">
+          <div class="row footer__links">
+            <div class="col footer__col">
+              <div class="footer__title">Contract work</div>
+              <ul class="footer__items clean-list">
+                <li><a class="footer__link-item" href="/work">Operations Automation Sprint</a></li>
+                <li><a class="footer__link-item" href="/contact">Start a conversation</a></li>
+                <li><a class="footer__link-item" href="/work/selected-work">Selected work</a></li>
+                <li><a class="footer__link-item" href="/about">About</a></li>
+                <li><a class="footer__link-item" href="/privacy">Privacy</a></li>
+              </ul>
+            </div>
+            <div class="col footer__col">
+              <div class="footer__title">Engineering and research</div>
+              <ul class="footer__items clean-list">
+                <li><a class="footer__link-item" href="/research">Overview</a></li>
+                <li>
+                  <a class="footer__link-item" href="https://github.com/libardo667"
+                    >GitHub profile <svg class="external-link-icon" aria-hidden="true" viewBox="0 0 24 24"
+                      ><path d="M14 5h5v5M19 5l-9 9M19 13v6H5V5h6"></path></svg
+                    ></a
+                  >
+                </li>
+                <li>
+                  <a class="footer__link-item" href="https://github.com/libardo667/evogen"
+                    >EvoGen source <svg class="external-link-icon" aria-hidden="true" viewBox="0 0 24 24"
+                      ><path d="M14 5h5v5M19 5l-9 9M19 13v6H5V5h6"></path></svg
+                    ></a
+                  >
+                </li>
+                <li>
+                  <a class="footer__link-item" href="https://github.com/libardo667/kenshi-agent-env"
+                    >Kenshi Agent Environment source <svg
+                      class="external-link-icon"
+                      aria-hidden="true"
+                      viewBox="0 0 24 24"><path d="M14 5h5v5M19 5l-9 9M19 13v6H5V5h6"></path></svg
+                    ></a
+                  >
+                </li>
+                <li>
+                  <a class="footer__link-item" href="https://github.com/libardo667/worldweaver"
+                    >WorldWeaver source <svg class="external-link-icon" aria-hidden="true" viewBox="0 0 24 24"
+                      ><path d="M14 5h5v5M19 5l-9 9M19 13v6H5V5h6"></path></svg
+                    ></a
+                  >
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="footer__bottom text--center">Copyright © 2026 Hekswerk.</div>
+        </div>
+      </footer>
+    </div>
+
+    <script>
+      const navbar = document.querySelector('.navbar');
+      const toggle = document.querySelector('.navbar__toggle');
+      const sidebar = document.querySelector('.navbar-sidebar');
+      const close = document.querySelector('.navbar-sidebar__close');
+
+      function setMenu(open) {
+        navbar?.classList.toggle('navbar-sidebar--show', open);
+        sidebar?.setAttribute('aria-hidden', String(!open));
+        toggle?.setAttribute('aria-expanded', String(open));
+        document.body.classList.toggle('menu-open', open);
+        if (open) sidebar?.querySelector('a')?.focus();
+        else toggle?.focus();
+      }
+
+      toggle?.addEventListener('click', () => setMenu(true));
+      close?.addEventListener('click', () => setMenu(false));
+      sidebar?.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => setMenu(false)));
+      document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape' && toggle?.getAttribute('aria-expanded') === 'true') setMenu(false);
+      });
+    </script>
+  </body>
+</html>

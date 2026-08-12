@@ -1,5 +1,5 @@
-import Link from '@docusaurus/Link';
-import Layout from '@theme/Layout';
+import Link from '../../components/Link';
+import Layout from '../../components/PageContent';
 import {CallToAction, Hero} from '../../components/SitePrimitives';
 
 function CaseStudy({className = '', evidenceClass, title, summary, fields, sources, featured = false}) {

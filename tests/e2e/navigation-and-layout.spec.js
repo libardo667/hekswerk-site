@@ -67,7 +67,7 @@ for (const route of publicRoutes) {
     await page.goto(route);
     await expect(page.locator('h1')).toHaveCount(1);
     const layout = await page.evaluate(() => {
-      const selectors = ['html', 'body', '#__docusaurus', '.main-wrapper'];
+      const selectors = ['html', 'body', '#site-root', '.main-wrapper'];
       return {
         scrollWidth: document.documentElement.scrollWidth,
         viewportWidth: document.documentElement.clientWidth,
@@ -85,10 +85,15 @@ test('mobile menu opens with every option visible and usable', async ({page}, te
   await page.locator('.navbar__toggle').click();
   const sidebar = page.locator('.navbar-sidebar');
   await expect(sidebar).toBeVisible();
+  await expect.poll(async () => (await sidebar.boundingBox())?.x).toBe(0);
   const box = await sidebar.boundingBox();
   expect(box.width).toBeGreaterThanOrEqual(300);
   for (const label of ['Contract Work', 'Selected Work', 'Engineering & Research', 'About', 'Start a conversation']) {
-    await expect(sidebar.getByRole('link', {name: label})).toBeVisible();
+    const link = sidebar.getByRole('link', {name: label});
+    await expect(link).toBeVisible();
+    const linkBox = await link.boundingBox();
+    expect(linkBox.x).toBeGreaterThanOrEqual(0);
+    expect(linkBox.x + linkBox.width).toBeLessThanOrEqual(await page.evaluate(() => window.innerWidth));
   }
 });
 
@@ -96,7 +101,9 @@ test('footer keeps the current two-group hierarchy', async ({page}) => {
   await page.goto('/');
   const footer = page.locator('footer');
   await expect(footer.locator('.footer__title')).toHaveText(['Contract work', 'Engineering and research']);
-  const engineeringLinks = await footer.locator('.footer__col').nth(1).locator('.footer__link-item').allTextContents();
+  const engineeringLinks = (
+    await footer.locator('.footer__col').nth(1).locator('.footer__link-item').allTextContents()
+  ).map((text) => text.trim());
   expect(engineeringLinks).toEqual([
     'Overview',
     'GitHub profile',

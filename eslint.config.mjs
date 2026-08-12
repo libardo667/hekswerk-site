@@ -8,6 +8,7 @@ export default [
   {
     ignores: [
       'build/**',
+      '.astro/**',
       '.docusaurus/**',
       'node_modules/**',
       'playwright-report/**',

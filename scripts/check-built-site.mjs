@@ -87,7 +87,7 @@ function statSafe(file) {
 }
 
 function extractJsonLd(html, file) {
-  const blocks = [...html.matchAll(/<script(?: data-rh=true)? type=application\/ld\+json>(.*?)<\/script>/g)].map(
+  const blocks = [...html.matchAll(/<script[^>]*type=["']application\/ld\+json["'][^>]*>(.*?)<\/script>/g)].map(
     (match) => match[1],
   );
   return blocks.flatMap((block, index) => {
@@ -108,20 +108,20 @@ for (const entry of routes) {
   }
   const html = readFileSync(file, 'utf8');
   const canonical = `${siteUrl}${entry.route}`;
-  expectIncludes(html, '<!doctype html>', `${entry.route}: malformed document`);
-  expectIncludes(html, `<title data-rh=true>${entry.title}</title>`, `${entry.route}: title`);
-  expectIncludes(html, `name=description content="${entry.description}"`, `${entry.route}: description`);
-  expectIncludes(html, `rel=canonical href=${canonical} `, `${entry.route}: canonical`);
-  expectIncludes(html, `property=og:url content=${canonical} `, `${entry.route}: Open Graph URL`);
-  expectIncludes(html, `property=og:title content="${entry.title}"`, `${entry.route}: Open Graph title`);
+  if (!html.toLowerCase().includes('<!doctype html>')) fail(`${entry.route}: malformed document`);
+  expectIncludes(html, `<title>${entry.title}</title>`, `${entry.route}: title`);
+  expectIncludes(html, `name="description" content="${entry.description}"`, `${entry.route}: description`);
+  expectIncludes(html, `rel="canonical" href="${canonical}"`, `${entry.route}: canonical`);
+  expectIncludes(html, `property="og:url" content="${canonical}"`, `${entry.route}: Open Graph URL`);
+  expectIncludes(html, `property="og:title" content="${entry.title}"`, `${entry.route}: Open Graph title`);
   expectIncludes(
     html,
-    `property=og:description content="${entry.description}"`,
+    `property="og:description" content="${entry.description}"`,
     `${entry.route}: Open Graph description`,
   );
-  expectIncludes(html, `property=og:image content=${socialImage} `, `${entry.route}: Open Graph image`);
-  expectIncludes(html, `name=twitter:image content=${socialImage} `, `${entry.route}: Twitter image`);
-  expectIncludes(html, 'name=twitter:card content=summary_large_image ', `${entry.route}: Twitter card`);
+  expectIncludes(html, `property="og:image" content="${socialImage}"`, `${entry.route}: Open Graph image`);
+  expectIncludes(html, `name="twitter:image" content="${socialImage}"`, `${entry.route}: Twitter image`);
+  expectIncludes(html, 'name="twitter:card" content="summary_large_image"', `${entry.route}: Twitter card`);
 
   const jsonLd = extractJsonLd(html, entry.file);
   const graph = jsonLd.find((block) => Array.isArray(block['@graph']));
@@ -149,11 +149,14 @@ if (image.toString('ascii', 1, 4) !== 'PNG' || image.readUInt32BE(16) !== 1200 |
 
 const expectedCname = 'www.hekswerk.com\n';
 if (readFileSync(path.join(buildRoot, 'CNAME'), 'utf8') !== expectedCname) fail('CNAME');
-const expectedRobots = `User-agent: *\nAllow: /\n\nSitemap: ${siteUrl}/sitemap.xml\n`;
+const expectedRobots = `User-agent: *\nAllow: /\n\nSitemap: ${siteUrl}/sitemap-index.xml\n`;
 if (readFileSync(path.join(buildRoot, 'robots.txt'), 'utf8') !== expectedRobots) fail('robots.txt');
-const sitemap = readFileSync(path.join(buildRoot, 'sitemap.xml'), 'utf8');
+const sitemapIndex = readFileSync(path.join(buildRoot, 'sitemap-index.xml'), 'utf8');
+expectIncludes(sitemapIndex, `${siteUrl}/sitemap-0.xml`, 'sitemap index');
+const sitemap = readFileSync(path.join(buildRoot, 'sitemap-0.xml'), 'utf8');
 for (const {route} of routes) {
-  expectIncludes(sitemap, `<loc>${siteUrl}${route}</loc>`, `sitemap: ${route}`);
+  const location = route === '/' ? siteUrl : `${siteUrl}${route}`;
+  expectIncludes(sitemap, `<loc>${location}</loc>`, `sitemap: ${route}`);
 }
 if (/\/worldweaver(?:<|\/)/.test(sitemap)) fail('sitemap: retired WorldWeaver route remains');
 
@@ -193,9 +196,14 @@ function scanPublicSource(directory) {
   }
 }
 scanPublicSource(path.resolve(process.cwd(), 'src'));
+scanPublicSource(path.resolve(process.cwd(), 'site'));
 scanPublicSource(path.resolve(process.cwd(), 'static'));
-if (readFileSync(path.resolve(process.cwd(), 'docusaurus.config.js'), 'utf8').includes('—')) {
-  fail('docusaurus.config.js: em dash in public source');
+if (readFileSync(path.resolve(process.cwd(), 'astro.config.mjs'), 'utf8').includes('—')) {
+  fail('astro.config.mjs: em dash in public source');
+}
+const packageManifest = readFileSync(path.resolve(process.cwd(), 'package.json'), 'utf8');
+if (packageManifest.toLowerCase().includes('docusaurus')) {
+  fail('package.json: retired Docusaurus dependency or command remains');
 }
 
 if (failures.length > 0) {

@@ -1,4 +1,4 @@
-import Link from '@docusaurus/Link';
+import Link from './Link';
 
 export function Hero({eyebrow, title, lede, actions = [], aside, compact = false}) {
   return (

@@ -1,5 +1,5 @@
-import Layout from '@theme/Layout';
 import ContactForm from '../components/ContactForm';
+import Layout from '../components/PageContent';
 import {BoundaryBox, Hero} from '../components/SitePrimitives';
 import {contactEmail} from '../data/site';
 

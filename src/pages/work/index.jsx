@@ -1,5 +1,5 @@
-import Layout from '@theme/Layout';
 import {CallToAction, FitLists, Hero, PricingCards, ProcessSteps} from '../../components/SitePrimitives';
+import Layout from '../../components/PageContent';
 import StructuredData from '../../components/StructuredData';
 import {offer} from '../../data/offer';
 
