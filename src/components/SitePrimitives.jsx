@@ -11,13 +11,23 @@ export function Hero({eyebrow, title, lede, actions = [], aside, compact = false
           {actions.length > 0 && (
             <div className="hero-actions">
               {actions.map((action) => (
-                <Link
-                  key={action.label}
-                  className={`button ${action.primary ? 'button--primary' : 'button--outline'} button--lg`}
-                  to={action.to}
-                >
-                  {action.label}
-                </Link>
+                action.href ? (
+                  <a
+                    key={action.label}
+                    className={`button ${action.primary ? 'button--primary' : 'button--outline'} button--lg`}
+                    href={action.href}
+                  >
+                    {action.label}
+                  </a>
+                ) : (
+                  <Link
+                    key={action.label}
+                    className={`button ${action.primary ? 'button--primary' : 'button--outline'} button--lg`}
+                    to={action.to}
+                  >
+                    {action.label}
+                  </Link>
+                )
               ))}
             </div>
           )}

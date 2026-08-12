@@ -165,7 +165,7 @@ h3 {
 .button {
   border-radius: 999px;
   text-align: center;
-  white-space: normal;
+  white-space: normal !important;
 }
 
 .button--primary {
@@ -274,6 +274,13 @@ h3 {
   margin-top: 3rem;
 }
 
+.problem-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1rem;
+  margin-top: 3rem;
+}
+
 .proof-card,
 .lane-card,
 .pricing-card,
@@ -323,6 +330,42 @@ h3 {
 
 .lane-card--commercial {
   background: linear-gradient(145deg, rgba(74, 75, 120, 0.32), rgba(41, 54, 86, 0.2));
+}
+
+.selected-preview,
+.agent-project-grid {
+  margin-top: 3rem;
+}
+
+.section-link {
+  display: inline-block;
+  margin-top: 1.5rem;
+}
+
+.section-agent-work {
+  scroll-margin-top: calc(var(--ifm-navbar-height) + 1rem);
+  border-top: 1px solid var(--heks-hairline);
+  border-bottom: 1px solid var(--heks-hairline);
+  background:
+    radial-gradient(circle at 82% 24%, rgba(140, 118, 153, 0.13), transparent 30%),
+    rgba(41, 54, 86, 0.12);
+}
+
+.project-boundary {
+  padding-top: 1rem;
+  border-top: 1px solid var(--heks-hairline);
+}
+
+.agent-project-grid .button {
+  margin-top: 0.75rem;
+}
+
+.research-section {
+  align-items: center;
+}
+
+.aura-panel--research {
+  min-height: 300px;
 }
 
 .process-grid {
@@ -640,7 +683,8 @@ h3 {
 }
 
 @media (max-width: 996px) {
-  .proof-grid {
+  .proof-grid,
+  .problem-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
@@ -660,6 +704,7 @@ h3 {
 @media (max-width: 760px) {
   .page-hero__grid,
   .proof-grid,
+  .problem-grid,
   .lane-grid,
   .split-section,
   .fit-grid,

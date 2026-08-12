@@ -27,6 +27,10 @@ An entry marked **Hold** must not appear publicly until Levi supplies the named 
 | W3 | WorldWeaver manifests and license at `43eae31` | Public |
 | K1 | [Kenshi Agent Environment README at `bfaa4d5`](https://github.com/libardo667/kenshi-agent-env/blob/bfaa4d55ae10a34d33e7a06ee3959fc6659eceb4/README.md) | Public |
 | K2 | Kenshi Agent Environment package manifest and license at `bfaa4d5` | Public |
+| E1 | [EvoGen README at `c37147b`](https://github.com/libardo667/evogen/blob/c37147b3120c38c9a979ca8671fcc11c5ab62c6c/README.md) | Public |
+| E2 | [EvoGen KAE integration notes at `c37147b`](https://github.com/libardo667/evogen/blob/c37147b3120c38c9a979ca8671fcc11c5ab62c6c/docs/kenshi-integration.md) | Public |
+| E3 | [EvoGen evidence cockpit content at `c37147b`](https://github.com/libardo667/evogen/blob/c37147b3120c38c9a979ca8671fcc11c5ab62c6c/docs/cockpit/content.json) | Public |
+| L1 | Levi's current public project-priority decision, confirmed 2026-08-11 | Private |
 | O1 | Oregon Secretary of State assumed business name registration for Hekswerk, e-filed January 13, 2026; Levi confirms January 2026 as Hekswerk's public founding month. Registry number and addresses omitted. | Public and private |
 | P1 | Private resumes and CV drafts reviewed locally and in Google Drive on 2026-08-11. No private file, link, contact detail, or reference detail is reproduced here. | Private |
 | P2 | Private invoice-file metadata and a private income-tracker title reviewed in Google Drive on 2026-08-11. No amount, invoice, row, or account detail was copied. | Private |
@@ -119,6 +123,19 @@ The complete and current capability list belongs in the WorldWeaver manual. Heks
 | KEN-06 | Fully autonomous, production-ready, safe, complete, or generally capable game-playing agent. | None. | K1 expressly states narrower boundaries | Public | Unverified | No |
 
 Kenshi Agent Environment may appear as selected technical or research work. It must not become a new commercial product or dilute the Operations Automation Sprint as the public front door.
+
+## EvoGen and current agent work
+
+| ID | Claim under review | Exact approved wording | Source | Class | Number | Public decision |
+| --- | --- | --- | --- | --- | --- | --- |
+| EVO-01 | Plain description. | EvoGen is an outer-loop capability engineering harness for autonomous agents. | E1 | Public | None | Yes |
+| EVO-02 | Current repository maturity. | The repository is a runnable alpha with one deterministic end-to-end prototype. | E1 | Public | One prototype, exact | Yes |
+| EVO-03 | Current proof boundary. | It does not yet prove a real game integration or model-generated diagnosis. | E1 | Public | None | Yes. Recheck current documentation before reuse. |
+| EVO-04 | Current relationship to KAE. | EvoGen includes a small KAE JSONL normalization adapter. KAE is not yet registered as a complete EvoGen subject, and its production trajectory exporter is not complete. | E1, E2, E3 | Public | None | Yes. Recheck current documentation before reuse. |
+| EVO-05 | Current project priority. | EvoGen and Kenshi Agent Environment are the agent-system projects I am actively working on. | L1 | Private | Two projects, exact | Yes |
+| EVO-06 | Public repository and commercial boundary. | They are public repositories, not products included in the Operations Automation Sprint. | E1, K1, H1 | Public | None | Yes |
+
+EvoGen and Kenshi Agent Environment may be prominent, inspectable technical work. Neither is a product included in the Operations Automation Sprint, and the KAE integration must not be described as complete before the public evidence supports that claim.
 
 ## Technologies used
 
