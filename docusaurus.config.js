@@ -143,7 +143,10 @@ const config = {
           title: 'Contract work',
           items: [
             {label: 'Operations Automation Sprint', to: '/work'},
+            {label: 'Start a conversation', to: '/contact'},
             {label: 'Selected work', to: '/work/selected-work'},
+            {label: 'About', to: '/about'},
+            {label: 'Privacy', to: '/privacy'},
           ],
         },
         {
@@ -154,14 +157,6 @@ const config = {
             {label: 'Kenshi Agent Environment source', href: 'https://github.com/libardo667/kenshi-agent-env'},
             {label: 'WorldWeaver manual', to: '/worldweaver'},
             {label: 'WorldWeaver source', href: 'https://github.com/libardo667/worldweaver'},
-          ],
-        },
-        {
-          title: 'Practice',
-          items: [
-            {label: 'About', to: '/about'},
-            {label: 'Start a conversation', to: '/contact'},
-            {label: 'Privacy', to: '/privacy'},
             {label: 'GitHub profile', href: 'https://github.com/libardo667'},
           ],
         },
