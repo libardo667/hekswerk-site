@@ -77,18 +77,20 @@ test('native validation protects the shared and automation-required fields', asy
 });
 
 test('automation submission carries only its intended fields and honeypot', async ({page}) => {
+  const metricEvents = [];
+  await page.route('**/_metrics', async (route) => {
+    metricEvents.push(route.request().postDataJSON());
+    await route.fulfill({status: 204});
+  });
   let payload;
   await page.route(endpoint, async (route) => {
     payload = route.request().postDataJSON();
     await route.fulfill({status: 200, contentType: 'application/json', body: JSON.stringify({ok: true})});
   });
-  await page.goto('/contact?topic=automation&utm_source=discard-me');
+  await page.goto('/contact?topic=automation&utm_source=directory');
   const honeypot = page.locator('input[name="website"]');
   await expect(honeypot).toHaveCount(1);
   await expect(honeypot).toHaveAttribute('tabindex', '-1');
-  await honeypot.evaluate((input) => {
-    input.value = 'bot-value';
-  });
   await page.getByLabel('Name').fill('Ada');
   await page.getByLabel('Email').fill('ada@example.com');
   await page.getByLabel('Organization Optional').fill('Example practice');
@@ -110,7 +112,7 @@ test('automation submission carries only its intended fields and honeypot', asyn
     email: 'ada@example.com',
     topic: 'Operations Automation Sprint',
     privacy_acknowledged: true,
-    website: 'bot-value',
+    website: '',
     organization: 'Example practice',
     repeating_process: 'Intake gets copied by hand.',
     systems_involved: 'Email and Sheets',
@@ -119,8 +121,43 @@ test('automation submission carries only its intended fields and honeypot', asyn
     desired_timing: 'Within one month',
     sensitive_or_regulated: 'Unsure',
   });
+  await expect.poll(() => metricEvents.some(({event}) => event === 'automation_form_submitted')).toBe(true);
+  expect(metricEvents).toContainEqual({
+    event: 'automation_form_submitted',
+    page: '/contact',
+    source: 'outreach.directory',
+    topic: 'automation',
+  });
+  expect(JSON.stringify(metricEvents)).not.toContain('Ada');
+  expect(JSON.stringify(metricEvents)).not.toContain('ada@example.com');
+  expect(JSON.stringify(metricEvents)).not.toContain('Intake gets copied by hand.');
   await expect(page.getByLabel('Name')).toHaveValue('');
   await expect(page.getByLabel('What is this about?')).toHaveValue('automation');
+});
+
+test('honeypot acceptance is not counted as a successful inquiry', async ({page}) => {
+  const metricEvents = [];
+  await page.route('**/_metrics', async (route) => {
+    metricEvents.push(route.request().postDataJSON());
+    await route.fulfill({status: 204});
+  });
+  await page.route(endpoint, (route) =>
+    route.fulfill({status: 200, contentType: 'application/json', body: JSON.stringify({ok: true})}),
+  );
+
+  await page.goto('/contact?topic=automation');
+  await page.locator('input[name="website"]').evaluate((input) => {
+    input.value = 'bot-value';
+  });
+  await page.getByLabel('Name').fill('Bot');
+  await page.getByLabel('Email').fill('bot@example.com');
+  await page.getByLabel('What process repeats?').fill('Automated spam');
+  await page.getByLabel('Does this workflow involve sensitive or regulated information?').selectOption('No');
+  await page.getByRole('checkbox').check();
+  await page.getByRole('button', {name: 'Send inquiry'}).click();
+  await expect(page.getByRole('status')).toHaveText('Thank you. Your inquiry has been sent.');
+  await expect.poll(() => metricEvents.some(({event}) => event === 'automation_form_started')).toBe(true);
+  expect(metricEvents.some(({event}) => event === 'automation_form_submitted')).toBe(false);
 });
 
 test('switching topics excludes stale conditional fields from the payload', async ({page}) => {

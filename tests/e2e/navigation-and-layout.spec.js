@@ -15,7 +15,7 @@ test.beforeEach(async ({page}) => {
   await blockExternalAssets(page);
 });
 
-test('pages install no client-side analytics or browser storage', async ({page}) => {
+test('cookieless metrics install no third-party beacon or browser storage', async ({page}) => {
   for (const route of publicRoutes) {
     await page.goto(`${route}${route.includes('?') ? '&' : '?'}utm_source=discard-me`);
     await expect(page.locator('script[data-cf-beacon]')).toHaveCount(0);
@@ -46,6 +46,47 @@ test('pages make no unapproved automatic third-party requests', async ({page}) =
   }
 });
 
+test('conversion events contain only the approved aggregate dimensions', async ({page}) => {
+  const events = [];
+  await page.route('**/_metrics', async (route) => {
+    events.push(route.request().postDataJSON());
+    await route.fulfill({status: 204});
+  });
+
+  await page.goto('/work?utm_source=linkedin');
+  await expect.poll(() => events.length).toBeGreaterThanOrEqual(1);
+  expect(events[0]).toEqual({event: 'work_view', page: '/work', source: 'outreach.linkedin', topic: 'none'});
+
+  const contactLink = page.getByRole('link', {name: 'Start an automation inquiry'}).first();
+  await expect(contactLink).toHaveAttribute('href', '/contact?topic=automation&source=outreach.linkedin');
+  await contactLink.click();
+  await expect(page).toHaveURL(/\/contact\?topic=automation&source=outreach\.linkedin$/);
+  await expect.poll(() => events.some(({event}) => event === 'automation_form_started')).toBe(true);
+
+  expect(events).toContainEqual({
+    event: 'contact_cta_click',
+    page: '/work',
+    source: 'outreach.linkedin',
+    topic: 'automation',
+  });
+  expect(events).toContainEqual({
+    event: 'automation_form_started',
+    page: '/contact',
+    source: 'outreach.linkedin',
+    topic: 'automation',
+  });
+
+  await page.goto('/work/selected-work?utm_source=referral');
+  await expect.poll(() => events.some(({event}) => event === 'selected_work_view')).toBe(true);
+  expect(events).toContainEqual({
+    event: 'selected_work_view',
+    page: '/work/selected-work',
+    source: 'outreach.referral',
+    topic: 'none',
+  });
+  for (const event of events) expect(Object.keys(event).sort()).toEqual(['event', 'page', 'source', 'topic']);
+});
+
 test('homepage commercial and research paths resolve', async ({page}) => {
   await page.goto('/');
   await page.getByRole('link', {name: 'View the Operations Automation Sprint'}).click();
@@ -57,7 +98,7 @@ test('homepage commercial and research paths resolve', async ({page}) => {
   await expect(page.locator('#research')).toBeInViewport();
 
   await page.getByRole('link', {name: 'Start an automation inquiry'}).click();
-  await expect(page).toHaveURL(/\/contact\?topic=automation$/);
+  await expect(page).toHaveURL(/\/contact\?topic=automation&source=direct$/);
 });
 
 test('work pricing distinguishes inquiry, scoping, the sprint, and custom work', async ({page}) => {
@@ -85,7 +126,7 @@ test('work pricing distinguishes inquiry, scoping, the sprint, and custom work',
   await expect(pricing.getByText('generally starts at $6,500.').first()).toBeVisible();
 
   await page.getByRole('link', {name: 'Start an automation inquiry'}).first().click();
-  await expect(page).toHaveURL(/\/contact\?topic=automation$/);
+  await expect(page).toHaveURL(/\/contact\?topic=automation&source=direct$/);
 });
 
 test('referral brief is self-contained and print-ready', async ({page}) => {
@@ -101,7 +142,7 @@ test('referral brief is self-contained and print-ready', async ({page}) => {
   await expect(brief.getByText('Paid employer work, not a Hekswerk client result.')).toBeVisible();
   await expect(brief.getByRole('link', {name: 'www.hekswerk.com/contact'})).toHaveAttribute(
     'href',
-    '/contact?topic=automation',
+    '/contact?topic=automation&source=direct',
   );
 
   await page.setViewportSize({width: 816, height: 1056});
@@ -134,7 +175,7 @@ test('navigation and footer expose every intended internal destination', async (
   const footer = page.locator('footer');
   const footerInternal = await footer
     .locator('a[href^="/"]')
-    .evaluateAll((links) => links.map((link) => link.getAttribute('href')));
+    .evaluateAll((links) => links.map((link) => new URL(link.href).pathname));
   expect(footerInternal).toEqual(footerDestinations);
 
   for (const destination of [...new Set([...navDestinations, ...footerDestinations])]) {

@@ -16,7 +16,10 @@ migration.
 
 ## Repository layout
 
-- `workers/site/wrangler.jsonc`: asset-only site Worker configuration and the `www.hekswerk.com` custom-domain route.
+- `workers/site/wrangler.jsonc`: static-assets, conversion-metrics binding, and the `www.hekswerk.com` custom-domain
+  route.
+- `workers/site/worker.js`: same-origin `/_metrics` validation and Analytics Engine writes. Other requests pass to
+  Static Assets.
 - `static/_headers`: response security policy, immutable caching for fingerprinted assets, and no-index behavior on the
   public `workers.dev` review hostname.
 - `static/_redirects`: path compatibility redirects, including `/contact.html` to `/contact` with its query string.
@@ -26,8 +29,10 @@ migration.
 - `.github/workflows/deploy-pages-fallback.yml`: temporary cutover fallback for clients whose recursive resolver still
   uses the former GoDaddy authority. It deploys the same checked build, but it does not make Pages authoritative.
 
-The Worker has no script, secrets, database, storage binding, or server-side application state. Cloudflare serves the
-built HTML, CSS, JavaScript, images, and locally bundled fonts directly from Static Assets.
+The Worker has a narrow script and a Workers Analytics Engine binding for the fixed conversion-event schema. It has no
+secret, database, key-value store, object bucket, session state, or general server-side application state. Cloudflare
+serves the built HTML, CSS, JavaScript, images, and locally bundled fonts directly from Static Assets. Only
+`/_metrics` runs the Worker script first.
 
 ## Local commands
 
@@ -66,7 +71,8 @@ passes. The check and deployment are in one ordered job, so a failed gate cannot
 - Every asset sends `Cache-Control: no-transform`. For HTML, this prevents Cloudflare's automatic Web Analytics setup
   from injecting a script even if that account-level setting is enabled.
 - The `workers.dev` hostname sends `X-Robots-Tag: noindex, nofollow`.
-- HTML routes contain no client-side analytics beacon and write no browser storage. Aggregate traffic counts come from
+- HTML routes load no third-party analytics beacon and write no browser storage. A small same-origin client records the
+  fixed conversion events documented in `docs/METRICS.md`; aggregate traffic counts also remain available through
   Cloudflare's edge and zone analytics.
 - Canonical, social, sitemap, and robots URLs identify `https://www.hekswerk.com`.
 - Cloudflare redirects apex HTTP and HTTPS requests to `www`, preserving the path and query string.
@@ -113,7 +119,7 @@ Additional production checks established:
 - canonical, Open Graph, Twitter, Organization, and WebSite metadata on every public route;
 - Person metadata on `/about` and Service metadata on `/work` through the built-artifact gate;
 - the intended `robots.txt` and sitemap, with no retired WorldWeaver site route;
-- no client-side analytics tag, browser-storage write, remote font, or unapproved automatic third-party request;
+- no third-party analytics tag, browser-storage write, remote font, or unapproved automatic third-party request;
 - `Cache-Control: no-transform` on production responses, preventing Cloudflare's automatic analytics transformation;
 - HTTP 404 and the Hekswerk not-found document for unknown, Pages-only, and retired manual paths;
 - HTTP 301 for `/contact.html` and `/index.html`, with query and browser fragment behavior covered;

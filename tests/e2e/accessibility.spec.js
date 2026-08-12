@@ -39,7 +39,7 @@ test('retired WorldWeaver documentation route returns 404', async ({request}) =>
   }
 });
 
-test('custom 404 is styled, noindex, and contains no client-side analytics', async ({page}) => {
+test('custom 404 is styled, noindex, and contains no third-party analytics', async ({page}) => {
   const response = await page.goto('/not-a-real-hekswerk-route?custom-404-check=1');
   expect(response.status()).toBe(404);
   await expect(page.getByRole('heading', {name: 'There is nothing at this address.'})).toBeVisible();

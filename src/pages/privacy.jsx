@@ -41,8 +41,14 @@ export default function Privacy() {
               <p>
                 I use Cloudflare&apos;s aggregate traffic dashboard to understand requests, page views, visits, and
                 broad country-level traffic. Cloudflare derives some of these measures from network information such as
-                IP addresses. I do not install a client-side analytics beacon and do not receive raw request logs.
-                Worker invocation logs are disabled.
+                IP addresses. I do not receive raw request logs. Worker invocation logs are disabled.
+              </p>
+              <p>
+                The site also sends five bounded conversion events to its own <code>/_metrics</code> path: views of the
+                work and selected-work pages, contact-link clicks, automation-intake reaches, and successful automation
+                submissions. The site Worker stores the event time and name, a fixed page and topic, and a source bucket
+                in Cloudflare Workers Analytics Engine for three months. A source is direct, internal, a short outreach
+                label, or an external referrer&apos;s hostname. It never includes a referrer path or full address.
               </p>
               <p>
                 Cloudflare currently adds Network Error Logging instructions to its responses. If a supporting browser
@@ -53,9 +59,10 @@ export default function Privacy() {
                 third parties.
               </p>
               <p>
-                This site sets no cookies and writes nothing to local storage or session storage. Its styles, images,
-                scripts, and two typefaces are served with the page. The typefaces are bundled locally, so a page view
-                does not contact Google Fonts.
+                This site sets no cookies and writes nothing to local storage or session storage. It has no visitor or
+                session identifier and loads no third-party analytics script. Its styles, images, scripts, and two
+                typefaces are served with the page. The typefaces are bundled locally, so a page view does not contact
+                Google Fonts.
               </p>
               <p>
                 External project links do not send the Hekswerk page as a referrer. If you choose one, the destination,
@@ -75,6 +82,11 @@ export default function Privacy() {
                 <li>
                   <Link to="https://developers.cloudflare.com/network-error-logging/">
                     Cloudflare Network Error Logging and privacy details
+                  </Link>
+                </li>
+                <li>
+                  <Link to="https://developers.cloudflare.com/analytics/analytics-engine/limits/">
+                    Workers Analytics Engine retention
                   </Link>
                 </li>
               </ul>
@@ -97,6 +109,12 @@ export default function Privacy() {
               <p>
                 The required privacy checkbox records that you saw this notice. It is not consent to marketing and is
                 not the legal basis for handling the inquiry.
+              </p>
+              <p>
+                Analytics and inquiry contents are separate. The metrics endpoint never receives a name, email address,
+                organization, message, workflow description, form answer, or sensitive-information selection. A
+                successful automation submission with an empty spam trap records only the fixed success event after the
+                intake endpoint accepts the form.
               </p>
             </section>
 

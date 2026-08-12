@@ -17,18 +17,20 @@ and is not treated as the legal basis for processing.
 
 ## Browser data flows
 
-| Trigger                              | Recipient or storage               | Data involved                                                                                                                                                                                                                | Current boundary                                                                                                                                                                                                            |
-| ------------------------------------ | ---------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Page or asset request                | Cloudflare Workers Static Assets   | Requested address, IP address, and ordinary HTTP, TLS, and connection information needed to serve and protect the site                                                                                                       | Cloudflare-controlled platform processing. The asset-only site Worker has no application logs or storage binding.                                                                                                           |
-| Aggregate traffic reporting          | Cloudflare zone analytics          | Requests, bandwidth, page views, visits, and broad country-level measures derived from edge traffic. Cloudflare says visit and country measures use IP information.                                                          | Hekswerk sees aggregate dashboard measures, not raw request logs. No client-side analytics beacon is installed. Provider retention is not asserted.                                                                         |
-| Browser encounters a network failure | Cloudflare Network Error Logging   | Supporting browsers may report the failed address, referrer, request method, timing, protocol, status, error type, and network connection. Cloudflare uses the connection IP to derive the network, country, and metro area. | Cloudflare says the IP exists only in volatile memory during processing, personal data is then purged, and reports are not shared with third parties. This is a provider-added response-header path, not a Hekswerk script. |
-| Page asset loading                   | Hekswerk site origin               | Astro JavaScript, CSS, images, and locally bundled Fraunces and Outfit WOFF2 files                                                                                                                                           | Normal browser and hosting caches. No Google Fonts request.                                                                                                                                                                 |
-| Visitor chooses an external link     | Chosen destination, usually GitHub | Ordinary connection information needed to serve the destination                                                                                                                                                              | Hekswerk links use `noreferrer`; no request occurs merely because the page contains the link.                                                                                                                               |
+| Trigger                              | Recipient or storage                                 | Data involved                                                                                                                                                                                                                | Current boundary                                                                                                                                                                                                            |
+| ------------------------------------ | ---------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Page or asset request                | Cloudflare Workers Static Assets                     | Requested address, IP address, and ordinary HTTP, TLS, and connection information needed to serve and protect the site                                                                                                       | Cloudflare-controlled platform processing. The site Worker has no application logs, database, or general storage binding.                                                                                                   |
+| Aggregate traffic reporting          | Cloudflare zone analytics                            | Requests, bandwidth, page views, visits, and broad country-level measures derived from edge traffic. Cloudflare says visit and country measures use IP information.                                                          | Hekswerk sees aggregate dashboard measures, not raw request logs. Provider retention is not asserted.                                                                                                                       |
+| Bounded conversion event             | Same-origin site Worker and Workers Analytics Engine | Event time and name, fixed public page, fixed topic, and direct, internal, outreach-label, or referrer-hostname source bucket                                                                                                | No visitor or session identifier. No form field, full URL, query string, or referrer path. The dataset retains events for three months.                                                                                     |
+| Browser encounters a network failure | Cloudflare Network Error Logging                     | Supporting browsers may report the failed address, referrer, request method, timing, protocol, status, error type, and network connection. Cloudflare uses the connection IP to derive the network, country, and metro area. | Cloudflare says the IP exists only in volatile memory during processing, personal data is then purged, and reports are not shared with third parties. This is a provider-added response-header path, not a Hekswerk script. |
+| Page asset loading                   | Hekswerk site origin                                 | Astro JavaScript, CSS, images, and locally bundled Fraunces and Outfit WOFF2 files                                                                                                                                           | Normal browser and hosting caches. No Google Fonts request.                                                                                                                                                                 |
+| Visitor chooses an external link     | Chosen destination, usually GitHub                   | Ordinary connection information needed to serve the destination                                                                                                                                                              | Hekswerk links use `noreferrer`; no request occurs merely because the page contains the link.                                                                                                                               |
 
-The site sets no cookies and writes nothing to `localStorage` or `sessionStorage`. During successful page loads, browser
-tests observe no automatic cross-origin request. A failure-triggered Network Error Logging report remains possible
-because Cloudflare currently adds the governing response headers. The built-artifact gate fails if a Cloudflare Web
-Analytics beacon, browser-storage use, Google Fonts, or another unapproved third-party path returns in site source.
+The site sets no cookies and writes nothing to `localStorage` or `sessionStorage`. It creates no visitor or session
+identifier and loads no third-party analytics script. During successful page loads, browser tests observe no automatic
+cross-origin request. A failure-triggered Network Error Logging report remains possible because Cloudflare currently
+adds the governing response headers. The built-artifact gate fails if a Cloudflare Web Analytics beacon,
+browser-storage use, Google Fonts, or another unapproved third-party path returns in site source.
 Production responses also send `Cache-Control: no-transform` to prevent Cloudflare's automatic Web Analytics setup from
 injecting the beacon at the edge.
 
@@ -41,6 +43,31 @@ Provider evidence:
 - Cloudflare Network Error Logging and its privacy statement:
   <https://developers.cloudflare.com/network-error-logging/>
 - Cloudflare Workers Logs behavior: <https://developers.cloudflare.com/workers/observability/logs/workers-logs/>
+- Workers Analytics Engine setup and schema: <https://developers.cloudflare.com/analytics/analytics-engine/get-started/>
+- Workers Analytics Engine retention: <https://developers.cloudflare.com/analytics/analytics-engine/limits/>
+
+## Conversion event data flow
+
+```text
+browser event
+  -> POST /_metrics on the Hekswerk site Worker
+  -> hekswerk_conversion_metrics Analytics Engine dataset
+```
+
+The browser sends exactly `event`, `page`, `source`, and `topic`. Cloudflare adds the dataset name, event timestamp, and
+sampling metadata. The Worker rejects extra keys, unknown enumerations, cross-origin browser writes, and oversized
+bodies. It stores no IP address, user agent, name, email address, organization, message, workflow description, form
+answer, full URL, query string, or referrer path in the dataset.
+
+An inbound `utm_source` is reduced to a short `outreach.<label>` value. An external referrer is reduced to its hostname.
+The normalized label is carried to internal contact links in a `source` query parameter because the site uses no
+browser storage. Invalid values are grouped as `other`. Outreach links must never use personal or confidential values
+as source labels.
+
+The dataset is aggregate operational measurement, not a person-level journey. It has no visitor or session identifier,
+so reloads may count again and events cannot be joined into an individual's history. Analytics Engine retains data for
+three months. Weekly counts are copied into the existing business tracker as described in [`METRICS.md`](./METRICS.md),
+not exposed through a bespoke dashboard.
 
 ## Inquiry data flow
 
@@ -52,8 +79,8 @@ browser form
 ```
 
 Every inquiry sends schema and topic identifiers, name, email, privacy acknowledgement, the hidden honeypot value, and
-the visible topic-specific answers. It does not send a first-touch path, UTM parameters, cookies, or browser-storage
-identifiers.
+the visible topic-specific answers. The inquiry payload does not send a first-touch path, source label, UTM parameter,
+cookie, or browser-storage identifier. Conversion events use the separate bounded path described above.
 
 Automation asks for a high-level repeating process and sensitive-or-regulated classification. Organization, systems,
 current failure points, frequency, and desired timing are optional. Research and general inquiries contain one message.

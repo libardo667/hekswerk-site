@@ -143,7 +143,7 @@ for (const entry of routes) {
   expectIncludes(html, `name="twitter:image" content="${socialImage}"`, `${entry.route}: Twitter image`);
   expectIncludes(html, 'name="twitter:card" content="summary_large_image"', `${entry.route}: Twitter card`);
   expectIncludes(html, 'name="referrer" content="strict-origin-when-cross-origin"', `${entry.route}: referrer policy`);
-  if (/data-cf-beacon|cloudflareinsights\.com/.test(html)) fail(`${entry.route}: client-side analytics remains`);
+  if (/data-cf-beacon|cloudflareinsights\.com/.test(html)) fail(`${entry.route}: third-party analytics remains`);
 
   const jsonLd = extractJsonLd(html, entry.file);
   const graph = jsonLd.find((block) => Array.isArray(block['@graph']));
@@ -169,7 +169,7 @@ expectIncludes(notFoundHtml, '<title>Page not found | Hekswerk</title>', '404: t
 expectIncludes(notFoundHtml, 'name="robots" content="noindex"', '404: noindex');
 expectIncludes(notFoundHtml, 'There is nothing at this address.', '404: public explanation');
 if (notFoundHtml.includes('rel="canonical"')) fail('404: canonical URL must be absent');
-if (/data-cf-beacon|cloudflareinsights\.com/.test(notFoundHtml)) fail('404: client-side analytics remains');
+if (/data-cf-beacon|cloudflareinsights\.com/.test(notFoundHtml)) fail('404: third-party analytics remains');
 
 const builtFiles = filesBelow(buildRoot);
 for (const file of builtFiles.filter((candidate) => ['.html', '.css', '.js'].includes(path.extname(candidate)))) {
@@ -178,7 +178,7 @@ for (const file of builtFiles.filter((candidate) => ['.html', '.css', '.js'].inc
     fail(`${path.relative(buildRoot, file)}: remote Google Fonts reference remains`);
   }
   if (/data-cf-beacon|cloudflareinsights\.com|sessionStorage|localStorage/.test(contents)) {
-    fail(`${path.relative(buildRoot, file)}: client-side tracking or browser storage remains`);
+    fail(`${path.relative(buildRoot, file)}: unapproved third-party tracking or browser storage remains`);
   }
 }
 if (builtFiles.filter((file) => path.extname(file) === '.woff2').length === 0) fail('locally bundled WOFF2 fonts');
@@ -201,6 +201,9 @@ for (const phrase of [
   'Your data-protection rights',
   'No automated decision about your inquiry',
   'does not by itself establish a client relationship',
+  'five bounded conversion events',
+  'Workers Analytics Engine for three months',
+  'never receives a name, email address',
 ]) {
   expectIncludes(privacyHtml, phrase, `/privacy: ${phrase}`);
 }
@@ -294,7 +297,7 @@ for (const retiredPagesFile of ['CNAME', '.nojekyll', '.assetsignore']) {
   }
 }
 const headers = readFileSync(path.join(buildRoot, '_headers'), 'utf8');
-if (/cloudflareinsights\.com/.test(headers)) fail('_headers: retired client-side analytics origin remains');
+if (/cloudflareinsights\.com/.test(headers)) fail('_headers: retired third-party analytics origin remains');
 for (const value of [
   'Content-Security-Policy:',
   'Cache-Control: public, max-age=0, must-revalidate, no-transform',
@@ -367,10 +370,25 @@ const packageManifest = readFileSync(path.resolve(process.cwd(), 'package.json')
 if (packageManifest.toLowerCase().includes('docusaurus')) {
   fail('package.json: retired Docusaurus dependency or command remains');
 }
+expectIncludes(
+  packageManifest,
+  '"metrics:weekly": "node --env-file-if-exists=.env scripts/weekly-metrics.mjs"',
+  'package.json: local weekly metrics command',
+);
+const gitignore = readFileSync(path.resolve(process.cwd(), '.gitignore'), 'utf8');
+for (const value of ['.env\n', '.env.*\n', '!.env.example\n']) {
+  expectIncludes(gitignore, value, `.gitignore: ${value.trim()}`);
+}
+if (!statSafe(path.resolve(process.cwd(), '.env.example'))) fail('local metrics environment template');
 const siteWorkerConfig = readFileSync(path.resolve(process.cwd(), 'workers/site/wrangler.jsonc'), 'utf8');
 for (const value of [
   '"name": "hekswerk-site"',
+  '"main": "./worker.js"',
   '"directory": "../../build"',
+  '"binding": "ASSETS"',
+  '"run_worker_first": ["/_metrics"]',
+  '"binding": "METRICS"',
+  '"dataset": "hekswerk_conversion_metrics"',
   '"html_handling": "drop-trailing-slash"',
   '"not_found_handling": "404-page"',
   '"pattern": "www.hekswerk.com"',
@@ -380,12 +398,29 @@ for (const value of [
 }
 if (/account_id|api_token/i.test(siteWorkerConfig)) fail('site Worker configuration: account identifier or token key');
 
+const siteWorkerSource = readFileSync(path.resolve(process.cwd(), 'workers/site/worker.js'), 'utf8');
+for (const value of [
+  "url.pathname !== '/_metrics'",
+  'env.ASSETS.fetch(request)',
+  'env.METRICS.writeDataPoint',
+  "'work_view'",
+  "'selected_work_view'",
+  "'contact_cta_click'",
+  "'automation_form_started'",
+  "'automation_form_submitted'",
+]) {
+  expectIncludes(siteWorkerSource, value, `site metric Worker: ${value}`);
+}
+for (const forbidden of ['payload.name', 'payload.email', 'payload.message', 'payload.organization']) {
+  if (siteWorkerSource.includes(forbidden)) fail(`site metric Worker: forbidden analytics field ${forbidden}`);
+}
+
 if (failures.length > 0) {
   console.error(`Built-site check failed with ${failures.length} issue(s):`);
   for (const failure of failures) console.error(`- ${failure}`);
   process.exitCode = 1;
 } else {
   console.log(
-    `Built-site check passed for ${routes.length} routes: metadata, JSON-LD, links, anchors, local fonts, privacy boundaries, social image, deployment files, prose, and retired routes.`,
+    `Built-site check passed for ${routes.length} routes: metadata, JSON-LD, links, anchors, local fonts, privacy and metric boundaries, social image, deployment files, prose, and retired routes.`,
   );
 }

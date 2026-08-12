@@ -198,6 +198,10 @@ const structuredData = {
     </div>
 
     <script>
+      import {installMetrics} from '../../src/data/metrics';
+
+      installMetrics();
+
       const navbar = document.querySelector('.navbar');
       const toggle = document.querySelector('.navbar__toggle');
       const sidebar = document.querySelector('.navbar-sidebar');

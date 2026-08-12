@@ -1,5 +1,6 @@
-import {useEffect, useState, useSyncExternalStore} from 'react';
+import {useEffect, useRef, useState, useSyncExternalStore} from 'react';
 import {defaultTopic, payloadFromForm, topicFromSearch, topicOptions} from '../data/contactForm';
+import {sendMetric} from '../data/metrics';
 import {contactEmail} from '../data/site';
 import Link from './Link';
 
@@ -108,6 +109,7 @@ export default function ContactForm() {
   const [selectedTopic, setSelectedTopic] = useState(null);
   const topic = selectedTopic ?? queryTopic;
   const [status, setStatus] = useState({kind: '', message: ''});
+  const automationStartRecorded = useRef(false);
 
   useEffect(() => {
     const currentLocation = window.location;
@@ -115,6 +117,13 @@ export default function ContactForm() {
       window.location.replace(`/contact${currentLocation.search}${currentLocation.hash}`);
     }
   }, []);
+
+  useEffect(() => {
+    if (topic === 'automation' && !automationStartRecorded.current) {
+      automationStartRecorded.current = true;
+      sendMetric('automation_form_started', {topic: 'automation'});
+    }
+  }, [topic]);
 
   async function submit(event) {
     event.preventDefault();
@@ -133,6 +142,9 @@ export default function ContactForm() {
       const result = await response.json().catch(() => ({}));
       if (!response.ok) {
         throw new Error(result.error || 'The form could not be sent.');
+      }
+      if (topic === 'automation' && !payload.website) {
+        sendMetric('automation_form_submitted', {topic: 'automation'});
       }
       formElement.reset();
       setSelectedTopic(defaultTopic);
