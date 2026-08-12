@@ -25,16 +25,22 @@ An entry marked **Hold** must not appear publicly until Levi supplies the named 
 | W1 | [WorldWeaver README at `43eae31`](https://github.com/libardo667/worldweaver/blob/43eae31093ac941bc3335d6ab95d3b38409942ea/README.md) | Public |
 | W2 | [WorldWeaver manual landing page at `43eae31`](https://github.com/libardo667/worldweaver/blob/43eae31093ac941bc3335d6ab95d3b38409942ea/docs/index.md) | Public |
 | W3 | WorldWeaver manifests and license at `43eae31` | Public |
+| W4 | Public WorldWeaver Git history through `43eae31` | Public |
 | K1 | [Kenshi Agent Environment README at `bfaa4d5`](https://github.com/libardo667/kenshi-agent-env/blob/bfaa4d55ae10a34d33e7a06ee3959fc6659eceb4/README.md) | Public |
 | K2 | Kenshi Agent Environment package manifest and license at `bfaa4d5` | Public |
+| K3 | Public Kenshi Agent Environment Git history through `bfaa4d5` | Public |
 | E1 | [EvoGen README at `c37147b`](https://github.com/libardo667/evogen/blob/c37147b3120c38c9a979ca8671fcc11c5ab62c6c/README.md) | Public |
 | E2 | [EvoGen KAE integration notes at `c37147b`](https://github.com/libardo667/evogen/blob/c37147b3120c38c9a979ca8671fcc11c5ab62c6c/docs/kenshi-integration.md) | Public |
 | E3 | [EvoGen evidence cockpit content at `c37147b`](https://github.com/libardo667/evogen/blob/c37147b3120c38c9a979ca8671fcc11c5ab62c6c/docs/cockpit/content.json) | Public |
+| E4 | Public EvoGen Git history through `c37147b` | Public |
+| S1 | [Confidentiality-safe delivery reconciliation sample at `d0509e2`](https://github.com/libardo667/delivery-reconciliation-sample/tree/d0509e2034f53f72857fe8e3c5fb882a7e51a1af), built with synthetic fixtures and a clean public history | Public |
 | L1 | Levi's current public project-priority decision, confirmed 2026-08-11 | Private |
+| L2 | Levi confirms that he designed and wrote the original proof-of-delivery automation and authorizes a confidentiality-safe reconstruction, confirmed 2026-08-11 | Private |
 | O1 | Oregon Secretary of State assumed business name registration for Hekswerk, e-filed January 13, 2026; Levi confirms January 2026 as Hekswerk's public founding month. Registry number and addresses omitted. | Public and private |
 | P1 | Private resumes and CV drafts reviewed locally and in Google Drive on 2026-08-11. No private file, link, contact detail, or reference detail is reproduced here. | Private |
 | P2 | Private invoice-file metadata and a private income-tracker title reviewed in Google Drive on 2026-08-11. No amount, invoice, row, or account detail was copied. | Private |
 | P3 | Private Providence interview notes reviewed in Google Drive on 2026-08-11. No operational detail is reproduced here. | Private |
+| P4 | Levi-authored proof-of-delivery automation source reviewed locally on 2026-08-11. The source contains employer-specific workflow details and is not copied or linked here. | Private and potentially client-confidential |
 | C1 | Underlying AI-platform task materials, agreements, and work records. These were not copied or treated as publishable. | Client-confidential |
 
 The private `research-runway` repository was used only as a cross-check for Levi-authored statements. Its application drafts, personal details, references, finances, and unpublished research claims are not public evidence for this site.
@@ -55,12 +61,19 @@ PAY-01 and PAY-02 may support a short personal background section. They must not
 
 | ID | Claim under review | Exact approved wording | Source | Class | Number | Public decision |
 | --- | --- | --- | --- | --- | --- | --- |
-| PROV-01 | Levi used Python and Excel VBA to automate part of an internal healthcare workflow. | In a healthcare data-quality role, I used Python and Excel VBA to automate part of an internal workflow. | P1, P3 | Private | None | Yes, biography context only. Do not add the employer, workflow type, payer, or result. |
+| PROV-01 | Levi used Python and Excel VBA to automate part of an internal healthcare workflow. | In a healthcare data-quality role, I used Python and Excel VBA to automate part of an internal workflow. | P1, P3, P4 | Private | None | Yes. Keep the employer unnamed. |
 | PROV-02 | Levi used Power BI for healthcare operations analysis. | In that role, I also used Power BI to analyze operational data. | P1 | Private | None | Yes, only immediately after PROV-01 |
 | PROV-03 | Levi held a named Providence role from August 2023 through October 2024. | None. | P1 | Private | Exact dates, unverified | Hold. Levi must provide an employment record and approve public use of the employer, title, and dates. |
 | PROV-04 | Any time-savings or before-and-after duration for the automation. | None. | P1, P3 | Private and potentially client-confidential | Approximate and unverified | No. Levi evidence and permission would be required for any future reconsideration. |
 | PROV-05 | Any dataset-size or record-count claim. | None. | P1 | Private and potentially client-confidential | Approximate and unverified | No. Levi evidence and permission would be required for any future reconsideration. |
 | PROV-06 | Internal workflow, equipment, payer, compliance, error, or process-failure details. | None. | P3 and C1 | Client-confidential | None or unverified, depending on the detail | No |
+| PROV-07 | Levi's role and safe technical summary. | I designed and wrote a Python workflow that gathered reports from separate systems, normalized them into tabular records, reconciled records by shared identifiers, and produced an operational report. | P4, L2 | Private and potentially client-confidential | None | Yes. Use only this employer-neutral summary. |
+| PROV-08 | Historical result. | The working portion completed report gathering, normalization, reconciliation, and report generation. | P4 | Private and potentially client-confidential | None | Yes. Do not add an outcome metric or internal system detail. |
+| PROV-09 | Public reconstruction boundary. | The public sample is a clean reconstruction with synthetic data. Its tests validate the sample, not the employer system or historical outcome. | S1 | Public | None | Yes |
+| PROV-10 | Source disclosure boundary. | The underlying source is not linked because it includes employer-specific workflow details and is not confidentiality-safe. | P4 | Private and potentially client-confidential | None | Yes |
+| PROV-11 | Public sample architecture. | The sample loads two CSV exports, validates their schemas, normalizes identifiers, selects the latest matching event, reconciles quantities, and writes explicit review reasons. | S1 | Public | Two exports, exact | Yes |
+| PROV-12 | Historical completion boundary. | A later write-back step was not completed. | P4 | Private and potentially client-confidential | None | Yes |
+| PROV-13 | Withheld result boundary. | No time saving, record count, business outcome, or production benchmark is claimed. | P1, P3, P4 | Private and potentially client-confidential | None | Yes |
 
 The approved Providence wording is deliberately employer-neutral. It establishes relevant background without publishing internal healthcare operations or an unsupported outcome metric.
 
@@ -111,6 +124,9 @@ Offer terms in HEK-04 through HEK-08 are commitments and boundaries, not histori
 | WW-07 | Product status. | WorldWeaver is open research, not a hosted product or an Operations Automation Sprint deliverable. | H1 | Public | None | Yes |
 | WW-08 | Consciousness, sentience, personhood, users, adoption, production readiness, or client outcomes. | None. | No adequate source for those public claims | Public, private, or speculative | Unverified | No |
 | WW-09 | A current feature, test result, or research finding not stated above. | None. | Current manual and dated research records | Public | Depends on claim | Hold. Add a pinned, narrowly worded ledger entry first. |
+| WW-10 | Levi's role. | I am the primary author of the WorldWeaver repository at the pinned commit. | W4 | Public | None | Yes |
+| WW-11 | Repository validation surface. | The repository provides root-level test and check commands. The manual is current operating documentation, while dated research records what was tested at the time. | W1, W2 | Public | None | Yes. This does not claim that a current run passed. |
+| WW-12 | Backend, persistence, event, and distributed-system boundary. | The world engine owns concrete facts and typed consequences. Resident identity and history persist between private and shared spaces. Travel between independently operated computers remains a goal. | W1, W2 | Public | None | Yes |
 
 The complete and current capability list belongs in the WorldWeaver manual. Hekswerk overview pages should use the stable wording above and link to the manual rather than copying volatile feature counts or research conclusions.
 
@@ -124,6 +140,9 @@ The complete and current capability list belongs in the WorldWeaver manual. Heks
 | KEN-04 | License and relationship to the game. | Kenshi Agent Environment is an unofficial open-source project licensed under GPL-3.0-or-later. It does not include Kenshi game assets or game binaries. | K1, K2 | Public | License version, exact | Yes |
 | KEN-05 | Current action coverage, live proof, protocol version, test count, run count, or autonomous-play result. | None. | Current README and public evidence bundles | Public | Depends on claim and changes frequently | Hold. Add a pinned, narrowly worded ledger entry first. |
 | KEN-06 | Fully autonomous, production-ready, safe, complete, or generally capable game-playing agent. | None. | K1 expressly states narrower boundaries | Public | Unverified | No |
+| KEN-07 | Levi's role. | I am the primary author of the Kenshi Agent Environment repository at the pinned commit. | K3 | Public | None | Yes |
+| KEN-08 | Validation and evidence path. | Before dispatch, the runtime checks the model's choice against fresh state. The native mod reports whether Kenshi accepted the action and what happened afterward. The runtime records the observation, decision, command, and result. Mock and replay runs use the same planner and operation path. | K1 | Public | None | Yes |
+| KEN-09 | Inspectable system boundary. | The public architecture keeps model choice, action validity, game execution, and later evidence separate. | K1 | Public | None | Yes |
 
 Kenshi Agent Environment may appear as selected technical or research work. It must not become a new commercial product or dilute the Operations Automation Sprint as the public front door.
 
@@ -137,6 +156,10 @@ Kenshi Agent Environment may appear as selected technical or research work. It m
 | EVO-04 | Current relationship to KAE. | EvoGen includes a small KAE JSONL normalization adapter. KAE is not yet registered as a complete EvoGen subject, and its production trajectory exporter is not complete. | E1, E2, E3 | Public | None | Yes. Recheck current documentation before reuse. |
 | EVO-05 | Current project priority. | EvoGen and Kenshi Agent Environment are the agent-system projects I am actively working on. | L1 | Private | Two projects, exact | Yes |
 | EVO-06 | Public repository and commercial boundary. | They are public repositories, not products included in the Operations Automation Sprint. | E1, K1, H1 | Public | None | Yes |
+| EVO-07 | Architecture. | The repository uses strict Pydantic contracts, append-only JSONL trajectories, a content-addressed artifact store, and a SQLite ledger. | E1 | Public | None | Yes |
+| EVO-08 | Validation surface. | One verification command runs Ruff, strict mypy, schema checks, the full test suite, a deterministic end-to-end proof in a disposable workspace, and a whitespace-error check. | E1 | Public | One command and one proof, exact | Yes |
+| EVO-09 | Levi's role. | I am the primary author of the EvoGen repository at the pinned commit. | E4 | Public | None | Yes |
+| EVO-10 | Runtime and evolution boundary. | Candidate changes are evaluated outside the runtime plane and promoted only through lineage gates. | E1 | Public | None | Yes |
 
 EvoGen and Kenshi Agent Environment may be prominent, inspectable technical work. Neither is a product included in the Operations Automation Sprint, and the KAE integration must not be described as complete before the public evidence supports that claim.
 
