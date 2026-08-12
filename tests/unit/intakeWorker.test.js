@@ -32,10 +32,6 @@ function automationPayload(overrides = {}) {
     sensitive_or_regulated: 'No',
     privacy_acknowledged: true,
     website: '',
-    utm_source: 'directory',
-    utm_medium: 'profile',
-    utm_campaign: 'august',
-    initial_landing_path: '/work',
     ...overrides,
   };
 }
@@ -95,8 +91,8 @@ describe('intake Worker boundary', () => {
     expect(email.reply_to).toBe('ada@example.com');
     expect(email.subject).toBe('Automation inquiry from Ada');
     expect(email.text).toContain('What process repeats:\nIntake gets copied by hand.');
-    expect(email.text).toContain('utm_campaign: august');
-    expect(email.text).toContain('Initial landing path: /work');
+    expect(email.text).toContain('Privacy acknowledgement: Yes');
+    expect(email.text).not.toContain('Attribution:');
   });
 
   it('rejects the retired pre-versioned contact payload', async () => {
@@ -135,7 +131,6 @@ describe('intake Worker boundary', () => {
         message: 'A bounded question',
         privacy_acknowledged: true,
         website: '',
-        initial_landing_path: '/contact',
       }),
       {resend_api_key: 'withheld-test-value'},
     );
@@ -219,13 +214,6 @@ describe('intake Worker boundary', () => {
     expect(missing.status).toBe(400);
     expect(await missing.json()).toEqual({error: 'Missing required fields'});
 
-    const invalidAttribution = await worker.fetch(
-      workerRequest(automationPayload({initial_landing_path: 'https://example.com/private'})),
-      {resend_api_key: 'withheld-test-value'},
-    );
-    expect(invalidAttribution.status).toBe(400);
-    expect(await invalidAttribution.json()).toEqual({error: 'Invalid attribution'});
-
     const invalidSelect = await worker.fetch(
       workerRequest(automationPayload({approximate_frequency: 'Continuously'})),
       {resend_api_key: 'withheld-test-value'},
@@ -233,6 +221,26 @@ describe('intake Worker boundary', () => {
     expect(invalidSelect.status).toBe(400);
     expect(await invalidSelect.json()).toEqual({error: 'Invalid selection'});
     expect(delivery).not.toHaveBeenCalled();
+  });
+
+  it('ignores retired attribution fields rather than including them in email', async () => {
+    const delivery = vi.fn().mockResolvedValue(new Response('{}', {status: 200}));
+    vi.stubGlobal('fetch', delivery);
+    const response = await worker.fetch(
+      workerRequest(
+        automationPayload({
+          utm_source: 'directory',
+          utm_medium: 'profile',
+          utm_campaign: 'august',
+          initial_landing_path: '/work',
+        }),
+      ),
+      {resend_api_key: 'withheld-test-value'},
+    );
+    expect(response.status).toBe(200);
+    const email = JSON.parse(delivery.mock.calls[0][1].body);
+    expect(email.text).not.toContain('directory');
+    expect(email.text).not.toContain('/work');
   });
 
   it('returns a legible gateway error without exposing the provider response', async () => {

@@ -15,12 +15,19 @@ test.beforeEach(async ({page}) => {
   await blockExternalAssets(page);
 });
 
-test('each page includes one Cloudflare Web Analytics beacon in static-navigation mode', async ({page}) => {
-  await page.goto('/');
-  const beacon = page.locator('script[src="https://static.cloudflareinsights.com/beacon.min.js"]');
-  await expect(beacon).toHaveCount(1);
-  const configuration = JSON.parse(await beacon.getAttribute('data-cf-beacon'));
-  expect(configuration).toEqual({token: 'b521818f3dee4549be53db47190f52c2', spa: false});
+test('pages install no client-side analytics or browser storage', async ({page}) => {
+  for (const route of publicRoutes) {
+    await page.goto(`${route}${route.includes('?') ? '&' : '?'}utm_source=discard-me`);
+    await expect(page.locator('script[data-cf-beacon]')).toHaveCount(0);
+    expect(
+      await page.evaluate(() => ({
+        cookie: document.cookie,
+        localStorage: window.localStorage.length,
+        sessionStorage: window.sessionStorage.length,
+      })),
+      route,
+    ).toEqual({cookie: '', localStorage: 0, sessionStorage: 0});
+  }
 });
 
 test('pages make no unapproved automatic third-party requests', async ({page}) => {
@@ -35,14 +42,7 @@ test('pages make no unapproved automatic third-party requests', async ({page}) =
     await page.waitForLoadState('networkidle');
     page.off('request', record);
     const uniqueRequests = [...new Set(externalRequests)];
-    expect(uniqueRequests, route).toContain('https://static.cloudflareinsights.com/beacon.min.js');
-    expect(
-      uniqueRequests.filter((requestUrl) => {
-        const url = new URL(requestUrl);
-        return url.origin !== 'https://static.cloudflareinsights.com' || !url.pathname.startsWith('/beacon.min.js');
-      }),
-      route,
-    ).toEqual([]);
+    expect(uniqueRequests, route).toEqual([]);
   }
 });
 
@@ -109,18 +109,32 @@ test('privacy page exposes the actual collection, processors, deletion, and rela
 }) => {
   await page.goto('/privacy');
   for (const heading of [
+    'Who is responsible',
     'When you browse the site',
     'What the contact form collects',
     'Where an inquiry goes and what is retained',
-    'How I use an inquiry',
-    'Requesting deletion',
+    'Why I use an inquiry',
+    'International processing',
+    'How long I keep an inquiry',
+    'Your data-protection rights',
+    'No automated decision about your inquiry',
     'An inquiry is not a client relationship',
   ]) {
     await expect(page.getByRole('heading', {name: heading})).toBeVisible();
   }
   await expect(page.getByText('Cloudflare Worker', {exact: false}).last()).toBeVisible();
+  await expect(page.getByText('Network Error Logging', {exact: false}).first()).toBeVisible();
   await expect(page.getByText('Resend', {exact: false}).first()).toBeVisible();
   await expect(page.getByText('Microsoft 365', {exact: false}).first()).toBeVisible();
+});
+
+test('work page states the AI scoping and legal-advice boundaries', async ({page}) => {
+  await page.goto('/work#responsible-automation');
+  await expect(
+    page.getByRole('heading', {name: 'Classify the responsibility before choosing the technology'}),
+  ).toBeVisible();
+  await expect(page.getByText('The EU AI Act and European data-protection law are separate checks')).toBeVisible();
+  await expect(page.getByText('Hekswerk does not certify EU AI Act or privacy compliance')).toBeVisible();
 });
 
 for (const route of publicRoutes) {

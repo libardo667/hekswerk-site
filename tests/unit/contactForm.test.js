@@ -1,22 +1,9 @@
 import {describe, expect, it} from 'vitest';
-import {
-  attributionFromLocation,
-  attributionStorageKey,
-  captureAttribution,
-  readAttribution,
-} from '../../src/data/contactAttribution';
 import {defaultTopic, payloadFromForm, topicFromSearch} from '../../src/data/contactForm';
 
 function formData(values) {
   return {get: (name) => values[name] ?? null};
 }
-
-const attribution = {
-  utm_source: 'directory',
-  utm_medium: 'profile',
-  utm_campaign: 'august',
-  initial_landing_path: '/work',
-};
 
 describe('contact topic selection', () => {
   it.each([
@@ -30,48 +17,8 @@ describe('contact topic selection', () => {
   });
 });
 
-describe('contact attribution', () => {
-  it('captures only the allowed campaign fields and the pathname', () => {
-    expect(
-      attributionFromLocation({
-        pathname: '/work',
-        search: '?utm_source=directory&utm_medium=profile&utm_campaign=august&private=value',
-      }),
-    ).toEqual(attribution);
-  });
-
-  it('keeps the initial landing attribution for the browser session', () => {
-    const values = new Map();
-    const storage = {
-      getItem: (key) => values.get(key) ?? null,
-      setItem: (key, value) => values.set(key, value),
-    };
-    captureAttribution(
-      {pathname: '/work', search: '?utm_source=directory&utm_medium=profile&utm_campaign=august'},
-      storage,
-    );
-    captureAttribution({pathname: '/contact', search: '?utm_source=other'}, storage);
-    expect(readAttribution({pathname: '/contact', search: ''}, storage)).toEqual(attribution);
-    expect(JSON.parse(values.get(attributionStorageKey))).toEqual(attribution);
-  });
-
-  it('falls back to the current page when session storage is unavailable', () => {
-    const unavailableStorage = {
-      getItem() {
-        throw new Error('unavailable');
-      },
-    };
-    expect(readAttribution({pathname: '/contact', search: '?utm_source=direct'}, unavailableStorage)).toEqual({
-      utm_source: 'direct',
-      utm_medium: '',
-      utm_campaign: '',
-      initial_landing_path: '/contact',
-    });
-  });
-});
-
 describe('contact payloads', () => {
-  it('builds the versioned automation payload with attribution and the honeypot', () => {
+  it('builds the versioned automation payload with the honeypot', () => {
     expect(
       payloadFromForm(
         formData({
@@ -88,7 +35,6 @@ describe('contact payloads', () => {
           website: 'leave-me-empty',
         }),
         'automation',
-        attribution,
       ),
     ).toEqual({
       schema_version: 2,
@@ -98,7 +44,6 @@ describe('contact payloads', () => {
       topic: 'Operations Automation Sprint',
       privacy_acknowledged: true,
       website: 'leave-me-empty',
-      ...attribution,
       organization: 'Example practice',
       repeating_process: 'Intake arrives by email and gets copied into three systems.',
       systems_involved: 'Email, Sheets, and a CRM',
@@ -120,7 +65,6 @@ describe('contact payloads', () => {
           website: '',
         }),
         'relocation',
-        attribution,
       ),
     ).toEqual({
       schema_version: 2,
@@ -130,7 +74,6 @@ describe('contact payloads', () => {
       topic: 'Relocation planning',
       privacy_acknowledged: true,
       website: '',
-      ...attribution,
       hardest_part: 'Housing',
     });
   });
@@ -146,7 +89,6 @@ describe('contact payloads', () => {
           website: '',
         }),
         'research',
-        attribution,
       ),
     ).toEqual({
       schema_version: 2,
@@ -156,7 +98,6 @@ describe('contact payloads', () => {
       topic: 'Research collaboration',
       privacy_acknowledged: true,
       website: '',
-      ...attribution,
       message: 'A research question',
     });
   });

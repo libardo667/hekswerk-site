@@ -56,4 +56,5 @@ The contact endpoint is a separate Cloudflare Worker whose source and Wrangler c
 Worker and therefore is intentionally not part of the static-site workflow.
 
 The site bundles its fonts locally. `docs/PRIVACY_DATA_FLOW.md` is the implementation authority for browsing and
-initial-inquiry data flows, provider boundaries, deletion handling, and the operational checklist for later access.
+initial-inquiry data flows, provider boundaries, retention, and rights handling. `docs/PRIVACY_AND_AI_SCOPING.md` is
+the operating gate for later access, privacy scoping, and AI-enabled contract work.

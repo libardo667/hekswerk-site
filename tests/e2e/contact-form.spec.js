@@ -76,14 +76,13 @@ test('native validation protects the shared and automation-required fields', asy
   expect(emailValidity.message.length).toBeGreaterThan(0);
 });
 
-test('automation submission carries its fields, honeypot, and initial-session attribution', async ({page}) => {
+test('automation submission carries only its intended fields and honeypot', async ({page}) => {
   let payload;
   await page.route(endpoint, async (route) => {
     payload = route.request().postDataJSON();
     await route.fulfill({status: 200, contentType: 'application/json', body: JSON.stringify({ok: true})});
   });
-  await page.goto('/work?utm_source=directory&utm_medium=profile&utm_campaign=august&private=discard-me');
-  await page.goto('/contact?topic=automation');
+  await page.goto('/contact?topic=automation&utm_source=discard-me');
   const honeypot = page.locator('input[name="website"]');
   await expect(honeypot).toHaveCount(1);
   await expect(honeypot).toHaveAttribute('tabindex', '-1');
@@ -112,10 +111,6 @@ test('automation submission carries its fields, honeypot, and initial-session at
     topic: 'Operations Automation Sprint',
     privacy_acknowledged: true,
     website: 'bot-value',
-    utm_source: 'directory',
-    utm_medium: 'profile',
-    utm_campaign: 'august',
-    initial_landing_path: '/work',
     organization: 'Example practice',
     repeating_process: 'Intake gets copied by hand.',
     systems_involved: 'Email and Sheets',
@@ -179,30 +174,6 @@ test('relocation submission contains only the intended conditional payload', asy
 test('the form states the relationship boundary before submission', async ({page}) => {
   await page.goto('/contact');
   await expect(page.getByText('Sending an inquiry does not establish a client relationship.')).toBeVisible();
-});
-
-test('submission falls back safely when session storage is unavailable', async ({page}) => {
-  await page.addInitScript(() => {
-    Object.defineProperty(window, 'sessionStorage', {
-      configurable: true,
-      get() {
-        throw new DOMException('Storage unavailable', 'SecurityError');
-      },
-    });
-  });
-  let payload;
-  await page.route(endpoint, async (route) => {
-    payload = route.request().postDataJSON();
-    await route.fulfill({status: 200, contentType: 'application/json', body: JSON.stringify({ok: true})});
-  });
-  await page.goto('/contact?topic=research&utm_source=direct');
-  await page.getByLabel('Name').fill('Ada');
-  await page.getByLabel('Email').fill('ada@example.com');
-  await page.getByLabel('What would you like to explore or discuss?').fill('A question');
-  await page.getByRole('checkbox').check();
-  await page.getByRole('button', {name: 'Send inquiry'}).click();
-  expect(payload.utm_source).toBe('direct');
-  expect(payload.initial_landing_path).toBe('/contact');
 });
 
 test('mocked failure is announced with the email fallback', async ({page}) => {

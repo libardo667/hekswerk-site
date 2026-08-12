@@ -4,8 +4,6 @@ import path from 'node:path';
 const buildRoot = path.resolve(process.cwd(), 'build');
 const siteUrl = 'https://www.hekswerk.com';
 const socialImage = `${siteUrl}/img/hekswerk-social-card.png`;
-const analyticsScript = 'https://static.cloudflareinsights.com/beacon.min.js';
-const analyticsToken = 'b521818f3dee4549be53db47190f52c2';
 const routes = [
   {
     route: '/',
@@ -132,11 +130,7 @@ for (const entry of routes) {
   expectIncludes(html, `name="twitter:image" content="${socialImage}"`, `${entry.route}: Twitter image`);
   expectIncludes(html, 'name="twitter:card" content="summary_large_image"', `${entry.route}: Twitter card`);
   expectIncludes(html, 'name="referrer" content="strict-origin-when-cross-origin"', `${entry.route}: referrer policy`);
-  const analyticsBlocks = [...html.matchAll(/<script[^>]*data-cf-beacon=/g)];
-  if (analyticsBlocks.length !== 1) fail(`${entry.route}: expected exactly one Cloudflare Web Analytics beacon`);
-  expectIncludes(html, `src="${analyticsScript}"`, `${entry.route}: Cloudflare Web Analytics script`);
-  expectIncludes(html, analyticsToken, `${entry.route}: Cloudflare Web Analytics site token`);
-  expectIncludes(html, '&quot;spa&quot;:false', `${entry.route}: Cloudflare Web Analytics static-navigation mode`);
+  if (/data-cf-beacon|cloudflareinsights\.com/.test(html)) fail(`${entry.route}: client-side analytics remains`);
 
   const jsonLd = extractJsonLd(html, entry.file);
   const graph = jsonLd.find((block) => Array.isArray(block['@graph']));
@@ -162,15 +156,16 @@ expectIncludes(notFoundHtml, '<title>Page not found | Hekswerk</title>', '404: t
 expectIncludes(notFoundHtml, 'name="robots" content="noindex"', '404: noindex');
 expectIncludes(notFoundHtml, 'There is nothing at this address.', '404: public explanation');
 if (notFoundHtml.includes('rel="canonical"')) fail('404: canonical URL must be absent');
-if ([...notFoundHtml.matchAll(/<script[^>]*data-cf-beacon=/g)].length !== 1) {
-  fail('404: expected exactly one Cloudflare Web Analytics beacon');
-}
+if (/data-cf-beacon|cloudflareinsights\.com/.test(notFoundHtml)) fail('404: client-side analytics remains');
 
 const builtFiles = filesBelow(buildRoot);
 for (const file of builtFiles.filter((candidate) => ['.html', '.css', '.js'].includes(path.extname(candidate)))) {
   const contents = readFileSync(file, 'utf8');
   if (/fonts\.(?:googleapis|gstatic)\.com/.test(contents)) {
     fail(`${path.relative(buildRoot, file)}: remote Google Fonts reference remains`);
+  }
+  if (/data-cf-beacon|cloudflareinsights\.com|sessionStorage|localStorage/.test(contents)) {
+    fail(`${path.relative(buildRoot, file)}: client-side tracking or browser storage remains`);
   }
 }
 if (builtFiles.filter((file) => path.extname(file) === '.woff2').length === 0) fail('locally bundled WOFF2 fonts');
@@ -184,17 +179,26 @@ if (!statSafe(path.join(buildRoot, 'fonts/OFL-1.1.txt'))) fail('bundled font lic
 
 const privacyHtml = htmlForRoute('/privacy');
 for (const phrase of [
+  'Who is responsible',
   'What the contact form collects',
   'Cloudflare Worker',
+  'Network Error Logging',
   'Resend',
   'Microsoft 365',
-  'Requesting deletion',
+  'Your data-protection rights',
+  'No automated decision about your inquiry',
   'does not by itself establish a client relationship',
 ]) {
   expectIncludes(privacyHtml, phrase, `/privacy: ${phrase}`);
 }
 const workHtml = htmlForRoute('/work');
-for (const phrase of ['Do not send passwords', 'narrowly scoped credentials', 'Access is revoked or transferred']) {
+for (const phrase of [
+  'Do not send passwords',
+  'narrowly scoped credentials',
+  'Access is revoked or transferred',
+  'The EU AI Act and European data-protection law are separate checks',
+  'Hekswerk does not certify EU AI Act or privacy compliance',
+]) {
   expectIncludes(workHtml, phrase, `/work data handling: ${phrase}`);
 }
 
@@ -209,6 +213,7 @@ for (const retiredPagesFile of ['CNAME', '.nojekyll', '.assetsignore']) {
   }
 }
 const headers = readFileSync(path.join(buildRoot, '_headers'), 'utf8');
+if (/cloudflareinsights\.com/.test(headers)) fail('_headers: retired client-side analytics origin remains');
 for (const value of [
   'Content-Security-Policy:',
   'X-Content-Type-Options: nosniff',

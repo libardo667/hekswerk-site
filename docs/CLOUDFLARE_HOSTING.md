@@ -62,7 +62,8 @@ passes. The check and deployment are in one ordered job, so a failed gate cannot
 - Unknown routes serve the Hekswerk `404.html` with status 404.
 - Fingerprinted files under `/_astro/` are cached immutably.
 - The `workers.dev` hostname sends `X-Robots-Tag: noindex, nofollow`.
-- All HTML routes contain exactly one explicit Cloudflare Web Analytics beacon.
+- HTML routes contain no client-side analytics beacon and write no browser storage. Aggregate traffic counts come from
+  Cloudflare's edge and zone analytics.
 - Canonical, social, sitemap, and robots URLs identify `https://www.hekswerk.com`.
 - Cloudflare redirects apex HTTP and HTTPS requests to `www`, preserving the path and query string.
 
@@ -101,8 +102,7 @@ Additional production checks established:
 - canonical, Open Graph, Twitter, Organization, and WebSite metadata on every public route;
 - Person metadata on `/about` and Service metadata on `/work` through the built-artifact gate;
 - the intended `robots.txt` and sitemap, with no retired WorldWeaver site route;
-- exactly one configured Cloudflare Web Analytics tag per HTML document, followed by Cloudflare's versioned loader and
-  report request at runtime;
+- no client-side analytics tag, browser-storage write, remote font, or unapproved automatic third-party request;
 - HTTP 404 and the Hekswerk not-found document for unknown, Pages-only, and retired manual paths;
 - HTTP 301 for `/contact.html` and `/index.html`, with query and browser fragment behavior covered;
 - valid TLS, Cloudflare response headers, and the apex redirect with its test path and query string preserved;

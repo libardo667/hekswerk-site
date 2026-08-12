@@ -1,3 +1,4 @@
+import Link from '../../components/Link';
 import {CallToAction, FitLists, Hero, PricingCards, ProcessSteps} from '../../components/SitePrimitives';
 import Layout from '../../components/PageContent';
 import StructuredData from '../../components/StructuredData';
@@ -201,6 +202,65 @@ export default function Work() {
                 The $750 rate requires permission to develop an anonymized case study. Nothing is published without the
                 client's approval. The case study can document the scope, approach, build, and acceptance check without
                 identifying the client, and no positive testimonial is required.
+              </p>
+            </aside>
+          </div>
+        </section>
+
+        <section className="section-block section-soft" id="responsible-automation">
+          <div className="shell">
+            <div className="section-heading">
+              <span className="eyebrow">When automation includes AI</span>
+              <h2>Classify the responsibility before choosing the technology</h2>
+              <p>
+                The EU AI Act and European data-protection law are separate checks that may both matter. I identify the
+                parties&apos; roles, the affected people and data, and any prohibited-practice, high-risk, or
+                transparency question before deciding whether an AI-enabled workflow belongs in a sprint.
+              </p>
+            </div>
+            <div className="service-boundary-grid">
+              <article className="service-boundary-card">
+                <span className="eyebrow">Classify</span>
+                <h3>Name the purpose, parties, and affected people</h3>
+                <p>
+                  We identify who provides, deploys, or integrates the system, what it is meant to do, and who may be
+                  affected. An unresolved legal classification is a reason to pause or narrow the work.
+                </p>
+              </article>
+              <article className="service-boundary-card">
+                <span className="eyebrow">Oversight</span>
+                <h3>Keep human authority explicit</h3>
+                <p>
+                  The scope names what the system may recommend or do, who reviews consequential outcomes, how a person
+                  can intervene, and what happens when the system is uncertain or fails.
+                </p>
+              </article>
+              <article className="service-boundary-card">
+                <span className="eyebrow">Evidence</span>
+                <h3>Test, disclose, and hand off known limits</h3>
+                <p>
+                  Acceptance covers representative inputs, expected failures, relevant versions, useful logs, required
+                  notices, known limits, and a client-owned handoff rather than an unexplained model call.
+                </p>
+              </article>
+            </div>
+            <aside className="pricing-note">
+              <span className="eyebrow">Boundary</span>
+              <h3>Engineering scope is not legal certification</h3>
+              <p>
+                I can make roles, data flows, controls, tests, and open questions visible. Hekswerk does not certify EU
+                AI Act or privacy compliance or replace qualified legal or data-protection advice. If classification or
+                sensitive-data questions control the scope, the client should involve the appropriate counsel or data
+                protection lead before implementation.
+              </p>
+              <p>
+                <Link to="https://digital-strategy.ec.europa.eu/en/faqs/navigating-ai-act">
+                  European Commission AI Act guidance
+                </Link>{' '}
+                and{' '}
+                <Link to="https://commission.europa.eu/law/law-topic/data-protection/information-individuals_en">
+                  European Commission data-protection guidance
+                </Link>
               </p>
             </aside>
           </div>

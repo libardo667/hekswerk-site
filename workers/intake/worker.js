@@ -143,10 +143,6 @@ function normalizeShared(payload) {
     topic: clean(payload.topic),
     privacy_acknowledged: payload.privacy_acknowledged === true,
     website: clean(payload.website),
-    utm_source: clean(payload.utm_source),
-    utm_medium: clean(payload.utm_medium),
-    utm_campaign: clean(payload.utm_campaign),
-    initial_landing_path: clean(payload.initial_landing_path),
   };
 }
 
@@ -229,16 +225,9 @@ function validateShared(submission) {
       email: [submission.email, 200],
       topic: [submission.topic, 120],
       website: [submission.website, 200],
-      utm_source: [submission.utm_source, 200],
-      utm_medium: [submission.utm_medium, 200],
-      utm_campaign: [submission.utm_campaign, 200],
-      initial_landing_path: [submission.initial_landing_path, 500],
     })
   ) {
     return 'Submission is too long';
-  }
-  if (submission.initial_landing_path && !submission.initial_landing_path.startsWith('/')) {
-    return 'Invalid attribution';
   }
   return null;
 }
@@ -287,16 +276,7 @@ function emailText(heading, submission, fields) {
   for (const [label, value] of fields) {
     lines.push('', `${label}:`, value || '(not provided)');
   }
-  lines.push(
-    '',
-    `Privacy acknowledgement: ${submission.privacy_acknowledged ? 'Yes' : 'No'}`,
-    '',
-    'Attribution:',
-    `utm_source: ${submission.utm_source || '(not captured)'}`,
-    `utm_medium: ${submission.utm_medium || '(not captured)'}`,
-    `utm_campaign: ${submission.utm_campaign || '(not captured)'}`,
-    `Initial landing path: ${submission.initial_landing_path || '(not captured)'}`,
-  );
+  lines.push('', `Privacy acknowledgement: ${submission.privacy_acknowledged ? 'Yes' : 'No'}`);
   return lines.join('\n');
 }
 

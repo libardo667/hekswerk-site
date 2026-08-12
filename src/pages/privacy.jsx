@@ -14,7 +14,7 @@ export default function Privacy() {
           compact
           eyebrow="Privacy and data handling"
           title="What this site sends, and where."
-          lede="This is a factual map of the current public site and initial inquiry path. It is not a generic policy for practices or systems that do not exist."
+          lede="This notice covers the public Hekswerk site and the first inquiry. Any later client work gets its own scope, responsibilities, and data-handling terms."
         />
 
         <section className="section-block">
@@ -22,24 +22,40 @@ export default function Privacy() {
             <p className="privacy-reviewed">Implementation and provider documentation last checked August 12, 2026.</p>
 
             <section>
+              <h2>Who is responsible</h2>
+              <p>
+                Levi Banks operates Hekswerk as a one-person practice. For this website and its inquiry path, I decide
+                why and how personal information is handled and am the data controller where that term applies. You can
+                reach me at <a href={`mailto:${contactEmail}`}>{contactEmail}</a>.
+              </p>
+            </section>
+
+            <section>
               <h2>When you browse the site</h2>
               <p>
                 Cloudflare Workers Static Assets serves the site at <code>www.hekswerk.com</code>. Cloudflare processes
-                the network request, requested path, and ordinary connection metadata needed to return the page. The
-                same build may also be available at a <code>workers.dev</code> review address, which is marked not to be
-                indexed.
+                the network request, including the requested address, IP address, and ordinary connection information
+                needed to return the page and protect the service. The same build may also be available at a{' '}
+                <code>workers.dev</code> review address, which is marked not to be indexed.
               </p>
               <p>
-                The site&apos;s styles, images, scripts, and two typefaces are served with the page by its current host.
-                The typefaces are bundled locally under the SIL Open Font License, so a page view does not contact
-                Google Fonts.
+                I use Cloudflare&apos;s aggregate traffic dashboard to understand requests, page views, visits, and
+                broad country-level traffic. Cloudflare derives some of these measures from network information such as
+                IP addresses. I do not install a client-side analytics beacon and do not receive raw request logs.
+                Worker invocation logs are disabled.
               </p>
               <p>
-                One Cloudflare Web Analytics script measures page views and page performance. Cloudflare receives the
-                site host and path, referring site, country, device and browser categories, and performance timing. Its
-                current documentation says Web Analytics does not log query strings, use cookies or browser storage, or
-                collect or use visitors&apos; personal data. Cloudflare keeps unsampled beacon data for seven days and
-                then retains aggregated data; its dashboard exposes the previous six months.
+                Cloudflare currently adds Network Error Logging instructions to its responses. If a supporting browser
+                encounters a network failure, it may send Cloudflare a diagnostic report describing the failed address,
+                referrer, request method, timing, protocol, status, error type, and network connection. Cloudflare says
+                it uses the connection IP to derive the network, country, and metro area, keeps the IP only in volatile
+                memory while processing the report, purges personal data afterward, and does not share the reports with
+                third parties.
+              </p>
+              <p>
+                This site sets no cookies and writes nothing to local storage or session storage. Its styles, images,
+                scripts, and two typefaces are served with the page. The typefaces are bundled locally, so a page view
+                does not contact Google Fonts.
               </p>
               <p>
                 External project links do not send the Hekswerk page as a referrer. If you choose one, the destination,
@@ -47,13 +63,18 @@ export default function Privacy() {
               </p>
               <ul className="plain-list privacy-sources">
                 <li>
-                  <Link to="https://developers.cloudflare.com/web-analytics/data-metrics/data-origin-and-collection/">
-                    Cloudflare Web Analytics collection
+                  <Link to="https://developers.cloudflare.com/analytics/account-and-zone-analytics/zone-analytics/">
+                    Cloudflare zone analytics
                   </Link>
                 </li>
                 <li>
-                  <Link to="https://developers.cloudflare.com/web-analytics/faq/">
-                    Cloudflare Web Analytics retention and query-string behavior
+                  <Link to="https://developers.cloudflare.com/analytics/faq/about-analytics/">
+                    Cloudflare&apos;s explanation of visits and unique visitors
+                  </Link>
+                </li>
+                <li>
+                  <Link to="https://developers.cloudflare.com/network-error-logging/">
+                    Cloudflare Network Error Logging and privacy details
                   </Link>
                 </li>
               </ul>
@@ -73,16 +94,9 @@ export default function Privacy() {
                 returns success without sending an email. Do not put passwords, access tokens, production data, medical
                 records, legal files, financial identifiers, identity documents, or other secrets in any field.
               </p>
-            </section>
-
-            <section>
-              <h2>Limited inquiry attribution</h2>
               <p>
-                The site records the first path you visit in a browser-tab session and, when present, the campaign
-                parameters <code>utm_source</code>, <code>utm_medium</code>, and <code>utm_campaign</code>. These values
-                stay in that tab&apos;s session storage and are sent only if you submit the form. The site does not
-                retain other query parameters for attribution. The browser normally clears this copy when that tab
-                session ends.
+                The required privacy checkbox records that you saw this notice. It is not consent to marketing and is
+                not the legal basis for handling the inquiry.
               </p>
             </section>
 
@@ -96,12 +110,12 @@ export default function Privacy() {
                 delivery is unavailable or rejected.
               </p>
               <p>
-                Cloudflare still processes the network request. For a valid submission, the Worker sends the form fields
-                and limited attribution to Resend as a plain-text email. Resend&apos;s dashboard exposes the sent
-                message and API request log, and its current documentation says it retains email data for 30 days. The
-                destination is my Hekswerk mailbox hosted by Microsoft 365, where the message remains subject to that
-                mailbox&apos;s deletion, recovery, and retention settings. There is no additional Hekswerk-owned contact
-                database.
+                Cloudflare still processes the network request. For a valid submission, the Worker sends only the
+                accepted form fields to Resend as a plain-text email. Resend&apos;s dashboard exposes the sent message
+                and API request log, and its current documentation says it retains email data for 30 days. Its public
+                documentation does not state a separate retention period for the request log. The destination is my
+                Hekswerk mailbox hosted by Microsoft 365, where the message remains subject to that mailbox&apos;s
+                deletion, recovery, and retention settings. There is no additional Hekswerk-owned contact database.
               </p>
               <p>
                 <Link to="https://resend.com/docs/dashboard/webhooks/how-to-store-webhooks-data">
@@ -111,22 +125,80 @@ export default function Privacy() {
             </section>
 
             <section>
-              <h2>How I use an inquiry</h2>
+              <h2>Why I use an inquiry</h2>
               <p>
                 I use the message to understand the question, assess whether the work appears to fit, reply, and keep
                 the resulting conversation in my business mailbox. Submitting does not create an account, schedule a
                 meeting, or add anyone to a newsletter or marketing list.
               </p>
+              <p>
+                Where European data-protection law applies, I rely on steps requested before a possible contract for a
+                service inquiry. I rely on legitimate interests to answer genuine research or general inquiries, secure
+                the form, diagnose site availability, maintain necessary business correspondence, and understand
+                aggregate site traffic. Those interests are limited to operating and protecting this small practice, and
+                I do not use an inquiry for unrelated advertising.
+              </p>
             </section>
 
             <section>
-              <h2>Requesting deletion</h2>
+              <h2>International processing</h2>
               <p>
-                To request deletion of an inquiry, email <a href={`mailto:${contactEmail}`}>{contactEmail}</a>, ideally
-                from the address used in the form, and include the approximate submission date. I can remove copies I
-                control from my mailbox and ask Resend about a provider-held copy that is still within its retention
-                period. I will tell you what I removed and identify any provider-controlled logs, backups, or retention
-                that I cannot directly erase or verify.
+                Cloudflare, Resend, and Microsoft provide services internationally and may process information outside
+                the European Economic Area, including in the United States. Their published data-protection terms use
+                contractual transfer safeguards, including the European Commission&apos;s standard contractual clauses,
+                where required. Exact routing and storage can change with provider configuration, so the linked provider
+                terms are the current source for those safeguards.
+              </p>
+              <ul className="plain-list privacy-sources">
+                <li>
+                  <Link to="https://www.cloudflare.com/cloudflare-customer-dpa/">
+                    Cloudflare Data Processing Addendum
+                  </Link>
+                </li>
+                <li>
+                  <Link to="https://resend.com/legal/dpa">Resend Data Processing Addendum</Link>
+                </li>
+                <li>
+                  <Link to="https://www.microsoft.com/licensing/docs/view/Microsoft-Products-and-Services-Data-Protection-Addendum-DPA">
+                    Microsoft Products and Services Data Protection Addendum
+                  </Link>
+                </li>
+              </ul>
+            </section>
+
+            <section>
+              <h2>How long I keep an inquiry</h2>
+              <p>
+                I keep inquiry correspondence while it is needed to reply, assess fit, continue a conversation you
+                requested, meet an agreed or legal record-keeping duty, or handle a possible claim. At least once each
+                calendar year, I review inquiries that did not lead to work and delete active-mailbox copies that are no
+                longer needed. If an inquiry leads to client work, the later agreement and applicable financial or legal
+                duties determine the relevant records and retention.
+              </p>
+            </section>
+
+            <section>
+              <h2>Your data-protection rights</h2>
+              <p>
+                Depending on the law that applies, you may ask for access, correction, deletion, restriction, or a
+                portable copy of your personal information, or object to its use. Email{' '}
+                <a href={`mailto:${contactEmail}`}>{contactEmail}</a>, ideally from the address used in the inquiry, and
+                include the approximate date. I will use the least additional information reasonably needed to verify
+                the request. Some records may need to be kept for legal duties or claims, and provider-controlled
+                backups or logs may not be directly erasable.
+              </p>
+              <p>
+                If European data-protection law applies, you may also complain to the authority where you live or work.
+                Hekswerk&apos;s intended post-move supervisory authority is the{' '}
+                <Link to="https://autoriteitpersoonsgegevens.nl/en">Dutch Data Protection Authority</Link>.
+              </p>
+            </section>
+
+            <section>
+              <h2>No automated decision about your inquiry</h2>
+              <p>
+                This site has no chatbot, advertising profile, or automated acceptance or rejection of inquiries. The
+                form performs ordinary field validation and a spam-trap check. I review delivered inquiries myself.
               </p>
             </section>
 

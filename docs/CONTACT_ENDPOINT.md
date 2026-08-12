@@ -36,11 +36,10 @@ The recovered active deployment had these verified properties:
 - Workers Logs and invocation logs enabled in the recovered dashboard deployment
 - Connected Git repository or external build configuration: none
 
-The audited Worker was deployed with Wrangler 4.121.0 on 2026-08-12. The current deployment adds the exact named
-static-site review origin to the CORS allowlist. Cloudflare reports version
-`38993525-645b-4f65-a541-d18aaa143719`, created at `2026-08-12T14:56:12.469Z`, receiving 100 percent of traffic. The
-Cloudflare deployment listing labels the source `Unknown (deployment)`; the local deployment command and its successful
-output are the evidence that it came from `npm run worker:deploy` in this repository.
+The audited Worker was deployed with Wrangler 4.121.0 on 2026-08-12. The current deployment keeps the exact named
+static-site review origin in the CORS allowlist and removes the retired attribution fields from normalization,
+validation, and email output. Cloudflare reports version `28209e53-1bca-4c7b-a07f-0d6593bbce0c`. The successful local
+`npm run worker:deploy` output is the evidence that this version came from the repository configuration.
 
 The repository deliberately preserves the verified compatibility date. Changing that date is a separate runtime
 upgrade and requires targeted testing against Cloudflare's compatibility changes.
@@ -67,10 +66,6 @@ Every version 2 payload also includes:
 | `topic` | string | Public display label, at most 120 characters |
 | `privacy_acknowledged` | boolean | Must be exactly `true` |
 | `website` | string | Honeypot, at most 200 characters |
-| `utm_source` | string | Optional, at most 200 characters |
-| `utm_medium` | string | Optional, at most 200 characters |
-| `utm_campaign` | string | Optional, at most 200 characters |
-| `initial_landing_path` | string | Optional same-site pathname beginning with `/`, at most 500 characters |
 
 ### Automation fields
 
@@ -92,12 +87,11 @@ Every version 2 payload also includes:
 
 Research and general submissions have one required `message` of at most 5,000 characters.
 
-## Attribution and browser storage
+## Browser-state boundary
 
-The first Hekswerk page loaded in a browser-tab session records only its pathname and the optional campaign parameters
-`utm_source`, `utm_medium`, and `utm_campaign`. These values are placed in `sessionStorage`, not cookies. They are sent
-to the Worker only if the visitor submits the contact form. Other query parameters are not retained for attribution.
-If session storage is unavailable, submission still works and uses the current page's allowed attribution values.
+The site does not use cookies, `localStorage`, or `sessionStorage`. Campaign parameters and the initial landing path are
+not included in the version 2 payload. The Worker ignores those retired fields if an older or hand-built client sends
+them, so they do not appear in the delivered email.
 
 ## Compatibility behavior
 
@@ -113,7 +107,7 @@ were retained temporarily during the previous staged deployment.
 - POST requests must declare `application/json`.
 - JSON bodies larger than 32,000 bytes are rejected.
 - A filled `website` honeypot receives a successful response but causes no email delivery.
-- Required fields, email shape, enumerated selections, lengths, and attribution path shape are checked at the Worker.
+- Required fields, email shape, enumerated selections, and lengths are checked at the Worker.
 - Provider response bodies are not returned to visitors or written to logs by this source.
 - Automatic invocation logs are disabled. The only application log calls are content-free configuration or delivery
   errors.
@@ -142,9 +136,10 @@ simple spam; they are not a security, abuse-prevention, confidentiality, or comp
 
 The Worker has no persistence binding and does not write inquiry contents to logs. Cloudflare still processes the
 request and its platform metadata. On successful delivery, Resend receives the full plain-text message and request body;
-its current documentation states that email data is retained for 30 days. The delivered message remains in the
-Hekswerk Microsoft 365 mailbox under that mailbox's deletion and retention settings. No exact mailbox or provider
-backup deletion schedule is asserted.
+its current documentation states that email data is retained for 30 days. Its public documentation does not identify a
+separate request-log retention period. The delivered message remains in the Hekswerk Microsoft 365 mailbox. At least
+once each calendar year, unconverted inquiries must be reviewed and active-mailbox copies that are no longer needed
+deleted. No exact provider backup deletion schedule is asserted.
 
 Deletion requests go to `levi@hekswerk.com`. The handling checklist, provider evidence, and known unknowns are recorded
 in `docs/PRIVACY_DATA_FLOW.md`.
@@ -153,14 +148,14 @@ in `docs/PRIVACY_DATA_FLOW.md`.
 
 - **Source-verified:** normalization, validation, honeypot handling, CORS, Resend request construction, payload limits,
   compatibility behavior, and public responses in `workers/intake/worker.js`.
-- **Test-verified:** form payload construction, attribution lifetime and fallback, Worker success and failure paths,
+- **Test-verified:** minimized form payload construction, absence of browser storage, Worker success and failure paths,
   strict version and content-type rejection, conditional fields, browser success and failure, keyboard behavior, and
   automated accessibility.
 - **Dashboard-verified:** the recovered active version, compatibility settings, route state, Secret binding type,
   deployment source, and pre-audit observability state listed above.
-- **Deployment-verified:** version `38993525-645b-4f65-a541-d18aaa143719` has the repository compatibility date and
-  required Secret binding, allows the exact named review origin, and was deployed from the configuration that disables
-  automatic invocation logs.
+- **Deployment-verified:** version `28209e53-1bca-4c7b-a07f-0d6593bbce0c` has the repository compatibility date and
+  required Secret binding, allows the exact named review origin, removes retired attribution from delivered messages,
+  and was deployed from the configuration that disables automatic invocation logs.
 - **Externally observed:** the public endpoint resolves, permits the production origin, requires JSON, rejects a
   retired payload, permits a review-origin preflight, rejects an unrelated origin, and silently accepts a synthetic
   filled-honeypot request without delivery.

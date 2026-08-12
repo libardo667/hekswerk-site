@@ -18,7 +18,7 @@ export function topicLabel(topic) {
   return topicLabels[topic] || topicLabels[defaultTopic];
 }
 
-function sharedPayload(form, topic, attribution) {
+function sharedPayload(form, topic) {
   return {
     schema_version: 2,
     form_type: topic,
@@ -27,15 +27,11 @@ function sharedPayload(form, topic, attribution) {
     topic: topicLabel(topic),
     privacy_acknowledged: form.get('privacy_acknowledged') === 'on',
     website: form.get('website'),
-    utm_source: attribution.utm_source || '',
-    utm_medium: attribution.utm_medium || '',
-    utm_campaign: attribution.utm_campaign || '',
-    initial_landing_path: attribution.initial_landing_path || '',
   };
 }
 
-export function payloadFromForm(form, topic, attribution = {}) {
-  const shared = sharedPayload(form, topic, attribution);
+export function payloadFromForm(form, topic) {
+  const shared = sharedPayload(form, topic);
 
   if (topic === 'automation') {
     return {

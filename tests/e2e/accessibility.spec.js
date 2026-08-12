@@ -39,13 +39,13 @@ test('retired WorldWeaver documentation route returns 404', async ({request}) =>
   }
 });
 
-test('custom 404 is styled, noindex, and includes one analytics beacon', async ({page}) => {
+test('custom 404 is styled, noindex, and contains no client-side analytics', async ({page}) => {
   const response = await page.goto('/not-a-real-hekswerk-route?custom-404-check=1');
   expect(response.status()).toBe(404);
   await expect(page.getByRole('heading', {name: 'There is nothing at this address.'})).toBeVisible();
   await expect(page.locator('meta[name="robots"]')).toHaveAttribute('content', 'noindex');
   await expect(page.locator('link[rel="canonical"]')).toHaveCount(0);
-  await expect(page.locator('script[src="https://static.cloudflareinsights.com/beacon.min.js"]')).toHaveCount(1);
+  await expect(page.locator('script[data-cf-beacon]')).toHaveCount(0);
 });
 
 test('site responses carry the repository security-header policy', async ({request}) => {

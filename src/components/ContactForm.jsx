@@ -1,5 +1,4 @@
 import {useEffect, useState, useSyncExternalStore} from 'react';
-import {readAttribution} from '../data/contactAttribution';
 import {defaultTopic, payloadFromForm, topicFromSearch, topicOptions} from '../data/contactForm';
 import {contactEmail} from '../data/site';
 import Link from './Link';
@@ -123,13 +122,7 @@ export default function ContactForm() {
 
     const formElement = event.currentTarget;
     const form = new FormData(formElement);
-    let attribution = {};
-    try {
-      attribution = readAttribution(window.location, window.sessionStorage);
-    } catch {
-      attribution = readAttribution(window.location, {getItem: () => null});
-    }
-    const payload = payloadFromForm(form, topic, attribution);
+    const payload = payloadFromForm(form, topic);
 
     try {
       const response = await fetch(endpoint, {
