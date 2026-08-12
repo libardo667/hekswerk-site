@@ -110,7 +110,6 @@ const config = {
           items: [
             {label: 'Operations Automation Sprint', to: '/work'},
             {label: 'Selected work', to: '/work/selected-work'},
-            {label: 'Shareable brief', to: '/work/brief'},
           ],
         },
         {

@@ -272,7 +272,6 @@ h3 {
 .lane-card h2,
 .site-cta h2,
 .contact-section h2,
-.brief-sheet h2,
 .privacy-copy h2 {
   color: var(--heks-cream);
   font-weight: 500;
@@ -282,7 +281,6 @@ h3 {
 .section-copy,
 .lane-card p,
 .plain-list,
-.brief-sheet > section > p,
 .privacy-copy p {
   color: var(--heks-muted);
   font-size: 1.06rem;
@@ -649,18 +647,6 @@ h3 {
   margin-bottom: 0.7rem;
 }
 
-.brief-sheet {
-  display: grid;
-  gap: clamp(4rem, 8vw, 7rem);
-  padding-top: clamp(4rem, 8vw, 7rem);
-  padding-bottom: clamp(4rem, 8vw, 7rem);
-}
-
-.brief-sheet .process-grid,
-.brief-sheet .pricing-grid {
-  margin-top: 2rem;
-}
-
 .contact-section {
   padding-top: clamp(3rem, 6vw, 5rem);
 }
@@ -915,8 +901,7 @@ h3 {
   }
 
   .page-hero,
-  .section-block,
-  .brief-sheet {
+  .section-block {
     padding-top: 2rem;
     padding-bottom: 2rem;
   }
