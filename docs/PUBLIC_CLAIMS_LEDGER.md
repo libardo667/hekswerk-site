@@ -21,6 +21,7 @@ An entry marked **Hold** must not appear publicly until Levi supplies the named 
 | --- | --- | --- |
 | H1 | [`docs/CONTRACT_WORK_RELAUNCH.md`](./CONTRACT_WORK_RELAUNCH.md), the August 2026 relaunch authority | Public |
 | H2 | Public Hekswerk Git history, especially `0fbc945:the-practice.html` and the later claim-withdrawal history | Public |
+| H3 | Current Hekswerk website source, configuration, and contact-form implementation | Public |
 | W1 | [WorldWeaver README at `43eae31`](https://github.com/libardo667/worldweaver/blob/43eae31093ac941bc3335d6ab95d3b38409942ea/README.md) | Public |
 | W2 | [WorldWeaver manual landing page at `43eae31`](https://github.com/libardo667/worldweaver/blob/43eae31093ac941bc3335d6ab95d3b38409942ea/docs/index.md) | Public |
 | W3 | WorldWeaver manifests and license at `43eae31` | Public |
@@ -82,7 +83,7 @@ The site may call the work **AI evaluation**. It must not name a platform, model
 | HEK-04 | The intended audience. | It is for small, operations-heavy professional-service teams, generally 3 to 25 people, with one recurring internal workflow that can be named, bounded, tested, and handed off. | H1 | Public | Approximate audience range | Yes |
 | HEK-05 | What Levi will deliver. | For one agreed workflow, I map the current process, define the build and acceptance check, build and test the automation, deploy it into client-controlled systems, document it, train its owner, and provide a bounded bug-fix period. | H1 | Public | One workflow, exact offer boundary | Yes |
 | HEK-06 | Client ownership. | The client keeps control of its accounts, credentials, data, and deployed system. Hekswerk is not a required hosting layer, subscription, or permanent operator. | H1 | Public | None | Yes |
-| HEK-07 | Offer pricing. | A qualifying founding-client scope is $750. The standard starting price is $1,500. Complex work starts at $2,500. | H1 | Public | Exact offer prices | Yes |
+| HEK-07 | Offer pricing. | Most Operations Automation Sprints start at $1,500. A qualifying founding-client scope is $750 and must have one clear trigger, one primary outcome, no custom service or database, and no more than two client-owned systems. Work needing a custom service, database, or several integrations starts at $2,500. | H1 | Public | Exact offer prices and scope boundaries | Yes |
 | HEK-08 | Bug-fix term. | The default bug-fix period is 14 calendar days after handoff and covers defects against the agreed scope. New integrations, rules, inputs, or branches are new work. | H1 | Public | Exact duration | Yes |
 | HEK-09 | WorldWeaver's place in Hekswerk. | WorldWeaver is part of Hekswerk's open research lane. It is visible evidence of systems work, not the service being sold. | H1 | Public | None | Yes |
 | HEK-10 | Hekswerk's founding date. | I founded Hekswerk in January 2026. | O1 | Public and private | Exact | Yes |
@@ -133,6 +134,19 @@ Kenshi Agent Environment may appear as selected technical or research work. It m
 | TECH-08 | A technology is secure, private, compliant, enterprise-ready, or production-proven merely because Levi has used it. | None. | No adequate source | Private or client-confidential | Unverified | No |
 
 The automation offer may also name email, forms, documents, spreadsheets, customer relationship management systems, task systems, and recurring reports as typical workflow inputs. Those are examples defined by H1, not claims that every integration has already been delivered.
+
+## Website privacy and data handling
+
+| ID | Claim under review | Exact approved wording | Source | Class | Number | Public decision |
+| --- | --- | --- | --- | --- | --- | --- |
+| WEB-01 | Information collected by the general contact form. | The contact form asks for your name, email address, topic, and message. | H3 | Public | None | Yes |
+| WEB-02 | Additional relocation fields. | If you choose relocation planning, it also offers fields for locations, timeline, household, and urgent or sensitive context. | H3 | Public | None | Yes |
+| WEB-03 | Contact-form transport and purpose. | The form sends those details over HTTPS to Hekswerk's intake endpoint so I can understand and reply to your inquiry. | H3 | Public | None | Yes |
+| WEB-04 | Account and newsletter behavior. | Submitting the form does not create a user account or add you to a newsletter. | H3 | Public | None | Yes |
+| WEB-05 | Website infrastructure and external resources. | The site is published with GitHub Pages. It loads typefaces from Google Fonts and links to public repositories on GitHub. | H3 | Public | None | Yes |
+| WEB-06 | Features not present on the site. | The site does not include advertising trackers, a scheduling platform, or a generic chatbot. | H3 | Public | None | Yes. Recheck the implementation before reuse. |
+
+These statements cover only the current public website and intake form. They are not a general security, compliance, confidentiality, or retention claim. The site must not promise a deletion schedule, storage location, processor list, or legal regime unless the underlying intake system is reviewed and the ledger is amended first.
 
 ## Quantitative results
 

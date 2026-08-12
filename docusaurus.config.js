@@ -24,7 +24,7 @@ function worldweaverEditUrl({docPath}) {
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'Hekswerk',
-  tagline: 'Independent research and careful systems work',
+  tagline: 'Operations automation and open research',
   favicon: 'img/logo_aura.svg',
   url: 'https://www.hekswerk.com',
   baseUrl: '/',
@@ -34,7 +34,7 @@ const config = {
   customFields: {
     worldweaverCommit: worldweaverCommit || null,
   },
-  staticDirectories: ['static', 'legacy-static'],
+  staticDirectories: ['static'],
   onBrokenLinks: 'throw',
   markdown: {
     hooks: {
@@ -74,7 +74,7 @@ const config = {
       {
         name: 'description',
         content:
-          'Hekswerk is an independent research practice building WorldWeaver, open infrastructure for persistent AI residents and shared worlds.',
+          "Hekswerk is Levi Banks's one-person systems practice. Its primary commercial offer is the Operations Automation Sprint.",
       },
     ],
     colorMode: {
@@ -89,40 +89,44 @@ const config = {
         src: 'img/logo_aura.svg',
       },
       items: [
+        {to: '/work', label: 'Work', position: 'left'},
+        {to: '/work/selected-work', label: 'Selected work', position: 'left'},
+        {to: '/research', label: 'Research', position: 'left'},
         {
           to: '/worldweaver/',
           label: 'WorldWeaver docs',
           position: 'left',
           activeBaseRegex: '/worldweaver/',
         },
-        {to: '/research', label: 'Research', position: 'left'},
         {to: '/about', label: 'About', position: 'left'},
-        {
-          href: 'https://github.com/libardo667/worldweaver',
-          label: 'GitHub',
-          position: 'right',
-        },
+        {to: '/contact', label: 'Contact', position: 'right'},
       ],
     },
     footer: {
       style: 'dark',
       links: [
         {
-          title: 'WorldWeaver',
+          title: 'Work',
           items: [
-            {label: 'Documentation', to: '/worldweaver/'},
-            {
-              label: 'Source code',
-              href: 'https://github.com/libardo667/worldweaver',
-            },
+            {label: 'Operations Automation Sprint', to: '/work'},
+            {label: 'Selected work', to: '/work/selected-work'},
+            {label: 'Shareable brief', to: '/work/brief'},
           ],
         },
         {
-          title: 'Hekswerk',
+          title: 'Research',
           items: [
-            {label: 'Research record', to: '/research'},
+            {label: 'WorldWeaver documentation', to: '/worldweaver/'},
+            {label: 'Research orientation', to: '/research'},
+            {label: 'WorldWeaver source', href: 'https://github.com/libardo667/worldweaver'},
+          ],
+        },
+        {
+          title: 'Practice',
+          items: [
             {label: 'About', to: '/about'},
-            {label: 'Contact', href: 'https://www.hekswerk.com/contact.html'},
+            {label: 'Contact', to: '/contact'},
+            {label: 'Privacy', to: '/privacy'},
           ],
         },
       ],
