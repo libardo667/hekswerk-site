@@ -139,10 +139,10 @@ Offer terms in HEK-04 through HEK-08 are commitments and boundaries, not histori
 | WW-08 | Consciousness, sentience, personhood, users, adoption, production readiness, or client outcomes. | None. | No adequate source for those public claims | Public, private, or speculative | Unverified | No |
 | WW-09 | A current feature, test result, or research finding not stated above. | None. | Current manual and dated research records | Public | Depends on claim | Hold. Add a pinned, narrowly worded ledger entry first. |
 | WW-10 | Levi's role. | I am the primary author of the WorldWeaver repository at the pinned commit. | W4 | Public | None | Yes |
-| WW-11 | Repository validation surface. | The repository provides root-level test and check commands. The manual is current operating documentation, while dated research records what was tested at the time. | W1, W2 | Public | None | Yes. This does not claim that a current run passed. |
+| WW-11 | Repository validation surface. | The repository provides root-level test and check commands. Dated research records what was tested at the time. | W1, W2 | Public | None | Yes. This does not claim that a current run passed. |
 | WW-12 | Backend, persistence, event, and distributed-system boundary. | The world engine owns concrete facts and typed consequences. Resident identity and history persist between private and shared spaces. Travel between independently operated computers remains a goal. | W1, W2 | Public | None | Yes |
 
-The complete and current capability list belongs in the WorldWeaver manual. Hekswerk overview pages should use the stable wording above and link to the manual rather than copying volatile feature counts or research conclusions.
+The complete and current capability list belongs in the WorldWeaver repository. Hekswerk overview pages should use the stable wording above and link to the project source rather than copying volatile feature counts or research conclusions.
 
 ## Kenshi Agent Environment
 

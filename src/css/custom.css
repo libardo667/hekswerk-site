@@ -936,16 +936,14 @@ h3 {
     #0d0f18;
 }
 
-.research-project-card h3,
-.research-record h3 {
+.research-project-card h3 {
   margin: 0 0 0.8rem;
   color: var(--heks-cream);
   font-size: clamp(1.45rem, 3vw, 2rem);
   font-weight: 500;
 }
 
-.research-project-card > p,
-.research-record p {
+.research-project-card > p {
   color: var(--heks-muted);
   line-height: 1.7;
 }
@@ -978,22 +976,6 @@ h3 {
 .research-project-card .button {
   align-self: flex-start;
   margin-top: auto;
-}
-
-.research-record {
-  display: grid;
-  margin: 3rem 0 1.5rem;
-  padding: clamp(1.6rem, 4vw, 2.5rem);
-  grid-template-columns: minmax(0, 1.1fr) minmax(280px, 0.9fr);
-  align-items: end;
-  gap: clamp(2rem, 6vw, 5rem);
-  border-top: 1px solid var(--heks-lavender);
-  border-bottom: 1px solid var(--heks-hairline);
-}
-
-.research-record .link-row {
-  margin: 0;
-  justify-content: flex-end;
 }
 
 .process-grid {
@@ -1363,13 +1345,8 @@ h3 {
     grid-template-columns: 1fr;
   }
 
-  .research-project-grid,
-  .research-record {
+  .research-project-grid {
     grid-template-columns: 1fr;
-  }
-
-  .research-record .link-row {
-    justify-content: flex-start;
   }
 
   .about-profile dl > div {

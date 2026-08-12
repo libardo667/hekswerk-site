@@ -141,23 +141,6 @@ export default function Research() {
                 link: {label: 'Open the WorldWeaver source', to: worldweaverUrl},
               },
             ]} />
-            <div className="research-record">
-              <div>
-                <span className="eyebrow">Current documentation</span>
-                <h3>The manual describes the documented software</h3>
-                <p>
-                  The repository provides root-level test and check commands. The manual is current operating
-                  documentation, while dated research records what was tested at the time. Do not treat an older
-                  research record as a current capability claim.
-                </p>
-              </div>
-              <div className="link-row">
-                <Link className="button button--primary" to="/worldweaver">Read the WorldWeaver manual</Link>
-                <Link className="button button--outline" to={`${worldweaverUrl}/tree/main/research`}>
-                  Open the dated research record
-                </Link>
-              </div>
-            </div>
             <BoundaryBox title="Current limits">
               <p>
                 Travel between independently operated computers is a goal, not a completed claim. WorldWeaver is

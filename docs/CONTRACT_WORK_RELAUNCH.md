@@ -2,7 +2,7 @@
 
 Status: authoritative for the August 2026 public-site relaunch.
 
-This document defines the positioning, offer, route structure, and completion standard for the relaunch. It is the authority for this work. If older site copy, retired pages, or prior positioning conflicts with this document, follow this document. The current Docusaurus architecture and the public WorldWeaver manual remain authoritative for how the site and research documentation work.
+This document defines the positioning, offer, route structure, and completion standard for the relaunch. It is the authority for this work. If older site copy, retired pages, or prior positioning conflicts with this document, follow this document. The current Docusaurus source remains authoritative for the site, while each public project repository remains authoritative for its implementation and technical documentation.
 
 ## The practice
 
@@ -91,7 +91,7 @@ Artificial intelligence may or may not be useful inside a particular workflow. I
 
 ## Open research lane
 
-WorldWeaver is Hekswerk's open research lane. It is serious, visible work and evidence that Levi can reason about stateful systems, boundaries, documentation, testing, and failure modes. That evidence must remain inspectable through the technical manual, source repository, and dated research record.
+WorldWeaver is part of Hekswerk's open research lane. It is serious, visible work and evidence that Levi can reason about stateful systems, boundaries, documentation, testing, and failure modes. That evidence remains inspectable in its source repository and dated research record. Hekswerk does not republish its manual or give it a dedicated site subtree.
 
 WorldWeaver is not:
 
@@ -126,8 +126,7 @@ The relaunch uses the existing site rather than creating a microsite or parallel
 | `/` | Hekswerk homepage and commercial front door. Lead with the Operations Automation Sprint, its audience, its concrete outcome, starting price, and one primary inquiry action. Introduce Hekswerk as a one-person practice with contract and research lanes. Give WorldWeaver a visible but secondary research section. |
 | `/work` | Complete Operations Automation Sprint page. State the workflow problem, audience, promise, process, scope boundaries, price tiers, client ownership, defect-correction boundary, and inquiry action. This is a service page, not an app or product dashboard. |
 | `/work/selected-work` | Claims-ledger-controlled evidence page. Separate professional work, independent engineering, and open research. Give paid employer automation visual primacy, identify provenance and limits for every case, and do not present independent projects as commercial deployments. |
-| `/research` | Orientation page for independent engineering and open research. Present EvoGen and Kenshi Agent Environment as the current active agent-system work, with their source, verification paths, maturity, and explicit limits. Present WorldWeaver as established open research with its manual and dated research record intact. Keep all three separate from the commercial offer. |
-| `/worldweaver/` | Existing Docusaurus integration for the canonical WorldWeaver technical manual. Keep the external docs source, sidebar, edit links, and published commit reference intact. WorldWeaver remains directly reachable from the engineering and research page, project sections, and footer. |
+| `/research` | Orientation page for independent engineering and open research. Present EvoGen and Kenshi Agent Environment as the current active agent-system work, with their source, verification paths, maturity, and explicit limits. Present WorldWeaver as established open research through the same project-source pattern, without a dedicated Hekswerk documentation subtree. Keep all three separate from the commercial offer. |
 | `/about` | Explain the one-person practice, its two lanes, the working method, and the client-ownership posture without inflating credentials or experience. Link to the primary offer and contact route. |
 | `/contact` | Docusaurus contact page using the existing private submission endpoint. Make automation the primary commercial topic and support `/contact?topic=automation` from offer calls to action. Keep research, relocation, and general-contact paths available without presenting them as equal commercial offers. |
 
@@ -177,8 +176,7 @@ The relaunch must preserve:
 - Docusaurus as the site framework;
 - the current GitHub Pages build and deployment workflow;
 - `www.hekswerk.com` and the existing custom-domain configuration;
-- the `/worldweaver` documentation integration with the sibling repository locally and the checked-out repository in GitHub Actions;
-- the WorldWeaver source integration and version recorded by the deployment workflow, without placing project-specific provenance in the global copyright line;
+- source links to EvoGen, Kenshi Agent Environment, and WorldWeaver without mounting one project's documentation inside the Hekswerk route tree;
 - the Docusaurus contact form and its existing submission endpoint unless a separately scoped change is approved; and
 - the established aura mark, typography, palette, and overall visual character.
 
@@ -211,12 +209,12 @@ The public relaunch is complete only when all of the following are true:
 2. The homepage and metadata make contract operations automation the primary commercial front door.
 3. The `/work` page states the full promise, audience, process, ownership model, price tiers, and scope boundaries without unsupported claims.
 4. The contact form names the Operations Automation Sprint, accepts preselection through `?topic=automation`, and still supports research, relocation, and general inquiries.
-5. Independent engineering and open research remain visible through the lane-level navigation, homepage, `/research`, Selected Work, relevant project links, and footer. EvoGen and Kenshi Agent Environment are presented as current agent-system work. WorldWeaver remains visible through the homepage research section, `/research`, and the complete `/worldweaver/` manual integration, but no individual project occupies primary navigation or is framed as the service being sold.
+5. Independent engineering and open research remain visible through the lane-level navigation, homepage, `/research`, Selected Work, relevant project links, and footer. EvoGen and Kenshi Agent Environment are presented as current agent-system work. WorldWeaver remains visible as open research, but no individual project occupies primary navigation, receives a dedicated documentation subtree, or is framed as the service being sold.
 6. Relocation planning is absent from the primary navigation and public offer hierarchy, with no restored landing page or August launch claim.
-7. The current Docusaurus framework, GitHub Pages workflow, custom domain, WorldWeaver source integration, deployment version record, and contact submission endpoint remain intact.
+7. The current Docusaurus framework, GitHub Pages workflow, custom domain, project source links, and contact submission endpoint remain intact.
 8. The existing visual identity is preserved and the changed pages are readable at desktop and mobile widths.
 9. All public copy passes a manual claims audit and a repository search for em dashes. It uses one-person language and contains no invented clients, metrics, testimonials, certifications, compliance claims, or production experience.
-10. A production build using the real WorldWeaver documentation succeeds with broken-link checks enabled. The built output contains the required routes and retains the custom-domain file.
+10. A production build succeeds with broken-link checks enabled. The built output contains the required Hekswerk routes, omits the retired WorldWeaver documentation subtree, and retains the custom-domain file.
 11. Per-page titles, descriptions, canonical URLs, Open Graph metadata, a Hekswerk social-sharing image, and minimal accurate structured data describe the umbrella practice rather than only WorldWeaver.
 12. The implementation is delivered as one coherent relaunch commit after all relevant checks pass.
 

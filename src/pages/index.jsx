@@ -169,8 +169,9 @@ export default function Home() {
                   but it does not decide whether the action worked.
                 </p>
                 <div className="link-row">
-                  <Link className="button button--outline" to="/worldweaver/">Read the manual</Link>
-                  <Link className="text-link" to="/research">WorldWeaver orientation</Link>
+                  <Link className="button button--outline" to="https://github.com/libardo667/worldweaver">
+                    Explore WorldWeaver
+                  </Link>
                 </div>
               </div>
             </article>

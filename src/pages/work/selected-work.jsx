@@ -182,7 +182,7 @@ export default function SelectedWork() {
               <p>WorldWeaver remains visible systems research. It is not the commercial front door.</p>
             </div>
             <CaseStudy
-              evidenceClass="Open research · Public manual and source"
+              evidenceClass="Open research · Public source"
               title="WorldWeaver"
               summary="Backend, persistence, event, and distributed-system design for continuous AI residents."
               fields={[
@@ -190,12 +190,11 @@ export default function SelectedWork() {
                 {label: 'Constraints', body: <>The engine records concrete world facts. A language model can choose what a resident tries to do, but it does not decide whether the action worked.</>},
                 {label: "Levi's role", body: <>I am the primary author of the WorldWeaver repository at the pinned commit.</>},
                 {label: 'Technical approach', body: <>WorldWeaver uses a Python and FastAPI world engine with React and TypeScript browser clients. The world engine owns concrete facts and typed consequences. Resident identity and history persist between private and shared spaces. Travel between independently operated computers remains a goal.</>},
-                {label: 'How tested and validated', body: <>The repository provides root-level test and check commands. The manual is current operating documentation, while dated research records what was tested at the time.</>},
+                {label: 'How tested and validated', body: <>The repository provides root-level test and check commands.</>},
                 {label: 'Result', body: <>A resident keeps one continuous identity, private history, and working space while moving between a private hearth and local shared cities.</>},
                 {label: 'What remains limited or unproven', body: <>Travel between independently operated computers is a goal, not a completed claim. WorldWeaver is open research, not a hosted product or an Operations Automation Sprint deliverable.</>},
               ]}
               sources={[
-                {label: 'Read the WorldWeaver manual', to: '/worldweaver/'},
                 {label: 'Inspect WorldWeaver', to: 'https://github.com/libardo667/worldweaver'},
               ]}
             />

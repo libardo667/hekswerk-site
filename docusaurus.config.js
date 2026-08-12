@@ -1,25 +1,8 @@
-import path from 'node:path';
 import {themes as prismThemes} from 'prism-react-renderer';
-
-const docsPath = path.resolve(
-  process.cwd(),
-  process.env.WORLDWEAVER_DOCS_DIR || '../worldweaver/docs',
-);
-const worldweaverCommit = String(process.env.WORLDWEAVER_COMMIT || '').trim();
 
 const siteUrl = 'https://www.hekswerk.com';
 const practiceDescription =
   "Hekswerk is Levi Banks's one-person systems practice for contract operations automation, independent engineering, and open research.";
-
-function worldweaverEditUrl({docPath}) {
-  const normalized = String(docPath).replaceAll('\\', '/');
-  const docsMarker = '/docs/';
-  const markerIndex = normalized.lastIndexOf(docsMarker);
-  const relativePath = markerIndex >= 0
-    ? normalized.slice(markerIndex + docsMarker.length)
-    : normalized.replace(/^(\.\.\/)+/, '');
-  return `https://github.com/libardo667/worldweaver/edit/main/docs/${relativePath}`;
-}
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
@@ -31,9 +14,6 @@ const config = {
   organizationName: 'libardo667',
   projectName: 'hekswerk-site',
   trailingSlash: false,
-  customFields: {
-    worldweaverCommit: worldweaverCommit || null,
-  },
   staticDirectories: ['static'],
   onBrokenLinks: 'throw',
   headTags: [
@@ -85,13 +65,7 @@ const config = {
     [
       'classic',
       {
-        docs: {
-          path: docsPath,
-          routeBasePath: 'worldweaver',
-          sidebarPath: './sidebars.js',
-          editUrl: worldweaverEditUrl,
-          showLastUpdateTime: true,
-        },
+        docs: false,
         blog: false,
         theme: {
           customCss: './src/css/custom.css',
@@ -153,11 +127,10 @@ const config = {
           title: 'Engineering and research',
           items: [
             {label: 'Overview', to: '/research'},
+            {label: 'GitHub profile', href: 'https://github.com/libardo667'},
             {label: 'EvoGen source', href: 'https://github.com/libardo667/evogen'},
             {label: 'Kenshi Agent Environment source', href: 'https://github.com/libardo667/kenshi-agent-env'},
-            {label: 'WorldWeaver manual', to: '/worldweaver'},
             {label: 'WorldWeaver source', href: 'https://github.com/libardo667/worldweaver'},
-            {label: 'GitHub profile', href: 'https://github.com/libardo667'},
           ],
         },
       ],
