@@ -35,7 +35,7 @@ export default function Home() {
           lede={`This is for recurring operational work spread across email, forms, documents, spreadsheets, and follow-ups. ${offer.delivery}`}
           actions={[
             {label: 'View the Operations Automation Sprint', to: '/work', primary: true},
-            {label: 'Explore current agent work', href: '#agent-work'},
+            {label: 'Explore EvoGen and KAE', href: '#research'},
           ]}
           aside={(
             <div className="aura-panel" aria-label="How the sprint works">
@@ -109,10 +109,10 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="section-block section-agent-work" id="agent-work">
+        <section className="section-block section-research-work" id="research">
           <div className="shell">
             <div className="section-heading">
-              <span className="eyebrow">Current agent work</span>
+              <span className="eyebrow">Research at Hekswerk</span>
               <h2>EvoGen and Kenshi Agent Environment</h2>
               <p>
                 EvoGen and Kenshi Agent Environment are the agent-system projects I am actively working on. They
@@ -154,36 +154,26 @@ export default function Home() {
             <Link className="text-link section-link" to="https://github.com/libardo667">
               See all public repositories
             </Link>
-          </div>
-        </section>
-
-        <section className="section-block section-soft">
-          <div className="shell split-section research-section">
-            <div className="section-heading">
-              <span className="eyebrow">Research at Hekswerk</span>
-              <h2>WorldWeaver</h2>
-              <p>
-                WorldWeaver is software for persistent AI residents and the worlds they can inhabit with people.
-                It remains part of Hekswerk's open research lane and visible evidence of systems work, not the
-                service being sold.
-              </p>
-              <div className="link-row">
-                <Link className="button button--outline" to="/worldweaver/">Read the manual</Link>
-                <Link className="text-link" to="/research">Research orientation</Link>
+            <article className="research-continuation">
+              <div>
+                <span className="eyebrow">Also in the research lane</span>
+                <h3>WorldWeaver</h3>
+                <p>
+                  WorldWeaver is software for persistent AI residents and the worlds they can inhabit with people.
+                  It remains visible evidence of systems work, not the service being sold.
+                </p>
               </div>
-            </div>
-            <div className="aura-panel aura-panel--research" aria-label="WorldWeaver research boundaries">
-              <img src="/img/logo_aura.svg" alt="" />
-              <span>
-                A resident keeps one continuous identity, private history, and working space while moving between
-                a private hearth and local shared cities.
-              </span>
-              <span>
-                The engine records concrete world facts. A language model can choose what a resident tries to do,
-                but it does not decide whether the action worked.
-              </span>
-              <span>WorldWeaver is open research, not a hosted product or an Operations Automation Sprint deliverable.</span>
-            </div>
+              <div>
+                <p>
+                  The engine records concrete world facts. A language model can choose what a resident tries to do,
+                  but it does not decide whether the action worked.
+                </p>
+                <div className="link-row">
+                  <Link className="button button--outline" to="/worldweaver/">Read the manual</Link>
+                  <Link className="text-link" to="/research">WorldWeaver orientation</Link>
+                </div>
+              </div>
+            </article>
           </div>
         </section>
 
