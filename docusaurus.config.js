@@ -6,10 +6,6 @@ const docsPath = path.resolve(
   process.env.WORLDWEAVER_DOCS_DIR || '../worldweaver/docs',
 );
 const worldweaverCommit = String(process.env.WORLDWEAVER_COMMIT || '').trim();
-const worldweaverVersion = worldweaverCommit ? worldweaverCommit.slice(0, 7) : 'local checkout';
-const worldweaverVersionUrl = worldweaverCommit
-  ? `https://github.com/libardo667/worldweaver/tree/${worldweaverCommit}/docs`
-  : 'https://github.com/libardo667/worldweaver/tree/main/docs';
 
 const siteUrl = 'https://www.hekswerk.com';
 const practiceDescription =
@@ -170,9 +166,7 @@ const config = {
           ],
         },
       ],
-      copyright:
-        `Copyright © ${new Date().getFullYear()} Hekswerk. WorldWeaver source is AGPL-3.0-or-later. ` +
-        `Manual source: <a href="${worldweaverVersionUrl}">${worldweaverVersion}</a>.`,
+      copyright: `Copyright © ${new Date().getFullYear()} Hekswerk.`,
     },
     prism: {
       theme: prismThemes.github,
