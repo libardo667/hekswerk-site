@@ -16,6 +16,7 @@ const contentTypes = {
   '.xml': 'application/xml; charset=utf-8',
 };
 const securityHeaders = {
+  'Cache-Control': 'public, max-age=0, must-revalidate, no-transform',
   'Content-Security-Policy':
     "default-src 'self'; base-uri 'self'; connect-src 'self' https://hekswerk-intake.levi-020.workers.dev; font-src 'self'; form-action 'none'; frame-ancestors 'none'; img-src 'self' data:; object-src 'none'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; upgrade-insecure-requests",
   'Cross-Origin-Opener-Policy': 'same-origin',
@@ -58,6 +59,9 @@ createServer((request, response) => {
 
   response.writeHead(200, {
     ...securityHeaders,
+    ...(file.includes(`${path.sep}_astro${path.sep}`)
+      ? {'Cache-Control': 'public, max-age=31536000, immutable, no-transform'}
+      : {}),
     'Content-Type': contentTypes[path.extname(file)] || 'application/octet-stream',
   });
   createReadStream(file).pipe(response);

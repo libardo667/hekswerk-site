@@ -29,6 +29,8 @@ The site sets no cookies and writes nothing to `localStorage` or `sessionStorage
 tests observe no automatic cross-origin request. A failure-triggered Network Error Logging report remains possible
 because Cloudflare currently adds the governing response headers. The built-artifact gate fails if a Cloudflare Web
 Analytics beacon, browser-storage use, Google Fonts, or another unapproved third-party path returns in site source.
+Production responses also send `Cache-Control: no-transform` to prevent Cloudflare's automatic Web Analytics setup from
+injecting the beacon at the edge.
 
 Provider evidence:
 

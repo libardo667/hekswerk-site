@@ -61,6 +61,8 @@ passes. The check and deployment are in one ordered job, so a failed gate cannot
 - `/index.html` redirects to `/`.
 - Unknown routes serve the Hekswerk `404.html` with status 404.
 - Fingerprinted files under `/_astro/` are cached immutably.
+- Every asset sends `Cache-Control: no-transform`. For HTML, this prevents Cloudflare's automatic Web Analytics setup
+  from injecting a script even if that account-level setting is enabled.
 - The `workers.dev` hostname sends `X-Robots-Tag: noindex, nofollow`.
 - HTML routes contain no client-side analytics beacon and write no browser storage. Aggregate traffic counts come from
   Cloudflare's edge and zone analytics.
@@ -103,6 +105,7 @@ Additional production checks established:
 - Person metadata on `/about` and Service metadata on `/work` through the built-artifact gate;
 - the intended `robots.txt` and sitemap, with no retired WorldWeaver site route;
 - no client-side analytics tag, browser-storage write, remote font, or unapproved automatic third-party request;
+- `Cache-Control: no-transform` on production responses, preventing Cloudflare's automatic analytics transformation;
 - HTTP 404 and the Hekswerk not-found document for unknown, Pages-only, and retired manual paths;
 - HTTP 301 for `/contact.html` and `/index.html`, with query and browser fragment behavior covered;
 - valid TLS, Cloudflare response headers, and the apex redirect with its test path and query string preserved;

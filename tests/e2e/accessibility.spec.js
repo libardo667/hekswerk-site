@@ -50,6 +50,7 @@ test('custom 404 is styled, noindex, and contains no client-side analytics', asy
 
 test('site responses carry the repository security-header policy', async ({request}) => {
   const response = await request.get('/');
+  expect(response.headers()['cache-control']).toContain('no-transform');
   expect(response.headers()['content-security-policy']).toContain("default-src 'self'");
   expect(response.headers()['x-content-type-options']).toBe('nosniff');
   expect(response.headers()['x-frame-options']).toBe('DENY');

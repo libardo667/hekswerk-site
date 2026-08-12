@@ -216,13 +216,14 @@ const headers = readFileSync(path.join(buildRoot, '_headers'), 'utf8');
 if (/cloudflareinsights\.com/.test(headers)) fail('_headers: retired client-side analytics origin remains');
 for (const value of [
   'Content-Security-Policy:',
+  'Cache-Control: public, max-age=0, must-revalidate, no-transform',
   'X-Content-Type-Options: nosniff',
   'X-Frame-Options: DENY',
   'Strict-Transport-Security: max-age=31536000',
   'https://:worker.levi-020.workers.dev/*',
   'X-Robots-Tag: noindex, nofollow',
   '/_astro/*',
-  'Cache-Control: public, max-age=31536000, immutable',
+  'Cache-Control: public, max-age=31536000, immutable, no-transform',
 ]) {
   expectIncludes(headers, value, `_headers: ${value}`);
 }
