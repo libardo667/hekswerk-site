@@ -1,6 +1,7 @@
 import Link from '@docusaurus/Link';
 import Layout from '@theme/Layout';
 import {BoundaryBox, CallToAction, Hero, ProcessSteps} from '../components/SitePrimitives';
+import StructuredData from '../components/StructuredData';
 import {projectLanguageSnapshot} from '../data/projectLanguageSnapshot';
 
 export default function About() {
@@ -9,6 +10,17 @@ export default function About() {
       title="About"
       description="About Levi Banks, the working method behind Hekswerk, and the practice's contract and public systems work."
     >
+      <StructuredData data={{
+        '@context': 'https://schema.org',
+        '@type': 'Person',
+        '@id': 'https://www.hekswerk.com/about#levi-banks',
+        name: 'Levi Banks',
+        url: 'https://www.hekswerk.com/about',
+        jobTitle: 'Founder',
+        worksFor: {
+          '@id': 'https://www.hekswerk.com/#organization',
+        },
+      }} />
       <main>
         <Hero
           compact

@@ -6,6 +6,7 @@ import {
   PricingCards,
   ProcessSteps,
 } from '../../components/SitePrimitives';
+import StructuredData from '../../components/StructuredData';
 import {offer} from '../../data/offer';
 
 const representativeProjects = [
@@ -56,6 +57,18 @@ const sprintContents = [
 export default function Work() {
   return (
     <Layout title={offer.name} description={`${offer.name}: ${offer.shortDescription}`}>
+      <StructuredData data={{
+        '@context': 'https://schema.org',
+        '@type': 'Service',
+        '@id': 'https://www.hekswerk.com/work#operations-automation-sprint',
+        name: offer.name,
+        url: 'https://www.hekswerk.com/work',
+        serviceType: 'Operations automation',
+        description: offer.shortDescription,
+        provider: {
+          '@id': 'https://www.hekswerk.com/#organization',
+        },
+      }} />
       <main>
         <Hero
           eyebrow="Operations Automation Sprint · Primary commercial offer"

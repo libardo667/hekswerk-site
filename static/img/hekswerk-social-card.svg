@@ -1,0 +1,31 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="aura" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(948 182) rotate(131) scale(520 520)">
+      <stop stop-color="#4A4B78" stop-opacity="0.42" />
+      <stop offset="0.52" stop-color="#293656" stop-opacity="0.18" />
+      <stop offset="1" stop-color="#09090E" stop-opacity="0" />
+    </radialGradient>
+    <linearGradient id="line" x1="80" y1="520" x2="1120" y2="520" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#C0A990" />
+      <stop offset="0.48" stop-color="#8C7699" />
+      <stop offset="1" stop-color="#7095B7" />
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="#09090E" />
+  <rect width="1200" height="630" fill="url(#aura)" />
+  <circle cx="970" cy="185" r="146" stroke="#7095B7" stroke-width="7" opacity="0.9" />
+  <circle cx="970" cy="185" r="108" stroke="#8C7699" stroke-width="7" opacity="0.82" />
+  <circle cx="970" cy="185" r="70" stroke="#C0A990" stroke-width="7" opacity="0.92" />
+  <circle cx="970" cy="185" r="32" fill="#F5F5F2" fill-opacity="0.08" stroke="#F5F5F2" stroke-opacity="0.12" />
+  <text x="80" y="110" fill="#C0A990" font-family="Arial, sans-serif" font-size="24" font-weight="600" letter-spacing="6">HEKSWERK</text>
+  <text x="80" y="210" fill="#F5F5F2" font-family="Georgia, serif" font-size="62" font-weight="400">
+    <tspan x="80" dy="0">Systems work with</tspan>
+    <tspan x="80" dy="74">clear boundaries.</tspan>
+  </text>
+  <text x="80" y="410" fill="#F5F5F2" fill-opacity="0.76" font-family="Arial, sans-serif" font-size="27" font-weight="400">
+    <tspan x="80" dy="0">Contract operations automation</tspan>
+    <tspan x="80" dy="42">Independent engineering and open research</tspan>
+  </text>
+  <rect x="80" y="518" width="1040" height="2" fill="url(#line)" opacity="0.75" />
+  <text x="80" y="571" fill="#F5F5F2" fill-opacity="0.58" font-family="Arial, sans-serif" font-size="22" letter-spacing="1">A ONE-PERSON PRACTICE BY LEVI BANKS</text>
+</svg>
