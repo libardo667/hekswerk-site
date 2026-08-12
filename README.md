@@ -53,3 +53,6 @@ existing custom domain. Both workflows can also be run manually from GitHub Acti
 The contact endpoint is a separate Cloudflare Worker whose source and Wrangler configuration live under
 `workers/intake/`. Read `docs/CONTACT_ENDPOINT.md` before deploying it. `npm run worker:deploy` updates that external
 Worker and therefore is intentionally not part of the GitHub Pages workflow.
+
+The site bundles its fonts locally. `docs/PRIVACY_DATA_FLOW.md` is the implementation authority for browsing and
+initial-inquiry data flows, provider boundaries, deletion handling, and the operational checklist for later access.

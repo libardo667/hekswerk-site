@@ -1,3 +1,4 @@
+import Link from '../components/Link';
 import {BoundaryBox, Hero} from '../components/SitePrimitives';
 import Layout from '../components/PageContent';
 import {contactEmail} from '../data/site';
@@ -12,20 +13,65 @@ export default function Privacy() {
         <Hero
           compact
           eyebrow="Privacy and data handling"
-          title="A small site with a small intake surface."
-          lede="This note explains what the Hekswerk website and contact form collect, where information goes, and what not to send."
+          title="What this site sends, and where."
+          lede="This is a factual map of the current public site and initial inquiry path. It is not a generic policy for practices or systems that do not exist."
         />
 
         <section className="section-block">
           <div className="shell narrow-shell privacy-copy">
+            <p className="privacy-reviewed">Implementation and provider documentation last checked August 12, 2026.</p>
+
             <section>
-              <h2>What the form collects</h2>
+              <h2>When you browse the site</h2>
               <p>
-                The contact form asks for your name, email address, and topic. The remaining fields change with the
-                topic you choose. An automation inquiry asks about one recurring process, the systems involved, timing,
-                and whether the work may involve sensitive or regulated information. Research and general inquiries ask
-                for a message. Relocation inquiries offer fields for locations, timeline, household, constraints, and
-                the hardest part of the move.
+                GitHub Pages currently serves the site. GitHub says it logs a visitor&apos;s IP address for security
+                when a Pages site is visited. The site&apos;s styles, images, scripts, and two typefaces are otherwise
+                served from the Hekswerk site itself. The typefaces are bundled locally under the SIL Open Font License,
+                so a page view does not contact Google Fonts.
+              </p>
+              <p>
+                One Cloudflare Web Analytics script measures page views and page performance. Cloudflare receives the
+                site host and path, referring site, country, device and browser categories, and performance timing. Its
+                current documentation says Web Analytics does not log query strings, use cookies or browser storage, or
+                collect or use visitors&apos; personal data. Cloudflare keeps unsampled beacon data for seven days and
+                then retains aggregated data; its dashboard exposes the previous six months.
+              </p>
+              <p>
+                External project links do not send the Hekswerk page as a referrer. If you choose one, the destination,
+                usually GitHub, still receives the ordinary connection information needed to serve its page.
+              </p>
+              <ul className="plain-list privacy-sources">
+                <li>
+                  <Link to="https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages">
+                    GitHub Pages data collection
+                  </Link>
+                </li>
+                <li>
+                  <Link to="https://developers.cloudflare.com/web-analytics/data-metrics/data-origin-and-collection/">
+                    Cloudflare Web Analytics collection
+                  </Link>
+                </li>
+                <li>
+                  <Link to="https://developers.cloudflare.com/web-analytics/faq/">
+                    Cloudflare Web Analytics retention and query-string behavior
+                  </Link>
+                </li>
+              </ul>
+            </section>
+
+            <section>
+              <h2>What the contact form collects</h2>
+              <p>
+                Every inquiry asks for a name, email address, and topic. Automation inquiries ask for a high-level
+                description of one repeating process and whether it may involve sensitive or regulated information.
+                Organization, systems involved, current failure points, frequency, and desired timing are optional.
+                Research and general inquiries ask for a message. Relocation asks for one high-level note rather than
+                separate household, address, or document details.
+              </p>
+              <p>
+                The form also includes a hidden <code>website</code> field as a spam trap. If it is filled, the Worker
+                returns success without sending an email. Do not put passwords, access tokens, production data, medical
+                records, legal files, financial identifiers, identity documents, or other secrets in any field.
               </p>
             </section>
 
@@ -33,38 +79,70 @@ export default function Privacy() {
               <h2>Limited inquiry attribution</h2>
               <p>
                 The site records the first path you visit in a browser-tab session and, when present, the campaign
-                parameters <code>utm_source</code>, <code>utm_medium</code>, and <code>utm_campaign</code>. It keeps
-                these values in browser session storage, not cookies, and sends them only if you submit the contact
-                form. It does not retain other query parameters for attribution.
+                parameters <code>utm_source</code>, <code>utm_medium</code>, and <code>utm_campaign</code>. These values
+                stay in that tab&apos;s session storage and are sent only if you submit the form. The site does not
+                retain other query parameters for attribution. The browser normally clears this copy when that tab
+                session ends.
               </p>
             </section>
 
             <section>
-              <h2>What happens when you send it</h2>
+              <h2>Where an inquiry goes and what is retained</h2>
               <p>
-                The form sends those details over HTTPS to a Hekswerk Cloudflare Worker. The Worker validates the
-                submission and uses Resend to deliver it to my Hekswerk email so I can understand and reply to your
-                inquiry. Submitting the form does not create a user account or add you to a newsletter.
+                The browser sends the form over HTTPS to a Hekswerk Cloudflare Worker. The Worker validates and limits
+                the payload, but its origin check is a browser boundary rather than proof of identity. It has no
+                database, storage bucket, customer list, or analytics binding. The code does not write form contents to
+                logs, and automatic invocation logs are disabled. It emits only content-free error messages when email
+                delivery is unavailable or rejected.
+              </p>
+              <p>
+                Cloudflare still processes the network request. For a valid submission, the Worker sends the form fields
+                and limited attribution to Resend as a plain-text email. Resend&apos;s dashboard exposes the sent
+                message and API request log, and its current documentation says it retains email data for 30 days. The
+                destination is my Hekswerk mailbox hosted by Microsoft 365, where the message remains subject to that
+                mailbox&apos;s deletion, recovery, and retention settings. There is no additional Hekswerk-owned contact
+                database.
+              </p>
+              <p>
+                <Link to="https://resend.com/docs/dashboard/webhooks/how-to-store-webhooks-data">
+                  Resend&apos;s current email-retention statement
+                </Link>
               </p>
             </section>
 
             <section>
-              <h2>Other services used by this site</h2>
+              <h2>How I use an inquiry</h2>
               <p>
-                The site is published with GitHub Pages. It loads typefaces from Google Fonts and links to public
-                repositories on GitHub. Cloudflare Web Analytics measures aggregate visits, page views, referral paths,
-                approximate location, and page performance through a JavaScript beacon. Cloudflare describes this
-                service as privacy-first and says it does not collect or use visitors' personal data. The beacon does
-                not set cookies. The site does not include advertising trackers, a scheduling platform, or a generic
-                chatbot.
+                I use the message to understand the question, assess whether the work appears to fit, reply, and keep
+                the resulting conversation in my business mailbox. Submitting does not create an account, schedule a
+                meeting, or add anyone to a newsletter or marketing list.
+              </p>
+            </section>
+
+            <section>
+              <h2>Requesting deletion</h2>
+              <p>
+                To request deletion of an inquiry, email <a href={`mailto:${contactEmail}`}>{contactEmail}</a>, ideally
+                from the address used in the form, and include the approximate submission date. I can remove copies I
+                control from my mailbox and ask Resend about a provider-held copy that is still within its retention
+                period. I will tell you what I removed and identify any provider-controlled logs, backups, or retention
+                that I cannot directly erase or verify.
+              </p>
+            </section>
+
+            <section>
+              <h2>An inquiry is not a client relationship</h2>
+              <p>
+                Sending a form or receiving a reply does not by itself establish a client relationship or agreement to
+                perform work. Do not treat the initial message as a confidential client channel. A working relationship
+                begins only after scope, responsibilities, data handling, and terms are agreed in writing.
               </p>
             </section>
 
             <BoundaryBox title="Keep the first message low-risk">
               <p>
-                Do not send passwords, access tokens, production data, medical records, legal files, full financial
-                identifiers, confidential datasets, or other secrets through the form. After an initial conversation, I
-                can suggest an appropriate way to handle any necessary material.
+                The safest initial note names the process and problem without including real records or credentials. If
+                later work needs sensitive material, the appropriate access and handling method should be agreed first.
               </p>
             </BoundaryBox>
 
@@ -72,7 +150,8 @@ export default function Privacy() {
               <h2>Questions or alternatives</h2>
               <p>
                 If you have a question about this note or prefer not to use the form, email{' '}
-                <a href={`mailto:${contactEmail}`}>{contactEmail}</a>.
+                <a href={`mailto:${contactEmail}`}>{contactEmail}</a>. Ordinary email uses the same Microsoft 365
+                mailbox but does not use the Hekswerk contact Worker or its Resend delivery step.
               </p>
             </section>
           </div>

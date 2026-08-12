@@ -44,16 +44,8 @@ test('each topic reveals only its intended fields', async ({page}) => {
   await expect(page.getByLabel('What would you like to ask or tell me?')).toBeVisible();
 
   await page.getByLabel('What is this about?').selectOption('relocation');
-  for (const label of [
-    'Current location',
-    'Target location',
-    'Timeline',
-    'Household',
-    'Constraints I should account for Optional',
-    'What is the hardest part of the move right now?',
-  ]) {
-    await expect(page.getByLabel(label)).toBeVisible();
-  }
+  await expect(page.getByLabel('What would you like help with?')).toBeVisible();
+  await expect(page.getByText('Do not include an address, identity number')).toBeVisible();
   await expect(page.getByLabel('What would you like to ask or tell me?')).toHaveCount(0);
 });
 
@@ -165,12 +157,7 @@ test('relocation submission contains only the intended conditional payload', asy
   await page.goto('/contact?topic=relocation');
   await page.getByLabel('Name').fill('Ada');
   await page.getByLabel('Email').fill('ada@example.com');
-  await page.getByLabel('Current location').fill('Portland');
-  await page.getByLabel('Target location').fill('The Hague');
-  await page.getByLabel('Timeline').fill('December');
-  await page.getByLabel('Household').fill('Two people');
-  await page.getByLabel('Constraints I should account for Optional').fill('A fixed arrival date');
-  await page.getByLabel('What is the hardest part of the move right now?').fill('Housing');
+  await page.getByLabel('What would you like help with?').fill('Housing near The Hague around December.');
   await page.getByRole('checkbox').check();
   await page.getByRole('button', {name: 'Send inquiry'}).click();
   await expect(page.getByRole('status')).toHaveText('Thank you. Your inquiry has been sent.');
@@ -180,16 +167,18 @@ test('relocation submission contains only the intended conditional payload', asy
     name: 'Ada',
     email: 'ada@example.com',
     topic: 'Relocation planning',
-    current_location: 'Portland',
-    target_location: 'The Hague',
-    timeline: 'December',
-    household: 'Two people',
-    hardest_part: 'Housing',
-    constraints: 'A fixed arrival date',
+    hardest_part: 'Housing near The Hague around December.',
     privacy_acknowledged: true,
     website: '',
   });
   expect(payload).not.toHaveProperty('repeating_process');
+  expect(payload).not.toHaveProperty('current_location');
+  expect(payload).not.toHaveProperty('household');
+});
+
+test('the form states the relationship boundary before submission', async ({page}) => {
+  await page.goto('/contact');
+  await expect(page.getByText('Sending an inquiry does not establish a client relationship.')).toBeVisible();
 });
 
 test('submission falls back safely when session storage is unavailable', async ({page}) => {

@@ -77,36 +77,12 @@ function RelocationFields() {
   return (
     <fieldset className="conditional-fields">
       <legend>About the move</legend>
-      <p className="field-note">These details are optional. Share only what is useful for an initial reply.</p>
-      <div className="field-grid">
-        <label>
-          Current location
-          <input name="current_location" autoComplete="address-level2" />
-        </label>
-        <label>
-          Target location
-          <input name="target_location" />
-        </label>
-      </div>
-      <div className="field-grid">
-        <label>
-          Timeline
-          <input name="timeline" />
-        </label>
-        <label>
-          Household
-          <input name="household" />
-        </label>
-      </div>
+      <p className="field-note">
+        Keep this high-level. A city or country and approximate timing are enough if they matter. Do not include an
+        address, identity number, immigration file, medical detail, legal document, or financial record.
+      </p>
       <label>
-        Constraints I should account for <span className="field-optional">Optional</span>
-        <textarea name="constraints" rows="3" />
-        <span className="field-note">
-          Keep this general. Do not include medical, legal, financial, or identity records.
-        </span>
-      </label>
-      <label>
-        What is the hardest part of the move right now?
+        What would you like help with?
         <textarea name="message" rows="5" required />
       </label>
     </fieldset>
@@ -203,6 +179,11 @@ export default function ContactForm() {
       {topic === 'automation' && <AutomationFields />}
       {topic === 'relocation' && <RelocationFields />}
       {(topic === 'research' || topic === 'general') && <MessageField topic={topic} />}
+
+      <p className="form-boundary-note">
+        Sending an inquiry does not establish a client relationship. Work begins only after scope and terms are agreed
+        in writing.
+      </p>
 
       <label className="honeypot" aria-hidden="true">
         Website

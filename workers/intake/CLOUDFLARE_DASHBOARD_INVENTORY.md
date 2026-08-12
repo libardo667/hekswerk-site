@@ -21,9 +21,9 @@ Secret and binding names are wanted. Replace any displayed secret value with `[s
 
 ## Active repository deployment
 
-- Active deployment date and time: `2026-08-12T13:42:59.726Z`
-- Active version created: `2026-08-12T13:42:59.276Z`
-- Active version ID: `69743eb4-2b6e-4cff-9dd0-46346a27434e`
+- Active deployment date and time: `2026-08-12T14:22:45.753Z`
+- Active version created: `2026-08-12T14:22:45.304Z`
+- Active version ID: `64ea07a6-b02b-4b75-a123-4a6e8dae84fb`
 - Traffic percentage for that version: `100%`
 - Deployment command: `npm run worker:deploy` with Wrangler 4.121.0 from this repository
 - Source shown by `wrangler deployments list`: `Unknown (deployment)`
@@ -78,13 +78,18 @@ Copy names and types only. Never copy secret values.
 
 ## Observability
 
-- Workers Logs enabled? `yes`
-- Invocation logs enabled? `yes`
+- Workers Logs enabled? `yes, through observability.enabled in the deployed Wrangler configuration`
+- Invocation logs enabled? `no, disabled through observability.logs.invocation_logs in the deployed Wrangler configuration`
 - Sampling rate: `not shown; "last 1 hour" is the chart time range, not a sampling rate`
 - Log retention shown: `not shown`
 - Tail Worker configured? `none; hekswerk-intake is the account's only Worker`
-- Recent error status, without copying request bodies or personal data: `none`
+- Recent error status, without copying request bodies or personal data: `not rechecked in the dashboard after deployment`
 
 ## Remaining uncertainty
 
 - The dashboard did not show an explicit sampling rate, log retention period, usage model, or limits in the inspected views.
+- The post-deployment observability state was verified from the deployed repository configuration, not by reopening the
+  dashboard settings view.
+- The Resend API key's permission scope was not established. Verify it in **Resend > API Keys**. If it has full access,
+  replace it with a sending-only key restricted to `mail.hekswerk.com`, update the Cloudflare Secret, verify one
+  non-sensitive delivery, and revoke the old key. Record the scope, never the secret value, here.

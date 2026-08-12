@@ -22,6 +22,21 @@ test('each page includes one Cloudflare Web Analytics beacon in static-navigatio
   expect(configuration).toEqual({token: 'b521818f3dee4549be53db47190f52c2', spa: false});
 });
 
+test('pages make no unapproved automatic third-party requests', async ({page}) => {
+  for (const route of publicRoutes) {
+    const externalRequests = [];
+    const record = (request) => {
+      const url = new URL(request.url());
+      if (url.origin !== 'http://127.0.0.1:4173' && url.protocol.startsWith('http')) externalRequests.push(url.href);
+    };
+    page.on('request', record);
+    await page.goto(route);
+    await page.waitForLoadState('networkidle');
+    page.off('request', record);
+    expect([...new Set(externalRequests)], route).toEqual(['https://static.cloudflareinsights.com/beacon.min.js']);
+  }
+});
+
 test('homepage commercial and research paths resolve', async ({page}) => {
   await page.goto('/');
   await page.getByRole('link', {name: 'View the Operations Automation Sprint'}).click();
@@ -68,6 +83,35 @@ test('navigation and footer expose every intended internal destination', async (
     .locator('a[href^="https://github.com/"]')
     .evaluateAll((links) => links.map((link) => link.href));
   expect(external).toEqual(repositoryLinks);
+});
+
+test('all external links suppress the referring page', async ({page}) => {
+  for (const route of publicRoutes) {
+    await page.goto(route);
+    const links = page.locator('a[href^="https://"]');
+    for (let index = 0; index < (await links.count()); index += 1) {
+      await expect(links.nth(index), `${route} external link ${index + 1}`).toHaveAttribute('rel', /noreferrer/);
+    }
+  }
+});
+
+test('privacy page exposes the actual collection, processors, deletion, and relationship boundaries', async ({
+  page,
+}) => {
+  await page.goto('/privacy');
+  for (const heading of [
+    'When you browse the site',
+    'What the contact form collects',
+    'Where an inquiry goes and what is retained',
+    'How I use an inquiry',
+    'Requesting deletion',
+    'An inquiry is not a client relationship',
+  ]) {
+    await expect(page.getByRole('heading', {name: heading})).toBeVisible();
+  }
+  await expect(page.getByText('Cloudflare Worker', {exact: false})).toBeVisible();
+  await expect(page.getByText('Resend', {exact: false}).first()).toBeVisible();
+  await expect(page.getByText('Microsoft 365', {exact: false}).first()).toBeVisible();
 });
 
 for (const route of publicRoutes) {

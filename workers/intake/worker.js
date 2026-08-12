@@ -47,6 +47,11 @@ export default {
       return jsonResponse({error: 'Origin not allowed'}, 403, origin);
     }
 
+    const contentType = (request.headers.get('Content-Type') || '').split(';', 1)[0].trim().toLowerCase();
+    if (contentType !== 'application/json') {
+      return jsonResponse({error: 'Content type must be application/json'}, 415, origin);
+    }
+
     const declaredLength = Number(request.headers.get('Content-Length') || 0);
     if (declaredLength > MAX_BODY_BYTES) {
       return jsonResponse({error: 'Submission is too long'}, 413, origin);
@@ -123,16 +128,8 @@ function normalizeSubmission(payload) {
   }
 
   const formType = clean(payload.form_type);
-  if (Number(payload.schema_version) === 2 && FORM_TYPES.has(formType)) {
+  if (payload.schema_version === 2 && FORM_TYPES.has(formType)) {
     return {kind: formType, submission: normalizeVersionTwo(payload, formType)};
-  }
-
-  // Accept the pre-versioned public form while the Worker and site are deployed independently.
-  if (formType === 'relocation' || (!formType && clean(payload.hardest_part))) {
-    return {kind: 'relocation', submission: normalizeLegacyRelocation(payload)};
-  }
-  if (formType === 'contact' || (!formType && clean(payload.message))) {
-    return {kind: 'legacy_contact', submission: normalizeLegacyContact(payload)};
   }
 
   return {error: 'Unknown form type'};
@@ -171,33 +168,11 @@ function normalizeVersionTwo(payload, formType) {
   if (formType === 'relocation') {
     return {
       ...shared,
-      current_location: clean(payload.current_location),
-      target_location: clean(payload.target_location),
-      timeline: clean(payload.timeline),
-      household: clean(payload.household),
       hardest_part: clean(payload.hardest_part),
-      constraints: clean(payload.constraints),
     };
   }
 
   return {...shared, message: clean(payload.message)};
-}
-
-function normalizeLegacyContact(payload) {
-  return {...normalizeShared(payload), message: clean(payload.message)};
-}
-
-function normalizeLegacyRelocation(payload) {
-  return {
-    ...normalizeShared(payload),
-    engagement_interest: clean(payload.engagement_interest),
-    current_location: clean(payload.current_location),
-    target_location: clean(payload.target_location),
-    timeline: clean(payload.timeline),
-    household: clean(payload.household),
-    hardest_part: clean(payload.hardest_part),
-    constraints: clean(payload.constraints || payload.urgent_or_sensitive),
-  };
 }
 
 function validateSubmission(kind, submission) {
@@ -231,17 +206,7 @@ function validateSubmission(kind, submission) {
 
   if (kind === 'relocation') {
     if (!submission.hardest_part) return 'Missing required fields';
-    if (
-      anyTooLong({
-        engagement_interest: [submission.engagement_interest, 120],
-        current_location: [submission.current_location, 200],
-        target_location: [submission.target_location, 200],
-        timeline: [submission.timeline, 80],
-        household: [submission.household, 120],
-        hardest_part: [submission.hardest_part, 3000],
-        constraints: [submission.constraints, 3000],
-      })
-    ) {
+    if (anyTooLong({hardest_part: [submission.hardest_part, 3000]})) {
       return 'Submission is too long';
     }
     return null;
@@ -297,13 +262,7 @@ function buildEmail(kind, submission) {
     return {
       subject: `Relocation inquiry from ${subjectValue(submission.name)}`,
       text: emailText('New Hekswerk relocation inquiry', submission, [
-        ['Engagement interest', submission.engagement_interest],
-        ['Current location', submission.current_location],
-        ['Target location', submission.target_location],
-        ['Timeline', submission.timeline],
-        ['Household', submission.household],
-        ['What is hardest right now', submission.hardest_part],
-        ['Constraints to account for', submission.constraints],
+        ['What the person would like help with', submission.hardest_part],
       ]),
     };
   }
@@ -375,6 +334,7 @@ function corsHeaders(origin) {
     'Access-Control-Allow-Methods': 'POST, OPTIONS',
     'Access-Control-Allow-Headers': 'Content-Type',
     'Access-Control-Max-Age': '86400',
+    'Cache-Control': 'no-store',
   };
 
   if (ALLOWED_ORIGINS.has(origin)) {

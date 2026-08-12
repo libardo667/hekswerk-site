@@ -9,7 +9,7 @@ function workerRequest(payload, options = {}) {
     method: options.method || 'POST',
     headers: {
       Origin: options.origin || origin,
-      'Content-Type': 'application/json',
+      'Content-Type': options.contentType || 'application/json',
     },
     body: options.method === 'OPTIONS' ? undefined : JSON.stringify(payload),
   });
@@ -49,6 +49,7 @@ describe('intake Worker boundary', () => {
     const response = await worker.fetch(workerRequest(null, {method: 'OPTIONS'}), {});
     expect(response.status).toBe(204);
     expect(response.headers.get('Access-Control-Allow-Origin')).toBe(origin);
+    expect(response.headers.get('Cache-Control')).toBe('no-store');
   });
 
   it('rejects a disallowed browser origin before delivery', async () => {
@@ -91,8 +92,8 @@ describe('intake Worker boundary', () => {
     expect(email.text).toContain('Initial landing path: /work');
   });
 
-  it('accepts the previous contact payload during a staged deployment', async () => {
-    const delivery = vi.fn().mockResolvedValue(new Response('{}', {status: 200}));
+  it('rejects the retired pre-versioned contact payload', async () => {
+    const delivery = vi.fn();
     vi.stubGlobal('fetch', delivery);
     const response = await worker.fetch(
       workerRequest({
@@ -106,8 +107,9 @@ describe('intake Worker boundary', () => {
       }),
       {resend_api_key: 'withheld-test-value'},
     );
-    expect(response.status).toBe(200);
-    expect(JSON.parse(delivery.mock.calls[0][1].body).text).toContain('Message:\nA workflow');
+    expect(response.status).toBe(400);
+    expect(await response.json()).toEqual({error: 'Unknown form type'});
+    expect(delivery).not.toHaveBeenCalled();
   });
 
   it.each([
@@ -137,7 +139,7 @@ describe('intake Worker boundary', () => {
     });
   });
 
-  it('delivers versioned relocation and accepts its previous contract', async () => {
+  it('delivers the minimized relocation contract and ignores retired extra fields', async () => {
     const delivery = vi.fn().mockResolvedValue(new Response('{}', {status: 200}));
     vi.stubGlobal('fetch', delivery);
     const versioned = await worker.fetch(
@@ -159,8 +161,13 @@ describe('intake Worker boundary', () => {
       {resend_api_key: 'withheld-test-value'},
     );
     expect(versioned.status).toBe(200);
-    expect(JSON.parse(delivery.mock.calls[0][1].body).text).toContain('What is hardest right now:\nHousing');
+    const versionedEmail = JSON.parse(delivery.mock.calls[0][1].body).text;
+    expect(versionedEmail).toContain('What the person would like help with:\nHousing');
+    expect(versionedEmail).not.toContain('Portland');
+    expect(versionedEmail).not.toContain('The Hague');
+    expect(versionedEmail).not.toContain('Two people');
 
+    delivery.mockClear();
     const legacy = await worker.fetch(
       workerRequest({
         form_type: 'relocation',
@@ -174,8 +181,26 @@ describe('intake Worker boundary', () => {
       }),
       {resend_api_key: 'withheld-test-value'},
     );
-    expect(legacy.status).toBe(200);
-    expect(JSON.parse(delivery.mock.calls[1][1].body).text).toContain('Constraints to account for:\nA fixed deadline');
+    expect(legacy.status).toBe(400);
+    expect(await legacy.json()).toEqual({error: 'Unknown form type'});
+    expect(delivery).not.toHaveBeenCalled();
+  });
+
+  it('requires JSON and an exact numeric schema version', async () => {
+    const delivery = vi.fn();
+    vi.stubGlobal('fetch', delivery);
+    const wrongType = await worker.fetch(workerRequest(automationPayload(), {contentType: 'text/plain'}), {
+      resend_api_key: 'withheld-test-value',
+    });
+    expect(wrongType.status).toBe(415);
+    expect(await wrongType.json()).toEqual({error: 'Content type must be application/json'});
+
+    const stringVersion = await worker.fetch(workerRequest(automationPayload({schema_version: '2'})), {
+      resend_api_key: 'withheld-test-value',
+    });
+    expect(stringVersion.status).toBe(400);
+    expect(await stringVersion.json()).toEqual({error: 'Unknown form type'});
+    expect(delivery).not.toHaveBeenCalled();
   });
 
   it('rejects incomplete or malformed versioned submissions', async () => {

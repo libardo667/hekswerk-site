@@ -115,12 +115,7 @@ describe('contact payloads', () => {
         formData({
           name: 'Ada',
           email: 'ada@example.com',
-          current_location: 'Portland',
-          target_location: 'The Hague',
-          timeline: 'December',
-          household: 'Two people',
           message: 'Housing',
-          constraints: 'A fixed arrival date',
           privacy_acknowledged: 'on',
           website: '',
         }),
@@ -136,12 +131,7 @@ describe('contact payloads', () => {
       privacy_acknowledged: true,
       website: '',
       ...attribution,
-      current_location: 'Portland',
-      target_location: 'The Hague',
-      timeline: 'December',
-      household: 'Two people',
       hardest_part: 'Housing',
-      constraints: 'A fixed arrival date',
     });
   });
 

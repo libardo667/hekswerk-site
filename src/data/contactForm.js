@@ -53,12 +53,7 @@ export function payloadFromForm(form, topic, attribution = {}) {
   if (topic === 'relocation') {
     return {
       ...shared,
-      current_location: form.get('current_location'),
-      target_location: form.get('target_location'),
-      timeline: form.get('timeline'),
-      household: form.get('household'),
       hardest_part: form.get('message'),
-      constraints: form.get('constraints'),
     };
   }
 

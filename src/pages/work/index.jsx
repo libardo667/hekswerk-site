@@ -230,9 +230,15 @@ export default function Work() {
               </article>
               <article className="service-boundary-card">
                 <span className="eyebrow">Data and access</span>
-                <h3>Discovery starts without sensitive production data</h3>
+                <h3>Keep credentials and production data out of intake</h3>
                 <p>
-                  Do not send sensitive production data during initial discovery. Regulated or unusually sensitive data
+                  Do not send passwords, access tokens, sensitive production data, or real records through the inquiry
+                  form or ordinary email.
+                </p>
+                <p>
+                  If implementation needs access, we agree first on the minimum systems and data required. I prefer
+                  client-created, narrowly scoped credentials and synthetic or redacted examples where they can prove
+                  the workflow. Access is revoked or transferred at handoff. Regulated or unusually sensitive data
                   requires a separate assessment before access or implementation is agreed.
                 </p>
               </article>

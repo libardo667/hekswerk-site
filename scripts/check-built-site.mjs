@@ -88,6 +88,13 @@ function statSafe(file) {
   }
 }
 
+function filesBelow(directory) {
+  return readdirSync(directory, {withFileTypes: true}).flatMap((entry) => {
+    const file = path.join(directory, entry.name);
+    return entry.isDirectory() ? filesBelow(file) : [file];
+  });
+}
+
 function extractJsonLd(html, file) {
   const blocks = [...html.matchAll(/<script[^>]*type=["']application\/ld\+json["'][^>]*>(.*?)<\/script>/g)].map(
     (match) => match[1],
@@ -124,6 +131,7 @@ for (const entry of routes) {
   expectIncludes(html, `property="og:image" content="${socialImage}"`, `${entry.route}: Open Graph image`);
   expectIncludes(html, `name="twitter:image" content="${socialImage}"`, `${entry.route}: Twitter image`);
   expectIncludes(html, 'name="twitter:card" content="summary_large_image"', `${entry.route}: Twitter card`);
+  expectIncludes(html, 'name="referrer" content="strict-origin-when-cross-origin"', `${entry.route}: referrer policy`);
   const analyticsBlocks = [...html.matchAll(/<script[^>]*data-cf-beacon=/g)];
   if (analyticsBlocks.length !== 1) fail(`${entry.route}: expected exactly one Cloudflare Web Analytics beacon`);
   expectIncludes(html, `src="${analyticsScript}"`, `${entry.route}: Cloudflare Web Analytics script`);
@@ -147,6 +155,38 @@ for (const entry of routes) {
   ) {
     fail('/work: Service JSON-LD');
   }
+}
+
+const builtFiles = filesBelow(buildRoot);
+for (const file of builtFiles.filter((candidate) => ['.html', '.css', '.js'].includes(path.extname(candidate)))) {
+  const contents = readFileSync(file, 'utf8');
+  if (/fonts\.(?:googleapis|gstatic)\.com/.test(contents)) {
+    fail(`${path.relative(buildRoot, file)}: remote Google Fonts reference remains`);
+  }
+}
+if (builtFiles.filter((file) => path.extname(file) === '.woff2').length === 0) fail('locally bundled WOFF2 fonts');
+const builtCss = builtFiles
+  .filter((file) => path.extname(file) === '.css')
+  .map((file) => readFileSync(file, 'utf8'))
+  .join('\n');
+expectIncludes(builtCss, 'Outfit Variable', 'compiled CSS: local Outfit family');
+expectIncludes(builtCss, 'Fraunces Variable', 'compiled CSS: local Fraunces family');
+if (!statSafe(path.join(buildRoot, 'fonts/OFL-1.1.txt'))) fail('bundled font license');
+
+const privacyHtml = htmlForRoute('/privacy');
+for (const phrase of [
+  'What the contact form collects',
+  'Cloudflare Worker',
+  'Resend',
+  'Microsoft 365',
+  'Requesting deletion',
+  'does not by itself establish a client relationship',
+]) {
+  expectIncludes(privacyHtml, phrase, `/privacy: ${phrase}`);
+}
+const workHtml = htmlForRoute('/work');
+for (const phrase of ['Do not send passwords', 'narrowly scoped credentials', 'Access is revoked or transferred']) {
+  expectIncludes(workHtml, phrase, `/work data handling: ${phrase}`);
 }
 
 const image = readFileSync(path.join(buildRoot, 'img/hekswerk-social-card.png'));
@@ -219,6 +259,6 @@ if (failures.length > 0) {
   process.exitCode = 1;
 } else {
   console.log(
-    `Built-site check passed for ${routes.length} routes: metadata, JSON-LD, links, anchors, social image, deployment files, prose, and retired routes.`,
+    `Built-site check passed for ${routes.length} routes: metadata, JSON-LD, links, anchors, local fonts, privacy boundaries, social image, deployment files, prose, and retired routes.`,
   );
 }
