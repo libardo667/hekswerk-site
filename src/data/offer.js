@@ -1,3 +1,71 @@
+const workflowScopingPrice = '$750';
+const standardSprintPrice = '$3,500';
+const customWorkStartingPrice = '$6,500';
+const customWorkPrice = `${customWorkStartingPrice}+`;
+
+const pricing = {
+  inquiry: {
+    name: 'Initial inquiry',
+    price: 'Free',
+    title: 'Start with the workflow',
+    body: 'Sending an initial inquiry remains free. Paid work begins only after scope, responsibilities, and payment are agreed in writing.',
+  },
+  scoping: {
+    name: 'Paid Workflow Scoping',
+    price: workflowScopingPrice,
+    title: 'Define the work before a build proposal',
+    body: 'Workflow Scoping is a paid pre-build engagement used when the initial inquiry does not provide enough information to make a responsible fixed-price build proposal.',
+    deliverables: [
+      'A map of one recurring workflow.',
+      'An inventory of the systems, owners, dependencies, and known constraints involved.',
+      'A feasibility assessment.',
+      'Draft acceptance criteria.',
+      'A recommended implementation approach.',
+      'A fixed-price build proposal when a responsible proposal can be made.',
+      'A reasoned no-build or narrower-scope recommendation when the proposed automation is not presently responsible or feasible.',
+    ],
+    implementationBoundary: 'Workflow Scoping does not include implementation.',
+    exclusions: [
+      'Production deployment or production changes.',
+      'Training, post-handoff support, or defect correction.',
+    ],
+    creditRule: `If the client accepts the resulting build proposal within 30 calendar days, the full ${workflowScopingPrice} scoping fee is credited toward that build.`,
+    creditExplanation: `The credit means the client does not pay ${workflowScopingPrice} on top of the accepted build price.`,
+    directQuoteBoundary:
+      'A sufficiently clear and narrow workflow may be quoted directly without a separate scoping engagement.',
+  },
+  standard: {
+    name: 'Operations Automation Sprint',
+    price: standardSprintPrice,
+    title: 'Implement one agreed workflow',
+    statement: `Most Operations Automation Sprints start at ${standardSprintPrice}.`,
+    body: 'The ordinary sprint covers one primary workflow, usually across one to three client-controlled systems, from mapping and acceptance criteria through implementation, testing, deployment, a runbook, one handoff or training session, and 30 calendar days of bounded defect correction. The price is a starting point, not a claim that every project costs the same amount.',
+  },
+  custom: {
+    name: 'Custom integration or system',
+    price: customWorkPrice,
+    title: 'Scope higher-risk work separately',
+    statement: `Work requiring a custom service, database, migration, more than three meaningful systems, complex authentication or permissions, or materially greater implementation risk is separately scoped and generally starts at ${customWorkStartingPrice}.`,
+    conditions: [
+      'A custom service, database, or migration.',
+      'More than three meaningful systems.',
+      'Complex authentication or permissions.',
+      'Materially greater implementation risk.',
+    ],
+    otherFactors: [
+      'Substantial historical data cleanup.',
+      'Several departments or workflow owners.',
+      'Many undocumented decision branches or exceptions.',
+      'Regulated or unusually sensitive information.',
+      'Real-time, high-availability, or ongoing operational expectations.',
+      'AI that materially influences consequential decisions.',
+    ],
+    boundary: 'These examples are scope signals, not an exhaustive rate card.',
+  },
+};
+
+pricing.homepageStatement = `${pricing.standard.statement} Paid Workflow Scoping is ${pricing.scoping.price} when the workflow needs more definition, and the scoping fee is credited toward an accepted build.`;
+
 export const offer = {
   name: 'Operations Automation Sprint',
   primaryStatement: "The Operations Automation Sprint is Hekswerk's primary commercial offer.",
@@ -10,9 +78,7 @@ export const offer = {
     'The client keeps control of its accounts, credentials, data, and deployed system. Hekswerk is not a required hosting layer, subscription, or permanent operator.',
   defectCorrection:
     'The default defect-correction period is 30 calendar days after handoff and covers defects against the agreed scope. New integrations, rules, inputs, or branches are new work.',
-  standardPriceStatement: 'Most Operations Automation Sprints start at $1,500.',
-  pricingSummary:
-    "Most Operations Automation Sprints start at $1,500. A qualifying founding-client scope is $750 and must have one clear trigger, one primary outcome, no custom service or database, no more than two client-owned systems, and permission to develop an anonymized case study. Nothing is published without the client's approval, and a positive testimonial is not required. Work needing a custom service, database, or more complex integration starts at $2,500.",
+  pricing,
   process: [
     {
       title: 'Map the workflow',
@@ -43,32 +109,5 @@ export const offer = {
     'A replacement for a permanent operations role or managed service.',
     'A speculative AI feature without a defined operational need.',
     'Work that requires unsupported access, hidden ownership, or a guaranteed business result.',
-  ],
-  pricing: [
-    {
-      name: 'Standard sprint',
-      price: '$1,500',
-      body: 'The normal starting point for one primary workflow. The ordinary case spans one to three systems and includes testing, deployment, documentation, training, and handoff.',
-      featured: true,
-    },
-    {
-      name: 'Founding-client sprint',
-      price: '$750',
-      body: 'A tightly bounded exception. Every requirement below must be met.',
-      requirements: [
-        'One clear trigger',
-        'One primary outcome',
-        'No custom service or database',
-        'No more than two client-owned systems',
-        'Permission to develop an anonymized case study',
-        'Client approval before anything is published',
-        'No positive testimonial required',
-      ],
-    },
-    {
-      name: 'Custom system',
-      price: '$2,500+',
-      body: 'Starting point for work that needs a custom service, a database, or more complex integration.',
-    },
   ],
 };

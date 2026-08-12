@@ -60,6 +60,34 @@ test('homepage commercial and research paths resolve', async ({page}) => {
   await expect(page).toHaveURL(/\/contact\?topic=automation$/);
 });
 
+test('work pricing distinguishes inquiry, scoping, the sprint, and custom work', async ({page}) => {
+  await page.goto('/work');
+  const summary = page.locator('.offer-summary');
+  await expect(summary.locator('strong')).toHaveText('$3,500');
+  await expect(summary.getByText('$750 paid Workflow Scoping')).toBeVisible();
+  await expect(summary.getByText('$6,500+ custom integration or system work')).toBeVisible();
+  await summary.getByRole('link', {name: 'See how pricing works'}).click();
+  await expect(page).toHaveURL(/\/work#pricing$/);
+
+  const pricing = page.locator('#pricing');
+  await expect(pricing.locator('.pricing-step .eyebrow')).toHaveText([
+    'Initial inquiry',
+    'Paid Workflow Scoping',
+    'Operations Automation Sprint',
+    'Custom integration or system',
+  ]);
+  await expect(pricing.getByText('Sending an initial inquiry remains free.').first()).toBeVisible();
+  await expect(pricing.getByText('Workflow Scoping does not include implementation.')).toBeVisible();
+  await expect(pricing.getByText('the full $750 scoping fee is credited toward that build')).toBeVisible();
+  await expect(
+    pricing.locator('.pricing-step').filter({hasText: 'Operations Automation Sprint'}).locator('strong'),
+  ).toHaveText('$3,500');
+  await expect(pricing.getByText('generally starts at $6,500.').first()).toBeVisible();
+
+  await page.getByRole('link', {name: 'Start an automation inquiry'}).first().click();
+  await expect(page).toHaveURL(/\/contact\?topic=automation$/);
+});
+
 test('navigation and footer expose every intended internal destination', async ({page, request}, testInfo) => {
   await page.goto('/');
   if (testInfo.project.name.startsWith('mobile')) {

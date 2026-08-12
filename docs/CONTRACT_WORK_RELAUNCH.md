@@ -53,11 +53,37 @@ The client keeps control of its accounts, credentials, data, and deployed system
 
 ### Scope and pricing
 
-Public pricing must use these tiers without presenting them as an exhaustive rate card:
+The Operations Automation Sprint remains the only primary commercial offer. Public pricing must distinguish the free inquiry and optional paid pre-build scoping from implementation:
 
-- **Founding-client price: $750.** This is for an unusually tight first scope: one clear trigger, one primary outcome, no custom service or database, and no more than two client-owned systems. The client must also give permission to develop an anonymized case study. Nothing is published without the client's approval, and a positive testimonial is not required. It is launch pricing for a qualifying workflow, not a claim that every project costs $750.
-- **Standard starting price: $1,500.** This is the normal starting point for a scoped Operations Automation Sprint.
-- **Complex work: $2,500 and above.** This applies when the agreed solution needs a custom service, a database, or several integrations. The scope and price must be agreed before implementation.
+1. **Initial inquiry is free.** Sending an initial inquiry does not begin paid work. Paid work begins only after scope, responsibilities, and payment are agreed in writing.
+2. **Workflow Scoping is $750.** It is a paid pre-build engagement used when the initial inquiry does not provide enough information to make a responsible fixed-price build proposal. A sufficiently clear and narrow workflow may be quoted directly without a separate scoping engagement.
+3. **Operations Automation Sprint.** Most Operations Automation Sprints start at $3,500. This is a starting point, not a claim that every project costs $3,500.
+4. **Custom integration or system.** Work requiring a custom service, database, migration, more than three meaningful systems, complex authentication or permissions, or materially greater implementation risk is separately scoped and generally starts at $6,500.
+
+Workflow Scoping produces:
+
+- a map of one recurring workflow;
+- an inventory of the systems, owners, dependencies, and known constraints involved;
+- a feasibility assessment;
+- draft acceptance criteria;
+- a recommended implementation approach;
+- a fixed-price build proposal when a responsible proposal can be made; and
+- a reasoned no-build or narrower-scope recommendation when the proposed automation is not presently responsible or feasible.
+
+Workflow Scoping does not include implementation, production deployment or production changes, training, post-handoff support, or defect correction. If the client accepts the resulting build proposal within 30 calendar days, the full $750 scoping fee is credited toward that build. The client does not pay $750 on top of the accepted build price.
+
+Other factors may also require custom scoping, including:
+
+- substantial historical data cleanup;
+- several departments or workflow owners;
+- many undocumented decision branches or exceptions;
+- regulated or unusually sensitive information;
+- real-time, high-availability, or ongoing operational expectations; and
+- AI that materially influences consequential decisions.
+
+These examples are scope signals, not an exhaustive rate card. Final scope and price must be agreed before implementation.
+
+The former public $750 implementation tier is retired. Public pricing is no longer conditioned on permission to develop or approve a case study, a testimonial, an endorsement, or a launch label. Any future discount is a private proposal-level decision, not a public offer.
 
 Do not add invented discounts, package levels, urgency, limited-slot language, return-on-investment figures, or savings estimates. Do not imply that price alone establishes fit.
 
@@ -123,8 +149,8 @@ The relaunch uses the existing site rather than creating a microsite or parallel
 
 | Route | Required role |
 | --- | --- |
-| `/` | Hekswerk homepage and commercial front door. Lead with the Operations Automation Sprint, its audience, its concrete outcome, starting price, and one primary inquiry action. Introduce Hekswerk as a one-person practice with contract and research lanes. Give WorldWeaver a visible but secondary research section. |
-| `/work` | Complete Operations Automation Sprint page. State the workflow problem, audience, promise, process, scope boundaries, price tiers, client ownership, defect-correction boundary, and inquiry action. This is a service page, not an app or product dashboard. |
+| `/` | Hekswerk homepage and commercial front door. Lead with the Operations Automation Sprint, its audience, its concrete outcome, restrained pricing context, and one primary inquiry action. Introduce Hekswerk as a one-person practice with contract and research lanes. Give WorldWeaver a visible but secondary research section. |
+| `/work` | Complete Operations Automation Sprint page. State the workflow problem, audience, promise, process, scope boundaries, the sequence from free inquiry through optional paid scoping to implementation, client ownership, defect-correction boundary, and inquiry action. This is a service page, not an app or product dashboard. |
 | `/work/selected-work` | Claims-ledger-controlled evidence page. Separate professional work, independent engineering, and open research. Give paid employer automation visual primacy, identify provenance and limits for every case, and do not present independent projects as commercial deployments. |
 | `/research` | Orientation page for independent engineering and open research. Present EvoGen and Kenshi Agent Environment as the current active agent-system work, with their source, verification paths, maturity, and explicit limits. Present WorldWeaver as established open research through the same project-source pattern, without a dedicated Hekswerk documentation subtree. Keep all three separate from the commercial offer. |
 | `/about` | Explain the one-person practice, its two lanes, the working method, and the client-ownership posture without inflating credentials or experience. Link to the primary offer and contact route. |
@@ -207,7 +233,7 @@ The public relaunch is complete only when all of the following are true:
 
 1. The route structure above is implemented in the existing static site, with no parallel site or application.
 2. The homepage and metadata make contract operations automation the primary commercial front door.
-3. The `/work` page states the full promise, audience, process, ownership model, price tiers, and scope boundaries without unsupported claims.
+3. The `/work` page states the full promise, audience, process, ownership model, paid-scoping boundary, implementation pricing, and scope boundaries without unsupported claims.
 4. The contact form names the Operations Automation Sprint, accepts preselection through `?topic=automation`, and still supports research, relocation, and general inquiries.
 5. Independent engineering and open research remain visible through the lane-level navigation, homepage, `/research`, Selected Work, relevant project links, and footer. EvoGen and Kenshi Agent Environment are presented as current agent-system work. WorldWeaver remains visible as open research, but no individual project occupies primary navigation, receives a dedicated documentation subtree, or is framed as the service being sold.
 6. Relocation planning is absent from the primary navigation and public offer hierarchy, with no restored landing page or August launch claim.

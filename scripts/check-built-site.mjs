@@ -57,6 +57,13 @@ const failures = [];
 const fail = (message) => failures.push(message);
 const decode = (value) =>
   value.replaceAll('&amp;', '&').replaceAll('&quot;', '"').replaceAll('&#x27;', "'").replaceAll('&#39;', "'");
+const textFromHtml = (html) =>
+  decode(
+    html
+      .replace(/<[^>]+>/g, ' ')
+      .replace(/\s+/g, ' ')
+      .trim(),
+  );
 
 function expectIncludes(html, value, label) {
   if (!html.includes(value)) fail(label);
@@ -192,6 +199,7 @@ for (const phrase of [
   expectIncludes(privacyHtml, phrase, `/privacy: ${phrase}`);
 }
 const workHtml = htmlForRoute('/work');
+const homeHtml = htmlForRoute('/');
 for (const phrase of [
   'Do not send passwords',
   'narrowly scoped credentials',
@@ -200,6 +208,48 @@ for (const phrase of [
   'Hekswerk does not certify EU AI Act or privacy compliance',
 ]) {
   expectIncludes(workHtml, phrase, `/work data handling: ${phrase}`);
+}
+
+const homeText = textFromHtml(homeHtml);
+const workText = textFromHtml(workHtml);
+for (const phrase of [
+  'Most Operations Automation Sprints start at $3,500.',
+  'Paid Workflow Scoping is $750 when the workflow needs more definition',
+  'the scoping fee is credited toward an accepted build',
+]) {
+  expectIncludes(homeText, phrase, `/: pricing: ${phrase}`);
+}
+for (const phrase of [
+  '$3,500',
+  '$750 paid Workflow Scoping',
+  '$6,500+ custom integration or system work',
+  'Workflow Scoping does not include implementation.',
+  'the full $750 scoping fee is credited toward that build',
+  'the client does not pay $750 on top of the accepted build price',
+  'Sending an initial inquiry remains free.',
+]) {
+  expectIncludes(workText, phrase, `/work pricing: ${phrase}`);
+}
+for (const [route, html] of [
+  ['/', homeHtml],
+  ['/work', workHtml],
+]) {
+  expectIncludes(html, 'href="/contact?topic=automation"', `${route}: primary automation inquiry route`);
+}
+
+const publicHtml = routes.map(({route}) => htmlForRoute(route)).join('\n');
+for (const retiredPricingFragment of [
+  `$${'1,500'}`,
+  `$${'2,500'}`,
+  ['founding', 'client'].join('-'),
+  ['qualifying', 'founding', 'client'].join(' '),
+]) {
+  if (publicHtml.toLowerCase().includes(retiredPricingFragment.toLowerCase())) {
+    fail(`built public site: retired pricing language remains: ${retiredPricingFragment}`);
+  }
+}
+for (const {route} of routes.filter(({route}) => !['/', '/work'].includes(route))) {
+  if (htmlForRoute(route).includes('$750')) fail(`${route}: $750 appears outside paid Workflow Scoping`);
 }
 
 const image = readFileSync(path.join(buildRoot, 'img/hekswerk-social-card.png'));

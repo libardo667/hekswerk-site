@@ -1,5 +1,5 @@
 import Link from '../../components/Link';
-import {CallToAction, FitLists, Hero, PricingCards, ProcessSteps} from '../../components/SitePrimitives';
+import {CallToAction, FitLists, Hero, PricingSequence, ProcessSteps} from '../../components/SitePrimitives';
 import Layout from '../../components/PageContent';
 import StructuredData from '../../components/StructuredData';
 import {offer} from '../../data/offer';
@@ -41,6 +41,13 @@ const sprintContents = [
 ];
 
 export default function Work() {
+  const pricingSequence = [
+    offer.pricing.inquiry,
+    offer.pricing.scoping,
+    {...offer.pricing.standard, featured: true},
+    offer.pricing.custom,
+  ];
+
   return (
     <Layout title={offer.name} description={`${offer.name}: ${offer.shortDescription}`}>
       <StructuredData
@@ -68,19 +75,19 @@ export default function Work() {
           ]}
           aside={
             <div className="offer-summary" aria-label="Operations Automation Sprint starting prices">
-              <span className="eyebrow">The normal starting point</span>
-              <strong>$1,500</strong>
-              <p>A standard sprint covers one primary workflow, usually across one to three systems.</p>
+              <span className="eyebrow">Standard sprint starting price</span>
+              <strong>{offer.pricing.standard.price}</strong>
+              <p>{offer.pricing.standard.statement}</p>
               <div className="offer-quick-facts">
                 <span>
-                  <b>$750</b> qualifying founding-client sprint
+                  <b>{offer.pricing.scoping.price}</b> paid Workflow Scoping
                 </span>
                 <span>
-                  <b>$2,500+</b> custom system
+                  <b>{offer.pricing.custom.price}</b> custom integration or system work
                 </span>
               </div>
               <a className="text-link" href="#pricing">
-                See the pricing conditions
+                See how pricing works
               </a>
             </div>
           }
@@ -188,21 +195,39 @@ export default function Work() {
           <div className="shell">
             <div className="section-heading">
               <span className="eyebrow">Pricing</span>
-              <h2>Standard work starts at $1,500</h2>
-              <p>
-                The $750 rate is a tightly bounded founding-client exception. A custom system starts at $2,500. Final
-                scope and price are agreed before implementation.
-              </p>
+              <h2>From a free inquiry to a responsibly scoped build</h2>
+              <p>{offer.pricing.inquiry.body}</p>
             </div>
-            <PricingCards items={offer.pricing} />
+            <PricingSequence items={pricingSequence} />
             <aside className="pricing-note">
-              <span className="eyebrow">About the founding-client rate</span>
-              <h3>An anonymized case study, never a required endorsement</h3>
+              <span className="eyebrow">What paid scoping produces</span>
+              <h3>A responsible build boundary, proposal, or reason not to build</h3>
+              <p>{offer.pricing.scoping.body}</p>
+              <ul>
+                {offer.pricing.scoping.deliverables.map((deliverable) => (
+                  <li key={deliverable}>{deliverable}</li>
+                ))}
+              </ul>
+              <p className="pricing-note__boundary">{offer.pricing.scoping.implementationBoundary}</p>
               <p>
-                The $750 rate requires permission to develop an anonymized case study. Nothing is published without the
-                client's approval. The case study can document the scope, approach, build, and acceptance check without
-                identifying the client, and no positive testimonial is required.
+                It also excludes {offer.pricing.scoping.exclusions[0].toLowerCase()} It does not include{' '}
+                {offer.pricing.scoping.exclusions[1].toLowerCase()}
               </p>
+              <p>{offer.pricing.scoping.creditRule}</p>
+              <p>{offer.pricing.scoping.creditExplanation}</p>
+              <p>{offer.pricing.scoping.directQuoteBoundary}</p>
+            </aside>
+            <aside className="pricing-note pricing-note--custom">
+              <span className="eyebrow">When custom scoping applies</span>
+              <h3>More systems, dependencies, or operational risk</h3>
+              <p>{offer.pricing.custom.statement}</p>
+              <p>Other factors may also require custom scoping:</p>
+              <ul>
+                {offer.pricing.custom.otherFactors.map((factor) => (
+                  <li key={factor}>{factor}</li>
+                ))}
+              </ul>
+              <p>{offer.pricing.custom.boundary}</p>
             </aside>
           </div>
         </section>

@@ -96,24 +96,23 @@ export function FitLists({fit, nonFit}) {
   );
 }
 
-export function PricingCards({items}) {
+export function PricingSequence({items}) {
   return (
-    <div className="pricing-grid">
-      {items.map((item) => (
-        <article className={`pricing-card${item.featured ? ' pricing-card--featured' : ''}`} key={item.name}>
-          <span className="eyebrow">{item.name}</span>
+    <ol className="pricing-sequence">
+      {items.map((item, index) => (
+        <li className={`pricing-step${item.featured ? ' pricing-step--featured' : ''}`} key={item.name}>
+          <span className="pricing-step__number" aria-hidden="true">
+            {String(index + 1).padStart(2, '0')}
+          </span>
+          <div className="pricing-step__content">
+            <span className="eyebrow">{item.name}</span>
+            <h3>{item.title}</h3>
+            <p>{item.body || item.statement}</p>
+          </div>
           <strong>{item.price}</strong>
-          <p>{item.body}</p>
-          {item.requirements && (
-            <ul className="pricing-requirements">
-              {item.requirements.map((requirement) => (
-                <li key={requirement}>{requirement}</li>
-              ))}
-            </ul>
-          )}
-        </article>
+        </li>
       ))}
-    </div>
+    </ol>
   );
 }
 
