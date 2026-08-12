@@ -70,6 +70,10 @@ h3 {
   backdrop-filter: blur(14px);
 }
 
+.navbar.navbar-sidebar--show {
+  backdrop-filter: none;
+}
+
 .navbar__logo {
   width: 2.15rem;
   height: 2.15rem;
