@@ -26,6 +26,7 @@ An entry marked **Hold** must not appear publicly until Levi supplies the named 
 | W3 | WorldWeaver manifests and license at `43eae31` | Public |
 | K1 | [Kenshi Agent Environment README at `bfaa4d5`](https://github.com/libardo667/kenshi-agent-env/blob/bfaa4d55ae10a34d33e7a06ee3959fc6659eceb4/README.md) | Public |
 | K2 | Kenshi Agent Environment package manifest and license at `bfaa4d5` | Public |
+| O1 | Oregon Secretary of State assumed business name registration for Hekswerk, e-filed January 13, 2026; Levi confirms January 2026 as Hekswerk's public founding month. Registry number and addresses omitted. | Public and private |
 | P1 | Private resumes and CV drafts reviewed locally and in Google Drive on 2026-08-11. No private file, link, contact detail, or reference detail is reproduced here. | Private |
 | P2 | Private invoice-file metadata and a private income-tracker title reviewed in Google Drive on 2026-08-11. No amount, invoice, row, or account detail was copied. | Private |
 | P3 | Private Providence interview notes reviewed in Google Drive on 2026-08-11. No operational detail is reproduced here. | Private |
@@ -83,8 +84,8 @@ The site may call the work **AI evaluation**. It must not name a platform, model
 | HEK-06 | Client ownership. | The client keeps control of its accounts, credentials, data, and deployed system. Hekswerk is not a required hosting layer, subscription, or permanent operator. | H1 | Public | None | Yes |
 | HEK-07 | Offer pricing. | A qualifying founding-client scope is $750. The standard starting price is $1,500. Complex work starts at $2,500. | H1 | Public | Exact offer prices | Yes |
 | HEK-08 | Bug-fix term. | The default bug-fix period is 14 calendar days after handoff and covers defects against the agreed scope. New integrations, rules, inputs, or branches are new work. | H1 | Public | Exact duration | Yes |
-| HEK-09 | WorldWeaver's place in Hekswerk. | WorldWeaver is Hekswerk's open research lane. It is visible evidence of systems work, not the service being sold. | H1 | Public | None | Yes |
-| HEK-10 | Hekswerk's legal registration, founding date, or operating start date. | None. | Conflicting private drafts use September 2025 and January 2026 | Private | Exact but conflicting | Hold. Levi must provide the registration record and choose the intended public date and wording. |
+| HEK-09 | WorldWeaver's place in Hekswerk. | WorldWeaver is part of Hekswerk's open research lane. It is visible evidence of systems work, not the service being sold. | H1 | Public | None | Yes |
+| HEK-10 | Hekswerk's founding date. | I founded Hekswerk in January 2026. | O1 | Public and private | Exact | Yes |
 | HEK-11 | Privacy-first, secure, compliant, audited, production-proven, or guaranteed automation. | None. | No implementation-specific evidence exists for a general claim | Private or client-confidential | Unverified | No |
 
 Offer terms in HEK-04 through HEK-08 are commitments and boundaries, not historical results. They may not be rewritten as claims about completed clients.
@@ -97,7 +98,7 @@ Offer terms in HEK-04 through HEK-08 are commitments and boundaries, not histori
 | WW-02 | Resident continuity. | A resident keeps one continuous identity, private history, and working space while moving between a private hearth and local shared cities. | W1, W2 | Public | One identity, exact design claim | Yes |
 | WW-03 | Boundary between model choice and world facts. | The engine records concrete world facts. A language model can choose what a resident tries to do, but it does not decide whether the action worked. | W1, W2 | Public | None | Yes |
 | WW-04 | Current federation limit. | Travel between independently operated computers is a goal, not a completed claim. | W1, W2 | Public | None | Yes. Recheck current manual before reuse. |
-| WW-05 | Development status. | WorldWeaver is under active development. | W2 | Public | None | Yes. Recheck current manual before reuse. |
+| WW-05 | Development status. | None. | W2 and Levi's current status | Public and private | None | No. Development is currently paused. |
 | WW-06 | License. | WorldWeaver's source code is available under the AGPL-3.0-or-later license. | W1, W3 | Public | License version, exact | Yes |
 | WW-07 | Product status. | WorldWeaver is open research, not a hosted product or an Operations Automation Sprint deliverable. | H1 | Public | None | Yes |
 | WW-08 | Consciousness, sentience, personhood, users, adoption, production readiness, or client outcomes. | None. | No adequate source for those public claims | Public, private, or speculative | Unverified | No |
@@ -151,7 +152,7 @@ No client outcome metric is currently approved. Offer parameters are allowed onl
 | --- | --- | --- | --- | --- | --- | --- |
 | DATE-01 | Start of paid AI-evaluation work. | I have done paid AI-evaluation work since April 2024. | H2, P1, P2 | Public and private | Exact month | Yes |
 | DATE-02 | Providence employment dates. | None. | P1 | Private | Exact but unverified | Hold. Levi must provide an employment record and approve the exact public wording. |
-| DATE-03 | Hekswerk founding or operating date. | None. | Conflicting private drafts | Private | Exact but conflicting | Hold. Resolve September 2025 versus January 2026 with a primary record. |
+| DATE-03 | Hekswerk's founding date. | I founded Hekswerk in January 2026. | O1 | Public and private | Exact | Yes |
 | DATE-04 | WorldWeaver or Kenshi founding date. | None. | Git history records code dates but does not define a public founding date | Public | Unverified as a founding claim | No |
 | DATE-05 | Relocation, launch, cohort, registration, grant, application, or future availability dates. | None. | Private plans and applications | Private | Exact or approximate, often prospective | No for the August relaunch |
 | DATE-06 | The Operations Automation Sprint bug-fix period. | The default bug-fix period is 14 calendar days after handoff. | H1 | Public | Exact duration | Yes |
