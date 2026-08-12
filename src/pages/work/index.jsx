@@ -1,11 +1,5 @@
 import Layout from '@theme/Layout';
-import {
-  CallToAction,
-  FitLists,
-  Hero,
-  PricingCards,
-  ProcessSteps,
-} from '../../components/SitePrimitives';
+import {CallToAction, FitLists, Hero, PricingCards, ProcessSteps} from '../../components/SitePrimitives';
 import StructuredData from '../../components/StructuredData';
 import {offer} from '../../data/offer';
 
@@ -21,26 +15,17 @@ const sprintContents = [
   {
     eyebrow: 'Define',
     title: 'A workflow with a testable boundary',
-    items: [
-      'Workflow mapping',
-      'Acceptance criteria agreed before implementation',
-    ],
+    items: ['Workflow mapping', 'Acceptance criteria agreed before implementation'],
   },
   {
     eyebrow: 'Build',
     title: 'One primary workflow',
-    items: [
-      'One to three systems in the ordinary case',
-      'Implementation of the agreed automation',
-    ],
+    items: ['One to three systems in the ordinary case', 'Implementation of the agreed automation'],
   },
   {
     eyebrow: 'Verify',
     title: 'Expected paths and visible failures',
-    items: [
-      'Happy-path and exception testing',
-      'Basic logs or an audit trail appropriate to the scope',
-    ],
+    items: ['Happy-path and exception testing', 'Basic logs or an audit trail appropriate to the scope'],
   },
   {
     eyebrow: 'Hand off',
@@ -57,18 +42,20 @@ const sprintContents = [
 export default function Work() {
   return (
     <Layout title={offer.name} description={`${offer.name}: ${offer.shortDescription}`}>
-      <StructuredData data={{
-        '@context': 'https://schema.org',
-        '@type': 'Service',
-        '@id': 'https://www.hekswerk.com/work#operations-automation-sprint',
-        name: offer.name,
-        url: 'https://www.hekswerk.com/work',
-        serviceType: 'Operations automation',
-        description: offer.shortDescription,
-        provider: {
-          '@id': 'https://www.hekswerk.com/#organization',
-        },
-      }} />
+      <StructuredData
+        data={{
+          '@context': 'https://schema.org',
+          '@type': 'Service',
+          '@id': 'https://www.hekswerk.com/work#operations-automation-sprint',
+          name: offer.name,
+          url: 'https://www.hekswerk.com/work',
+          serviceType: 'Operations automation',
+          description: offer.shortDescription,
+          provider: {
+            '@id': 'https://www.hekswerk.com/#organization',
+          },
+        }}
+      />
       <main>
         <Hero
           eyebrow="Operations Automation Sprint · Primary commercial offer"
@@ -78,18 +65,24 @@ export default function Work() {
             {label: 'Start an automation inquiry', to: '/contact?topic=automation', primary: true},
             {label: 'Check fit and scope', href: '#fit'},
           ]}
-          aside={(
+          aside={
             <div className="offer-summary" aria-label="Operations Automation Sprint starting prices">
               <span className="eyebrow">The normal starting point</span>
               <strong>$1,500</strong>
               <p>A standard sprint covers one primary workflow, usually across one to three systems.</p>
               <div className="offer-quick-facts">
-                <span><b>$750</b> qualifying founding-client sprint</span>
-                <span><b>$2,500+</b> custom system</span>
+                <span>
+                  <b>$750</b> qualifying founding-client sprint
+                </span>
+                <span>
+                  <b>$2,500+</b> custom system
+                </span>
               </div>
-              <a className="text-link" href="#pricing">See the pricing conditions</a>
+              <a className="text-link" href="#pricing">
+                See the pricing conditions
+              </a>
             </div>
-          )}
+          }
         />
 
         <section className="section-block">
@@ -98,13 +91,13 @@ export default function Work() {
               <span className="eyebrow">The problem</span>
               <h2>Manual bridges make repeatable work fragile</h2>
               <p>
-                A form arrives. Someone copies its fields into a spreadsheet. An attachment is checked against a
-                record. A follow-up depends on memory. None of those steps is unusual, but the chain becomes hard to
-                see, hard to test, and easy to interrupt.
+                A form arrives. Someone copies its fields into a spreadsheet. An attachment is checked against a record.
+                A follow-up depends on memory. None of those steps is unusual, but the chain becomes hard to see, hard
+                to test, and easy to interrupt.
               </p>
               <p>
-                The sprint starts by making that chain explicit. The build has a named trigger, a primary outcome,
-                known exceptions, and an acceptance check that both sides agree on before implementation.
+                The sprint starts by making that chain explicit. The build has a named trigger, a primary outcome, known
+                exceptions, and an acceptance check that both sides agree on before implementation.
               </p>
             </div>
             <article className="lane-card lane-card--commercial service-audience">
@@ -125,8 +118,8 @@ export default function Work() {
               <span className="eyebrow">Representative projects</span>
               <h2>Concrete workflows, not an abstract transformation</h2>
               <p>
-                These are examples of suitable sprint scopes. They are not claims that each project has already
-                been delivered for a Hekswerk client.
+                These are examples of suitable sprint scopes. They are not claims that each project has already been
+                delivered for a Hekswerk client.
               </p>
             </div>
             <div className="project-example-grid">
@@ -156,7 +149,9 @@ export default function Work() {
                   <span className="eyebrow">{group.eyebrow}</span>
                   <h3>{group.title}</h3>
                   <ul>
-                    {group.items.map((item) => <li key={item}>{item}</li>)}
+                    {group.items.map((item) => (
+                      <li key={item}>{item}</li>
+                    ))}
                   </ul>
                 </article>
               ))}
@@ -194,8 +189,8 @@ export default function Work() {
               <span className="eyebrow">Pricing</span>
               <h2>Standard work starts at $1,500</h2>
               <p>
-                The $750 rate is a tightly bounded founding-client exception. A custom system starts at $2,500.
-                Final scope and price are agreed before implementation.
+                The $750 rate is a tightly bounded founding-client exception. A custom system starts at $2,500. Final
+                scope and price are agreed before implementation.
               </p>
             </div>
             <PricingCards items={offer.pricing} />
@@ -203,9 +198,9 @@ export default function Work() {
               <span className="eyebrow">About the founding-client rate</span>
               <h3>An anonymized case study, never a required endorsement</h3>
               <p>
-                The $750 rate requires permission to develop an anonymized case study. Nothing is published without
-                the client's approval. The case study can document the scope, approach, build, and acceptance check
-                without identifying the client, and no positive testimonial is required.
+                The $750 rate requires permission to develop an anonymized case study. Nothing is published without the
+                client's approval. The case study can document the scope, approach, build, and acceptance check without
+                identifying the client, and no positive testimonial is required.
               </p>
             </aside>
           </div>
@@ -228,14 +223,17 @@ export default function Work() {
                 <span className="eyebrow">Support</span>
                 <h3>The sprint ends</h3>
                 <p>{offer.defectCorrection}</p>
-                <p>There is no indefinite maintenance obligation, 24-hour support, or custom SaaS product hidden inside the sprint.</p>
+                <p>
+                  There is no indefinite maintenance obligation, 24-hour support, or custom SaaS product hidden inside
+                  the sprint.
+                </p>
               </article>
               <article className="service-boundary-card">
                 <span className="eyebrow">Data and access</span>
                 <h3>Discovery starts without sensitive production data</h3>
                 <p>
-                  Do not send sensitive production data during initial discovery. Regulated or unusually sensitive
-                  data requires a separate assessment before access or implementation is agreed.
+                  Do not send sensitive production data during initial discovery. Regulated or unusually sensitive data
+                  requires a separate assessment before access or implementation is agreed.
                 </p>
               </article>
             </div>

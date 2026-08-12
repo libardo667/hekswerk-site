@@ -4,7 +4,10 @@ import {contactEmail} from '../data/site';
 
 export default function Privacy() {
   return (
-    <Layout title="Privacy" description="Plain-language privacy and data-handling information for the Hekswerk website and contact form.">
+    <Layout
+      title="Privacy"
+      description="Plain-language privacy and data-handling information for the Hekswerk website and contact form."
+    >
       <main>
         <Hero
           compact
@@ -26,8 +29,8 @@ export default function Privacy() {
             <section>
               <h2>What happens when you send it</h2>
               <p>
-                The form sends those details over HTTPS to Hekswerk's intake endpoint so I can understand and reply
-                to your inquiry. Submitting the form does not create a user account or add you to a newsletter.
+                The form sends those details over HTTPS to Hekswerk's intake endpoint so I can understand and reply to
+                your inquiry. Submitting the form does not create a user account or add you to a newsletter.
               </p>
             </section>
 
@@ -43,8 +46,8 @@ export default function Privacy() {
             <BoundaryBox title="Keep the first message low-risk">
               <p>
                 Do not send passwords, access tokens, full financial identifiers, health records, or confidential
-                datasets through the form. After an initial conversation, I can suggest an appropriate way to handle
-                any necessary material.
+                datasets through the form. After an initial conversation, I can suggest an appropriate way to handle any
+                necessary material.
               </p>
             </BoundaryBox>
 

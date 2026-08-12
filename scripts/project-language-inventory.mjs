@@ -3,7 +3,8 @@ import {readdirSync, statSync} from 'node:fs';
 import path from 'node:path';
 
 const projectsRoot = path.resolve(process.cwd(), '..');
-const ignoredPathPart = /(^|\/)(node_modules|vendor|third_party|\.venv|venv|dist|build|coverage|\.docusaurus|\.cache|__pycache__)(\/|$)/i;
+const ignoredPathPart =
+  /(^|\/)(node_modules|vendor|third_party|\.venv|venv|dist|build|coverage|\.docusaurus|\.cache|__pycache__)(\/|$)/i;
 
 const languageByExtension = new Map([
   ['.py', 'Python'],
@@ -103,11 +104,17 @@ const languages = [...languageFiles.entries()]
 
 const sourceFiles = languages.reduce((total, language) => total + language.files, 0);
 
-console.log(JSON.stringify({
-  method: 'Git-tracked source files by filename extension',
-  projectsRoot,
-  includedProjectCount: includedProjects.length,
-  excludedThirdPartyProjects: excludedProjects.sort(),
-  sourceFiles,
-  languages,
-}, null, 2));
+console.log(
+  JSON.stringify(
+    {
+      method: 'Git-tracked source files by filename extension',
+      projectsRoot,
+      includedProjectCount: includedProjects.length,
+      excludedThirdPartyProjects: excludedProjects.sort(),
+      sourceFiles,
+      languages,
+    },
+    null,
+    2,
+  ),
+);

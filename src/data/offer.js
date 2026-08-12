@@ -1,8 +1,7 @@
 export const offer = {
   name: 'Operations Automation Sprint',
   primaryStatement: "The Operations Automation Sprint is Hekswerk's primary commercial offer.",
-  shortDescription:
-    'A bounded build for one recurring internal workflow, deployed into systems the client controls.',
+  shortDescription: 'A bounded build for one recurring internal workflow, deployed into systems the client controls.',
   audience:
     'It is for small, operations-heavy professional-service teams, generally 3 to 25 people, with one recurring internal workflow that can be named, bounded, tested, and handed off.',
   delivery:

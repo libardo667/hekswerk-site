@@ -5,7 +5,10 @@ import {contactEmail} from '../data/site';
 
 export default function Contact() {
   return (
-    <Layout title="Contact" description="Contact Hekswerk about an Operations Automation Sprint, research, or another inquiry.">
+    <Layout
+      title="Contact"
+      description="Contact Hekswerk about an Operations Automation Sprint, research, or another inquiry."
+    >
       <main>
         <Hero
           compact
@@ -24,8 +27,8 @@ export default function Contact() {
               </p>
               <BoundaryBox title="Do not send secrets">
                 <p>
-                  Please do not include passwords, access tokens, full financial identifiers, health records, or
-                  other sensitive records in this first message.
+                  Please do not include passwords, access tokens, full financial identifiers, health records, or other
+                  sensitive records in this first message.
                 </p>
               </BoundaryBox>
               <p className="contact-alternative">

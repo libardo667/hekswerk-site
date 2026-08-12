@@ -10,7 +10,7 @@ export function Hero({eyebrow, title, lede, actions = [], aside, compact = false
           <p className="hero-lede">{lede}</p>
           {actions.length > 0 && (
             <div className="hero-actions">
-              {actions.map((action) => (
+              {actions.map((action) =>
                 action.href ? (
                   <a
                     key={action.label}
@@ -27,8 +27,8 @@ export function Hero({eyebrow, title, lede, actions = [], aside, compact = false
                   >
                     {action.label}
                   </Link>
-                )
-              ))}
+                ),
+              )}
             </div>
           )}
         </div>
@@ -46,7 +46,11 @@ export function ProofCards({items}) {
           {item.eyebrow && <span className="eyebrow">{item.eyebrow}</span>}
           <h3>{item.title}</h3>
           <p>{item.body}</p>
-          {item.link && <Link className="text-link" to={item.link.to}>{item.link.label}</Link>}
+          {item.link && (
+            <Link className="text-link" to={item.link.to}>
+              {item.link.label}
+            </Link>
+          )}
         </article>
       ))}
     </div>
@@ -73,12 +77,20 @@ export function FitLists({fit, nonFit}) {
       <section className="fit-panel">
         <span className="eyebrow">Good fit</span>
         <h3>A bounded operational problem</h3>
-        <ul>{fit.map((item) => <li key={item}>{item}</li>)}</ul>
+        <ul>
+          {fit.map((item) => (
+            <li key={item}>{item}</li>
+          ))}
+        </ul>
       </section>
       <section className="fit-panel fit-panel--not">
         <span className="eyebrow">Not a fit</span>
         <h3>Open-ended or unsupported work</h3>
-        <ul>{nonFit.map((item) => <li key={item}>{item}</li>)}</ul>
+        <ul>
+          {nonFit.map((item) => (
+            <li key={item}>{item}</li>
+          ))}
+        </ul>
       </section>
     </div>
   );
@@ -94,7 +106,9 @@ export function PricingCards({items}) {
           <p>{item.body}</p>
           {item.requirements && (
             <ul className="pricing-requirements">
-              {item.requirements.map((requirement) => <li key={requirement}>{requirement}</li>)}
+              {item.requirements.map((requirement) => (
+                <li key={requirement}>{requirement}</li>
+              ))}
             </ul>
           )}
         </article>
@@ -111,7 +125,9 @@ export function CallToAction({eyebrow = 'Start with the workflow', title, body, 
         <h2>{title}</h2>
         <p>{body}</p>
       </div>
-      <Link className="button button--primary button--lg" to={to}>{label}</Link>
+      <Link className="button button--primary button--lg" to={to}>
+        {label}
+      </Link>
     </section>
   );
 }

@@ -30,8 +30,8 @@ export default function Research() {
               <span className="eyebrow">Active agent-system work</span>
               <h2>EvoGen and Kenshi Agent Environment</h2>
               <p>
-                Read each repository alongside its validation path and current boundary. The descriptions below
-                stay deliberately narrower than the implementation detail in the source.
+                Read each repository alongside its validation path and current boundary. The descriptions below stay
+                deliberately narrower than the implementation detail in the source.
               </p>
             </div>
             <div className="research-project-grid">
@@ -49,7 +49,9 @@ export default function Research() {
                     <dd>It does not yet prove a real game integration or model-generated diagnosis.</dd>
                   </div>
                 </dl>
-                <Link className="button button--outline" to={evogenUrl}>Inspect EvoGen</Link>
+                <Link className="button button--outline" to={evogenUrl}>
+                  Inspect EvoGen
+                </Link>
               </article>
               <article className="research-project-card">
                 <span className="eyebrow">Kenshi Agent Environment</span>
@@ -59,8 +61,8 @@ export default function Research() {
                   <div>
                     <dt>Inspectable boundary</dt>
                     <dd>
-                      The public architecture keeps model choice, action validity, game execution, and later
-                      evidence separate.
+                      The public architecture keeps model choice, action validity, game execution, and later evidence
+                      separate.
                     </dd>
                   </div>
                   <div>
@@ -71,13 +73,15 @@ export default function Research() {
                     </dd>
                   </div>
                 </dl>
-                <Link className="button button--outline" to={kenshiUrl}>Inspect Kenshi Agent Environment</Link>
+                <Link className="button button--outline" to={kenshiUrl}>
+                  Inspect Kenshi Agent Environment
+                </Link>
               </article>
             </div>
             <BoundaryBox eyebrow="Integration boundary" title="Related work, not a completed integration">
               <p>
-                EvoGen includes a small KAE JSONL normalization adapter. KAE is not yet registered as a complete
-                EvoGen subject, and its production trajectory exporter is not complete.
+                EvoGen includes a small KAE JSONL normalization adapter. KAE is not yet registered as a complete EvoGen
+                subject, and its production trajectory exporter is not complete.
               </p>
             </BoundaryBox>
           </div>
@@ -93,26 +97,28 @@ export default function Research() {
                 particular check exercises. Neither should be stretched into a broader maturity or outcome claim.
               </p>
             </div>
-            <ProofCards items={[
-              {
-                eyebrow: 'EvoGen verification',
-                title: 'A deterministic proof path',
-                body: 'One verification command runs Ruff, strict mypy, schema checks, the full test suite, a deterministic end-to-end proof in a disposable workspace, and a whitespace-error check.',
-                link: {label: 'Read the EvoGen source', to: evogenUrl},
-              },
-              {
-                eyebrow: 'Kenshi evidence',
-                title: 'Decision and result stay separate',
-                body: "Before dispatch, the runtime checks the model's choice against fresh state. The native mod reports whether Kenshi accepted the action and what happened afterward. The runtime records the observation, decision, command, and result.",
-                link: {label: 'Read the KAE source', to: kenshiUrl},
-              },
-              {
-                eyebrow: 'Selected work',
-                title: 'Claims stay next to their provenance',
-                body: 'The selected-work record states what is shown, what was verified, and what is not claimed for each public example.',
-                link: {label: 'Review selected work', to: '/work/selected-work'},
-              },
-            ]} />
+            <ProofCards
+              items={[
+                {
+                  eyebrow: 'EvoGen verification',
+                  title: 'A deterministic proof path',
+                  body: 'One verification command runs Ruff, strict mypy, schema checks, the full test suite, a deterministic end-to-end proof in a disposable workspace, and a whitespace-error check.',
+                  link: {label: 'Read the EvoGen source', to: evogenUrl},
+                },
+                {
+                  eyebrow: 'Kenshi evidence',
+                  title: 'Decision and result stay separate',
+                  body: "Before dispatch, the runtime checks the model's choice against fresh state. The native mod reports whether Kenshi accepted the action and what happened afterward. The runtime records the observation, decision, command, and result.",
+                  link: {label: 'Read the KAE source', to: kenshiUrl},
+                },
+                {
+                  eyebrow: 'Selected work',
+                  title: 'Claims stay next to their provenance',
+                  body: 'The selected-work record states what is shown, what was verified, and what is not claimed for each public example.',
+                  link: {label: 'Review selected work', to: '/work/selected-work'},
+                },
+              ]}
+            />
           </div>
         </section>
 
@@ -122,29 +128,31 @@ export default function Research() {
               <span className="eyebrow">Established open research</span>
               <h2>WorldWeaver remains visible and inspectable</h2>
               <p>
-                WorldWeaver is software for persistent AI residents and the worlds they can inhabit with people.
-                It is part of Hekswerk's open research lane, not the service being sold.
+                WorldWeaver is software for persistent AI residents and the worlds they can inhabit with people. It is
+                part of Hekswerk's open research lane, not the service being sold.
               </p>
             </div>
-            <ProofCards items={[
-              {
-                title: 'Continuity',
-                body: 'A resident keeps one continuous identity, private history, and working space while moving between a private hearth and local shared cities.',
-              },
-              {
-                title: 'Concrete consequences',
-                body: 'The engine records concrete world facts. A language model can choose what a resident tries to do, but it does not decide whether the action worked.',
-              },
-              {
-                title: 'Open source',
-                body: "WorldWeaver's source code is available under the AGPL-3.0-or-later license.",
-                link: {label: 'Open the WorldWeaver source', to: worldweaverUrl},
-              },
-            ]} />
+            <ProofCards
+              items={[
+                {
+                  title: 'Continuity',
+                  body: 'A resident keeps one continuous identity, private history, and working space while moving between a private hearth and local shared cities.',
+                },
+                {
+                  title: 'Concrete consequences',
+                  body: 'The engine records concrete world facts. A language model can choose what a resident tries to do, but it does not decide whether the action worked.',
+                },
+                {
+                  title: 'Open source',
+                  body: "WorldWeaver's source code is available under the AGPL-3.0-or-later license.",
+                  link: {label: 'Open the WorldWeaver source', to: worldweaverUrl},
+                },
+              ]}
+            />
             <BoundaryBox title="Current limits">
               <p>
-                Travel between independently operated computers is a goal, not a completed claim. WorldWeaver is
-                open research, not a hosted product or an Operations Automation Sprint deliverable.
+                Travel between independently operated computers is a goal, not a completed claim. WorldWeaver is open
+                research, not a hosted product or an Operations Automation Sprint deliverable.
               </p>
             </BoundaryBox>
           </div>

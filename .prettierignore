@@ -1,7 +1,7 @@
-node_modules/
 build/
 .docusaurus/
-.cache-loader/
+node_modules/
 playwright-report/
 test-results/
-npm-debug.log*
+docs/site-baseline/
+package-lock.json

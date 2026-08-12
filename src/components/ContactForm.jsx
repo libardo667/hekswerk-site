@@ -1,36 +1,20 @@
 import Link from '@docusaurus/Link';
+import {useLocation} from '@docusaurus/router';
 import {useEffect, useState} from 'react';
+import {defaultTopic, messageLabelForTopic, payloadFromForm, topicFromSearch, topicOptions} from '../data/contactForm';
 import {contactEmail} from '../data/site';
 
 const endpoint = 'https://hekswerk-intake.levi-020.workers.dev/';
 
-const topicOptions = [
-  {label: 'Operations Automation Sprint', value: 'Quickstart Automation'},
-  {label: 'Research collaboration', value: 'Research collaboration'},
-  {label: 'Relocation planning', value: 'Relocation planning'},
-  {label: 'Something else', value: 'Something else'},
-];
-
-const queryTopics = {
-  automation: 'Quickstart Automation',
-  research: 'Research collaboration',
-  relocation: 'Relocation planning',
-};
-
 export default function ContactForm() {
-  const [topic, setTopic] = useState('Quickstart Automation');
+  const {search} = useLocation();
+  const [topic, setTopic] = useState(() => topicFromSearch(search));
   const [status, setStatus] = useState({kind: '', message: ''});
 
   useEffect(() => {
-    const {pathname, search, hash} = window.location;
-    if (pathname.endsWith('/contact.html')) {
-      window.location.replace(`/contact${search}${hash}`);
-      return;
-    }
-
-    const requestedTopic = new URLSearchParams(search).get('topic');
-    if (queryTopics[requestedTopic]) {
-      setTopic(queryTopics[requestedTopic]);
+    const currentLocation = window.location;
+    if (currentLocation.pathname.endsWith('/contact.html')) {
+      window.location.replace(`/contact${currentLocation.search}${currentLocation.hash}`);
     }
   }, []);
 
@@ -40,31 +24,7 @@ export default function ContactForm() {
 
     const formElement = event.currentTarget;
     const form = new FormData(formElement);
-    const relocation = topic === 'Relocation planning';
-    const payload = relocation
-      ? {
-          form_type: 'relocation',
-          name: form.get('name'),
-          email: form.get('email'),
-          topic,
-          current_location: form.get('current_location'),
-          target_location: form.get('target_location'),
-          timeline: form.get('timeline'),
-          household: form.get('household'),
-          hardest_part: form.get('message'),
-          urgent_or_sensitive: form.get('urgent_or_sensitive'),
-          privacy_acknowledged: form.get('privacy_acknowledged') === 'on',
-          website: form.get('website'),
-        }
-      : {
-          form_type: 'contact',
-          name: form.get('name'),
-          email: form.get('email'),
-          topic,
-          message: form.get('message'),
-          privacy_acknowledged: form.get('privacy_acknowledged') === 'on',
-          website: form.get('website'),
-        };
+    const payload = payloadFromForm(form, topic);
 
     try {
       const response = await fetch(endpoint, {
@@ -77,7 +37,7 @@ export default function ContactForm() {
         throw new Error(result.error || 'The form could not be sent.');
       }
       formElement.reset();
-      setTopic('Quickstart Automation');
+      setTopic(defaultTopic);
       setStatus({kind: 'success', message: 'Thank you. Your inquiry has been sent.'});
     } catch (error) {
       setStatus({
@@ -88,11 +48,7 @@ export default function ContactForm() {
   }
 
   const isRelocation = topic === 'Relocation planning';
-  const messageLabel = isRelocation
-    ? 'What is the hardest part of the move right now?'
-    : topic === 'Quickstart Automation'
-      ? 'Describe the workflow, the people involved, and the systems it touches'
-      : 'Message';
+  const messageLabel = messageLabelForTopic(topic);
 
   return (
     <form className="contact-form" onSubmit={submit}>
@@ -111,7 +67,9 @@ export default function ContactForm() {
         Topic
         <select name="topic" value={topic} onChange={(event) => setTopic(event.target.value)}>
           {topicOptions.map((option) => (
-            <option value={option.value} key={option.value}>{option.label}</option>
+            <option value={option.value} key={option.value}>
+              {option.label}
+            </option>
           ))}
         </select>
       </label>
@@ -119,12 +77,24 @@ export default function ContactForm() {
       {isRelocation && (
         <div className="conditional-fields">
           <div className="field-grid">
-            <label>Current location<input name="current_location" /></label>
-            <label>Target location<input name="target_location" /></label>
+            <label>
+              Current location
+              <input name="current_location" />
+            </label>
+            <label>
+              Target location
+              <input name="target_location" />
+            </label>
           </div>
           <div className="field-grid">
-            <label>Timeline<input name="timeline" /></label>
-            <label>Household<input name="household" /></label>
+            <label>
+              Timeline
+              <input name="timeline" />
+            </label>
+            <label>
+              Household
+              <input name="household" />
+            </label>
           </div>
           <label>
             Anything urgent or sensitive I should know?
@@ -145,14 +115,20 @@ export default function ContactForm() {
 
       <label className="privacy-check">
         <input name="privacy_acknowledged" type="checkbox" required />
-        <span>I have read the <Link to="/privacy">privacy and data-handling note</Link>.</span>
+        <span>
+          I have read the <Link to="/privacy">privacy and data-handling note</Link>.
+        </span>
       </label>
 
       <div className="form-footer">
         <button className="button button--primary button--lg" type="submit" disabled={status.kind === 'working'}>
           {status.kind === 'working' ? 'Sending...' : 'Send inquiry'}
         </button>
-        <p className={`form-status${status.kind ? ` form-status--${status.kind}` : ''}`} role="status" aria-live="polite">
+        <p
+          className={`form-status${status.kind ? ` form-status--${status.kind}` : ''}`}
+          role="status"
+          aria-live="polite"
+        >
           {status.message}
         </p>
       </div>
