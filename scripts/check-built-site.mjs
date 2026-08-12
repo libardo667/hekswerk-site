@@ -200,6 +200,7 @@ for (const phrase of [
 }
 const workHtml = htmlForRoute('/work');
 const homeHtml = htmlForRoute('/');
+const researchHtml = htmlForRoute('/research');
 for (const phrase of [
   'Do not send passwords',
   'narrowly scoped credentials',
@@ -236,6 +237,11 @@ for (const [route, html] of [
 ]) {
   expectIncludes(html, 'href="/contact?topic=automation"', `${route}: primary automation inquiry route`);
 }
+expectIncludes(
+  researchHtml,
+  'href="https://github.com/libardo667/worldweaver/blob/43eae31093ac941bc3335d6ab95d3b38409942ea/docs/index.md"',
+  '/research: pinned WorldWeaver documentation',
+);
 
 const publicHtml = routes.map(({route}) => htmlForRoute(route)).join('\n');
 for (const retiredPricingFragment of [

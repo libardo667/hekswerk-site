@@ -4,7 +4,8 @@ import {BoundaryBox, Hero, ProofCards} from '../components/SitePrimitives';
 
 const evogenUrl = 'https://github.com/libardo667/evogen';
 const kenshiUrl = 'https://github.com/libardo667/kenshi-agent-env';
-const worldweaverUrl = 'https://github.com/libardo667/worldweaver';
+const worldweaverDocsUrl =
+  'https://github.com/libardo667/worldweaver/blob/43eae31093ac941bc3335d6ab95d3b38409942ea/docs/index.md';
 
 export default function Research() {
   return (
@@ -143,9 +144,9 @@ export default function Research() {
                   body: 'The engine records concrete world facts. A language model can choose what a resident tries to do, but it does not decide whether the action worked.',
                 },
                 {
-                  title: 'Open source',
-                  body: "WorldWeaver's source code is available under the AGPL-3.0-or-later license.",
-                  link: {label: 'Open the WorldWeaver source', to: worldweaverUrl},
+                  title: 'Documentation and source',
+                  body: "WorldWeaver's documentation and AGPL-3.0-or-later source are public and inspectable.",
+                  link: {label: 'Read the WorldWeaver documentation', to: worldweaverDocsUrl},
                 },
               ]}
             />
