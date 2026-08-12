@@ -12,7 +12,7 @@ before reusing a claim after either changes.
 
 | Trigger                             | Recipient or storage                   | Data involved                                                                                                                                                                                                                                               | Current retention evidence                                                                                                               |
 | ----------------------------------- | -------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
-| Any page view                       | GitHub Pages                           | The HTTP request and ordinary connection metadata. GitHub specifically says it logs visitor IP addresses for Pages security.                                                                                                                                | GitHub controls its service logs and retention. Hekswerk does not receive a raw visitor log from Pages.                                  |
+| Canonical `www.hekswerk.com` page view or `workers.dev` review-page view | Cloudflare Workers Static Assets | The HTTP request, asset path, and ordinary connection metadata needed to serve the deployment. The review hostname sends `X-Robots-Tag: noindex, nofollow`. | Cloudflare controls platform processing and service retention. Automatic Worker invocation logs are disabled in repository configuration. |
 | Any page view                       | Cloudflare Web Analytics               | Host, path, referrer, country, browser and device categories, navigation and performance metrics. Cloudflare says it does not log query strings, use cookies or browser storage, fingerprint individuals, or collect or use personal data for this product. | Cloudflare says unsampled beacon data is retained for seven days and then aggregated, and its dashboard exposes the previous six months. |
 | First page in a browser-tab session | Browser `sessionStorage`               | Initial same-site path and optional `utm_source`, `utm_medium`, and `utm_campaign`. No other query parameters.                                                                                                                                              | Browser-controlled tab session. The values are sent to Hekswerk only with an inquiry.                                                    |
 | Page asset loading                  | Hekswerk site origin                   | Astro JavaScript, CSS, images, and locally bundled Fraunces and Outfit WOFF2 files.                                                                                                                                                                         | Normal browser and hosting caches. No Google Fonts request remains.                                                                      |
@@ -24,8 +24,8 @@ if Google Fonts or an unapproved automatic third-party request returns.
 
 ### Provider evidence
 
-- GitHub Pages data collection:
-  <https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages>
+- Cloudflare Workers Logs behavior:
+  <https://developers.cloudflare.com/workers/observability/logs/workers-logs/>
 - Cloudflare data origin and collection:
   <https://developers.cloudflare.com/web-analytics/data-metrics/data-origin-and-collection/>
 - Cloudflare dimensions:
@@ -67,7 +67,8 @@ documents, or detailed constraints.
 The Worker:
 
 - accepts only JSON with the exact version 2 schema and a known form type;
-- gives CORS permission only to the two production origins and the documented local development origins;
+- gives CORS permission only to the two production origins, the named static-site review Worker, and the documented
+  local development origins;
 - limits the request body to 32,000 bytes and bounds individual values;
 - validates required fields, email shape, select values, and same-site attribution paths;
 - silently discards a filled honeypot submission;
@@ -134,10 +135,8 @@ experience.
 
 ## Unknowns that must remain qualified
 
-- The permission scope of the current Resend API key was not established. In the Resend API Keys dashboard, replace a
-  full-access key with a sending-only key restricted to the `mail.hekswerk.com` sending domain, update the Cloudflare
-  Secret, verify one non-sensitive delivery, and revoke the old key.
-- The GitHub Pages service-log retention period was not established by this audit.
+- The current Resend key was operator-verified on 2026-08-12 as sending-only and restricted to `mail.hekswerk.com`. The
+  prior key was revoked. This establishes the configured scope, not a general security or delivery guarantee.
 - Cloudflare's internal platform processing outside the configured Workers Logs surface was not established.
 - The Microsoft 365 mailbox's administrative retention and backup policy was not established.
 - Provider backup deletion timing and legal-retention exceptions were not established.

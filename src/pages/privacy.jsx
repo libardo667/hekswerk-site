@@ -24,10 +24,15 @@ export default function Privacy() {
             <section>
               <h2>When you browse the site</h2>
               <p>
-                GitHub Pages currently serves the site. GitHub says it logs a visitor&apos;s IP address for security
-                when a Pages site is visited. The site&apos;s styles, images, scripts, and two typefaces are otherwise
-                served from the Hekswerk site itself. The typefaces are bundled locally under the SIL Open Font License,
-                so a page view does not contact Google Fonts.
+                Cloudflare Workers Static Assets serves the site at <code>www.hekswerk.com</code>. Cloudflare processes
+                the network request, requested path, and ordinary connection metadata needed to return the page. The
+                same build may also be available at a <code>workers.dev</code> review address, which is marked not to be
+                indexed.
+              </p>
+              <p>
+                The site&apos;s styles, images, scripts, and two typefaces are served with the page by its current host.
+                The typefaces are bundled locally under the SIL Open Font License, so a page view does not contact
+                Google Fonts.
               </p>
               <p>
                 One Cloudflare Web Analytics script measures page views and page performance. Cloudflare receives the
@@ -41,11 +46,6 @@ export default function Privacy() {
                 usually GitHub, still receives the ordinary connection information needed to serve its page.
               </p>
               <ul className="plain-list privacy-sources">
-                <li>
-                  <Link to="https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages">
-                    GitHub Pages data collection
-                  </Link>
-                </li>
                 <li>
                   <Link to="https://developers.cloudflare.com/web-analytics/data-metrics/data-origin-and-collection/">
                     Cloudflare Web Analytics collection

@@ -21,9 +21,9 @@ Secret and binding names are wanted. Replace any displayed secret value with `[s
 
 ## Active repository deployment
 
-- Active deployment date and time: `2026-08-12T14:22:45.753Z`
-- Active version created: `2026-08-12T14:22:45.304Z`
-- Active version ID: `64ea07a6-b02b-4b75-a123-4a6e8dae84fb`
+- Active deployment date and time: `2026-08-12T14:56:12.973Z`
+- Active version created: `2026-08-12T14:56:12.469Z`
+- Active version ID: `38993525-645b-4f65-a541-d18aaa143719`
 - Traffic percentage for that version: `100%`
 - Deployment command: `npm run worker:deploy` with Wrangler 4.121.0 from this repository
 - Source shown by `wrangler deployments list`: `Unknown (deployment)`
@@ -60,9 +60,9 @@ Copy every entry shown under **Settings > Domains & Routes**.
 
 Copy names and types only. Never copy secret values.
 
-| Name             | Dashboard type | Environment or scope | Notes                     |
-| ---------------- | -------------- | -------------------- | ------------------------- |
-| `resend_api_key` | `Secret`       | `production Worker`  | `[secret value withheld]` |
+| Name             | Dashboard type | Environment or scope | Notes                                                           |
+| ---------------- | -------------- | -------------------- | --------------------------------------------------------------- |
+| `resend_api_key` | `Secret`       | `production Worker`  | Sending-only; restricted to `mail.hekswerk.com`; value withheld |
 
 - Are there any KV, D1, R2, Durable Object, service, queue, Hyperdrive, Vectorize, mTLS, browser, AI, or other bindings? `none`
 - Are environment-specific overrides shown? `none`
@@ -90,6 +90,6 @@ Copy names and types only. Never copy secret values.
 - The dashboard did not show an explicit sampling rate, log retention period, usage model, or limits in the inspected views.
 - The post-deployment observability state was verified from the deployed repository configuration, not by reopening the
   dashboard settings view.
-- The Resend API key's permission scope was not established. Verify it in **Resend > API Keys**. If it has full access,
-  replace it with a sending-only key restricted to `mail.hekswerk.com`, update the Cloudflare Secret, verify one
-  non-sensitive delivery, and revoke the old key. Record the scope, never the secret value, here.
+- Levi verified on 2026-08-12 that the prior Resend key was revoked and its replacement has sending-only access
+  restricted to `mail.hekswerk.com`. The replacement is stored as the Cloudflare `resend_api_key` Secret. No key value
+  was captured in this repository or the audit notes.

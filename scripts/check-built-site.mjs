@@ -157,6 +157,15 @@ for (const entry of routes) {
   }
 }
 
+const notFoundHtml = readFileSync(path.join(buildRoot, '404.html'), 'utf8');
+expectIncludes(notFoundHtml, '<title>Page not found | Hekswerk</title>', '404: title');
+expectIncludes(notFoundHtml, 'name="robots" content="noindex"', '404: noindex');
+expectIncludes(notFoundHtml, 'There is nothing at this address.', '404: public explanation');
+if (notFoundHtml.includes('rel="canonical"')) fail('404: canonical URL must be absent');
+if ([...notFoundHtml.matchAll(/<script[^>]*data-cf-beacon=/g)].length !== 1) {
+  fail('404: expected exactly one Cloudflare Web Analytics beacon');
+}
+
 const builtFiles = filesBelow(buildRoot);
 for (const file of builtFiles.filter((candidate) => ['.html', '.css', '.js'].includes(path.extname(candidate)))) {
   const contents = readFileSync(file, 'utf8');
@@ -194,8 +203,27 @@ if (image.toString('ascii', 1, 4) !== 'PNG' || image.readUInt32BE(16) !== 1200 |
   fail('social image must be a 1200x630 PNG');
 }
 
-const expectedCname = 'www.hekswerk.com\n';
-if (readFileSync(path.join(buildRoot, 'CNAME'), 'utf8') !== expectedCname) fail('CNAME');
+for (const retiredPagesFile of ['CNAME', '.nojekyll', '.assetsignore']) {
+  if (statSafe(path.join(buildRoot, retiredPagesFile))) {
+    fail(`retired GitHub Pages artifact remains: ${retiredPagesFile}`);
+  }
+}
+const headers = readFileSync(path.join(buildRoot, '_headers'), 'utf8');
+for (const value of [
+  'Content-Security-Policy:',
+  'X-Content-Type-Options: nosniff',
+  'X-Frame-Options: DENY',
+  'Strict-Transport-Security: max-age=31536000',
+  'https://:worker.levi-020.workers.dev/*',
+  'X-Robots-Tag: noindex, nofollow',
+  '/_astro/*',
+  'Cache-Control: public, max-age=31536000, immutable',
+]) {
+  expectIncludes(headers, value, `_headers: ${value}`);
+}
+const redirects = readFileSync(path.join(buildRoot, '_redirects'), 'utf8');
+expectIncludes(redirects, '/contact.html /contact 301', '_redirects: contact compatibility');
+expectIncludes(redirects, '/index.html / 301', '_redirects: index canonicalization');
 const expectedRobots = `User-agent: *\nAllow: /\n\nSitemap: ${siteUrl}/sitemap-index.xml\n`;
 if (readFileSync(path.join(buildRoot, 'robots.txt'), 'utf8') !== expectedRobots) fail('robots.txt');
 const sitemapIndex = readFileSync(path.join(buildRoot, 'sitemap-index.xml'), 'utf8');
@@ -252,6 +280,18 @@ const packageManifest = readFileSync(path.resolve(process.cwd(), 'package.json')
 if (packageManifest.toLowerCase().includes('docusaurus')) {
   fail('package.json: retired Docusaurus dependency or command remains');
 }
+const siteWorkerConfig = readFileSync(path.resolve(process.cwd(), 'workers/site/wrangler.jsonc'), 'utf8');
+for (const value of [
+  '"name": "hekswerk-site"',
+  '"directory": "../../build"',
+  '"html_handling": "drop-trailing-slash"',
+  '"not_found_handling": "404-page"',
+  '"pattern": "www.hekswerk.com"',
+  '"custom_domain": true',
+]) {
+  expectIncludes(siteWorkerConfig, value, `site Worker configuration: ${value}`);
+}
+if (/account_id|api_token/i.test(siteWorkerConfig)) fail('site Worker configuration: account identifier or token key');
 
 if (failures.length > 0) {
   console.error(`Built-site check failed with ${failures.length} issue(s):`);

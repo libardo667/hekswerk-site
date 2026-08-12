@@ -30,6 +30,28 @@ test('contact controls and live status expose accessible names and announcements
 });
 
 test('retired WorldWeaver documentation route returns 404', async ({request}) => {
-  expect((await request.get('/worldweaver')).status()).toBe(404);
-  expect((await request.get('/worldweaver/reference/architecture')).status()).toBe(404);
+  for (const route of ['/worldweaver', '/worldweaver/reference/architecture']) {
+    const response = await request.get(`${route}?retired-route-check=1`, {
+      headers: {'cache-control': 'no-cache'},
+    });
+    expect(response.status()).toBe(404);
+    expect(await response.text()).toContain('There is nothing at this address.');
+  }
+});
+
+test('custom 404 is styled, noindex, and includes one analytics beacon', async ({page}) => {
+  const response = await page.goto('/not-a-real-hekswerk-route?custom-404-check=1');
+  expect(response.status()).toBe(404);
+  await expect(page.getByRole('heading', {name: 'There is nothing at this address.'})).toBeVisible();
+  await expect(page.locator('meta[name="robots"]')).toHaveAttribute('content', 'noindex');
+  await expect(page.locator('link[rel="canonical"]')).toHaveCount(0);
+  await expect(page.locator('script[src="https://static.cloudflareinsights.com/beacon.min.js"]')).toHaveCount(1);
+});
+
+test('site responses carry the repository security-header policy', async ({request}) => {
+  const response = await request.get('/');
+  expect(response.headers()['content-security-policy']).toContain("default-src 'self'");
+  expect(response.headers()['x-content-type-options']).toBe('nosniff');
+  expect(response.headers()['x-frame-options']).toBe('DENY');
+  expect(response.headers()['referrer-policy']).toBe('strict-origin-when-cross-origin');
 });

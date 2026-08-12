@@ -9,6 +9,7 @@ const repositoryLinks = [
   'https://github.com/libardo667/kenshi-agent-env',
   'https://github.com/libardo667/worldweaver',
 ];
+const siteOrigin = new URL(process.env.PLAYWRIGHT_BASE_URL || 'http://127.0.0.1:4173').origin;
 
 test.beforeEach(async ({page}) => {
   await blockExternalAssets(page);
@@ -27,13 +28,21 @@ test('pages make no unapproved automatic third-party requests', async ({page}) =
     const externalRequests = [];
     const record = (request) => {
       const url = new URL(request.url());
-      if (url.origin !== 'http://127.0.0.1:4173' && url.protocol.startsWith('http')) externalRequests.push(url.href);
+      if (url.origin !== siteOrigin && url.protocol.startsWith('http')) externalRequests.push(url.href);
     };
     page.on('request', record);
     await page.goto(route);
     await page.waitForLoadState('networkidle');
     page.off('request', record);
-    expect([...new Set(externalRequests)], route).toEqual(['https://static.cloudflareinsights.com/beacon.min.js']);
+    const uniqueRequests = [...new Set(externalRequests)];
+    expect(uniqueRequests, route).toContain('https://static.cloudflareinsights.com/beacon.min.js');
+    expect(
+      uniqueRequests.filter((requestUrl) => {
+        const url = new URL(requestUrl);
+        return url.origin !== 'https://static.cloudflareinsights.com' || !url.pathname.startsWith('/beacon.min.js');
+      }),
+      route,
+    ).toEqual([]);
   }
 });
 
@@ -109,7 +118,7 @@ test('privacy page exposes the actual collection, processors, deletion, and rela
   ]) {
     await expect(page.getByRole('heading', {name: heading})).toBeVisible();
   }
-  await expect(page.getByText('Cloudflare Worker', {exact: false})).toBeVisible();
+  await expect(page.getByText('Cloudflare Worker', {exact: false}).last()).toBeVisible();
   await expect(page.getByText('Resend', {exact: false}).first()).toBeVisible();
   await expect(page.getByText('Microsoft 365', {exact: false}).first()).toBeVisible();
 });

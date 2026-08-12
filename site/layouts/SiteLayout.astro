@@ -3,14 +3,14 @@ import '@fontsource-variable/fraunces/full.css';
 import '@fontsource-variable/outfit/wght.css';
 import '../../src/css/custom.css';
 
-const {title, description, canonicalPath} = Astro.props;
+const {title, description, canonicalPath, robots} = Astro.props;
 
 const siteUrl = 'https://www.hekswerk.com';
-const canonical = `${siteUrl}${canonicalPath}`;
+const canonical = canonicalPath ? `${siteUrl}${canonicalPath}` : null;
 const socialImage = `${siteUrl}/img/hekswerk-social-card.png`;
 const practiceDescription =
   "Hekswerk is Levi Banks's one-person systems practice for contract operations automation, independent engineering, and open research.";
-const currentPath = canonicalPath === '/' ? '/' : canonicalPath.replace(/\/$/, '');
+const currentPath = canonicalPath === '/' ? '/' : canonicalPath?.replace(/\/$/, '') || '';
 const isActive = (path) => currentPath === path || (path !== '/' && currentPath.startsWith(`${path}/`));
 const navItems = [
   {href: '/work', label: 'Contract Work'},
@@ -50,13 +50,14 @@ const structuredData = {
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="referrer" content="strict-origin-when-cross-origin" />
     <meta name="generator" content="Astro" />
+    {robots && <meta name="robots" content={robots} />}
     <title>{title}</title>
     <meta name="description" content={description} />
-    <link rel="canonical" href={canonical} />
+    {canonical && <link rel="canonical" href={canonical} />}
     <link rel="icon" href="/img/logo_aura.svg" />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Hekswerk" />
-    <meta property="og:url" content={canonical} />
+    {canonical && <meta property="og:url" content={canonical} />}
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={socialImage} />

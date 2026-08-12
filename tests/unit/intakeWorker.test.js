@@ -2,6 +2,7 @@ import {afterEach, describe, expect, it, vi} from 'vitest';
 import worker from '../../workers/intake/worker';
 
 const origin = 'https://www.hekswerk.com';
+const stagingOrigin = 'https://hekswerk-site.levi-020.workers.dev';
 const endpoint = 'https://hekswerk-intake.levi-020.workers.dev/';
 
 function workerRequest(payload, options = {}) {
@@ -50,6 +51,12 @@ describe('intake Worker boundary', () => {
     expect(response.status).toBe(204);
     expect(response.headers.get('Access-Control-Allow-Origin')).toBe(origin);
     expect(response.headers.get('Cache-Control')).toBe('no-store');
+  });
+
+  it('permits the named static-site migration origin', async () => {
+    const response = await worker.fetch(workerRequest(null, {method: 'OPTIONS', origin: stagingOrigin}), {});
+    expect(response.status).toBe(204);
+    expect(response.headers.get('Access-Control-Allow-Origin')).toBe(stagingOrigin);
   });
 
   it('rejects a disallowed browser origin before delivery', async () => {

@@ -1,0 +1,55 @@
+name: Deploy Hekswerk to Cloudflare
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: cloudflare-site-production
+  cancel-in-progress: true
+
+jobs:
+  check-and-deploy:
+    runs-on: ubuntu-latest
+    # This existing environment retains its original name so its secrets do not need to be copied.
+    environment: cloudflare-staging
+    steps:
+      - name: Check out Hekswerk
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+
+      - name: Set up Node
+        uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Playwright Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: Check site
+        run: npm run check
+
+      - name: Upload test artifacts
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: cloudflare-production-playwright-results
+          path: |
+            playwright-report
+            test-results
+          if-no-files-found: ignore
+
+      - name: Deploy static site Worker
+        uses: cloudflare/wrangler-action@9acf94ace14e7dc412b076f2c5c20b8ce93c79cd # v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          wranglerVersion: 4.121.0
+          command: deploy --config workers/site/wrangler.jsonc

@@ -36,8 +36,9 @@ The recovered active deployment had these verified properties:
 - Workers Logs and invocation logs enabled in the recovered dashboard deployment
 - Connected Git repository or external build configuration: none
 
-The audited Worker was deployed with Wrangler 4.121.0 on 2026-08-12. Cloudflare reports version
-`64ea07a6-b02b-4b75-a123-4a6e8dae84fb`, created at `2026-08-12T14:22:45.304Z`, receiving 100 percent of traffic. The
+The audited Worker was deployed with Wrangler 4.121.0 on 2026-08-12. The current deployment adds the exact named
+static-site review origin to the CORS allowlist. Cloudflare reports version
+`38993525-645b-4f65-a541-d18aaa143719`, created at `2026-08-12T14:56:12.469Z`, receiving 100 percent of traffic. The
 Cloudflare deployment listing labels the source `Unknown (deployment)`; the local deployment command and its successful
 output are the evidence that it came from `npm run worker:deploy` in this repository.
 
@@ -106,8 +107,8 @@ were retained temporarily during the previous staged deployment.
 
 ## Validation, abuse boundary, and responses
 
-- Only the two Hekswerk production origins and the documented Astro development or preview origins receive CORS
-  permission.
+- Only the two Hekswerk production origins, the named static-site review Worker, and the documented Astro
+  development or preview origins receive CORS permission.
 - Requests other than `POST` and `OPTIONS` are rejected.
 - POST requests must declare `application/json`.
 - JSON bodies larger than 32,000 bytes are rejected.
@@ -157,13 +158,17 @@ in `docs/PRIVACY_DATA_FLOW.md`.
   automated accessibility.
 - **Dashboard-verified:** the recovered active version, compatibility settings, route state, Secret binding type,
   deployment source, and pre-audit observability state listed above.
-- **Deployment-verified:** version `64ea07a6-b02b-4b75-a123-4a6e8dae84fb` has the repository compatibility date and
-  required Secret binding and was deployed from the configuration that disables automatic invocation logs.
+- **Deployment-verified:** version `38993525-645b-4f65-a541-d18aaa143719` has the repository compatibility date and
+  required Secret binding, allows the exact named review origin, and was deployed from the configuration that disables
+  automatic invocation logs.
 - **Externally observed:** the public endpoint resolves, permits the production origin, requires JSON, rejects a
-  retired payload, and silently accepts a synthetic filled-honeypot request without delivery.
+  retired payload, permits a review-origin preflight, rejects an unrelated origin, and silently accepts a synthetic
+  filled-honeypot request without delivery.
 - **Delivery-observed:** after the repository-managed deployment, one non-sensitive version 2 smoke inquiry received an
   HTTP 200 response and Levi confirmed it arrived in the destination inbox. This was a one-time deployment check, not
   an assertion of guaranteed future delivery or of a particular destination mail provider.
+- **Operator-verified:** Levi replaced and revoked the prior Resend key on 2026-08-12. The current key is sending-only
+  and restricted to `mail.hekswerk.com`; only its Cloudflare Secret binding name is recorded here.
 - **Provider-documented:** Resend displays sent message contents and API request bodies and currently states that email
   data is retained for 30 days. Cloudflare documents the metadata included in automatic invocation logs, which this
   Worker's configuration disables.

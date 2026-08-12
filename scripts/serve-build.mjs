@@ -12,7 +12,17 @@ const contentTypes = {
   '.png': 'image/png',
   '.svg': 'image/svg+xml',
   '.txt': 'text/plain; charset=utf-8',
+  '.woff2': 'font/woff2',
   '.xml': 'application/xml; charset=utf-8',
+};
+const securityHeaders = {
+  'Content-Security-Policy':
+    "default-src 'self'; base-uri 'self'; connect-src 'self' https://cloudflareinsights.com https://hekswerk-intake.levi-020.workers.dev; font-src 'self'; form-action 'none'; frame-ancestors 'none'; img-src 'self' data:; object-src 'none'; script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline'; upgrade-insecure-requests",
+  'Cross-Origin-Opener-Policy': 'same-origin',
+  'Permissions-Policy': 'camera=(), geolocation=(), microphone=(), payment=(), usb=()',
+  'Referrer-Policy': 'strict-origin-when-cross-origin',
+  'X-Content-Type-Options': 'nosniff',
+  'X-Frame-Options': 'DENY',
 };
 
 function resolveRequest(pathname) {
@@ -29,17 +39,27 @@ function resolveRequest(pathname) {
 }
 
 createServer((request, response) => {
-  const pathname = new URL(request.url, `http://${request.headers.host || '127.0.0.1'}`).pathname;
+  const url = new URL(request.url, `http://${request.headers.host || '127.0.0.1'}`);
+  const pathname = url.pathname;
+  if (pathname === '/contact.html' || pathname === '/index.html') {
+    const destination = pathname === '/contact.html' ? '/contact' : '/';
+    response.writeHead(301, {...securityHeaders, Location: `${destination}${url.search}`});
+    response.end();
+    return;
+  }
   const file = resolveRequest(pathname);
   if (!file) {
     const fallback = path.join(buildRoot, '404.html');
-    response.writeHead(404, {'Content-Type': 'text/html; charset=utf-8'});
+    response.writeHead(404, {...securityHeaders, 'Content-Type': 'text/html; charset=utf-8'});
     if (existsSync(fallback)) createReadStream(fallback).pipe(response);
     else response.end('Not found');
     return;
   }
 
-  response.writeHead(200, {'Content-Type': contentTypes[path.extname(file)] || 'application/octet-stream'});
+  response.writeHead(200, {
+    ...securityHeaders,
+    'Content-Type': contentTypes[path.extname(file)] || 'application/octet-stream',
+  });
   createReadStream(file).pipe(response);
 }).listen(port, '127.0.0.1', () => {
   console.log(`Serving build on http://127.0.0.1:${port}`);
