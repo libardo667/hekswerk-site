@@ -9,9 +9,9 @@ This document defines the positioning, offer, route structure, and completion st
 Hekswerk is Levi Banks's one-person systems practice. It has two lanes:
 
 1. **Contract work:** scoped operations automation for small professional-service teams.
-2. **Open research:** WorldWeaver and its public technical and research record.
+2. **Independent engineering and open research:** public systems work, including EvoGen, the Kenshi Agent Environment, and WorldWeaver.
 
-These lanes share a systems discipline, but they have different purposes. Contract work is the primary public commercial offer and the homepage front door. Open research remains serious, visible work, but it is not the service being sold.
+Both lanes are real work. They share a systems discipline, but they have different purposes, evidence, and obligations. Contract work is the primary public commercial offer and the homepage front door. Independent engineering and open research remain serious, visible work, but they are not the service being sold.
 
 The site should speak plainly and use first person where Levi is describing his own work, decisions, or availability. It must not imply a staff, agency, platform, client roster, or operating history that does not exist.
 

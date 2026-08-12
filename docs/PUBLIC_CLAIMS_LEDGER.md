@@ -42,6 +42,9 @@ An entry marked **Hold** must not appear publicly until Levi supplies the named 
 | P3 | Private Providence interview notes reviewed in Google Drive on 2026-08-11. No operational detail is reproduced here. | Private |
 | P4 | Levi-authored proof-of-delivery automation source reviewed locally on 2026-08-11. The source contains employer-specific workflow details and is not copied or linked here. | Private and potentially client-confidential |
 | C1 | Underlying AI-platform task materials, agreements, and work records. These were not copied or treated as publishable. | Client-confidential |
+| R1 | Private December 2026 The Hague housing-booking correspondence reviewed in Gmail on 2026-08-11. No property, address, booking, contact, household, or financial detail is reproduced here. | Private |
+| R2 | Current private business CV reviewed in Google Drive on 2026-08-11. It states Portland, Oregon. No contact detail is reproduced here. | Private |
+| L3 | Levi confirms the December 2026 relocation to The Hague and approves that month and city for public use, confirmed 2026-08-11. | Private |
 
 The private `research-runway` repository was used only as a cross-check for Levi-authored statements. Its application drafts, personal details, references, finances, and unpublished research claims are not public evidence for this site.
 
@@ -95,7 +98,7 @@ The site may call the work **AI evaluation**. It must not name a platform, model
 | ID | Claim under review | Exact approved wording | Source | Class | Number | Public decision |
 | --- | --- | --- | --- | --- | --- | --- |
 | HEK-01 | Hekswerk's identity and ownership. | Hekswerk is Levi Banks's one-person systems practice. | H1 | Public | One person, exact | Yes |
-| HEK-02 | Hekswerk's two lanes. | Hekswerk has two lanes: contract operations automation and open research. | H1 | Public | Two lanes, exact | Yes |
+| HEK-02 | Hekswerk's two lanes. | Hekswerk has two lanes: contract operations automation and a second lane for independent engineering and open research. | H1 | Public | Two lanes, exact | Yes |
 | HEK-03 | The primary commercial offer. | The Operations Automation Sprint is Hekswerk's primary commercial offer. | H1 | Public | None | Yes |
 | HEK-04 | The intended audience. | It is for small, operations-heavy professional-service teams, generally 3 to 25 people, with one recurring internal workflow that can be named, bounded, tested, and handed off. | H1 | Public | Approximate audience range | Yes |
 | HEK-05 | What Levi will deliver. | For one agreed workflow, I map the current process, define the build and acceptance check, build and test the automation, deploy it into client-controlled systems, document it, train its owner, and provide a bounded defect-correction period. | H1 | Public | One workflow, exact offer boundary | Yes |
@@ -110,6 +113,15 @@ The site may call the work **AI evaluation**. It must not name a platform, model
 | HEK-14 | Service, support, data, and ownership boundaries. | A sprint does not hide a custom SaaS product inside a fixed scope. It does not include indefinite maintenance or 24-hour support. Initial discovery must not use sensitive production data. Regulated or unusually sensitive data requires a separate assessment. The client owns the accounts, credentials, documentation, and resulting system. | H1 | Public | 24-hour support, exact exclusion | Yes |
 
 Offer terms in HEK-04 through HEK-08 are commitments and boundaries, not historical results. They may not be rewritten as claims about completed clients.
+
+## About and working method
+
+| ID | Claim under review | Exact approved wording | Source | Class | Number | Public decision |
+| --- | --- | --- | --- | --- | --- | --- |
+| ABOUT-01 | Professional background summary. | My professional background spans operations, data analysis, automation, AI evaluation, and software systems. | P1, P3, P4, C1, K1, E1, W1 | Public and private | None | Yes, biography context only |
+| ABOUT-02 | Practical working method. | I start by understanding the real process, including its owner, dependencies, exceptions, and intended result. I define a bounded solution and acceptance check, build it, verify it against expected paths and known failures, document it, and hand it back to the client. | H1 | Public | None | Yes, describes the method and offer commitment, not a historical client result |
+| ABOUT-03 | Why scope and written artifacts matter. | A clear scope states what will be built, how it will be accepted, and what counts as a later change. Written process maps, acceptance criteria, tests, logs or an audit trail, and a runbook make the work inspectable and usable after handoff. | H1 | Public | None | Yes, describes the working standard, not a historical client result |
+| ABOUT-04 | Equal standing and different roles of the two lanes. | The contract lane and the independent engineering and open research lane are both real work. The contract lane solves a bounded operational problem for a client. The engineering and research lane develops and tests public systems. They require different evidence and carry different obligations. Neither exists merely to validate the other. | H1, L1 | Public and private | Two lanes, exact | Yes |
 
 ## WorldWeaver
 
@@ -174,8 +186,9 @@ EvoGen and Kenshi Agent Environment may be prominent, inspectable technical work
 | TECH-05 | WorldWeaver stack. | WorldWeaver uses a Python and FastAPI world engine with React and TypeScript browser clients. | W1, W3 | Public | None | Yes |
 | TECH-06 | Kenshi stack. | Kenshi Agent Environment uses a Python runtime and a native mod. | K1, K2 | Public | None | Yes |
 | TECH-07 | Zapier and Make as representative systems in the offer. | An unreliable Zapier, Make, or n8n workflow may be a representative sprint scope. | H1 | Public | None | Yes, only as an offer example, not a completed-work or experience claim |
-| TECH-09 | RAG systems, local language models, SQL, Selenium, or any other named tool not approved above. | None. | Levi-authored private resumes without a reviewed public artifact for the intended claim | Private | Unverified | Hold. Levi must identify a current artifact or other primary evidence and the exact public wording. |
 | TECH-08 | A technology is secure, private, compliant, enterprise-ready, or production-proven merely because Levi has used it. | None. | No adequate source | Private or client-confidential | Unverified | No |
+| TECH-09 | RAG systems, local language models, SQL, Selenium, or any other named tool not approved above. | None. | Levi-authored private resumes without a reviewed public artifact for the intended claim | Private | Unverified | Hold. Levi must identify a current artifact or other primary evidence and the exact public wording. |
+| TECH-10 | Web and systems technologies used in public engineering work. | My public systems work includes FastAPI, React, TypeScript, Python runtimes, and native integrations. | W1, W3, K1, K2, E1, E2 | Public | None | Yes. Keep this grouped as public systems work, not commercial deployment experience. |
 
 The automation offer may also name email, forms, documents, spreadsheets, customer relationship management systems, task systems, and recurring reports as typical workflow inputs. Those are examples defined by H1, not claims that every integration has already been delivered.
 
@@ -212,8 +225,9 @@ No client outcome metric is currently approved. Offer parameters are allowed onl
 | DATE-02 | Providence employment dates. | None. | P1 | Private | Exact but unverified | Hold. Levi must provide an employment record and approve the exact public wording. |
 | DATE-03 | Hekswerk's founding date. | I founded Hekswerk in January 2026. | O1 | Public and private | Exact | Yes |
 | DATE-04 | WorldWeaver or Kenshi founding date. | None. | Git history records code dates but does not define a public founding date | Public | Unverified as a founding claim | No |
-| DATE-05 | Relocation, launch, cohort, registration, grant, application, or future availability dates. | None. | Private plans and applications | Private | Exact or approximate, often prospective | No for the August relaunch |
+| DATE-05 | Current location and confirmed relocation. | I am currently based in Portland, Oregon, and I am relocating to The Hague in December 2026. | R1, R2, L3 | Private | Exact month | Yes, biography context only |
 | DATE-06 | The Operations Automation Sprint defect-correction period. | The default defect-correction period is 30 calendar days after handoff. | H1 | Public | Exact duration | Yes |
+| DATE-07 | Other relocation, launch, cohort, registration, grant, application, or future availability dates. | None. | Private plans and applications | Private | Exact or approximate, often prospective | No for the August relaunch |
 
 ## Education and certificates
 
@@ -236,7 +250,7 @@ The following material was encountered during the evidence pass and is not an in
 - names of AI platforms, labs, model developers, or downstream customers;
 - confidential task instructions, evaluation guidelines, work samples, or platform records;
 - unpublished applications, research plans, funding requests, projected services, and future affiliations;
-- language proficiency claims, personal location plans, and family details; and
+- language proficiency claims, personal location and household details beyond DATE-05, and family details; and
 - claims withdrawn from earlier Hekswerk pages or superseded by H1.
 
 ## Update procedure

@@ -236,6 +236,54 @@ h3 {
   line-height: 1.65;
 }
 
+.about-profile {
+  padding: clamp(1.6rem, 4vw, 2.4rem);
+  border: 1px solid var(--heks-hairline);
+  border-top-color: var(--heks-gold);
+  border-radius: 22px;
+  background: linear-gradient(145deg, rgba(41, 54, 86, 0.46), rgba(21, 23, 36, 0.72));
+}
+
+.about-profile h2 {
+  margin: 0;
+  color: var(--heks-cream);
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  font-weight: 500;
+}
+
+.about-profile > p {
+  margin: 1rem 0 1.5rem;
+  color: var(--heks-muted);
+  line-height: 1.65;
+}
+
+.about-profile dl {
+  margin: 0;
+  border-top: 1px solid var(--heks-hairline);
+}
+
+.about-profile dl > div {
+  display: grid;
+  padding: 0.8rem 0;
+  grid-template-columns: minmax(110px, 0.7fr) minmax(0, 1.3fr);
+  gap: 1rem;
+  border-bottom: 1px solid var(--heks-hairline);
+}
+
+.about-profile dt {
+  color: var(--heks-gold);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.about-profile dd {
+  margin: 0;
+  color: var(--heks-cream);
+  line-height: 1.45;
+}
+
 .offer-quick-facts {
   display: grid;
   gap: 0.65rem;
@@ -288,6 +336,56 @@ h3 {
 }
 
 .proof-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  margin-top: 3rem;
+}
+
+.about-background-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  margin-top: 3rem;
+}
+
+.about-background-card,
+.capability-card {
+  min-width: 0;
+  padding: clamp(1.5rem, 4vw, 2.4rem);
+  border: 1px solid var(--heks-hairline);
+  border-radius: 18px;
+  background: var(--heks-panel);
+}
+
+.about-background-card > span {
+  color: var(--heks-gold);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
+
+.about-background-card h3,
+.capability-card h3 {
+  margin: 0.8rem 0;
+  color: var(--heks-cream);
+  font-weight: 500;
+}
+
+.about-background-card p,
+.capability-card p {
+  margin-bottom: 0;
+  color: var(--heks-muted);
+  line-height: 1.65;
+}
+
+.about-background-card .text-link {
+  display: inline-block;
+  margin-top: 1rem;
+}
+
+.capability-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 1rem;
@@ -551,6 +649,32 @@ h3 {
 
 .lane-card--commercial {
   background: linear-gradient(145deg, rgba(74, 75, 120, 0.32), rgba(41, 54, 86, 0.2));
+}
+
+.about-lane-grid {
+  margin-top: 3rem;
+}
+
+.about-lane-grid .text-link {
+  display: inline-block;
+  margin-top: 0.5rem;
+}
+
+.about-handoff {
+  align-items: start;
+  gap: clamp(2rem, 6vw, 5rem);
+}
+
+.section-block--closing {
+  padding-top: 0;
+}
+
+#background,
+#lanes,
+#method,
+#ownership,
+#technologies {
+  scroll-margin-top: calc(var(--ifm-navbar-height) + 1rem);
 }
 
 .work-intro {
@@ -988,7 +1112,8 @@ h3 {
   .proof-grid,
   .problem-grid,
   .project-example-grid,
-  .service-boundary-grid {
+  .service-boundary-grid,
+  .capability-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
@@ -1010,6 +1135,8 @@ h3 {
   .proof-grid,
   .problem-grid,
   .project-example-grid,
+  .about-background-grid,
+  .capability-grid,
   .sprint-scope-grid,
   .service-boundary-grid,
   .lane-grid,
@@ -1020,6 +1147,11 @@ h3 {
   .field-grid,
   .research-continuation {
     grid-template-columns: 1fr;
+  }
+
+  .about-profile dl > div {
+    grid-template-columns: 1fr;
+    gap: 0.25rem;
   }
 
   .evidence-key,
