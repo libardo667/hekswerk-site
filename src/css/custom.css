@@ -236,6 +236,24 @@ h3 {
   line-height: 1.65;
 }
 
+.offer-quick-facts {
+  display: grid;
+  gap: 0.65rem;
+  margin: 0.25rem 0 1.25rem;
+  padding: 1rem 0;
+  border-top: 1px solid var(--heks-hairline);
+  border-bottom: 1px solid var(--heks-hairline);
+}
+
+.offer-quick-facts span {
+  color: var(--heks-muted);
+  line-height: 1.45;
+}
+
+.offer-quick-facts b {
+  color: var(--heks-cream);
+}
+
 .section-block {
   padding: clamp(4rem, 8vw, 7rem) 0;
 }
@@ -283,6 +301,36 @@ h3 {
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 1rem;
   margin-top: 3rem;
+}
+
+.project-example-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  margin-top: 3rem;
+}
+
+.project-example-card {
+  min-height: 180px;
+  padding: clamp(1.4rem, 3vw, 2rem);
+  border: 1px solid var(--heks-hairline);
+  border-radius: 18px;
+  background: var(--heks-panel);
+}
+
+.project-example-card > span {
+  color: var(--heks-gold);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+}
+
+.project-example-card p {
+  margin: 1.5rem 0 0;
+  color: var(--heks-cream);
+  font-family: var(--ifm-heading-font-family);
+  font-size: 1.28rem;
+  line-height: 1.45;
 }
 
 .proof-card,
@@ -334,6 +382,60 @@ h3 {
 
 .lane-card--commercial {
   background: linear-gradient(145deg, rgba(74, 75, 120, 0.32), rgba(41, 54, 86, 0.2));
+}
+
+.work-intro {
+  align-items: start;
+}
+
+.service-audience p + p {
+  padding-top: 1rem;
+  border-top: 1px solid var(--heks-hairline);
+}
+
+.sprint-scope-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  margin-top: 3rem;
+}
+
+.sprint-scope-card,
+.service-boundary-card {
+  padding: clamp(1.5rem, 4vw, 2.5rem);
+  border: 1px solid var(--heks-hairline);
+  border-radius: 18px;
+  background: var(--heks-panel);
+}
+
+.sprint-scope-card h3,
+.service-boundary-card h3,
+.pricing-note h3 {
+  margin: 0 0 1rem;
+  color: var(--heks-cream);
+  font-weight: 500;
+}
+
+.sprint-scope-card ul {
+  margin: 1.4rem 0 0;
+  padding: 1.2rem 0 0 1.2rem;
+  border-top: 1px solid var(--heks-hairline);
+}
+
+.sprint-scope-card li,
+.service-boundary-card p,
+.pricing-note p {
+  color: var(--heks-muted);
+  line-height: 1.65;
+}
+
+.sprint-scope-card li + li {
+  margin-top: 0.6rem;
+}
+
+#fit,
+#pricing {
+  scroll-margin-top: calc(var(--ifm-navbar-height) + 1rem);
 }
 
 .selected-preview,
@@ -476,6 +578,30 @@ h3 {
 
 .pricing-requirements li + li {
   margin-top: 0.45rem;
+}
+
+.pricing-note {
+  margin-top: 1.25rem;
+  padding: clamp(1.5rem, 4vw, 2.5rem);
+  border: 1px solid rgba(192, 169, 144, 0.4);
+  border-radius: 18px;
+  background: rgba(21, 23, 36, 0.72);
+}
+
+.pricing-note p {
+  max-width: 820px;
+  margin-bottom: 0;
+}
+
+.service-boundary-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  margin-top: 3rem;
+}
+
+.service-boundary-card p:last-child {
+  margin-bottom: 0;
 }
 
 .boundary-box .eyebrow {
@@ -703,7 +829,9 @@ h3 {
 
 @media (max-width: 996px) {
   .proof-grid,
-  .problem-grid {
+  .problem-grid,
+  .project-example-grid,
+  .service-boundary-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
@@ -724,6 +852,9 @@ h3 {
   .page-hero__grid,
   .proof-grid,
   .problem-grid,
+  .project-example-grid,
+  .sprint-scope-grid,
+  .service-boundary-grid,
   .lane-grid,
   .split-section,
   .fit-grid,

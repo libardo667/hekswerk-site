@@ -43,9 +43,11 @@ For one agreed workflow, Levi will:
 4. deploy it into systems the client owns or controls;
 5. provide operating documentation, including how the workflow runs and what to do when it fails;
 6. train the person who will own the workflow; and
-7. provide a bounded bug-fix period after handoff.
+7. provide 30 calendar days of bounded defect correction after handoff.
 
-The default bug-fix period is 14 calendar days after handoff. It covers defects where the delivered automation does not behave as documented against the agreed scope. New integrations, changed business rules, expanded inputs, and new workflow branches are new work, not bug fixes.
+The default defect-correction period is 30 calendar days after handoff. It covers defects where the delivered automation does not behave as documented against the agreed scope. New integrations, changed business rules, expanded inputs, and new workflow branches are new work, not defect correction.
+
+In the ordinary case, the sprint contains one primary workflow across one to three systems. It includes workflow mapping, acceptance criteria, implementation, happy-path and exception testing, basic logs or an audit trail appropriate to the scope, deployment into client-owned systems, a written runbook, and one handoff or training session.
 
 The client keeps control of its accounts, credentials, data, and deployed system. Hekswerk is not a required hosting layer, subscription, or permanent operator. If a build needs a custom service, its ownership, hosting, access, and ongoing maintenance must be explicit in the scope before work begins.
 
@@ -53,7 +55,7 @@ The client keeps control of its accounts, credentials, data, and deployed system
 
 Public pricing must use these tiers without presenting them as an exhaustive rate card:
 
-- **Founding-client price: $750.** This is for an unusually tight first scope: one clear trigger, one primary outcome, no custom service or database, and no more than two client-owned systems. It is launch pricing for a qualifying workflow, not a claim that every project costs $750.
+- **Founding-client price: $750.** This is for an unusually tight first scope: one clear trigger, one primary outcome, no custom service or database, and no more than two client-owned systems. The client must also give permission to develop an anonymized case study. Nothing is published without the client's approval, and a positive testimonial is not required. It is launch pricing for a qualifying workflow, not a claim that every project costs $750.
 - **Standard starting price: $1,500.** This is the normal starting point for a scoped Operations Automation Sprint.
 - **Complex work: $2,500 and above.** This applies when the agreed solution needs a custom service, a database, or several integrations. The scope and price must be agreed before implementation.
 
@@ -72,6 +74,18 @@ The offer is not:
 - a generic AI strategy or chatbot engagement;
 - a promise to automate an entire business; or
 - a substitute for legal, financial, security, or compliance advice.
+
+A sprint does not hide a custom software-as-a-service product inside a fixed scope. It does not include indefinite maintenance or 24-hour support. Initial discovery must not use sensitive production data. Regulated or unusually sensitive data requires a separate assessment before access or implementation is agreed. The client owns the accounts, credentials, documentation, and resulting system.
+
+Representative projects may include:
+
+- form or email intake routed into a tracker or customer relationship management system;
+- attachments extracted and reconciled against internal records;
+- recurring CSV or spreadsheet exports cleaned into a report;
+- deadline or follow-up tasks created from structured records; and
+- an unreliable Zapier, Make, or n8n workflow rebuilt with visible failures and documentation.
+
+These are examples of suitable scopes, not claims that each project has already been delivered for a client.
 
 Artificial intelligence may or may not be useful inside a particular workflow. It is not the category being sold and must not be inserted into the offer merely to make the work sound current.
 
@@ -110,13 +124,13 @@ The relaunch uses the existing site rather than creating a microsite or parallel
 | Route | Required role |
 | --- | --- |
 | `/` | Hekswerk homepage and commercial front door. Lead with the Operations Automation Sprint, its audience, its concrete outcome, starting price, and one primary inquiry action. Introduce Hekswerk as a one-person practice with contract and research lanes. Give WorldWeaver a visible but secondary research section. |
-| `/automation` | Complete Operations Automation Sprint page. State the workflow problem, audience, promise, process, scope boundaries, price tiers, client ownership, bug-fix boundary, and inquiry action. This is a service page, not an app or product dashboard. |
+| `/work` | Complete Operations Automation Sprint page. State the workflow problem, audience, promise, process, scope boundaries, price tiers, client ownership, defect-correction boundary, and inquiry action. This is a service page, not an app or product dashboard. |
 | `/research` | Open-research overview. Explain how to distinguish the current manual from dated research, preserve the existing evidentiary cautions, and lead to the WorldWeaver manual and repository record. Do not pitch a research service. |
 | `/worldweaver/` | Existing Docusaurus integration for the canonical WorldWeaver technical manual. Keep the external docs source, sidebar, edit links, and published commit reference intact. WorldWeaver remains directly reachable from site navigation. |
 | `/about` | Explain the one-person practice, its two lanes, the working method, and the client-ownership posture without inflating credentials or experience. Link to the primary offer and contact route. |
-| `/contact.html` | Retained private contact form. Make automation the primary commercial topic and support `/contact.html?topic=automation` from offer calls to action. Keep research, relocation, and general-contact paths available without presenting them as equal commercial offers. |
+| `/contact` | Docusaurus contact page using the existing private submission endpoint. Make automation the primary commercial topic and support `/contact?topic=automation` from offer calls to action. Keep research, relocation, and general-contact paths available without presenting them as equal commercial offers. |
 
-The primary navigation order should reflect the public hierarchy: **Automation**, **Research**, **WorldWeaver docs**, **About**. A single prominent contact action may appear separately. GitHub links belong in research context or the footer rather than displacing the commercial action.
+The primary navigation should reflect the public hierarchy: **Work**, **Selected work**, **Research**, **WorldWeaver docs**, **About**. A single prominent contact action may appear separately. GitHub links belong in research context or the footer rather than displacing the commercial action.
 
 There is no August route for a blog, newsletter, client portal, scheduler, chatbot, product application, or relocation landing page. Existing retired URLs need not be restored unless a later implementation discovers a specific redirect requirement.
 
@@ -164,7 +178,7 @@ The relaunch must preserve:
 - `www.hekswerk.com` and the existing custom-domain configuration;
 - the `/worldweaver` documentation integration with the sibling repository locally and the checked-out repository in GitHub Actions;
 - the exact published WorldWeaver commit link in the footer;
-- the retained static contact form and its existing submission endpoint unless a separately scoped change is approved; and
+- the Docusaurus contact form and its existing submission endpoint unless a separately scoped change is approved; and
 - the established aura mark, typography, palette, and overall visual character.
 
 New public pages should live in the current Docusaurus source tree. Do not create a second site, restore the former static homepage, or build on withdrawn research exhibits.

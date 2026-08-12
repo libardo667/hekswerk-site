@@ -38,7 +38,7 @@ export default function WorkBrief() {
 
           <div className="split-section">
             <BoundaryBox title="Client ownership"><p>{offer.ownership}</p></BoundaryBox>
-            <BoundaryBox title="Bug-fix boundary"><p>{offer.bugFix}</p></BoundaryBox>
+            <BoundaryBox title="Defect-correction boundary"><p>{offer.defectCorrection}</p></BoundaryBox>
           </div>
 
           <CallToAction
