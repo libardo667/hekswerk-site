@@ -26,6 +26,12 @@ const routes = [
     description: 'Professional work, independent engineering, and open research with explicit provenance and limits.',
   },
   {
+    route: '/work/brief',
+    file: 'work/brief.html',
+    title: 'Referral brief | Hekswerk',
+    description: 'A one-page brief for the Hekswerk Operations Automation Sprint.',
+  },
+  {
     route: '/research',
     file: 'research.html',
     title: 'Engineering and research | Hekswerk',
@@ -199,6 +205,7 @@ for (const phrase of [
   expectIncludes(privacyHtml, phrase, `/privacy: ${phrase}`);
 }
 const workHtml = htmlForRoute('/work');
+const briefHtml = htmlForRoute('/work/brief');
 const homeHtml = htmlForRoute('/');
 const researchHtml = htmlForRoute('/research');
 for (const phrase of [
@@ -231,6 +238,24 @@ for (const phrase of [
 ]) {
   expectIncludes(workText, phrase, `/work pricing: ${phrase}`);
 }
+const briefText = textFromHtml(briefHtml);
+for (const phrase of [
+  'I turn one repetitive internal workflow into a tested automation',
+  'Route new inquiries',
+  'Reconcile documents',
+  'Build recurring reports',
+  'Repair brittle automations',
+  'What the sprint contains',
+  'Most Operations Automation Sprints start here.',
+  'Your accounts, credentials, data, documentation, and resulting system stay yours.',
+  'Paid employer work, not a Hekswerk client result.',
+  'www.hekswerk.com/contact',
+]) {
+  expectIncludes(briefText, phrase, `/work/brief: ${phrase}`);
+}
+if ((briefHtml.match(/class="brief-example"/g) || []).length !== 4) {
+  fail('/work/brief: expected exactly four recognizable workflow examples');
+}
 for (const [route, html] of [
   ['/', homeHtml],
   ['/work', workHtml],
@@ -254,7 +279,7 @@ for (const retiredPricingFragment of [
     fail(`built public site: retired pricing language remains: ${retiredPricingFragment}`);
   }
 }
-for (const {route} of routes.filter(({route}) => !['/', '/work'].includes(route))) {
+for (const {route} of routes.filter(({route}) => !['/', '/work', '/work/brief'].includes(route))) {
   if (htmlForRoute(route).includes('$750')) fail(`${route}: $750 appears outside paid Workflow Scoping`);
 }
 

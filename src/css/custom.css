@@ -899,6 +899,337 @@ h3 {
   position: relative;
 }
 
+.brief-main {
+  padding: clamp(2rem, 5vw, 4.5rem) 1rem clamp(3rem, 7vw, 6rem);
+  background:
+    radial-gradient(circle at 14% 8%, rgba(192, 169, 144, 0.12), transparent 28rem),
+    radial-gradient(circle at 90% 76%, rgba(112, 149, 183, 0.12), transparent 32rem);
+}
+
+.referral-brief {
+  width: min(980px, 100%);
+  margin: 0 auto;
+  overflow: hidden;
+  color: #252634;
+  border: 1px solid rgba(192, 169, 144, 0.48);
+  border-radius: 4px;
+  background: #f7f4ef;
+  box-shadow: 0 34px 100px rgba(0, 0, 0, 0.34);
+}
+
+.referral-brief h1,
+.referral-brief h2,
+.referral-brief h3 {
+  color: #20273b;
+}
+
+.brief-header {
+  padding: clamp(1.6rem, 4vw, 3.2rem);
+  color: #f5f5f2;
+  background: radial-gradient(circle at 82% 0%, rgba(112, 149, 183, 0.3), transparent 25rem), #20273b;
+}
+
+.brief-brandline,
+.brief-intro,
+.brief-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.brief-brandline {
+  padding-bottom: 1.2rem;
+  border-bottom: 1px solid rgba(245, 245, 242, 0.2);
+}
+
+.brief-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  color: #f5f5f2;
+  font-family: var(--ifm-heading-font-family);
+  font-size: 1.15rem;
+}
+
+.brief-brand:hover {
+  text-decoration: none;
+}
+
+.brief-brand img {
+  width: 2rem;
+  height: 2rem;
+}
+
+.brief-type,
+.brief-kicker,
+.brief-section-heading > span,
+.brief-price > span,
+.brief-proof-label > span,
+.brief-footer span {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
+
+.brief-type,
+.brief-kicker {
+  color: #d5c5b3;
+}
+
+.brief-intro {
+  align-items: end;
+  padding-top: clamp(2rem, 5vw, 3.8rem);
+}
+
+.brief-intro > div {
+  max-width: 650px;
+}
+
+.brief-kicker {
+  display: block;
+  margin-bottom: 0.8rem;
+}
+
+.referral-brief h1 {
+  max-width: 680px;
+  margin: 0;
+  color: #fff;
+  font-size: clamp(2.6rem, 6vw, 4.7rem);
+  font-weight: 500;
+  line-height: 0.98;
+}
+
+.brief-offer {
+  max-width: 690px;
+  margin: 1.25rem 0 0;
+  color: rgba(245, 245, 242, 0.82);
+  font-size: 1.12rem;
+  line-height: 1.55;
+}
+
+.brief-price {
+  min-width: 190px;
+  padding: 1.2rem;
+  border-top: 2px solid #c0a990;
+  background: rgba(9, 9, 14, 0.24);
+}
+
+.brief-price > span {
+  display: block;
+  color: #d5c5b3;
+}
+
+.brief-price strong {
+  display: block;
+  margin-top: 0.25rem;
+  color: #fff;
+  font-family: var(--ifm-heading-font-family);
+  font-size: 2.4rem;
+  font-weight: 500;
+}
+
+.brief-price p {
+  margin: 0.2rem 0 0;
+  color: rgba(245, 245, 242, 0.72);
+  font-size: 0.83rem;
+  line-height: 1.4;
+}
+
+.brief-section {
+  padding: clamp(1.5rem, 4vw, 2.6rem) clamp(1.6rem, 4vw, 3.2rem);
+}
+
+.brief-section-heading > span,
+.brief-proof-label > span {
+  display: block;
+  margin-bottom: 0.35rem;
+  color: #776249;
+}
+
+.brief-section-heading h2,
+.brief-proof-label h2 {
+  margin: 0;
+  font-size: clamp(1.35rem, 3vw, 1.85rem);
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+.brief-examples {
+  border-bottom: 1px solid rgba(41, 54, 86, 0.18);
+}
+
+.brief-example-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin-top: 1.4rem;
+  border-top: 1px solid rgba(41, 54, 86, 0.2);
+  border-left: 1px solid rgba(41, 54, 86, 0.2);
+}
+
+.brief-example {
+  display: grid;
+  min-width: 0;
+  padding: 1rem;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 0.85rem;
+  border-right: 1px solid rgba(41, 54, 86, 0.2);
+  border-bottom: 1px solid rgba(41, 54, 86, 0.2);
+}
+
+.brief-example > span {
+  color: #705638;
+  font-family: var(--ifm-heading-font-family);
+  font-size: 1.2rem;
+}
+
+.brief-example h3 {
+  margin: 0 0 0.25rem;
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+
+.brief-example p,
+.brief-ownership p,
+.brief-scoping p,
+.brief-proof p {
+  margin: 0;
+  color: #555968;
+  font-size: 0.9rem;
+  line-height: 1.48;
+}
+
+.brief-example-boundary {
+  margin: 0.6rem 0 0;
+  color: #6a6d79;
+  font-size: 0.72rem;
+  line-height: 1.4;
+}
+
+.brief-detail-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
+  border-bottom: 1px solid rgba(41, 54, 86, 0.18);
+}
+
+.brief-contains {
+  border-right: 1px solid rgba(41, 54, 86, 0.18);
+}
+
+.brief-contains ul {
+  display: grid;
+  margin: 1.2rem 0 0;
+  padding: 0;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.7rem 1.2rem;
+  list-style: none;
+}
+
+.brief-contains li {
+  position: relative;
+  padding-left: 1rem;
+  color: #4d5261;
+  font-size: 0.84rem;
+  line-height: 1.45;
+}
+
+.brief-contains li::before {
+  position: absolute;
+  top: 0.56em;
+  left: 0;
+  width: 0.35rem;
+  height: 0.35rem;
+  border-radius: 50%;
+  background: #705638;
+  content: '';
+}
+
+.brief-side-stack {
+  display: grid;
+  grid-template-rows: repeat(2, 1fr);
+}
+
+.brief-side-stack .brief-section {
+  padding: clamp(1.25rem, 3vw, 2rem);
+}
+
+.brief-side-stack .brief-section + .brief-section {
+  border-top: 1px solid rgba(41, 54, 86, 0.18);
+}
+
+.brief-side-stack h2 {
+  font-size: 1.16rem;
+}
+
+.brief-ownership p,
+.brief-scoping p {
+  margin-top: 0.7rem;
+}
+
+.brief-proof {
+  display: grid;
+  padding: clamp(1.5rem, 4vw, 2.6rem) clamp(1.6rem, 4vw, 3.2rem);
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+  gap: clamp(1.5rem, 4vw, 3.2rem);
+  border-bottom: 1px solid rgba(41, 54, 86, 0.18);
+  background: rgba(192, 169, 144, 0.13);
+}
+
+.brief-proof-copy p + p {
+  margin-top: 0.5rem;
+}
+
+.brief-proof-copy .brief-proof-boundary {
+  color: #6d665f;
+  font-size: 0.76rem;
+}
+
+.brief-text-link {
+  display: inline-block;
+  margin-top: 0.65rem;
+  color: #4b597a;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
+}
+
+.brief-footer {
+  padding: 1.5rem clamp(1.6rem, 4vw, 3.2rem);
+  color: #f5f5f2;
+  background: #293656;
+}
+
+.brief-footer span {
+  display: block;
+  margin-bottom: 0.25rem;
+  color: #d5c5b3;
+}
+
+.brief-footer strong {
+  display: block;
+  max-width: 580px;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.brief-contact {
+  flex: 0 0 auto;
+  padding: 0.65rem 1rem;
+  color: #20273b;
+  border-radius: 999px;
+  background: #d5c5b3;
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.brief-contact:hover {
+  color: #09090e;
+  background: #fff;
+  text-decoration: none;
+}
+
 .selected-work-section--professional {
   padding-top: clamp(5rem, 9vw, 8rem);
   background:
@@ -1868,6 +2199,41 @@ main p a:not(.button):not(.text-link) {
   .navbar__items--right .navbar__item {
     display: none;
   }
+
+  .brief-main {
+    padding-right: 0;
+    padding-left: 0;
+  }
+
+  .referral-brief {
+    border-right: 0;
+    border-left: 0;
+    border-radius: 0;
+  }
+
+  .brief-brandline,
+  .brief-intro,
+  .brief-footer {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .brief-price {
+    width: 100%;
+  }
+
+  .brief-example-grid,
+  .brief-detail-grid,
+  .brief-contains ul,
+  .brief-proof {
+    grid-template-columns: 1fr;
+  }
+
+  .brief-contains {
+    border-right: 0;
+    border-bottom: 1px solid rgba(41, 54, 86, 0.18);
+  }
 }
 
 @media print {
@@ -1886,5 +2252,162 @@ main p a:not(.button):not(.text-link) {
   .section-block {
     padding-top: 2rem;
     padding-bottom: 2rem;
+  }
+
+  @page {
+    size: letter;
+    margin: 0.32in;
+  }
+
+  html {
+    font-size: 9pt;
+  }
+
+  html,
+  body,
+  #site-root,
+  .main-wrapper,
+  .brief-main {
+    background: #fff !important;
+  }
+
+  .brief-main {
+    padding: 0;
+  }
+
+  .referral-brief {
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    break-inside: avoid;
+  }
+
+  .brief-header {
+    padding: 0.18in 0.24in 0.2in;
+    print-color-adjust: exact;
+  }
+
+  .brief-brandline {
+    padding-bottom: 0.08in;
+  }
+
+  .brief-brand img {
+    width: 0.24in;
+    height: 0.24in;
+  }
+
+  .brief-intro {
+    padding-top: 0.16in;
+    gap: 0.2in;
+  }
+
+  .referral-brief h1 {
+    font-size: 28pt;
+  }
+
+  .brief-offer {
+    margin-top: 0.08in;
+    font-size: 9.6pt;
+    line-height: 1.35;
+  }
+
+  .brief-price {
+    min-width: 1.55in;
+    padding: 0.09in 0.12in;
+    print-color-adjust: exact;
+  }
+
+  .brief-price strong {
+    font-size: 20pt;
+  }
+
+  .brief-section,
+  .brief-proof {
+    padding: 0.14in 0.24in;
+  }
+
+  .brief-section-heading h2,
+  .brief-proof-label h2 {
+    font-size: 12.5pt;
+  }
+
+  .brief-example-grid {
+    margin-top: 0.09in;
+  }
+
+  .brief-example {
+    padding: 0.07in 0.09in;
+    gap: 0.07in;
+  }
+
+  .brief-example h3 {
+    margin-bottom: 0.02in;
+    font-size: 9pt;
+  }
+
+  .brief-example p,
+  .brief-ownership p,
+  .brief-scoping p,
+  .brief-proof p,
+  .brief-contains li {
+    font-size: 7.7pt;
+    line-height: 1.3;
+  }
+
+  .brief-example-boundary,
+  .brief-proof-copy .brief-proof-boundary {
+    font-size: 6.8pt;
+  }
+
+  .brief-contains ul {
+    margin-top: 0.09in;
+    gap: 0.04in 0.12in;
+  }
+
+  .brief-side-stack .brief-section {
+    padding: 0.1in 0.14in;
+  }
+
+  .brief-side-stack h2 {
+    font-size: 10pt;
+  }
+
+  .brief-ownership p,
+  .brief-scoping p {
+    margin-top: 0.04in;
+  }
+
+  .brief-proof {
+    gap: 0.16in;
+  }
+
+  .brief-proof-copy p + p,
+  .brief-text-link {
+    margin-top: 0.04in;
+  }
+
+  .brief-footer {
+    padding: 0.12in 0.24in;
+    print-color-adjust: exact;
+  }
+
+  .brief-footer strong,
+  .brief-contact {
+    font-size: 8pt;
+  }
+
+  .brief-contact {
+    padding: 0.05in 0.09in;
+  }
+
+  .brief-section,
+  .brief-example,
+  .brief-detail-grid,
+  .brief-proof,
+  .brief-footer {
+    break-inside: avoid;
   }
 }

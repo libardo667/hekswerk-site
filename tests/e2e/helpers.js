@@ -1,6 +1,15 @@
 import {expect} from '@playwright/test';
 
-export const publicRoutes = ['/', '/work', '/work/selected-work', '/research', '/about', '/contact', '/privacy'];
+export const publicRoutes = [
+  '/',
+  '/work',
+  '/work/brief',
+  '/work/selected-work',
+  '/research',
+  '/about',
+  '/contact',
+  '/privacy',
+];
 
 export async function blockExternalAssets(page) {
   await page.route(/https:\/\/hekswerk-intake\.levi-020\.workers\.dev\/.*/, (route) => route.abort('blockedbyclient'));

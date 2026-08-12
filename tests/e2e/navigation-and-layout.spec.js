@@ -88,6 +88,31 @@ test('work pricing distinguishes inquiry, scoping, the sprint, and custom work',
   await expect(page).toHaveURL(/\/contact\?topic=automation$/);
 });
 
+test('referral brief is self-contained and print-ready', async ({page}) => {
+  await page.goto('/work/brief');
+  const brief = page.locator('.referral-brief');
+
+  await expect(brief.getByRole('heading', {level: 1})).toHaveText('Make the manual chain reliable.');
+  await expect(brief.locator('.brief-example')).toHaveCount(4);
+  await expect(brief.locator('.brief-price strong')).toHaveText('$3,500');
+  await expect(
+    brief.getByText('Your accounts, credentials, data, documentation, and resulting system stay yours.'),
+  ).toBeVisible();
+  await expect(brief.getByText('Paid employer work, not a Hekswerk client result.')).toBeVisible();
+  await expect(brief.getByRole('link', {name: 'www.hekswerk.com/contact'})).toHaveAttribute(
+    'href',
+    '/contact?topic=automation',
+  );
+
+  await page.setViewportSize({width: 816, height: 1056});
+  await page.emulateMedia({media: 'print'});
+  await expect(page.locator('.navbar')).toBeHidden();
+  await expect(page.locator('.footer')).toBeHidden();
+  await expect(brief).toHaveCSS('box-shadow', 'none');
+  const printHeight = await brief.evaluate((element) => element.getBoundingClientRect().height);
+  expect(printHeight).toBeLessThan(950);
+});
+
 test('navigation and footer expose every intended internal destination', async ({page, request}, testInfo) => {
   await page.goto('/');
   if (testInfo.project.name.startsWith('mobile')) {
