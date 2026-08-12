@@ -1476,11 +1476,34 @@ main p a:not(.button):not(.text-link) {
 
 .conditional-fields {
   display: grid;
+  min-width: 0;
+  margin: 0;
   gap: 1rem;
   padding: 1.25rem;
   border: 1px solid var(--heks-hairline);
   border-radius: 14px;
   background: rgba(41, 54, 86, 0.14);
+}
+
+.conditional-fields legend {
+  padding: 0 0.45rem;
+  color: var(--heks-cream);
+  font-family: var(--ifm-heading-font-family);
+  font-size: 1.25rem;
+}
+
+.field-note {
+  margin: 0;
+  color: var(--heks-muted);
+  font-size: 0.86rem;
+  font-weight: 400;
+  line-height: 1.55;
+}
+
+.field-optional {
+  color: var(--heks-muted);
+  font-size: 0.78rem;
+  font-weight: 400;
 }
 
 .honeypot {

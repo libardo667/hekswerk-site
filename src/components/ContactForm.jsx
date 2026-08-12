@@ -1,9 +1,128 @@
 import {useEffect, useState, useSyncExternalStore} from 'react';
-import {defaultTopic, messageLabelForTopic, payloadFromForm, topicFromSearch, topicOptions} from '../data/contactForm';
+import {readAttribution} from '../data/contactAttribution';
+import {defaultTopic, payloadFromForm, topicFromSearch, topicOptions} from '../data/contactForm';
 import {contactEmail} from '../data/site';
 import Link from './Link';
 
 const endpoint = 'https://hekswerk-intake.levi-020.workers.dev/';
+
+function AutomationFields() {
+  return (
+    <fieldset className="conditional-fields">
+      <legend>About the workflow</legend>
+      <p className="field-note">
+        Plain language is useful. Describe the work as it happens now rather than trying to design the solution.
+      </p>
+      <label>
+        Organization <span className="field-optional">Optional</span>
+        <input name="organization" autoComplete="organization" />
+      </label>
+      <label>
+        What process repeats?
+        <textarea name="repeating_process" rows="4" required />
+      </label>
+      <label>
+        What tools or systems are involved? <span className="field-optional">Optional</span>
+        <input name="systems_involved" placeholder="For example: email, forms, spreadsheets, a CRM, or documents" />
+      </label>
+      <label>
+        What currently takes too long, gets missed, or fails? <span className="field-optional">Optional</span>
+        <textarea name="current_problem" rows="3" />
+      </label>
+      <div className="field-grid">
+        <label>
+          Approximate frequency <span className="field-optional">Optional</span>
+          <select name="approximate_frequency" defaultValue="">
+            <option value="">Choose one</option>
+            <option>Several times a day</option>
+            <option>Daily</option>
+            <option>Several times a week</option>
+            <option>Weekly</option>
+            <option>Monthly</option>
+            <option>Less often or irregular</option>
+            <option>Not sure</option>
+          </select>
+        </label>
+        <label>
+          Desired timing <span className="field-optional">Optional</span>
+          <select name="desired_timing" defaultValue="">
+            <option value="">Choose one</option>
+            <option>As soon as practical</option>
+            <option>Within one month</option>
+            <option>Within three months</option>
+            <option>Later this year</option>
+            <option>Exploring for now</option>
+          </select>
+        </label>
+      </div>
+      <label>
+        Does this workflow involve sensitive or regulated information?
+        <select name="sensitive_or_regulated" defaultValue="" required>
+          <option value="" disabled>
+            Choose one
+          </option>
+          <option>No</option>
+          <option>Yes</option>
+          <option>Unsure</option>
+        </select>
+        <span className="field-note">
+          Answer at a high level. Do not identify people or include records, credentials, or protected data here.
+        </span>
+      </label>
+    </fieldset>
+  );
+}
+
+function RelocationFields() {
+  return (
+    <fieldset className="conditional-fields">
+      <legend>About the move</legend>
+      <p className="field-note">These details are optional. Share only what is useful for an initial reply.</p>
+      <div className="field-grid">
+        <label>
+          Current location
+          <input name="current_location" autoComplete="address-level2" />
+        </label>
+        <label>
+          Target location
+          <input name="target_location" />
+        </label>
+      </div>
+      <div className="field-grid">
+        <label>
+          Timeline
+          <input name="timeline" />
+        </label>
+        <label>
+          Household
+          <input name="household" />
+        </label>
+      </div>
+      <label>
+        Constraints I should account for <span className="field-optional">Optional</span>
+        <textarea name="constraints" rows="3" />
+        <span className="field-note">
+          Keep this general. Do not include medical, legal, financial, or identity records.
+        </span>
+      </label>
+      <label>
+        What is the hardest part of the move right now?
+        <textarea name="message" rows="5" required />
+      </label>
+    </fieldset>
+  );
+}
+
+function MessageField({topic}) {
+  const prompt =
+    topic === 'research' ? 'What would you like to explore or discuss?' : 'What would you like to ask or tell me?';
+  return (
+    <label>
+      {prompt}
+      <textarea name="message" rows="6" required />
+    </label>
+  );
+}
 
 export default function ContactForm() {
   const queryTopic = useSyncExternalStore(
@@ -28,7 +147,13 @@ export default function ContactForm() {
 
     const formElement = event.currentTarget;
     const form = new FormData(formElement);
-    const payload = payloadFromForm(form, topic);
+    let attribution = {};
+    try {
+      attribution = readAttribution(window.location, window.sessionStorage);
+    } catch {
+      attribution = readAttribution(window.location, {getItem: () => null});
+    }
+    const payload = payloadFromForm(form, topic, attribution);
 
     try {
       const response = await fetch(endpoint, {
@@ -51,9 +176,6 @@ export default function ContactForm() {
     }
   }
 
-  const isRelocation = topic === 'Relocation planning';
-  const messageLabel = messageLabelForTopic(topic);
-
   return (
     <form className="contact-form" onSubmit={submit}>
       <div className="field-grid">
@@ -68,7 +190,7 @@ export default function ContactForm() {
       </div>
 
       <label>
-        Topic
+        What is this about?
         <select name="topic" value={topic} onChange={(event) => setSelectedTopic(event.target.value)}>
           {topicOptions.map((option) => (
             <option value={option.value} key={option.value}>
@@ -78,39 +200,9 @@ export default function ContactForm() {
         </select>
       </label>
 
-      {isRelocation && (
-        <div className="conditional-fields">
-          <div className="field-grid">
-            <label>
-              Current location
-              <input name="current_location" />
-            </label>
-            <label>
-              Target location
-              <input name="target_location" />
-            </label>
-          </div>
-          <div className="field-grid">
-            <label>
-              Timeline
-              <input name="timeline" />
-            </label>
-            <label>
-              Household
-              <input name="household" />
-            </label>
-          </div>
-          <label>
-            Anything urgent or sensitive I should know?
-            <textarea name="urgent_or_sensitive" rows="3" />
-          </label>
-        </div>
-      )}
-
-      <label>
-        {messageLabel}
-        <textarea name="message" rows="7" required />
-      </label>
+      {topic === 'automation' && <AutomationFields />}
+      {topic === 'relocation' && <RelocationFields />}
+      {(topic === 'research' || topic === 'general') && <MessageField topic={topic} />}
 
       <label className="honeypot" aria-hidden="true">
         Website
@@ -136,6 +228,11 @@ export default function ContactForm() {
           {status.message}
         </p>
       </div>
+      <noscript>
+        <p className="form-status">
+          This form needs JavaScript. You can email <a href={`mailto:${contactEmail}`}>{contactEmail}</a> instead.
+        </p>
+      </noscript>
     </form>
   );
 }

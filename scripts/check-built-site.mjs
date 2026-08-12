@@ -4,6 +4,8 @@ import path from 'node:path';
 const buildRoot = path.resolve(process.cwd(), 'build');
 const siteUrl = 'https://www.hekswerk.com';
 const socialImage = `${siteUrl}/img/hekswerk-social-card.png`;
+const analyticsScript = 'https://static.cloudflareinsights.com/beacon.min.js';
+const analyticsToken = 'b521818f3dee4549be53db47190f52c2';
 const routes = [
   {
     route: '/',
@@ -122,6 +124,11 @@ for (const entry of routes) {
   expectIncludes(html, `property="og:image" content="${socialImage}"`, `${entry.route}: Open Graph image`);
   expectIncludes(html, `name="twitter:image" content="${socialImage}"`, `${entry.route}: Twitter image`);
   expectIncludes(html, 'name="twitter:card" content="summary_large_image"', `${entry.route}: Twitter card`);
+  const analyticsBlocks = [...html.matchAll(/<script[^>]*data-cf-beacon=/g)];
+  if (analyticsBlocks.length !== 1) fail(`${entry.route}: expected exactly one Cloudflare Web Analytics beacon`);
+  expectIncludes(html, `src="${analyticsScript}"`, `${entry.route}: Cloudflare Web Analytics script`);
+  expectIncludes(html, analyticsToken, `${entry.route}: Cloudflare Web Analytics site token`);
+  expectIncludes(html, '&quot;spa&quot;:false', `${entry.route}: Cloudflare Web Analytics static-navigation mode`);
 
   const jsonLd = extractJsonLd(html, entry.file);
   const graph = jsonLd.find((block) => Array.isArray(block['@graph']));

@@ -1,60 +1,69 @@
-export const defaultTopic = 'Quickstart Automation';
+export const defaultTopic = 'automation';
 
 export const topicOptions = [
   {label: 'Operations Automation Sprint', value: defaultTopic},
-  {label: 'Research collaboration', value: 'Research collaboration'},
-  {label: 'Relocation planning', value: 'Relocation planning'},
-  {label: 'Something else', value: 'Something else'},
+  {label: 'Research collaboration', value: 'research'},
+  {label: 'Something else', value: 'general'},
+  {label: 'Relocation planning', value: 'relocation'},
 ];
 
-const queryTopics = {
-  automation: defaultTopic,
-  research: 'Research collaboration',
-  relocation: 'Relocation planning',
-};
+const topicLabels = Object.fromEntries(topicOptions.map(({label, value}) => [value, label]));
 
 export function topicFromSearch(search) {
   const requestedTopic = new URLSearchParams(search).get('topic');
-  return queryTopics[requestedTopic] || defaultTopic;
+  return topicLabels[requestedTopic] ? requestedTopic : defaultTopic;
 }
 
-export function messageLabelForTopic(topic) {
-  if (topic === 'Relocation planning') {
-    return 'What is the hardest part of the move right now?';
-  }
-  if (topic === defaultTopic) {
-    return 'Describe the workflow, the people involved, and the systems it touches';
-  }
-  return 'Message';
+export function topicLabel(topic) {
+  return topicLabels[topic] || topicLabels[defaultTopic];
 }
 
-export function payloadFromForm(form, topic) {
-  const shared = {
+function sharedPayload(form, topic, attribution) {
+  return {
+    schema_version: 2,
+    form_type: topic,
     name: form.get('name'),
     email: form.get('email'),
-    topic,
+    topic: topicLabel(topic),
+    privacy_acknowledged: form.get('privacy_acknowledged') === 'on',
+    website: form.get('website'),
+    utm_source: attribution.utm_source || '',
+    utm_medium: attribution.utm_medium || '',
+    utm_campaign: attribution.utm_campaign || '',
+    initial_landing_path: attribution.initial_landing_path || '',
   };
+}
 
-  if (topic === 'Relocation planning') {
+export function payloadFromForm(form, topic, attribution = {}) {
+  const shared = sharedPayload(form, topic, attribution);
+
+  if (topic === 'automation') {
     return {
-      form_type: 'relocation',
+      ...shared,
+      organization: form.get('organization'),
+      repeating_process: form.get('repeating_process'),
+      systems_involved: form.get('systems_involved'),
+      current_problem: form.get('current_problem'),
+      approximate_frequency: form.get('approximate_frequency'),
+      desired_timing: form.get('desired_timing'),
+      sensitive_or_regulated: form.get('sensitive_or_regulated'),
+    };
+  }
+
+  if (topic === 'relocation') {
+    return {
       ...shared,
       current_location: form.get('current_location'),
       target_location: form.get('target_location'),
       timeline: form.get('timeline'),
       household: form.get('household'),
       hardest_part: form.get('message'),
-      urgent_or_sensitive: form.get('urgent_or_sensitive'),
-      privacy_acknowledged: form.get('privacy_acknowledged') === 'on',
-      website: form.get('website'),
+      constraints: form.get('constraints'),
     };
   }
 
   return {
-    form_type: 'contact',
     ...shared,
     message: form.get('message'),
-    privacy_acknowledged: form.get('privacy_acknowledged') === 'on',
-    website: form.get('website'),
   };
 }

@@ -13,8 +13,8 @@ export default function Contact() {
         <Hero
           compact
           eyebrow="Contact Hekswerk"
-          title="Start with the actual problem."
-          lede="For an automation inquiry, describe the recurring workflow, who touches it, what systems it crosses, and what a successful handoff would look like."
+          title="Start with the work as it happens now."
+          lede="For an automation inquiry, describe the recurring process and where it breaks down. You do not need to design the solution before getting in touch."
         />
 
         <section className="section-block contact-section">
@@ -23,12 +23,13 @@ export default function Contact() {
               <span className="eyebrow">Private inquiry</span>
               <h2>Send a short first note</h2>
               <p className="section-copy">
-                You do not need a technical specification. A concrete account of the current workflow is more useful.
+                Choose a topic and the form will ask only for the context that fits it. I read every inquiry myself and
+                reply directly.
               </p>
               <BoundaryBox title="Do not send secrets">
                 <p>
-                  Please do not include passwords, access tokens, full financial identifiers, health records, or other
-                  sensitive records in this first message.
+                  Do not include passwords, access tokens, production data, medical records, legal files, full financial
+                  identifiers, or other secrets in this first message.
                 </p>
               </BoundaryBox>
               <p className="contact-alternative">

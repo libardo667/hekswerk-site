@@ -14,6 +14,14 @@ test.beforeEach(async ({page}) => {
   await blockExternalAssets(page);
 });
 
+test('each page includes one Cloudflare Web Analytics beacon in static-navigation mode', async ({page}) => {
+  await page.goto('/');
+  const beacon = page.locator('script[src="https://static.cloudflareinsights.com/beacon.min.js"]');
+  await expect(beacon).toHaveCount(1);
+  const configuration = JSON.parse(await beacon.getAttribute('data-cf-beacon'));
+  expect(configuration).toEqual({token: 'b521818f3dee4549be53db47190f52c2', spa: false});
+});
+
 test('homepage commercial and research paths resolve', async ({page}) => {
   await page.goto('/');
   await page.getByRole('link', {name: 'View the Operations Automation Sprint'}).click();

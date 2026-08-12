@@ -193,6 +193,19 @@ const structuredData = {
       </footer>
     </div>
 
+    <script
+      type="module"
+      src="https://static.cloudflareinsights.com/beacon.min.js"
+      data-cf-beacon='{"token":"b521818f3dee4549be53db47190f52c2","spa":false}'></script>
+    <script>
+      import {captureAttribution} from '../../src/data/contactAttribution';
+
+      try {
+        captureAttribution(window.location, window.sessionStorage);
+      } catch {
+        // The contact form falls back to its current path if browser storage is unavailable.
+      }
+    </script>
     <script>
       const navbar = document.querySelector('.navbar');
       const toggle = document.querySelector('.navbar__toggle');

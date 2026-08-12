@@ -9,44 +9,63 @@ test.beforeEach(async ({page}) => {
 });
 
 for (const [query, topic] of [
-  ['', 'Quickstart Automation'],
-  ['?topic=automation', 'Quickstart Automation'],
-  ['?topic=research', 'Research collaboration'],
-  ['?topic=relocation', 'Relocation planning'],
-  ['?topic=unknown', 'Quickstart Automation'],
+  ['', 'automation'],
+  ['?topic=automation', 'automation'],
+  ['?topic=research', 'research'],
+  ['?topic=relocation', 'relocation'],
+  ['?topic=unknown', 'automation'],
 ]) {
   test(`contact topic ${query || 'defaults safely'}`, async ({page}) => {
     await page.goto(`/contact${query}`);
-    await expect(page.getByLabel('Topic')).toHaveValue(topic);
+    await expect(page.getByLabel('What is this about?')).toHaveValue(topic);
   });
 }
 
-test('automation prompt and relocation conditions match the selected topic', async ({page}) => {
+test('each topic reveals only its intended fields', async ({page}) => {
   await page.goto('/contact?topic=automation');
-  await expect(page.getByLabel(/^Describe the workflow/)).toBeVisible();
-  await expect(page.locator('.conditional-fields')).toHaveCount(0);
+  for (const label of [
+    'Organization Optional',
+    'What process repeats?',
+    'What tools or systems are involved? Optional',
+    'What currently takes too long, gets missed, or fails? Optional',
+    'Approximate frequency Optional',
+    'Desired timing Optional',
+    'Does this workflow involve sensitive or regulated information?',
+  ]) {
+    await expect(page.getByLabel(label)).toBeVisible();
+  }
+  await expect(page.getByLabel('What would you like to explore or discuss?')).toHaveCount(0);
 
-  await page.getByLabel('Topic').selectOption('Relocation planning');
+  await page.getByLabel('What is this about?').selectOption('research');
+  await expect(page.getByLabel('What would you like to explore or discuss?')).toBeVisible();
+  await expect(page.getByLabel('What process repeats?')).toHaveCount(0);
+
+  await page.getByLabel('What is this about?').selectOption('general');
+  await expect(page.getByLabel('What would you like to ask or tell me?')).toBeVisible();
+
+  await page.getByLabel('What is this about?').selectOption('relocation');
   for (const label of [
     'Current location',
     'Target location',
     'Timeline',
     'Household',
-    'Anything urgent or sensitive I should know?',
+    'Constraints I should account for Optional',
     'What is the hardest part of the move right now?',
   ]) {
     await expect(page.getByLabel(label)).toBeVisible();
   }
+  await expect(page.getByLabel('What would you like to ask or tell me?')).toHaveCount(0);
 });
 
-test('native validation protects required fields and email format', async ({page}) => {
-  await page.goto('/contact');
+test('native validation protects the shared and automation-required fields', async ({page}) => {
+  await page.goto('/contact?topic=automation');
   const form = page.locator('form.contact-form');
   await expect(form).not.toHaveJSProperty('noValidate', true);
   for (const control of [
     page.getByLabel('Name'),
     page.getByLabel('Email'),
-    page.getByLabel(/^Describe the workflow/),
+    page.getByLabel('What process repeats?'),
+    page.getByLabel('Does this workflow involve sensitive or regulated information?'),
     page.getByRole('checkbox'),
   ]) {
     await expect(control).toHaveAttribute('required', '');
@@ -54,7 +73,8 @@ test('native validation protects required fields and email format', async ({page
 
   await page.getByLabel('Name').fill('Ada');
   await page.getByLabel('Email').fill('not-an-email');
-  await page.getByLabel(/^Describe the workflow/).fill('A workflow');
+  await page.getByLabel('What process repeats?').fill('A workflow');
+  await page.getByLabel('Does this workflow involve sensitive or regulated information?').selectOption('No');
   await page.getByRole('checkbox').check();
   await page.getByRole('button', {name: 'Send inquiry'}).click();
   const emailValidity = await page
@@ -64,12 +84,13 @@ test('native validation protects required fields and email format', async ({page
   expect(emailValidity.message.length).toBeGreaterThan(0);
 });
 
-test('honeypot is present, excluded from tabs, and included in ordinary success payload', async ({page}) => {
+test('automation submission carries its fields, honeypot, and initial-session attribution', async ({page}) => {
   let payload;
   await page.route(endpoint, async (route) => {
     payload = route.request().postDataJSON();
     await route.fulfill({status: 200, contentType: 'application/json', body: JSON.stringify({ok: true})});
   });
+  await page.goto('/work?utm_source=directory&utm_medium=profile&utm_campaign=august&private=discard-me');
   await page.goto('/contact?topic=automation');
   const honeypot = page.locator('input[name="website"]');
   await expect(honeypot).toHaveCount(1);
@@ -79,21 +100,60 @@ test('honeypot is present, excluded from tabs, and included in ordinary success 
   });
   await page.getByLabel('Name').fill('Ada');
   await page.getByLabel('Email').fill('ada@example.com');
-  await page.getByLabel(/^Describe the workflow/).fill('Make intake reliable');
+  await page.getByLabel('Organization Optional').fill('Example practice');
+  await page.getByLabel('What process repeats?').fill('Intake gets copied by hand.');
+  await page.getByLabel('What tools or systems are involved? Optional').fill('Email and Sheets');
+  await page
+    .getByLabel('What currently takes too long, gets missed, or fails? Optional')
+    .fill('Follow-ups get missed.');
+  await page.getByLabel('Approximate frequency Optional').selectOption('Daily');
+  await page.getByLabel('Desired timing Optional').selectOption('Within one month');
+  await page.getByLabel('Does this workflow involve sensitive or regulated information?').selectOption('Unsure');
   await page.getByRole('checkbox').check();
   await page.getByRole('button', {name: 'Send inquiry'}).click();
   await expect(page.getByRole('status')).toHaveText('Thank you. Your inquiry has been sent.');
   expect(payload).toEqual({
-    form_type: 'contact',
+    schema_version: 2,
+    form_type: 'automation',
     name: 'Ada',
     email: 'ada@example.com',
-    topic: 'Quickstart Automation',
-    message: 'Make intake reliable',
+    topic: 'Operations Automation Sprint',
     privacy_acknowledged: true,
     website: 'bot-value',
+    utm_source: 'directory',
+    utm_medium: 'profile',
+    utm_campaign: 'august',
+    initial_landing_path: '/work',
+    organization: 'Example practice',
+    repeating_process: 'Intake gets copied by hand.',
+    systems_involved: 'Email and Sheets',
+    current_problem: 'Follow-ups get missed.',
+    approximate_frequency: 'Daily',
+    desired_timing: 'Within one month',
+    sensitive_or_regulated: 'Unsure',
   });
   await expect(page.getByLabel('Name')).toHaveValue('');
-  await expect(page.getByLabel('Topic')).toHaveValue('Quickstart Automation');
+  await expect(page.getByLabel('What is this about?')).toHaveValue('automation');
+});
+
+test('switching topics excludes stale conditional fields from the payload', async ({page}) => {
+  let payload;
+  await page.route(endpoint, async (route) => {
+    payload = route.request().postDataJSON();
+    await route.fulfill({status: 200, contentType: 'application/json', body: JSON.stringify({ok: true})});
+  });
+  await page.goto('/contact?topic=automation');
+  await page.getByLabel('What process repeats?').fill('This must not leak');
+  await page.getByLabel('What is this about?').selectOption('research');
+  await page.getByLabel('Name').fill('Ada');
+  await page.getByLabel('Email').fill('ada@example.com');
+  await page.getByLabel('What would you like to explore or discuss?').fill('A research question');
+  await page.getByRole('checkbox').check();
+  await page.getByRole('button', {name: 'Send inquiry'}).click();
+  expect(payload.form_type).toBe('research');
+  expect(payload.message).toBe('A research question');
+  expect(payload).not.toHaveProperty('repeating_process');
+  expect(payload).not.toHaveProperty('current_location');
 });
 
 test('relocation submission contains only the intended conditional payload', async ({page}) => {
@@ -109,12 +169,13 @@ test('relocation submission contains only the intended conditional payload', asy
   await page.getByLabel('Target location').fill('The Hague');
   await page.getByLabel('Timeline').fill('December');
   await page.getByLabel('Household').fill('Two people');
-  await page.getByLabel('Anything urgent or sensitive I should know?').fill('None');
+  await page.getByLabel('Constraints I should account for Optional').fill('A fixed arrival date');
   await page.getByLabel('What is the hardest part of the move right now?').fill('Housing');
   await page.getByRole('checkbox').check();
   await page.getByRole('button', {name: 'Send inquiry'}).click();
   await expect(page.getByRole('status')).toHaveText('Thank you. Your inquiry has been sent.');
-  expect(payload).toEqual({
+  expect(payload).toMatchObject({
+    schema_version: 2,
     form_type: 'relocation',
     name: 'Ada',
     email: 'ada@example.com',
@@ -124,20 +185,45 @@ test('relocation submission contains only the intended conditional payload', asy
     timeline: 'December',
     household: 'Two people',
     hardest_part: 'Housing',
-    urgent_or_sensitive: 'None',
+    constraints: 'A fixed arrival date',
     privacy_acknowledged: true,
     website: '',
   });
+  expect(payload).not.toHaveProperty('repeating_process');
+});
+
+test('submission falls back safely when session storage is unavailable', async ({page}) => {
+  await page.addInitScript(() => {
+    Object.defineProperty(window, 'sessionStorage', {
+      configurable: true,
+      get() {
+        throw new DOMException('Storage unavailable', 'SecurityError');
+      },
+    });
+  });
+  let payload;
+  await page.route(endpoint, async (route) => {
+    payload = route.request().postDataJSON();
+    await route.fulfill({status: 200, contentType: 'application/json', body: JSON.stringify({ok: true})});
+  });
+  await page.goto('/contact?topic=research&utm_source=direct');
+  await page.getByLabel('Name').fill('Ada');
+  await page.getByLabel('Email').fill('ada@example.com');
+  await page.getByLabel('What would you like to explore or discuss?').fill('A question');
+  await page.getByRole('checkbox').check();
+  await page.getByRole('button', {name: 'Send inquiry'}).click();
+  expect(payload.utm_source).toBe('direct');
+  expect(payload.initial_landing_path).toBe('/contact');
 });
 
 test('mocked failure is announced with the email fallback', async ({page}) => {
   await page.route(endpoint, (route) =>
     route.fulfill({status: 503, contentType: 'application/json', body: JSON.stringify({error: 'Please try again.'})}),
   );
-  await page.goto('/contact');
+  await page.goto('/contact?topic=research');
   await page.getByLabel('Name').fill('Ada');
   await page.getByLabel('Email').fill('ada@example.com');
-  await page.getByLabel(/^Describe the workflow/).fill('A workflow');
+  await page.getByLabel('What would you like to explore or discuss?').fill('A question');
   await page.getByRole('checkbox').check();
   await page.getByRole('button', {name: 'Send inquiry'}).click();
   await expect(page.getByRole('status')).toContainText('Please try again. You can also email');
@@ -147,5 +233,5 @@ test('mocked failure is announced with the email fallback', async ({page}) => {
 test('/contact.html redirects while preserving query and hash', async ({page}) => {
   await page.goto('/contact.html?topic=relocation#intake');
   await expect(page).toHaveURL(/\/contact\?topic=relocation#intake$/);
-  await expect(page.getByLabel('Topic')).toHaveValue('Relocation planning');
+  await expect(page.getByLabel('What is this about?')).toHaveValue('relocation');
 });

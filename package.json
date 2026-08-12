@@ -7,13 +7,15 @@
     "build": "ASTRO_TELEMETRY_DISABLED=1 astro build",
     "serve": "ASTRO_TELEMETRY_DISABLED=1 astro preview",
     "audit:languages": "node scripts/project-language-inventory.mjs",
+    "worker:check": "XDG_CONFIG_HOME=/tmp/hekswerk-wrangler-config WRANGLER_LOG_PATH=/tmp/hekswerk-wrangler-logs wrangler deploy --dry-run --config workers/intake/wrangler.jsonc",
+    "worker:deploy": "WRANGLER_LOG_PATH=/tmp/hekswerk-wrangler-logs wrangler deploy --config workers/intake/wrangler.jsonc",
     "lint": "eslint .",
-    "format": "prettier --write \".github/**/*.{yml,yaml}\" \"*.{js,mjs,json,md}\" \"site/**/*.astro\" \"src/**/*.{js,jsx,css}\" \"scripts/**/*.mjs\" \"tests/**/*.{js,jsx}\"",
-    "format:check": "prettier --check \".github/**/*.{yml,yaml}\" \"*.{js,mjs,json,md}\" \"site/**/*.astro\" \"src/**/*.{js,jsx,css}\" \"scripts/**/*.mjs\" \"tests/**/*.{js,jsx}\"",
+    "format": "prettier --write \".github/**/*.{yml,yaml}\" \"*.{js,mjs,json,md}\" \"site/**/*.astro\" \"src/**/*.{js,jsx,css}\" \"scripts/**/*.mjs\" \"tests/**/*.{js,jsx}\" \"workers/**/*.{js,jsonc,md}\"",
+    "format:check": "prettier --check \".github/**/*.{yml,yaml}\" \"*.{js,mjs,json,md}\" \"site/**/*.astro\" \"src/**/*.{js,jsx,css}\" \"scripts/**/*.mjs\" \"tests/**/*.{js,jsx}\" \"workers/**/*.{js,jsonc,md}\"",
     "test": "vitest run tests/unit",
     "test:e2e": "playwright test",
     "check:site": "node scripts/check-built-site.mjs",
-    "check": "npm run format:check && npm run lint && npm run test && npm run build && npm run check:site && npm run test:e2e"
+    "check": "npm run format:check && npm run lint && npm run test && npm run worker:check && npm run build && npm run check:site && npm run test:e2e"
   },
   "dependencies": {
     "@astrojs/react": "^6.0.2",
@@ -36,6 +38,7 @@
     "globals": "^17.10.0",
     "prettier": "^3.9.6",
     "prettier-plugin-astro": "^0.14.1",
-    "vitest": "^4.1.10"
+    "vitest": "^4.1.10",
+    "wrangler": "^4.121.0"
   }
 }

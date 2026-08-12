@@ -21,10 +21,10 @@ for (const route of publicRoutes) {
 
 test('contact controls and live status expose accessible names and announcements', async ({page}) => {
   await page.goto('/contact');
-  for (const name of ['Name', 'Email', 'Topic']) {
+  for (const name of ['Name', 'Email', 'What is this about?', 'What process repeats?']) {
     await expect(page.getByLabel(name)).toBeVisible();
   }
-  await expect(page.getByLabel(/^Describe the workflow/)).toBeVisible();
+  await expect(page.getByLabel('Does this workflow involve sensitive or regulated information?')).toBeVisible();
   await expect(page.getByRole('checkbox')).toHaveAccessibleName(/I have read the privacy and data-handling note/);
   await expect(page.getByRole('status')).toHaveAttribute('aria-live', 'polite');
 });
