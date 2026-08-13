@@ -8,6 +8,7 @@
     "serve": "ASTRO_TELEMETRY_DISABLED=1 astro preview",
     "audit:languages": "node scripts/project-language-inventory.mjs",
     "metrics:weekly": "node --env-file-if-exists=.env scripts/weekly-metrics.mjs",
+    "metrics:weekly:save": "bash scripts/save-weekly-metrics.sh",
     "worker:check": "XDG_CONFIG_HOME=/tmp/hekswerk-wrangler-config WRANGLER_LOG_PATH=/tmp/hekswerk-wrangler-logs wrangler deploy --dry-run --config workers/intake/wrangler.jsonc",
     "worker:deploy": "WRANGLER_LOG_PATH=/tmp/hekswerk-wrangler-logs wrangler deploy --config workers/intake/wrangler.jsonc",
     "site:check": "XDG_CONFIG_HOME=/tmp/hekswerk-site-wrangler-config WRANGLER_LOG_PATH=/tmp/hekswerk-site-wrangler-logs wrangler deploy --dry-run --config workers/site/wrangler.jsonc",

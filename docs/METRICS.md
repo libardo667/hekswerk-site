@@ -109,6 +109,39 @@ npm run metrics:weekly -- --days=30
 
 The accepted range is 1 through 90 days because Analytics Engine retains this dataset for three months.
 
+### Automatic private Windows report
+
+On the primary Windows and WSL workstation, Task Scheduler runs the same seven-day report every Monday at 9:00 AM in
+the Windows local timezone. The task is named `Hekswerk Weekly Metrics`. If the scheduled time is missed, Windows starts
+it when the task next becomes available. It runs for at most 15 minutes and does not start a second copy while one is
+already active. It may start and continue on battery power, but it does not wake a sleeping computer; a missed run is
+picked up after Windows and Task Scheduler are available again.
+
+The task invokes this checkout through `Ubuntu-22.04` and runs:
+
+```bash
+npm run metrics:weekly:save
+```
+
+Task Scheduler launches `%LOCALAPPDATA%\Hekswerk\run-weekly-metrics.ps1`, which the installer generates without any
+credential values. That Windows-side wrapper starts WSL and replaces `%LOCALAPPDATA%\Hekswerk\weekly-metrics-task.log`
+on each run with exit diagnostics only. The metrics table itself is not written to the Windows log.
+
+Successful reports are stored as `.metrics-reports/weekly-<UTC timestamp>.txt`. Failed attempts store a similarly
+private `failed-<UTC timestamp>.txt` diagnostic. The directory is ignored by Git, has mode `0700`, and report files
+have mode `0600`. The task command contains no credential values; the report process reads the ignored `.env` file at
+runtime. Do not copy reports into a tracked directory or attach them to this public repository's Actions runs.
+
+Reinstall or update the task from WSL with:
+
+```bash
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File "$(wslpath -w scripts/install-windows-metrics-task.ps1)"
+```
+
+The installer is idempotent. Its optional `-DayOfWeek` and `-At` arguments can change the default Monday 09:00
+schedule. Task Scheduler reports the task result separately from the saved report; a successful run has result code
+`0`.
+
 This query returns the last seven days by event and source while accounting for Analytics Engine sampling:
 
 ```sql

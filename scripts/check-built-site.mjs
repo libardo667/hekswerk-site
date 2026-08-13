@@ -375,11 +375,40 @@ expectIncludes(
   '"metrics:weekly": "node --env-file-if-exists=.env scripts/weekly-metrics.mjs"',
   'package.json: local weekly metrics command',
 );
+expectIncludes(
+  packageManifest,
+  '"metrics:weekly:save": "bash scripts/save-weekly-metrics.sh"',
+  'package.json: private weekly metrics capture command',
+);
 const gitignore = readFileSync(path.resolve(process.cwd(), '.gitignore'), 'utf8');
-for (const value of ['.env\n', '.env.*\n', '!.env.example\n']) {
+for (const value of ['.env\n', '.env.*\n', '!.env.example\n', '.metrics-reports/\n']) {
   expectIncludes(gitignore, value, `.gitignore: ${value.trim()}`);
 }
 if (!statSafe(path.resolve(process.cwd(), '.env.example'))) fail('local metrics environment template');
+for (const scheduledMetricsFile of ['scripts/save-weekly-metrics.sh', 'scripts/install-windows-metrics-task.ps1']) {
+  if (!statSafe(path.resolve(process.cwd(), scheduledMetricsFile)))
+    fail(`scheduled metrics helper: ${scheduledMetricsFile}`);
+}
+const savedMetricsSource = readFileSync(path.resolve(process.cwd(), 'scripts/save-weekly-metrics.sh'), 'utf8');
+for (const value of ['umask 077', '.metrics-reports', 'npm run --silent metrics:weekly', 'chmod 600']) {
+  expectIncludes(savedMetricsSource, value, `private metrics capture: ${value}`);
+}
+const taskInstallerSource = readFileSync(
+  path.resolve(process.cwd(), 'scripts/install-windows-metrics-task.ps1'),
+  'utf8',
+);
+for (const value of [
+  'Hekswerk Weekly Metrics',
+  'Ubuntu-22.04',
+  'Monday',
+  '09:00',
+  'StartWhenAvailable',
+  'AllowStartIfOnBatteries',
+  'DontStopIfGoingOnBatteries',
+  'run-weekly-metrics.ps1',
+]) {
+  expectIncludes(taskInstallerSource, value, `Windows metrics task installer: ${value}`);
+}
 const siteWorkerConfig = readFileSync(path.resolve(process.cwd(), 'workers/site/wrangler.jsonc'), 'utf8');
 for (const value of [
   '"name": "hekswerk-site"',
