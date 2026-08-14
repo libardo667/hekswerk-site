@@ -11,3 +11,6 @@ npm-debug.log*
 .env.*
 !.env.example
 .metrics-reports/
+
+# Local planning/scratch, never shipped
+.local/

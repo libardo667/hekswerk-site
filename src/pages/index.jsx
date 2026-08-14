@@ -71,6 +71,10 @@ export default function Home() {
               <span className="eyebrow">The Operations Automation Sprint</span>
               <h2>One bounded build, from map to handoff</h2>
               <p>{offer.delivery}</p>
+              <p>
+                I build with AI coding agents under my direction and review, and I am accountable for whether the result
+                is correct. You own the finished system.
+              </p>
               <p className="offer-pricing-line">{offer.pricing.homepageStatement}</p>
               <Link className="text-link" to="/work">
                 Review scope, fit, and pricing

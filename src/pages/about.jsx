@@ -159,6 +159,13 @@ export default function About() {
                 result. I define a bounded solution and acceptance check, build it, verify it against expected paths and
                 known failures, document it, and hand it back to the client.
               </p>
+              <p>
+                How I work: I build with AI coding agents that run under my direction and review. I hold the engineering
+                judgment myself. I frame the real problem, set the boundaries, decide what correct means, test the
+                exceptions, document the system, and hand it off. Where hand-writing the code is the right call, as with
+                the operations reconciliation sample, I do that. Either way I am accountable for the result and the
+                client owns it.
+              </p>
             </div>
             <ProcessSteps
               steps={[

@@ -12,6 +12,18 @@ Use it before accepting access to non-public systems or data, and before decidin
 Operations Automation Sprint. Keep the completed record with the private project file. Do not put client data, names,
 credentials, legal analysis, or confidential screenshots in this public repository.
 
+## How Hekswerk uses AI in delivery
+
+Hekswerk builds with AI coding agents under Levi's direction and review. That method has a data boundary, and the boundary is part of the privacy position, not separate from it.
+
+- Do not send client passwords, access tokens, production data, or confidential records to AI coding tools or model providers.
+- Build against synthetic, generated, or irreversibly redacted examples unless the client agrees otherwise in writing, and record that agreement in the project file.
+- When an AI tool must see client-adjacent material to make progress, minimize it first, name the tool and provider, and treat it as a subprocessor decision under section 2 below.
+- Keep Hekswerk's own AI-assisted build separate from any AI system inside the client's workflow. The screen in section 3 is about the client's system; this boundary is about how Hekswerk produces the deliverable.
+- The client owns the finished system. AI assistance during the build does not change ownership, accountability, or the acceptance standard.
+
+This corresponds to METHOD-01 and METHOD-02 in the public claims ledger.
+
 ## Stop at the intake boundary
 
 - Do not ask for or accept passwords, tokens, production records, medical information, legal files, identity records,

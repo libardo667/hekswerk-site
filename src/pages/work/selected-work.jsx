@@ -2,13 +2,18 @@ import Link from '../../components/Link';
 import Layout from '../../components/PageContent';
 import {CallToAction, Hero} from '../../components/SitePrimitives';
 
-function CaseStudy({className = '', evidenceClass, title, summary, fields, sources, featured = false}) {
+function CaseStudy({className = '', evidenceClass, title, summary, provenance, fields, sources, featured = false}) {
   return (
     <article className={`case-study${featured ? ' case-study--featured' : ''}${className ? ` ${className}` : ''}`}>
       <header className="case-study__header">
         <div>
           <span className="eyebrow">{evidenceClass}</span>
           <h2>{title}</h2>
+          {provenance && (
+            <p className="case-study__provenance">
+              <strong>Provenance:</strong> {provenance}
+            </p>
+          )}
         </div>
         <p>{summary}</p>
       </header>
@@ -82,6 +87,7 @@ export default function SelectedWork() {
               evidenceClass="Professional work · Paid employer work"
               title="Proof-of-delivery automation and operational reporting"
               summary="An employer-neutral account backed by reviewed source, plus a clean public reconstruction you can run."
+              provenance="Hand-written by Levi."
               fields={[
                 {
                   label: 'Situation',
@@ -178,6 +184,7 @@ export default function SelectedWork() {
                 evidenceClass="Independent engineering · Runnable alpha"
                 title="EvoGen"
                 summary="Outer-loop capability engineering for autonomous agents."
+                provenance="Built by directing AI coding agents under Levi's review."
                 fields={[
                   {
                     label: 'Situation',
@@ -242,6 +249,7 @@ export default function SelectedWork() {
                 evidenceClass="Independent engineering · Experimental system"
                 title="Kenshi Agent Environment"
                 summary="Supervised game control with explicit evidence boundaries."
+                provenance="Built by directing AI coding agents under Levi's review."
                 fields={[
                   {
                     label: 'Situation',
@@ -323,6 +331,7 @@ export default function SelectedWork() {
               evidenceClass="Open research · Public source"
               title="WorldWeaver"
               summary="Backend, persistence, event, and distributed-system design for continuous AI residents."
+              provenance="Built by directing AI coding agents under Levi's review."
               fields={[
                 {
                   label: 'Situation',

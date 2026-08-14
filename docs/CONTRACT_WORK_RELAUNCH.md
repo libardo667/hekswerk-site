@@ -51,6 +51,14 @@ In the ordinary case, the sprint contains one primary workflow across one to thr
 
 The client keeps control of its accounts, credentials, data, and deployed system. Hekswerk is not a required hosting layer, subscription, or permanent operator. If a build needs a custom service, its ownership, hosting, access, and ongoing maintenance must be explicit in the scope before work begins.
 
+### How the work is built
+
+Artificial intelligence is not the category being sold, and the offer must never be inflated into a generic AI consultancy. That position stands. Separately from it, the site states plainly how the work is actually built, because concealing the method would be dishonest.
+
+Hekswerk builds automations with the help of AI coding agents working under Levi's direction and review. Levi is accountable for the design, the boundaries, the testing, and whether the result is correct. The client owns the finished system. This is a delivery method, not a service tier, an add-on, or an AI product.
+
+The engineering-accountability posture is a current commitment and working method, not a demonstrated client track record. Public copy must not claim a history of delivered client automation until a real engagement provides reviewable evidence. See METHOD-01 in the claims ledger for the approved wording and the "How Hekswerk uses AI in delivery" section of `docs/PRIVACY_AND_AI_SCOPING.md` for the data boundary (METHOD-02).
+
 ### Scope and pricing
 
 The Operations Automation Sprint remains the only primary commercial offer. Public pricing must distinguish the free inquiry and optional paid pre-build scoping from implementation:

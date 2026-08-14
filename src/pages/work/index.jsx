@@ -1,5 +1,12 @@
 import Link from '../../components/Link';
-import {CallToAction, FitLists, Hero, PricingSequence, ProcessSteps} from '../../components/SitePrimitives';
+import {
+  BoundaryBox,
+  CallToAction,
+  FitLists,
+  Hero,
+  PricingSequence,
+  ProcessSteps,
+} from '../../components/SitePrimitives';
 import Layout from '../../components/PageContent';
 import StructuredData from '../../components/StructuredData';
 import {offer} from '../../data/offer';
@@ -174,6 +181,26 @@ export default function Work() {
               <h2>Four stages from current process to handoff</h2>
             </div>
             <ProcessSteps steps={offer.process} />
+          </div>
+        </section>
+
+        <section className="section-block" id="how-built">
+          <div className="shell">
+            <div className="section-heading">
+              <span className="eyebrow">How the work is built</span>
+              <h2>AI-assisted build, human-accountable</h2>
+            </div>
+            <BoundaryBox eyebrow="Method" title="AI helps me build; I stand behind the result">
+              <p>
+                I build automations with the help of AI coding agents working under my direction and review. I am
+                responsible for the design, the boundaries, the testing, and whether the result is correct. The client
+                owns the finished system.
+              </p>
+              <p>
+                I do not send your passwords, production data, or confidential records to AI tools. I build against
+                synthetic or redacted examples unless we agree otherwise in writing.
+              </p>
+            </BoundaryBox>
           </div>
         </section>
 

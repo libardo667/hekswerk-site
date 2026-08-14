@@ -6,6 +6,23 @@ This ledger controls factual claims on the Hekswerk site. Future public copy may
 
 An entry marked **Hold** must not appear publicly until Levi supplies the named evidence and changes the entry to **Yes**. An entry marked **No** must not appear publicly. `None` in the wording column means that no wording is approved.
 
+## The honesty invariant
+
+Every public claim must map to a specific decision Levi can personally narrate and defend. Where an artifact was built by directing AI coding agents rather than written by hand, the site says so. If Levi cannot narrate the judgment behind a piece of work, it is presented as an **exploration**, not a **credential**. This invariant governs every entry below, especially the working-method and provenance entries.
+
+## Working method and provenance
+
+These entries express how Hekswerk builds and the true authorship of each portfolio artifact. Levi confirmed the build-mode facts and the exact public wording on 2026-08-14. The wording below is approved for public use: the provenance labels appear on the Selected Work page, and the method disclosures appear on the homepage, `/work`, and `/about`.
+
+| ID        | Claim under review                                   | Proposed exact wording                                                                                                                                                                                                    | Source          | Class  | Public decision                                             |
+| --------- | ---------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------- | ------ | ---------------------------------------------------------- |
+| METHOD-01 | How Hekswerk builds.                                 | I build automations with the help of AI coding agents working under my direction and review. I am responsible for the design, the boundaries, the testing, and whether the result is correct. The client owns the finished system. | H1, L(08-14)    | Public | Yes. Current method and offer commitment, not a client result. |
+| METHOD-02 | AI-in-delivery data boundary.                        | I do not send client passwords, production data, or confidential records to AI tools. I build against synthetic or redacted examples unless we agree otherwise in writing.                                               | H1, H7, L(08-14) | Public | Yes. Offer commitment. Distinct from HEK-16 (inquiry-form hygiene). |
+| PROV-14   | Provenance of the operations automation work.        | I wrote the original proof-of-delivery automation and the public reconstruction sample by hand.                                                                                                                          | P4, S1, L2      | Public | Yes. Applied as a label on the Providence entries. |
+| PROV-15   | Provenance of the research systems.                  | I built WorldWeaver, the Kenshi Agent Environment, and EvoGen by directing AI coding agents under my review. I am the primary author and accountable for their design and boundaries.                                    | W4, K3, E4, L(08-14) | Public | Yes. Applied as a label on WW-10, KEN-07, EVO-09 and the Selected Work entries. |
+
+Source note: `L(08-14)` is Levi's 2026-08-14 confirmation of build modes (WorldWeaver, Kenshi Agent Environment, and EvoGen were AI-directed; the Providence original and its reconstruction sample were hand-written). No private detail is reproduced here.
+
 ## Evidence rules
 
 - **Public** means a visitor can inspect the source without private access.
