@@ -57,6 +57,41 @@ const routes = [
     title: 'Privacy | Hekswerk',
     description: 'Plain-language privacy and data-handling information for the Hekswerk website and contact form.',
   },
+  {
+    route: '/ledger-review',
+    file: 'ledger-review.html',
+    title: 'Hekswerk Ledger Review',
+    description:
+      "A private, read-only integration with QuickBooks Online used for Hekswerk's own accounting reconciliation.",
+  },
+  {
+    route: '/ledger-review/privacy',
+    file: 'ledger-review/privacy.html',
+    title: 'Ledger Review privacy | Hekswerk',
+    description:
+      "Privacy and data-handling terms for Hekswerk's private, read-only integration with QuickBooks Online.",
+  },
+  {
+    route: '/ledger-review/terms',
+    file: 'ledger-review/terms.html',
+    title: 'Ledger Review EULA | Hekswerk',
+    description:
+      "End-user license agreement for Hekswerk's private, owner-operated integration with QuickBooks Online.",
+  },
+  {
+    route: '/ledger-review/connect',
+    file: 'ledger-review/connect.html',
+    title: 'Connect Hekswerk Ledger Review',
+    description:
+      "Owner-only instructions for connecting or reconnecting Hekswerk's private integration with QuickBooks Online.",
+  },
+  {
+    route: '/ledger-review/disconnected',
+    file: 'ledger-review/disconnected.html',
+    title: 'Hekswerk Ledger Review disconnected',
+    description:
+      "Disconnection status and reconnection guidance for Hekswerk's private integration with QuickBooks Online.",
+  },
 ];
 
 const failures = [];
@@ -206,6 +241,50 @@ for (const phrase of [
   'never receives a name, email address',
 ]) {
   expectIncludes(privacyHtml, phrase, `/privacy: ${phrase}`);
+}
+const ledgerOverviewHtml = textFromHtml(htmlForRoute('/ledger-review'));
+const ledgerPrivacyHtml = textFromHtml(htmlForRoute('/ledger-review/privacy'));
+const ledgerTermsHtml = textFromHtml(htmlForRoute('/ledger-review/terms'));
+const ledgerConnectHtml = textFromHtml(htmlForRoute('/ledger-review/connect'));
+const ledgerDisconnectedHtml = textFromHtml(htmlForRoute('/ledger-review/disconnected'));
+for (const [contents, phrases, label] of [
+  [
+    ledgerOverviewHtml,
+    [
+      'Hekswerk Ledger Review',
+      'read company information, accounts, transactions, and accounting reports',
+      'does not create, edit, categorize, approve, or delete',
+    ],
+    '/ledger-review',
+  ],
+  [
+    ledgerPrivacyHtml,
+    [
+      'QuickBooks data the integration can read',
+      'deliberately read-only',
+      'does not sell QuickBooks data',
+      'Retention and disconnection',
+    ],
+    '/ledger-review/privacy',
+  ],
+  [
+    ledgerTermsHtml,
+    ['end-user license agreement', 'License grant', 'Purpose and permitted use', 'Read-only boundary', 'Termination'],
+    '/ledger-review/terms',
+  ],
+  [ledgerConnectHtml, ['Owner connection procedure', 'short-lived security state value'], '/ledger-review/connect'],
+  [
+    ledgerDisconnectedHtml,
+    ['What disconnection means', 'Reconnect if the disconnection was unintentional'],
+    '/ledger-review/disconnected',
+  ],
+]) {
+  for (const phrase of phrases) expectIncludes(contents, phrase, `${label}: ${phrase}`);
+  expectIncludes(
+    contents,
+    'Intuit and QuickBooks are registered trademarks of Intuit Inc. Used with permission.',
+    `${label}: Intuit trademark notice`,
+  );
 }
 const workHtml = htmlForRoute('/work');
 const briefHtml = htmlForRoute('/work/brief');
