@@ -4,6 +4,45 @@ This file is the operating record for production website releases. Hosting and D
 [`CLOUDFLARE_HOSTING.md`](./CLOUDFLARE_HOSTING.md) and [`DNS_CUTOVER.md`](./DNS_CUTOVER.md). The contact Worker is a
 separate deployment governed by [`CONTACT_ENDPOINT.md`](./CONTACT_ENDPOINT.md).
 
+## Hekswerk Ledger Review support pages
+
+Release date: 2026-08-17.
+
+Source commit: `1905da2` (`Add Ledger Review production support pages`).
+
+Cloudflare Worker version: `8b48edf4-1aae-4194-8139-163f03d87af4`.
+
+This release adds the public product, privacy, terms, connect, and disconnected pages required to register the
+owner-operated, read-only Hekswerk Ledger Review integration with Intuit. It does not add public user sign-in or
+change the contact Worker.
+
+### Release evidence
+
+- `npm ci` installed 558 packages from `package-lock.json`; the audit reported no vulnerabilities.
+- `npm run check` passed formatting, lint, 39 unit tests, both Worker dry runs, the Astro production build, the
+  13-route built-site contract, and the desktop and mobile browser suite.
+- The local and production browser runs each completed 124 cases: 121 passed and 3 device-specific cases were
+  intentionally skipped.
+- All five Ledger Review routes returned HTTP 200 with their expected content and canonical URLs:
+  `/ledger-review`, `/ledger-review/privacy`, `/ledger-review/terms`, `/ledger-review/connect`, and
+  `/ledger-review/disconnected`.
+- Both apex HTTP and apex HTTPS redirected to `www` while preserving the tested path and query string.
+  `/contact.html?topic=research` redirected to `/contact?topic=research`, `/index.html` redirected to `/`, and an
+  unknown path returned HTTP 404.
+- The social preview returned HTTP 200 as `image/png`. `robots.txt`, `sitemap-index.xml`, and `sitemap-0.xml` returned
+  HTTP 200, and the sitemap included all five Ledger Review URLs.
+- The live Ledger Review page returned the production HTTPS, content security, frame, referrer, permissions, and
+  content-type protection headers.
+- No contact smoke message was sent because this static release did not change the contact form or contact Worker.
+  Avoiding an unnecessary external message kept the verification proportional to the release.
+
+### Rollback
+
+For an urgent production rollback, restore the previous known-good Cloudflare version using the procedure below and
+verify the custom domain, redirects, headers, and public routes. Then revert source commit `1905da2` with a new commit
+so the next ordinary deployment cannot restore the pages accidentally. Do not rewrite published history or roll back
+the separate `hekswerk-intake` Worker for this static-site release.
+
 ## `contract-work-v1`
 
 Release date: 2026-08-12.
