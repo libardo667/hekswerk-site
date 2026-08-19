@@ -20,7 +20,7 @@ export default function Contact() {
         <section className="section-block contact-section">
           <div className="shell contact-grid">
             <div>
-              <span className="eyebrow">Private inquiry</span>
+              <span className="eyebrow">Initial inquiry</span>
               <h2>Send a short first note</h2>
               <p className="section-copy">
                 Choose a topic and the form will ask only for the context that fits it. I read every inquiry myself and
@@ -33,7 +33,9 @@ export default function Contact() {
                 </p>
               </BoundaryBox>
               <p className="contact-alternative">
-                Prefer email? Write to <a href={`mailto:${contactEmail}`}>{contactEmail}</a>.
+                Prefer email? Write to <a href={`mailto:${contactEmail}`}>{contactEmail}</a>. Messages sent from a
+                Proton Mail account are end-to-end encrypted automatically. From another provider, keep the first note
+                as low-risk as the form.
               </p>
             </div>
             <ContactForm />

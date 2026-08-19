@@ -122,7 +122,7 @@ For the public Hekswerk inquiry system:
 - delete active-mailbox copies that are no longer needed;
 - respond to a rights request using the least additional identity information reasonably needed;
 - record what Hekswerk deleted and identify provider-controlled copies that could not be directly verified or erased;
-- recheck Cloudflare, Resend, and Microsoft processing terms when the implementation or provider changes; and
+- recheck Cloudflare, Resend, and Proton processing terms when the implementation or provider changes; and
 - update `docs/PRIVACY_DATA_FLOW.md`, the public privacy page, tests, and the claims ledger in the same change.
 
 ## Project record template

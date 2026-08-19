@@ -19,7 +19,7 @@ export default function Privacy() {
 
         <section className="section-block">
           <div className="shell narrow-shell privacy-copy">
-            <p className="privacy-reviewed">Implementation and provider documentation last checked August 12, 2026.</p>
+            <p className="privacy-reviewed">Implementation and provider documentation last checked August 18, 2026.</p>
 
             <section>
               <h2>Who is responsible</h2>
@@ -132,14 +132,23 @@ export default function Privacy() {
                 accepted form fields to Resend as a plain-text email. Resend&apos;s dashboard exposes the sent message
                 and API request log, and its current documentation says it retains email data for 30 days. Its public
                 documentation does not state a separate retention period for the request log. The destination is my
-                Hekswerk mailbox hosted by Microsoft 365, where the message remains subject to that mailbox&apos;s
-                deletion, recovery, and retention settings. There is no additional Hekswerk-owned contact database.
+                Hekswerk mailbox hosted by Proton Mail. Proton says messages arriving from an external service are
+                stored with zero-access encryption after delivery. The form&apos;s Resend-to-Proton delivery is not
+                end-to-end encrypted. The message remains subject to my mailbox settings and Proton&apos;s service,
+                recovery, and legal obligations. There is no additional Hekswerk-owned contact database.
               </p>
-              <p>
-                <Link to="https://resend.com/docs/dashboard/webhooks/how-to-store-webhooks-data">
-                  Resend&apos;s current email-retention statement
-                </Link>
-              </p>
+              <ul className="plain-list privacy-sources">
+                <li>
+                  <Link to="https://resend.com/docs/dashboard/webhooks/how-to-store-webhooks-data">
+                    Resend&apos;s current email-retention statement
+                  </Link>
+                </li>
+                <li>
+                  <Link to="https://proton.me/support/what-is-encrypted-within-protonmail">
+                    Proton Mail encryption boundaries
+                  </Link>
+                </li>
+              </ul>
             </section>
 
             <section>
@@ -161,11 +170,11 @@ export default function Privacy() {
             <section>
               <h2>International processing</h2>
               <p>
-                Cloudflare, Resend, and Microsoft provide services internationally and may process information outside
-                the European Economic Area, including in the United States. Their published data-protection terms use
-                contractual transfer safeguards, including the European Commission&apos;s standard contractual clauses,
-                where required. Exact routing and storage can change with provider configuration, so the linked provider
-                terms are the current source for those safeguards.
+                Cloudflare and Resend provide services internationally and may process information outside the European
+                Economic Area, including in the United States. Proton AG is based in Switzerland and says Proton Mail
+                data is stored on servers in Switzerland, Germany, or Norway. Their published data-protection terms
+                describe the safeguards used for international transfers. Exact routing and storage can change with
+                provider configuration, so the linked provider terms are the current source.
               </p>
               <ul className="plain-list privacy-sources">
                 <li>
@@ -177,9 +186,10 @@ export default function Privacy() {
                   <Link to="https://resend.com/legal/dpa">Resend Data Processing Addendum</Link>
                 </li>
                 <li>
-                  <Link to="https://www.microsoft.com/licensing/docs/view/Microsoft-Products-and-Services-Data-Protection-Addendum-DPA">
-                    Microsoft Products and Services Data Protection Addendum
-                  </Link>
+                  <Link to="https://proton.me/mail/privacy-policy">Proton Mail Privacy Policy</Link>
+                </li>
+                <li>
+                  <Link to="https://proton.me/legal/dpa">Proton Data Processing Agreement</Link>
                 </li>
               </ul>
             </section>
@@ -240,8 +250,10 @@ export default function Privacy() {
               <h2>Questions or alternatives</h2>
               <p>
                 If you have a question about this note or prefer not to use the form, email{' '}
-                <a href={`mailto:${contactEmail}`}>{contactEmail}</a>. Ordinary email uses the same Microsoft 365
-                mailbox but does not use the Hekswerk contact Worker or its Resend delivery step.
+                <a href={`mailto:${contactEmail}`}>{contactEmail}</a>. Direct email goes to the same Proton Mail mailbox
+                without using the Hekswerk contact Worker or Resend. Mail sent from another Proton Mail account is
+                automatically end-to-end encrypted. Ordinary email from another provider is not end-to-end encrypted
+                unless compatible PGP is used, so keep the first message low-risk.
               </p>
             </section>
           </div>

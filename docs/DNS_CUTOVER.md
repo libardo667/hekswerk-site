@@ -5,6 +5,8 @@ one non-sensitive intake delivery were verified before GitHub Pages retirement.
 
 Observed: 2026-08-12.
 
+Mail routing rechecked after the Proton migration and Microsoft-record cleanup: 2026-08-19.
+
 The complete GoDaddy BIND export was read from its private local location on 2026-08-12. It contained one SOA record,
 two GoDaddy NS records, and 18 user-zone records. The source file is not copied into this repository. Its SHA-256 is
 `a54dde59659a028004df4e3109a55f7fd1c44f956910056b30570787008a4bc0`, which identifies the reviewed snapshot without
@@ -16,12 +18,12 @@ controlled recovery rather than from screenshots or chat.
 
 ## Current authority and website state
 
-| Name | Type | Production observation |
-| --- | --- | --- |
-| `hekswerk.com` | NS | `duke.ns.cloudflare.com`, `kiki.ns.cloudflare.com` |
-| `hekswerk.com` | SOA | Cloudflare authority |
-| `hekswerk.com` | A and AAAA | Cloudflare proxy addresses; apex redirect handled at Cloudflare |
-| `www.hekswerk.com` | A and AAAA | Cloudflare Worker custom domain |
+| Name               | Type       | Production observation                                          |
+| ------------------ | ---------- | --------------------------------------------------------------- |
+| `hekswerk.com`     | NS         | `duke.ns.cloudflare.com`, `kiki.ns.cloudflare.com`              |
+| `hekswerk.com`     | SOA        | Cloudflare authority                                            |
+| `hekswerk.com`     | A and AAAA | Cloudflare proxy addresses; apex redirect handled at Cloudflare |
+| `www.hekswerk.com` | A and AAAA | Cloudflare Worker custom domain                                 |
 
 The parent `.com` delegation and public resolvers at Cloudflare, Google, and Quad9 all observed the Cloudflare
 nameservers after cutover. Cloudflare reported the zone active at `2026-08-12T16:19:24Z`.
@@ -62,26 +64,26 @@ returned the Cloudflare delegation. The `.com` RDAP service continued to identif
 Levi reported that GoDaddy DNSSEC was off before cutover and did not enable it. A parent-zone DS query returned no
 record. Domain and subdomain forwarding were also absent. DNSSEC can be considered later as its own controlled change.
 
-## Email and verification records
+## Email and verification records at website cutover
 
 The following 14 non-website records were copied from the private export, compared against the original GoDaddy
 authority, and then compared directly against both assigned Cloudflare nameservers before activation.
 
-| Name | Type | Count | Value, target, or fingerprint | Purpose | Production handling |
-| --- | --- | ---: | --- | --- | --- |
-| `@` | MX | 1 | priority 0, `hekswerk-com.mail.protection.outlook.com` | Microsoft 365 inbound mail | DNS only |
-| `@` | TXT | 1 | `v=spf1 include:spf.protection.outlook.com -all` | Microsoft 365 SPF | DNS only |
-| `@` | TXT | 1 | SHA-256 `0116f840...0502d` | Google site verification | DNS only |
-| `_dmarc` | TXT | 1 | `v=DMARC1; p=none; adkim=r; aspf=r; rua=mailto:dmarc_rua@onsecureserver.net;` | DMARC | DNS only |
-| `autodiscover` | CNAME | 1 | `autodiscover.outlook.com` | Microsoft 365 discovery | DNS only |
-| `selector1._domainkey` | CNAME | 1 | Microsoft 365 selector 1 target | Microsoft 365 DKIM | DNS only |
-| `selector2._domainkey` | CNAME | 1 | Microsoft 365 selector 2 target | Microsoft 365 DKIM | DNS only |
-| `pay` | CNAME | 1 | `paylinks.commerce.godaddy.com` | GoDaddy payment link | DNS only |
-| `_domainconnect` | CNAME | 1 | `_domainconnect.gd.domaincontrol.com` | GoDaddy Domain Connect | DNS only |
-| `send.mail` | MX | 1 | priority 10, `feedback-smtp.us-east-1.amazonses.com` | Resend return path | DNS only |
-| `send.mail` | TXT | 1 | `v=spf1 include:dc-fd741b8612._spfm.send.mail.hekswerk.com ~all` | Resend SPF indirection | DNS only |
-| `dc-fd741b8612._spfm.send.mail` | TXT | 1 | `v=spf1 include:amazonses.com ~all` | Resend SPF source | DNS only |
-| `resend._domainkey.mail` | TXT | 1 | SHA-256 `3edce2fd...4d27e` | Resend DKIM public key | DNS only |
+| Name                            | Type  | Count | Value, target, or fingerprint                                                 | Purpose                    | Production handling |
+| ------------------------------- | ----- | ----: | ----------------------------------------------------------------------------- | -------------------------- | ------------------- |
+| `@`                             | MX    |     1 | priority 0, `hekswerk-com.mail.protection.outlook.com`                        | Microsoft 365 inbound mail | DNS only            |
+| `@`                             | TXT   |     1 | `v=spf1 include:spf.protection.outlook.com -all`                              | Microsoft 365 SPF          | DNS only            |
+| `@`                             | TXT   |     1 | SHA-256 `0116f840...0502d`                                                    | Google site verification   | DNS only            |
+| `_dmarc`                        | TXT   |     1 | `v=DMARC1; p=none; adkim=r; aspf=r; rua=mailto:dmarc_rua@onsecureserver.net;` | DMARC                      | DNS only            |
+| `autodiscover`                  | CNAME |     1 | `autodiscover.outlook.com`                                                    | Microsoft 365 discovery    | DNS only            |
+| `selector1._domainkey`          | CNAME |     1 | Microsoft 365 selector 1 target                                               | Microsoft 365 DKIM         | DNS only            |
+| `selector2._domainkey`          | CNAME |     1 | Microsoft 365 selector 2 target                                               | Microsoft 365 DKIM         | DNS only            |
+| `pay`                           | CNAME |     1 | `paylinks.commerce.godaddy.com`                                               | GoDaddy payment link       | DNS only            |
+| `_domainconnect`                | CNAME |     1 | `_domainconnect.gd.domaincontrol.com`                                         | GoDaddy Domain Connect     | DNS only            |
+| `send.mail`                     | MX    |     1 | priority 10, `feedback-smtp.us-east-1.amazonses.com`                          | Resend return path         | DNS only            |
+| `send.mail`                     | TXT   |     1 | `v=spf1 include:dc-fd741b8612._spfm.send.mail.hekswerk.com ~all`              | Resend SPF indirection     | DNS only            |
+| `dc-fd741b8612._spfm.send.mail` | TXT   |     1 | `v=spf1 include:amazonses.com ~all`                                           | Resend SPF source          | DNS only            |
+| `resend._domainkey.mail`        | TXT   |     1 | SHA-256 `3edce2fd...4d27e`                                                    | Resend DKIM public key     | DNS only            |
 
 The source zone also contained four apex GitHub Pages A records and one `www` GitHub Pages CNAME. Cloudflare initially
 received exact copies for safe pre-cutover comparison. The apex records were proxied to activate the redirect rule. The
@@ -96,11 +98,34 @@ cutover. Receipt confirmation is operator evidence and is not stored in this rep
 The export contains no record at bare `mail.hekswerk.com`, but it does contain the three Resend records beneath it. It
 contains no `_mta-sts`, `_smtp._tls`, CAA, SRV, wildcard, or subdomain NS record.
 
+## Current mail routing after the Proton migration
+
+Public DNS was queried independently on 2026-08-18 after Levi confirmed that Proton's MX, SPF, DKIM, and DMARC checks
+were green and that a non-sensitive message and reply were delivered. Opaque verification values and provider-generated
+DKIM targets are deliberately not reproduced here.
+
+| Name                            | Type       | Count | Current role                                            | Production handling |
+| ------------------------------- | ---------- | ----: | ------------------------------------------------------- | ------------------- |
+| `@`                             | MX         |     2 | Proton Mail inbound mail, priorities 10 and 20          | DNS only            |
+| `@`                             | TXT        |     1 | Proton Mail SPF                                         | DNS only            |
+| `@`                             | TXT        |     1 | Proton domain verification                              | DNS only            |
+| `protonmail._domainkey`         | CNAME      |     1 | Proton Mail DKIM selector 1                             | DNS only            |
+| `protonmail2._domainkey`        | CNAME      |     1 | Proton Mail DKIM selector 2                             | DNS only            |
+| `protonmail3._domainkey`        | CNAME      |     1 | Proton Mail DKIM selector 3                             | DNS only            |
+| `_dmarc`                        | TXT        |     1 | DMARC                                                   | DNS only            |
+| `send.mail` and related records | MX and TXT |     3 | Resend return path, SPF, and DKIM for website inquiries | DNS only            |
+
+The Proton MX records now determine inbound delivery. The previous Microsoft MX and apex SPF records are absent. Levi
+removed the remaining `autodiscover` and two Microsoft DKIM selector CNAMEs on 2026-08-19. Both authoritative
+Cloudflare nameservers, Cloudflare's public resolver, and Google's public resolver returned no CNAME answer for all
+three names afterward. The Proton MX, SPF, and three DKIM records, DMARC, and the Resend return-path records remained
+present at the authoritative nameservers.
+
 ## Reproduction rules
 
 - Keep mail discovery, mail authentication, MX, and verification records DNS only.
 - Do not merge TXT records, alter SPF mechanisms, invent TTLs, or normalize provider-generated DKIM targets.
-- Keep one effective SPF record at the apex unless Microsoft explicitly instructs otherwise.
+- Keep one effective SPF record at the apex and copy its mechanisms exactly from the active mail provider.
 - Preserve opaque verification and DKIM values from the private export or provider dashboard. The fingerprints here
   are verification aids, not recovery values.
 - Do not treat successful website routing as evidence that email works. Verify the mail records and a non-sensitive

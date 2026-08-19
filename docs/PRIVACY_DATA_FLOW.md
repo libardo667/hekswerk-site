@@ -2,7 +2,7 @@
 
 Status: implementation authority for public privacy copy.
 
-Last checked: 2026-08-12.
+Last checked: 2026-08-18.
 
 This document covers the public website and initial inquiry path. Later client work requires a separate scope using
 `docs/PRIVACY_AND_AI_SCOPING.md`.
@@ -75,7 +75,7 @@ not exposed through a bespoke dashboard.
 browser form
   -> Hekswerk Cloudflare Worker
   -> Resend email API
-  -> Hekswerk Microsoft 365 mailbox
+  -> Hekswerk Proton Mail mailbox
 ```
 
 Every inquiry sends schema and topic identifiers, name, email, privacy acknowledgement, the hidden honeypot value, and
@@ -112,14 +112,18 @@ display sent-message contents, and its API request log can include the full requ
 it retains email data for 30 days. Its public documentation does not identify a separate request-log retention period.
 Hekswerk has no Resend audience, contact list, webhook store, or marketing automation for this form.
 
-The delivered copy goes to the Hekswerk mailbox hosted by Microsoft 365. That mailbox is the working copy used to read
-and reply. There is no additional Hekswerk-owned contact database.
+The delivered copy goes to the Hekswerk mailbox hosted by Proton Mail. Proton says a message arriving from an external
+mail service is stored with zero-access encryption after delivery, but is not end-to-end encrypted unless the sender
+used compatible PGP. The Resend-to-Proton delivery used by the form is therefore not end-to-end encrypted. The Proton
+mailbox is the working copy used to read and reply. There is no additional Hekswerk-owned contact database.
 
 Provider evidence:
 
 - Resend sent messages: <https://resend.com/docs/dashboard/emails/introduction>
 - Resend request logs: <https://resend.com/docs/dashboard/logs/introduction>
 - Resend 30-day email-data statement: <https://resend.com/docs/dashboard/webhooks/how-to-store-webhooks-data>
+- Proton Mail encryption boundaries: <https://proton.me/support/what-is-encrypted-within-protonmail>
+- Proton Mail privacy policy: <https://proton.me/mail/privacy-policy>
 
 ## Purposes and legal bases
 
@@ -138,15 +142,16 @@ retention, and contract decisions.
 
 ## International processing and providers
 
-Cloudflare, Resend, and Microsoft provide services internationally and may process information outside the EEA,
-including in the United States. Their published data-protection terms use contractual transfer safeguards, including
-European Commission standard contractual clauses where required. Exact routing and storage depend on provider and
-account configuration and are not asserted here.
+Cloudflare and Resend provide services internationally and may process information outside the EEA, including in the
+United States. Proton AG is based in Switzerland and says Proton Mail data is stored on servers in Switzerland,
+Germany, or Norway. The providers' published data-protection terms describe the safeguards used for international
+transfers. Exact routing and storage depend on provider and account configuration and are not asserted beyond those
+current provider statements.
 
 - Cloudflare Data Processing Addendum: <https://www.cloudflare.com/cloudflare-customer-dpa/>
 - Resend Data Processing Addendum: <https://resend.com/legal/dpa>
-- Microsoft Products and Services Data Protection Addendum:
-  <https://www.microsoft.com/licensing/docs/view/Microsoft-Products-and-Services-Data-Protection-Addendum-DPA>
+- Proton Mail Privacy Policy: <https://proton.me/mail/privacy-policy>
+- Proton Data Processing Agreement: <https://proton.me/legal/dpa>
 
 ## Retention and rights operations
 
@@ -178,7 +183,8 @@ is assessed separately under `docs/PRIVACY_AND_AI_SCOPING.md`.
 - Cloudflare's platform retention outside the disabled Workers Logs surface, documented Network Error Logging path,
   and aggregate dashboard was not established.
 - Resend's separate API request-log retention period was not established.
-- The Microsoft 365 mailbox's backup and administrative retention timing was not established.
+- Proton says encrypted offline backups may be kept for up to 30 days. Removal timing for a particular deleted message
+  cannot be directly observed by Hekswerk.
 - Provider backup deletion timing, exact data locations, and legal-retention exceptions were not established.
 - An HTTP success from the Worker proves provider acceptance, not guaranteed inbox delivery.
 - No general security, confidentiality, compliance, AI Act, or privacy certification follows from this implementation.

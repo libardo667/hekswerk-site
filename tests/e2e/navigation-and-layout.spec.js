@@ -219,7 +219,8 @@ test('privacy page exposes the actual collection, processors, deletion, and rela
   await expect(page.getByText('Cloudflare Worker', {exact: false}).last()).toBeVisible();
   await expect(page.getByText('Network Error Logging', {exact: false}).first()).toBeVisible();
   await expect(page.getByText('Resend', {exact: false}).first()).toBeVisible();
-  await expect(page.getByText('Microsoft 365', {exact: false}).first()).toBeVisible();
+  await expect(page.getByText('Proton Mail', {exact: false}).first()).toBeVisible();
+  await expect(page.getByText('not end-to-end encrypted', {exact: false}).first()).toBeVisible();
 });
 
 test('work page states the AI scoping and legal-advice boundaries', async ({page}) => {

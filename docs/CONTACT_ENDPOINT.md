@@ -11,7 +11,7 @@ The public `/contact` page posts JSON over HTTPS to:
 `https://hekswerk-intake.levi-020.workers.dev/`
 
 Cloudflare Workers runs the endpoint. A Secret binding named `resend_api_key` authorizes a request to Resend, which
-delivers a plain-text email to the public Hekswerk contact address hosted by Microsoft 365. The form does not create an
+delivers a plain-text email to the public Hekswerk contact address hosted by Proton Mail. The form does not create an
 account, schedule a meeting, subscribe anyone to a list, or write to a site-owned database. The complete browser and
 provider flow is audited in `docs/PRIVACY_DATA_FLOW.md`.
 
@@ -48,41 +48,41 @@ upgrade and requires targeted testing against Cloudflare's compatibility changes
 
 The browser sends `schema_version: 2` and one of four `form_type` values:
 
-| `form_type` | Public topic | Required topic-specific fields |
-| --- | --- | --- |
+| `form_type`  | Public topic                 | Required topic-specific fields                |
+| ------------ | ---------------------------- | --------------------------------------------- |
 | `automation` | Operations Automation Sprint | `repeating_process`, `sensitive_or_regulated` |
-| `research` | Research collaboration | `message` |
-| `general` | Something else | `message` |
-| `relocation` | Relocation planning | `hardest_part` |
+| `research`   | Research collaboration       | `message`                                     |
+| `general`    | Something else               | `message`                                     |
+| `relocation` | Relocation planning          | `hardest_part`                                |
 
 Every version 2 payload also includes:
 
-| Field | Type | Requirement and limit |
-| --- | --- | --- |
-| `schema_version` | number | Must be `2` |
-| `form_type` | string | One of the four values above |
-| `name` | string | Required, at most 120 characters |
-| `email` | string | Required, syntactically validated, at most 200 characters |
-| `topic` | string | Public display label, at most 120 characters |
-| `privacy_acknowledged` | boolean | Must be exactly `true` |
-| `website` | string | Honeypot, at most 200 characters |
+| Field                  | Type    | Requirement and limit                                     |
+| ---------------------- | ------- | --------------------------------------------------------- |
+| `schema_version`       | number  | Must be `2`                                               |
+| `form_type`            | string  | One of the four values above                              |
+| `name`                 | string  | Required, at most 120 characters                          |
+| `email`                | string  | Required, syntactically validated, at most 200 characters |
+| `topic`                | string  | Public display label, at most 120 characters              |
+| `privacy_acknowledged` | boolean | Must be exactly `true`                                    |
+| `website`              | string  | Honeypot, at most 200 characters                          |
 
 ### Automation fields
 
-| Field | Requirement and limit |
-| --- | --- |
-| `organization` | Optional, at most 200 characters |
-| `repeating_process` | Required, at most 3,000 characters |
-| `systems_involved` | Optional, at most 1,000 characters |
-| `current_problem` | Optional, at most 3,000 characters |
-| `approximate_frequency` | Optional, at most 120 characters |
-| `desired_timing` | Optional, at most 120 characters |
+| Field                    | Requirement and limit                         |
+| ------------------------ | --------------------------------------------- |
+| `organization`           | Optional, at most 200 characters              |
+| `repeating_process`      | Required, at most 3,000 characters            |
+| `systems_involved`       | Optional, at most 1,000 characters            |
+| `current_problem`        | Optional, at most 3,000 characters            |
+| `approximate_frequency`  | Optional, at most 120 characters              |
+| `desired_timing`         | Optional, at most 120 characters              |
 | `sensitive_or_regulated` | Required and exactly `No`, `Yes`, or `Unsure` |
 
 ### Relocation fields
 
-| Field | Requirement and limit |
-| --- | --- |
+| Field          | Requirement and limit              |
+| -------------- | ---------------------------------- |
 | `hardest_part` | Required, at most 3,000 characters |
 
 Research and general submissions have one required `message` of at most 5,000 characters.
@@ -115,16 +115,16 @@ were retained temporarily during the previous staged deployment.
 
 Expected JSON responses:
 
-| Situation | HTTP status | Body |
-| --- | --- | --- |
-| Accepted or honeypot submission | 200 | `{"ok":true}` |
-| Successful preflight | 204 | Empty |
-| Invalid origin | 403 | `{"error":"Origin not allowed"}` |
-| Wrong content type | 415 | `{"error":"Content type must be application/json"}` |
-| Invalid JSON or payload | 400 | A bounded public error message |
-| Oversized body | 413 | `{"error":"Submission is too long"}` |
-| Missing Secret binding | 500 | `{"error":"Email delivery is not configured"}` |
-| Resend failure | 502 | `{"error":"Email delivery failed"}` |
+| Situation                       | HTTP status | Body                                                |
+| ------------------------------- | ----------- | --------------------------------------------------- |
+| Accepted or honeypot submission | 200         | `{"ok":true}`                                       |
+| Successful preflight            | 204         | Empty                                               |
+| Invalid origin                  | 403         | `{"error":"Origin not allowed"}`                    |
+| Wrong content type              | 415         | `{"error":"Content type must be application/json"}` |
+| Invalid JSON or payload         | 400         | A bounded public error message                      |
+| Oversized body                  | 413         | `{"error":"Submission is too long"}`                |
+| Missing Secret binding          | 500         | `{"error":"Email delivery is not configured"}`      |
+| Resend failure                  | 502         | `{"error":"Email delivery failed"}`                 |
 
 The public form announces success and failure in an ARIA live region. Failure copy gives the public Hekswerk email as a
 direct fallback.
@@ -137,9 +137,11 @@ simple spam; they are not a security, abuse-prevention, confidentiality, or comp
 The Worker has no persistence binding and does not write inquiry contents to logs. Cloudflare still processes the
 request and its platform metadata. On successful delivery, Resend receives the full plain-text message and request body;
 its current documentation states that email data is retained for 30 days. Its public documentation does not identify a
-separate request-log retention period. The delivered message remains in the Hekswerk Microsoft 365 mailbox. At least
-once each calendar year, unconverted inquiries must be reviewed and active-mailbox copies that are no longer needed
-deleted. No exact provider backup deletion schedule is asserted.
+separate request-log retention period. The delivered message remains in the Hekswerk Proton Mail mailbox. Proton says
+external messages receive zero-access encryption after delivery, but this Resend-to-Proton path is not end-to-end
+encrypted. At least once each calendar year, unconverted inquiries must be reviewed and active-mailbox copies that are
+no longer needed deleted. Proton says encrypted offline backups may be retained for up to 30 days; removal timing for a
+particular deleted message is not directly observable.
 
 Deletion requests go to `levi@hekswerk.com`. The handling checklist, provider evidence, and known unknowns are recorded
 in `docs/PRIVACY_DATA_FLOW.md`.
@@ -167,8 +169,8 @@ in `docs/PRIVACY_DATA_FLOW.md`.
 - **Provider-documented:** Resend displays sent message contents and API request bodies and currently states that email
   data is retained for 30 days. Cloudflare documents the metadata included in automatic invocation logs, which this
   Worker's configuration disables.
-- **Not asserted:** Cloudflare internal retention outside configured Workers Logs, Microsoft 365 mailbox or backup
-  deletion timing, guaranteed message delivery, or any compliance property.
+- **Not asserted:** Cloudflare internal retention outside configured Workers Logs, exact deletion timing for a
+  particular message in Proton Mail or its backups, guaranteed message delivery, or any compliance property.
 
 ## Deployment procedure
 

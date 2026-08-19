@@ -4,15 +4,17 @@ Status: production implementation authority.
 
 Last checked: 2026-08-12.
 
+Email-provider note rechecked: 2026-08-18.
+
 ## Scope and ownership
 
 GitHub remains the source repository. Astro produces the static `build/` artifact. Cloudflare Workers Static Assets
 serves that artifact at `https://www.hekswerk.com`. The `hekswerk-intake` Worker remains a separate service with its own
 source, configuration, and Resend Secret.
 
-The domain remains registered at GoDaddy. Cloudflare is the authoritative DNS provider and website host. Microsoft 365
-and Resend retain their existing email roles. Moving registration or changing the email provider is outside this
-migration.
+The domain remains registered at GoDaddy. Cloudflare is the authoritative DNS provider and website host. Proton Mail
+hosts the Hekswerk mailbox, and Resend delivers website inquiries to it. The mail-provider migration occurred
+separately from the website-hosting migration.
 
 ## Repository layout
 
