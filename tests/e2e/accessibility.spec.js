@@ -39,6 +39,22 @@ test('retired WorldWeaver documentation route returns 404', async ({request}) =>
   }
 });
 
+test('retired Ledger Review routes return 404', async ({request}) => {
+  for (const route of [
+    '/ledger-review',
+    '/ledger-review/privacy',
+    '/ledger-review/terms',
+    '/ledger-review/connect',
+    '/ledger-review/disconnected',
+  ]) {
+    const response = await request.get(`${route}?retired-route-check=1`, {
+      headers: {'cache-control': 'no-cache'},
+    });
+    expect(response.status()).toBe(404);
+    expect(await response.text()).toContain('There is nothing at this address.');
+  }
+});
+
 test('custom 404 is styled, noindex, and contains no third-party analytics', async ({page}) => {
   const response = await page.goto('/not-a-real-hekswerk-route?custom-404-check=1');
   expect(response.status()).toBe(404);

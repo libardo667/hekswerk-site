@@ -57,41 +57,14 @@ const routes = [
     title: 'Privacy | Hekswerk',
     description: 'Plain-language privacy and data-handling information for the Hekswerk website and contact form.',
   },
-  {
-    route: '/ledger-review',
-    file: 'ledger-review.html',
-    title: 'Hekswerk Ledger Review',
-    description:
-      "A private, read-only integration with QuickBooks Online used for Hekswerk's own accounting reconciliation.",
-  },
-  {
-    route: '/ledger-review/privacy',
-    file: 'ledger-review/privacy.html',
-    title: 'Ledger Review privacy | Hekswerk',
-    description:
-      "Privacy and data-handling terms for Hekswerk's private, read-only integration with QuickBooks Online.",
-  },
-  {
-    route: '/ledger-review/terms',
-    file: 'ledger-review/terms.html',
-    title: 'Ledger Review EULA | Hekswerk',
-    description:
-      "End-user license agreement for Hekswerk's private, owner-operated integration with QuickBooks Online.",
-  },
-  {
-    route: '/ledger-review/connect',
-    file: 'ledger-review/connect.html',
-    title: 'Connect Hekswerk Ledger Review',
-    description:
-      "Owner-only instructions for connecting or reconnecting Hekswerk's private integration with QuickBooks Online.",
-  },
-  {
-    route: '/ledger-review/disconnected',
-    file: 'ledger-review/disconnected.html',
-    title: 'Hekswerk Ledger Review disconnected',
-    description:
-      "Disconnection status and reconnection guidance for Hekswerk's private integration with QuickBooks Online.",
-  },
+];
+
+const retiredRoutes = [
+  '/ledger-review',
+  '/ledger-review/privacy',
+  '/ledger-review/terms',
+  '/ledger-review/connect',
+  '/ledger-review/disconnected',
 ];
 
 const failures = [];
@@ -108,6 +81,19 @@ const textFromHtml = (html) =>
 
 function expectIncludes(html, value, label) {
   if (!html.includes(value)) fail(label);
+}
+
+// Prose only: script and style CONTENTS are dropped before tags are stripped. textFromHtml
+// removes the tags but keeps whatever sat between them, so bundled runtime code (Astro's
+// handleHydrationError, form submit handlers) would otherwise trip word-level checks.
+const proseFromHtml = (html) =>
+  textFromHtml(
+    html.replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi, ' ').replace(/<style\b[^>]*>[\s\S]*?<\/style>/gi, ' '),
+  );
+
+function expectExcludes(prose, pattern, label) {
+  const match = prose.match(pattern);
+  if (match) fail(`${label}: found "${match[0].trim()}"`);
 }
 
 function htmlForRoute(route) {
@@ -243,50 +229,6 @@ for (const phrase of [
 ]) {
   expectIncludes(privacyHtml, phrase, `/privacy: ${phrase}`);
 }
-const ledgerOverviewHtml = textFromHtml(htmlForRoute('/ledger-review'));
-const ledgerPrivacyHtml = textFromHtml(htmlForRoute('/ledger-review/privacy'));
-const ledgerTermsHtml = textFromHtml(htmlForRoute('/ledger-review/terms'));
-const ledgerConnectHtml = textFromHtml(htmlForRoute('/ledger-review/connect'));
-const ledgerDisconnectedHtml = textFromHtml(htmlForRoute('/ledger-review/disconnected'));
-for (const [contents, phrases, label] of [
-  [
-    ledgerOverviewHtml,
-    [
-      'Hekswerk Ledger Review',
-      'read company information, accounts, transactions, and accounting reports',
-      'does not create, edit, categorize, approve, or delete',
-    ],
-    '/ledger-review',
-  ],
-  [
-    ledgerPrivacyHtml,
-    [
-      'QuickBooks data the integration can read',
-      'deliberately read-only',
-      'does not sell QuickBooks data',
-      'Retention and disconnection',
-    ],
-    '/ledger-review/privacy',
-  ],
-  [
-    ledgerTermsHtml,
-    ['end-user license agreement', 'License grant', 'Purpose and permitted use', 'Read-only boundary', 'Termination'],
-    '/ledger-review/terms',
-  ],
-  [ledgerConnectHtml, ['Owner connection procedure', 'short-lived security state value'], '/ledger-review/connect'],
-  [
-    ledgerDisconnectedHtml,
-    ['What disconnection means', 'Reconnect if the disconnection was unintentional'],
-    '/ledger-review/disconnected',
-  ],
-]) {
-  for (const phrase of phrases) expectIncludes(contents, phrase, `${label}: ${phrase}`);
-  expectIncludes(
-    contents,
-    'Intuit and QuickBooks are registered trademarks of Intuit Inc. Used with permission.',
-    `${label}: Intuit trademark notice`,
-  );
-}
 const workHtml = htmlForRoute('/work');
 const briefHtml = htmlForRoute('/work/brief');
 const homeHtml = htmlForRoute('/');
@@ -304,16 +246,16 @@ for (const phrase of [
 const homeText = textFromHtml(homeHtml);
 const workText = textFromHtml(workHtml);
 for (const phrase of [
-  'Most Operations Automation Sprints start at $3,500.',
+  'Most Operations Automation Sprints start at $6,000.',
   'Paid Workflow Scoping is $750 when the workflow needs more definition',
   'the scoping fee is credited toward an accepted build',
 ]) {
   expectIncludes(homeText, phrase, `/: pricing: ${phrase}`);
 }
 for (const phrase of [
-  '$3,500',
+  '$6,000',
   '$750 paid Workflow Scoping',
-  '$6,500+ custom integration or system work',
+  '$12,000+ custom integration or system work',
   'Workflow Scoping does not include implementation.',
   'the full $750 scoping fee is credited toward that build',
   'the client does not pay $750 on top of the accepted build price',
@@ -366,6 +308,121 @@ for (const {route} of routes.filter(({route}) => !['/', '/work', '/work/brief'].
   if (htmlForRoute(route).includes('$750')) fail(`${route}: $750 appears outside paid Workflow Scoping`);
 }
 
+// --------------------------------------------------------------------------------------
+// Forbidden public claims
+//
+// Authority: docs/PUBLIC_CLAIMS_LEDGER.md, and section 9 of the consolidated business plan
+// in the hekswerk-grimoire repo. Prose in this repo is the thing shipped; a rule written
+// only in a document is a rule nobody enforces at 2am.
+//
+// Matched against PROSE, and phrase-level rather than word-level. Bare words produce false
+// positives on correct copy: "guaranteed" appears legitimately in the not-a-fit list
+// ("Work that requires ... a guaranteed business result"), and a check that cries wolf is
+// a check somebody disables.
+// --------------------------------------------------------------------------------------
+
+const forbiddenEverywhere = [
+  // Naming a model or provider. METHOD-01 in the claims ledger deliberately says "AI coding
+  // agents" without naming one; changing that needs a ledger decision, not a copy edit.
+  [/\b(?:gemini|openrouter|ollama|chatgpt|gpt-[0-9]|deepseek)\b/i, 'names an AI model or provider'],
+  // Grimoire access is installation-wide. Per-book privacy does not exist and is not promised.
+  [/\bper-book\s+(?:privacy|access|isolation)\b/i, 'claims Grimoire per-book privacy'],
+  // Outcome guarantees. Negations such as "cannot guarantee" and "a guaranteed business
+  // result" (in the not-a-fit list) must keep passing.
+  [/\b(?:we|i)\s+guarantee\b/i, 'guarantees an outcome'],
+  [/\bguaranteed\s+(?:results?|outcomes?|approval|savings|delivery)\b/i, 'guarantees an outcome'],
+  // Compliance certification. "Hekswerk does not certify EU AI Act or privacy compliance"
+  // must keep passing.
+  [/\b(?:we|i|hekswerk)\s+certif(?:y|ies)\b/i, 'claims to certify compliance'],
+  // Invented commercial framing, per docs/CONTRACT_WORK_RELAUNCH.md.
+  [/\b(?:limited\s+slots?|only\s+\d+\s+slots?|act\s+now|book\s+today)\b/i, 'uses urgency or scarcity language'],
+];
+
+// Direct action on a client's behalf. LEGITIMATE on /work: the sprint really does build and
+// deploy into client systems. FORBIDDEN on the household relocation service, where Hekswerk
+// plans, researches, screens, explains, introduces with consent, routes, and coordinates —
+// and does not act as the client. A proposed "DAFT Programme" breached this on 2026-09-09
+// by promising "KVK/registration sequencing"; this check exists so the next draft cannot.
+// These are matched SENTENCE BY SENTENCE, and a sentence that negates the phrase passes.
+// The correct relocation copy says "Hekswerk does not submit forms on your behalf" — the
+// boundary being stated, which is exactly what we want on the page. A rule that fired on
+// its own boundary statement would be worse than no rule.
+const forbiddenDirectAction = [
+  [/\b(?:i|we)\s+(?:will\s+)?(?:arrange|register|file|submit|open)\s+your\b/i, 'implies direct action for the client'],
+  [/\b(?:registration|appointment|account)\s+sequencing\b/i, 'implies direct action for the client'],
+  [/\bon\s+your\s+behalf\b/i, 'implies acting on the client behalf'],
+  [
+    /\b(?:set\s+up|open)\s+(?:your|the)\s+(?:bank\s+account|kvk|business\s+registration)\b/i,
+    'implies direct action for the client',
+  ],
+];
+
+const negation = /\b(?:does not|do not|doesn't|don't|cannot|can't|never|without|not)\b/i;
+
+// The unit matters. Rendered prose splits cleanly into sentences. A JSX source file does
+// not: it has almost no ". " sequences, so the whole file collapses into a single "sentence"
+// which will almost always contain some negation somewhere, and the check silently passes
+// everything. Source is therefore split by line. This was a live bug on 2026-09-09 - the
+// draft scan reported clean while forbidden claims sat in the file.
+function expectExcludesUnlessNegated(text, pattern, label, unit = 'prose') {
+  const chunks = unit === 'source' ? text.split(/\r?\n/) : text.split(/(?<=[.!?])\s+/);
+  for (const chunk of chunks) {
+    const match = chunk.match(pattern);
+    if (match && !negation.test(chunk)) {
+      fail(`${label}: found "${match[0].trim()}" in "${chunk.trim().slice(0, 120)}"`);
+      return;
+    }
+  }
+}
+
+const forbiddenByRoute = {
+  '/relocation': forbiddenDirectAction,
+  // '/relocation/brief': forbiddenDirectAction,  // enable with the draft in src/pages/relocation/
+};
+
+for (const {route} of routes) {
+  const prose = proseFromHtml(htmlForRoute(route));
+  for (const [pattern, why] of forbiddenEverywhere) {
+    expectExcludes(prose, pattern, `${route}: ${why}`);
+  }
+  for (const [pattern, why] of forbiddenByRoute[route] ?? []) {
+    expectExcludesUnlessNegated(prose, pattern, `${route}: ${why}`);
+  }
+}
+
+// Unrouted drafts under src/pages are not built, so the route loop above never sees them.
+// Scan their source anyway: a forbidden claim should surface while drafting, not on the day
+// the page ships. Comments are stripped first — this file's own rules, and the drafts' own
+// warning headers, legitimately name the phrases they forbid.
+const draftSources = ['src/pages/relocation/brief.jsx'];
+for (const relative of draftSources) {
+  const file = path.resolve(process.cwd(), relative);
+  if (!statSafe(file)) continue;
+  const source = readFileSync(file, 'utf8')
+    .replace(/\/\*[\s\S]*?\*\//g, ' ')
+    .replace(/^\s*\/\/.*$/gm, ' ');
+  for (const [pattern, why] of [...forbiddenEverywhere, ...forbiddenDirectAction]) {
+    expectExcludesUnlessNegated(source, pattern, `${relative} (unrouted draft): ${why}`, 'source');
+  }
+}
+
+// Disclaimers that must be present wherever an offer is described. These are the sentences
+// that keep the offer pages honest; losing one silently is the failure this guards against.
+const requiredDisclaimers = [
+  [
+    '/work',
+    'They are not claims that each project has already been delivered for a Hekswerk client.',
+    'representative-projects disclaimer',
+  ],
+  ['/work', 'The sprint ends', 'engagement-ends boundary'],
+  ['/work', 'Hekswerk does not certify EU AI Act or privacy compliance', 'EU AI Act boundary'],
+];
+for (const [route, phrase, label] of requiredDisclaimers) {
+  const html = htmlForRoute(route);
+  if (!html) continue;
+  expectIncludes(proseFromHtml(html), phrase, `${route}: missing ${label}`);
+}
+
 const image = readFileSync(path.join(buildRoot, 'img/hekswerk-social-card.png'));
 if (image.toString('ascii', 1, 4) !== 'PNG' || image.readUInt32BE(16) !== 1200 || image.readUInt32BE(20) !== 630) {
   fail('social image must be a 1200x630 PNG');
@@ -402,6 +459,10 @@ const sitemap = readFileSync(path.join(buildRoot, 'sitemap-0.xml'), 'utf8');
 for (const {route} of routes) {
   const location = route === '/' ? siteUrl : `${siteUrl}${route}`;
   expectIncludes(sitemap, `<loc>${location}</loc>`, `sitemap: ${route}`);
+}
+for (const route of retiredRoutes) {
+  if (routeFile(route)) fail(`${route}: retired route output remains`);
+  if (sitemap.includes(`<loc>${siteUrl}${route}</loc>`)) fail(`sitemap: retired route remains: ${route}`);
 }
 if (/\/worldweaver(?:<|\/)/.test(sitemap)) fail('sitemap: retired WorldWeaver route remains');
 

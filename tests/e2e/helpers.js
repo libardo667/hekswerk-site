@@ -9,11 +9,6 @@ export const publicRoutes = [
   '/about',
   '/contact',
   '/privacy',
-  '/ledger-review',
-  '/ledger-review/privacy',
-  '/ledger-review/terms',
-  '/ledger-review/connect',
-  '/ledger-review/disconnected',
 ];
 
 export async function blockExternalAssets(page) {

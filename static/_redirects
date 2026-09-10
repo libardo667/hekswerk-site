@@ -1,2 +1,10 @@
 /contact.html /contact 301
 /index.html / 301
+
+# Hekswerk Ledger Review retired 2026-09-09. The QuickBooks Online integration was
+# deactivated, its subscription cancelled, and the developer app deleted, so these pages
+# document an integration that no longer exists. Redirected rather than left to 404
+# because Intuit listings and prior correspondence may still reference them.
+/ledger-review / 301
+/ledger-review.html / 301
+/ledger-review/* / 301

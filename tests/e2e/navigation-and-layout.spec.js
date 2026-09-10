@@ -104,9 +104,9 @@ test('homepage commercial and research paths resolve', async ({page}) => {
 test('work pricing distinguishes inquiry, scoping, the sprint, and custom work', async ({page}) => {
   await page.goto('/work');
   const summary = page.locator('.offer-summary');
-  await expect(summary.locator('strong')).toHaveText('$3,500');
+  await expect(summary.locator('strong')).toHaveText('$6,000');
   await expect(summary.getByText('$750 paid Workflow Scoping')).toBeVisible();
-  await expect(summary.getByText('$6,500+ custom integration or system work')).toBeVisible();
+  await expect(summary.getByText('$12,000+ custom integration or system work')).toBeVisible();
   await summary.getByRole('link', {name: 'See how pricing works'}).click();
   await expect(page).toHaveURL(/\/work#pricing$/);
 
@@ -122,8 +122,8 @@ test('work pricing distinguishes inquiry, scoping, the sprint, and custom work',
   await expect(pricing.getByText('the full $750 scoping fee is credited toward that build')).toBeVisible();
   await expect(
     pricing.locator('.pricing-step').filter({hasText: 'Operations Automation Sprint'}).locator('strong'),
-  ).toHaveText('$3,500');
-  await expect(pricing.getByText('generally starts at $6,500.').first()).toBeVisible();
+  ).toHaveText('$6,000');
+  await expect(pricing.getByText('generally starts at $12,000.').first()).toBeVisible();
 
   await page.getByRole('link', {name: 'Start an automation inquiry'}).first().click();
   await expect(page).toHaveURL(/\/contact\?topic=automation&source=direct$/);
@@ -135,7 +135,7 @@ test('referral brief is self-contained and print-ready', async ({page}) => {
 
   await expect(brief.getByRole('heading', {level: 1})).toHaveText('Make the manual chain reliable.');
   await expect(brief.locator('.brief-example')).toHaveCount(4);
-  await expect(brief.locator('.brief-price strong')).toHaveText('$3,500');
+  await expect(brief.locator('.brief-price strong')).toHaveText('$6,000');
   await expect(
     brief.getByText('Your accounts, credentials, data, documentation, and resulting system stay yours.'),
   ).toBeVisible();

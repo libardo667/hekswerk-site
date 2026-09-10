@@ -1,35 +1,7 @@
 import Link from '../../components/Link';
 import Layout from '../../components/PageContent';
 import StructuredData from '../../components/StructuredData';
-import {offer} from '../../data/offer';
-
-const workflowExamples = [
-  {
-    title: 'Route new inquiries',
-    body: 'Move details from a form or shared inbox into the right tracker or CRM, assign an owner, and create the next step.',
-  },
-  {
-    title: 'Reconcile documents',
-    body: 'Extract attachment data, match it against internal records, and flag missing or mismatched items for review.',
-  },
-  {
-    title: 'Build recurring reports',
-    body: 'Clean CSV or spreadsheet exports, combine the required sources, and produce a consistent operational report.',
-  },
-  {
-    title: 'Repair brittle automations',
-    body: 'Rebuild an unreliable Zapier, Make, or n8n workflow with visible failures, useful logs, and documentation.',
-  },
-];
-
-const sprintContents = [
-  'Map one primary workflow and agree on acceptance criteria.',
-  'Build across one to three systems in the ordinary case.',
-  'Test the expected path, exceptions, and failure behavior.',
-  'Add basic logs or an audit trail appropriate to the scope.',
-  'Deploy, write the runbook, and train the workflow owner.',
-  'Correct in-scope defects for 30 calendar days after handoff.',
-];
+import {offer, sprintContentsBrief, sprintExamplesBrief} from '../../data/offer';
 
 export default function WorkBrief() {
   return (
@@ -79,7 +51,7 @@ export default function WorkBrief() {
               <h2 id="brief-examples-title">Does one of these keep landing back in someone&apos;s hands?</h2>
             </div>
             <div className="brief-example-grid">
-              {workflowExamples.map((example, index) => (
+              {sprintExamplesBrief.map((example, index) => (
                 <article className="brief-example" key={example.title}>
                   <span aria-hidden="true">0{index + 1}</span>
                   <div>
@@ -101,7 +73,7 @@ export default function WorkBrief() {
                 <h2 id="brief-contains-title">From current process to owned system</h2>
               </div>
               <ul>
-                {sprintContents.map((item) => (
+                {sprintContentsBrief.map((item) => (
                   <li key={item}>{item}</li>
                 ))}
               </ul>

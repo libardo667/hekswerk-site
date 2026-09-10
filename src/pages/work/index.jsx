@@ -9,43 +9,7 @@ import {
 } from '../../components/SitePrimitives';
 import Layout from '../../components/PageContent';
 import StructuredData from '../../components/StructuredData';
-import {offer} from '../../data/offer';
-
-const representativeProjects = [
-  'Form or email intake routed into a tracker or CRM.',
-  'Attachments extracted and reconciled against internal records.',
-  'Recurring CSV or spreadsheet exports cleaned into a report.',
-  'Deadline or follow-up tasks created from structured records.',
-  'An unreliable Zapier, Make, or n8n workflow rebuilt with visible failures and documentation.',
-];
-
-const sprintContents = [
-  {
-    eyebrow: 'Define',
-    title: 'A workflow with a testable boundary',
-    items: ['Workflow mapping', 'Acceptance criteria agreed before implementation'],
-  },
-  {
-    eyebrow: 'Build',
-    title: 'One primary workflow',
-    items: ['One to three systems in the ordinary case', 'Implementation of the agreed automation'],
-  },
-  {
-    eyebrow: 'Verify',
-    title: 'Expected paths and visible failures',
-    items: ['Happy-path and exception testing', 'Basic logs or an audit trail appropriate to the scope'],
-  },
-  {
-    eyebrow: 'Hand off',
-    title: 'A system the client can own',
-    items: [
-      'Deployment into client-owned systems',
-      'Written runbook',
-      'One handoff or training session',
-      '30 calendar days of bounded defect correction',
-    ],
-  },
-];
+import {offer, sprintExamplesFull, sprintPhases} from '../../data/offer';
 
 export default function Work() {
   const pricingSequence = [
@@ -138,7 +102,7 @@ export default function Work() {
               </p>
             </div>
             <div className="project-example-grid">
-              {representativeProjects.map((project, index) => (
+              {sprintExamplesFull.map((project, index) => (
                 <article className="project-example-card" key={project}>
                   <span aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
                   <p>{project}</p>
@@ -159,7 +123,7 @@ export default function Work() {
               </p>
             </div>
             <div className="sprint-scope-grid">
-              {sprintContents.map((group) => (
+              {sprintPhases.map((group) => (
                 <article className="sprint-scope-card" key={group.title}>
                   <span className="eyebrow">{group.eyebrow}</span>
                   <h3>{group.title}</h3>
