@@ -463,7 +463,7 @@ const requiredDisclaimers = [
   ['/relocation', 'does not submit forms on your behalf', 'REL-03 no direct action'],
   ['/relocation', 'does not make legal, immigration, tax, medical, or financial determinations', 'REL-04'],
   ['/relocation', 'cannot guarantee approval, timing, cost, or any third party decision', 'REL-05'],
-  ['/relocation', 'Identifiable client data is not sent to third-party AI', 'AI-03'],
+  ['/relocation', 'Identifiable client data is not sent to third-party AI', 'ROUTE-03'],
 ];
 for (const [route, phrase, label] of requiredDisclaimers) {
   const html = htmlForRoute(route);

@@ -2,7 +2,7 @@
 //
 // Every factual claim on this page maps to PUBLIC_CLAIMS_LEDGER.md. As of 2026-09-09:
 //   Yes:  REL-02 (not the other professionals), REL-03 (no direct action), REL-04 (no
-//         determinations), REL-05 (no guarantees), REL-06 (own DAFT move), AI-01, AI-02, AI-03.
+//         determinations), REL-05 (no guarantees), REL-06 (own DAFT move), ROUTE-01, ROUTE-02, ROUTE-03.
 //   Hold: REL-01 (the offer itself), REL-07 ("opening to a small number of households"),
 //         REL-08 (control-panel figures; none used here).
 // The page may not lose noindex, enter the sitemap, or be linked from navigation until the
@@ -144,9 +144,9 @@ export default function Relocation() {
               direction and review. I am accountable for whether the result is correct, not the model.
             </p>
             <p>
-              The system I run your plan in sends nothing anywhere by default. Its shipping configuration has outbound
-              network access switched off and no model connected at all. Anything that leaves the machine leaves because
-              someone deliberately turned it on for a stated reason.
+              Each client's book in the system I run your plan in starts with AI switched off. Nothing from your case
+              can reach a model unless we turn that on together, in writing, for a route I have described to you. The
+              software ships that way too: a clean install has outbound access disabled and no model connected.
             </p>
             <p>
               Identifiable client data is not sent to third-party AI. The model can run locally, on the same machine as
