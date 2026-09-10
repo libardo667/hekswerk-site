@@ -57,6 +57,18 @@ const routes = [
     title: 'Privacy | Hekswerk',
     description: 'Plain-language privacy and data-handling information for the Hekswerk website and contact form.',
   },
+  // `draft: true` routes render but are not advertised: they must carry robots noindex and be
+  // ABSENT from the sitemap (astro.config.mjs `draftRoutes` must list them too). Everything
+  // else still applies - metadata, JSON-LD, links, forbidden claims, required disclaimers -
+  // so a draft is held to the same honesty as a live page while it is being iterated on.
+  {
+    route: '/relocation',
+    file: 'relocation.html',
+    title: 'Relocation coordination | Hekswerk',
+    description:
+      'Household relocation coordination: what is waiting on whom, what is blocked, and what breaks if a date slips.',
+    draft: true,
+  },
 ];
 
 const retiredRoutes = [
@@ -89,6 +101,19 @@ function expectIncludes(html, value, label) {
 const proseFromHtml = (html) =>
   textFromHtml(
     html.replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi, ' ').replace(/<style\b[^>]*>[\s\S]*?<\/style>/gi, ' '),
+  );
+
+// For negation-aware matching, a block element boundary must count as a sentence boundary.
+// Headings, eyebrows, and list items rarely end in a period, so plain tag-stripping fuses
+// "What Hekswerk does not do" with whatever heading follows it into one "sentence" whose
+// "does not" then masks a violation in the next element. Caught by mutation test on
+// 2026-09-09: an injected "I will register your KVK appointment." passed on /relocation.
+const sentenceProseFromHtml = (html) =>
+  proseFromHtml(
+    html.replace(
+      /<\/(?:p|h[1-6]|li|dt|dd|blockquote|figcaption|td|th|span|div|section|article|header|footer)>/gi,
+      '. ',
+    ),
   );
 
 function expectExcludes(prose, pattern, label) {
@@ -381,12 +406,15 @@ const forbiddenByRoute = {
 };
 
 for (const {route} of routes) {
-  const prose = proseFromHtml(htmlForRoute(route));
+  const html = htmlForRoute(route);
+  const prose = proseFromHtml(html);
   for (const [pattern, why] of forbiddenEverywhere) {
     expectExcludes(prose, pattern, `${route}: ${why}`);
   }
+  // Negation-aware rules need block boundaries respected; see sentenceProseFromHtml.
+  const sentences = sentenceProseFromHtml(html);
   for (const [pattern, why] of forbiddenByRoute[route] ?? []) {
-    expectExcludesUnlessNegated(prose, pattern, `${route}: ${why}`);
+    expectExcludesUnlessNegated(sentences, pattern, `${route}: ${why}`);
   }
 }
 
@@ -416,6 +444,26 @@ const requiredDisclaimers = [
   ],
   ['/work', 'The sprint ends', 'engagement-ends boundary'],
   ['/work', 'Hekswerk does not certify EU AI Act or privacy compliance', 'EU AI Act boundary'],
+  // The partnership tier must never read as a walk-back of "The sprint ends". Both its
+  // availability restriction and its separate-agreement framing have to be on the page.
+  ['/work', 'available only after a completed sprint or custom build', 'partnership availability boundary'],
+  [
+    '/work',
+    'a separate agreement entered deliberately, not an extension of this one',
+    'partnership separate-agreement',
+  ],
+  ['/work', 'Unused capacity does not accumulate', 'partnership non-accumulation'],
+  // /relocation: the four boundary sentences from PUBLIC_CLAIMS_LEDGER.md REL-02..REL-05.
+  // These are the page's protection against the direct-action failure; they must be present.
+  [
+    '/relocation',
+    'Hekswerk is not a housing agent, an immigration lawyer, a tax adviser, or a moving company',
+    'REL-02',
+  ],
+  ['/relocation', 'does not submit forms on your behalf', 'REL-03 no direct action'],
+  ['/relocation', 'does not make legal, immigration, tax, medical, or financial determinations', 'REL-04'],
+  ['/relocation', 'cannot guarantee approval, timing, cost, or any third party decision', 'REL-05'],
+  ['/relocation', 'Identifiable client data is not sent to third-party AI', 'AI-03'],
 ];
 for (const [route, phrase, label] of requiredDisclaimers) {
   const html = htmlForRoute(route);
@@ -456,8 +504,13 @@ if (readFileSync(path.join(buildRoot, 'robots.txt'), 'utf8') !== expectedRobots)
 const sitemapIndex = readFileSync(path.join(buildRoot, 'sitemap-index.xml'), 'utf8');
 expectIncludes(sitemapIndex, `${siteUrl}/sitemap-0.xml`, 'sitemap index');
 const sitemap = readFileSync(path.join(buildRoot, 'sitemap-0.xml'), 'utf8');
-for (const {route} of routes) {
+for (const {route, draft} of routes) {
   const location = route === '/' ? siteUrl : `${siteUrl}${route}`;
+  if (draft) {
+    if (sitemap.includes(`<loc>${location}</loc>`)) fail(`sitemap: draft route must be absent: ${route}`);
+    expectIncludes(htmlForRoute(route), 'name="robots" content="noindex"', `${route}: draft route must be noindex`);
+    continue;
+  }
   expectIncludes(sitemap, `<loc>${location}</loc>`, `sitemap: ${route}`);
 }
 for (const route of retiredRoutes) {

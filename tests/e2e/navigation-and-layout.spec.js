@@ -116,7 +116,10 @@ test('work pricing distinguishes inquiry, scoping, the sprint, and custom work',
     'Paid Workflow Scoping',
     'Operations Automation Sprint',
     'Custom integration or system',
+    'Continuity partnership',
   ]);
+  await expect(pricing.getByText('available only after a completed sprint or custom build')).toBeVisible();
+  await expect(pricing.getByText('Unused capacity does not accumulate')).toBeVisible();
   await expect(pricing.getByText('Sending an initial inquiry remains free.').first()).toBeVisible();
   await expect(pricing.getByText('Workflow Scoping does not include implementation.')).toBeVisible();
   await expect(pricing.getByText('the full $750 scoping fee is credited toward that build')).toBeVisible();

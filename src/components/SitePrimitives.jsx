@@ -108,6 +108,7 @@ export function PricingSequence({items}) {
             <span className="eyebrow">{item.name}</span>
             <h3>{item.title}</h3>
             <p>{item.body || item.statement}</p>
+            {item.boundary ? <p className="pricing-step__boundary">{item.boundary}</p> : null}
           </div>
           <strong>{item.price}</strong>
         </li>

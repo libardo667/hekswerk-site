@@ -1,0 +1,17 @@
+---
+// DRAFT ROUTE. Renders for local preview and on a branch; must not reach main until
+// PUBLIC_CLAIMS_LEDGER.md entries REL-01, REL-07 and REL-08 read Yes and /privacy covers
+// the consumer service. Kept noindex and out of the sitemap while it is a draft; the
+// built-site check enforces both for any route flagged `draft: true`.
+import SiteLayout from '../layouts/SiteLayout.astro';
+import Relocation from '../../src/pages/relocation/index.jsx';
+---
+
+<SiteLayout
+  title="Relocation coordination | Hekswerk"
+  description="Household relocation coordination: what is waiting on whom, what is blocked, and what breaks if a date slips."
+  canonicalPath="/relocation"
+  robots="noindex"
+>
+  <Relocation />
+</SiteLayout>

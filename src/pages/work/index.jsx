@@ -17,6 +17,7 @@ export default function Work() {
     offer.pricing.scoping,
     {...offer.pricing.standard, featured: true},
     offer.pricing.custom,
+    offer.pricing.partnership,
   ];
 
   return (
@@ -303,6 +304,7 @@ export default function Work() {
                   There is no indefinite maintenance obligation, 24-hour support, or custom SaaS product hidden inside
                   the sprint.
                 </p>
+                <p>{offer.pricing.partnership.separateAgreement}</p>
               </article>
               <article className="service-boundary-card">
                 <span className="eyebrow">Data and access</span>

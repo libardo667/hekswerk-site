@@ -1665,6 +1665,11 @@ h3 {
   line-height: 1.65;
 }
 
+.pricing-step__boundary {
+  margin-top: 0.6rem;
+  font-size: 0.92rem;
+}
+
 .pricing-step strong {
   color: var(--heks-cream);
   font-family: var(--ifm-heading-font-family);
