@@ -6,6 +6,7 @@ const fonts = new URL('fonts/', output);
 
 await cp(new URL('workers/move/site/', root), output, {recursive: true});
 await mkdir(fonts, {recursive: true});
+await copyFile(new URL('static/img/logo_aura.svg', root), new URL('logo_aura.svg', output));
 
 for (const name of ['outfit', 'fraunces']) {
   const source = new URL(`node_modules/@fontsource-variable/${name}/`, root);
