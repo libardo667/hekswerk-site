@@ -140,16 +140,10 @@ The site may connect the discipline visible in WorldWeaver to the care used in c
 
 ## Relocation planning
 
-Relocation planning is a secondary, by-inquiry lane. It is not part of the August launch.
-
-For this relaunch:
-
-- do not place relocation planning in the primary navigation or homepage offer hierarchy;
-- do not publish or restore a relocation landing page;
-- do not advertise relocation pricing, cohorts, launch dates, or availability; and
-- keep a relocation topic in the contact form so an existing or referred inquiry can still reach Levi.
-
-Relocation planning must not become a third equal front door. Any later public launch requires a separate strategy decision.
+The August decision kept relocation out of the primary homepage and navigation. On 2026-11-22, Levi approved
+`move.hekswerk.com` as a separate, by-inquiry page for people seeking help with an international move. The page
+describes the work and gives visitors Levi’s existing email address. Timing, scope and any offer are discussed
+individually. The existing relocation topic remains available on the main site’s contact form.
 
 ## Required public route structure
 

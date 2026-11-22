@@ -36,6 +36,13 @@ secret, database, key-value store, object bucket, session state, or general serv
 serves the built HTML, CSS, JavaScript, images, and locally bundled fonts directly from Static Assets. Only
 `/_metrics` runs the Worker script first.
 
+## Relocation subdomain
+
+`move.hekswerk.com` has its own Static Assets Worker in `workers/move/`. Edit the copy and
+styles there. `npm run build` builds the page with the repository’s locally bundled fonts.
+`npm run move:check` validates the built Worker package. The existing production workflow deploys the subdomain after
+the shared site checks. Inquiries use the existing Hekswerk email address through a mail link.
+
 ## Local commands
 
 ```bash

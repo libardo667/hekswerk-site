@@ -1,4 +1,5 @@
 build/
+build-move/
 .astro/
 .docusaurus/
 node_modules/

@@ -1,0 +1,13 @@
+{
+  "$schema": "../../node_modules/wrangler/config-schema.json",
+  "name": "hekswerk-move",
+  "compatibility_date": "2026-08-12",
+  "workers_dev": false,
+  "preview_urls": false,
+  "routes": [{"pattern": "move.hekswerk.com", "custom_domain": true}],
+  "assets": {
+    "directory": "../../build-move",
+    "html_handling": "drop-trailing-slash",
+    "not_found_handling": "none",
+  },
+}
