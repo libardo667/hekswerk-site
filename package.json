@@ -4,22 +4,24 @@
   "private": true,
   "scripts": {
     "start": "ASTRO_TELEMETRY_DISABLED=1 astro dev",
-    "build": "ASTRO_TELEMETRY_DISABLED=1 astro build",
+    "build": "ASTRO_TELEMETRY_DISABLED=1 astro build && npm run move:build",
     "serve": "ASTRO_TELEMETRY_DISABLED=1 astro preview",
     "audit:languages": "node scripts/project-language-inventory.mjs",
     "metrics:weekly": "node --env-file-if-exists=.env scripts/weekly-metrics.mjs",
     "metrics:weekly:save": "bash scripts/save-weekly-metrics.sh",
     "worker:check": "XDG_CONFIG_HOME=/tmp/hekswerk-wrangler-config WRANGLER_LOG_PATH=/tmp/hekswerk-wrangler-logs wrangler deploy --dry-run --config workers/intake/wrangler.jsonc",
     "worker:deploy": "WRANGLER_LOG_PATH=/tmp/hekswerk-wrangler-logs wrangler deploy --config workers/intake/wrangler.jsonc",
+    "move:build": "node scripts/build-move.mjs",
+    "move:check": "XDG_CONFIG_HOME=/tmp/hekswerk-move-wrangler-config WRANGLER_LOG_PATH=/tmp/hekswerk-move-wrangler-logs wrangler deploy --dry-run --config workers/move/wrangler.jsonc",
     "site:check": "XDG_CONFIG_HOME=/tmp/hekswerk-site-wrangler-config WRANGLER_LOG_PATH=/tmp/hekswerk-site-wrangler-logs wrangler deploy --dry-run --config workers/site/wrangler.jsonc",
     "site:deploy": "npm run build && WRANGLER_LOG_PATH=/tmp/hekswerk-site-wrangler-logs wrangler deploy --config workers/site/wrangler.jsonc",
     "lint": "eslint .",
-    "format": "prettier --write \".github/**/*.{yml,yaml}\" \"*.{js,mjs,json,md}\" \"site/**/*.astro\" \"src/**/*.{js,jsx,css}\" \"scripts/**/*.mjs\" \"tests/**/*.{js,jsx}\" \"workers/**/*.{js,jsonc,md}\"",
-    "format:check": "prettier --check \".github/**/*.{yml,yaml}\" \"*.{js,mjs,json,md}\" \"site/**/*.astro\" \"src/**/*.{js,jsx,css}\" \"scripts/**/*.mjs\" \"tests/**/*.{js,jsx}\" \"workers/**/*.{js,jsonc,md}\"",
+    "format": "prettier --write \".github/**/*.{yml,yaml}\" \"*.{js,mjs,json,md}\" \"site/**/*.astro\" \"src/**/*.{js,jsx,css}\" \"scripts/**/*.mjs\" \"tests/**/*.{js,jsx}\" \"workers/**/*.{js,jsonc,md,html,css}\"",
+    "format:check": "prettier --check \".github/**/*.{yml,yaml}\" \"*.{js,mjs,json,md}\" \"site/**/*.astro\" \"src/**/*.{js,jsx,css}\" \"scripts/**/*.mjs\" \"tests/**/*.{js,jsx}\" \"workers/**/*.{js,jsonc,md,html,css}\"",
     "test": "vitest run tests/unit",
     "test:e2e": "playwright test",
     "check:site": "node scripts/check-built-site.mjs",
-    "check": "npm run format:check && npm run lint && npm run test && npm run worker:check && npm run build && npm run site:check && npm run check:site && npm run test:e2e"
+    "check": "npm run format:check && npm run lint && npm run test && npm run worker:check && npm run build && npm run site:check && npm run move:check && npm run check:site && npm run test:e2e"
   },
   "dependencies": {
     "@astrojs/react": "^6.0.2",

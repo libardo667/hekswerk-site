@@ -390,6 +390,15 @@ for (const {route} of routes) {
   }
 }
 
+const movePage = readFileSync(path.resolve('build-move/index.html'), 'utf8');
+const moveProse = proseFromHtml(movePage);
+for (const [pattern, why] of forbiddenEverywhere) {
+  expectExcludes(moveProse, pattern, `move.hekswerk.com: ${why}`);
+}
+for (const [pattern, why] of forbiddenDirectAction) {
+  expectExcludesUnlessNegated(moveProse, pattern, `move.hekswerk.com: ${why}`);
+}
+
 // Unrouted drafts under src/pages are not built, so the route loop above never sees them.
 // Scan their source anyway: a forbidden claim should surface while drafting, not on the day
 // the page ships. Comments are stripped first — this file's own rules, and the drafts' own

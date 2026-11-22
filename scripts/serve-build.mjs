@@ -2,7 +2,7 @@ import {createReadStream, existsSync, statSync} from 'node:fs';
 import {createServer} from 'node:http';
 import path from 'node:path';
 
-const buildRoot = path.resolve(process.cwd(), 'build');
+const buildRoot = path.resolve(process.cwd(), process.env.SITE_BUILD_ROOT || 'build');
 const port = Number(process.env.PORT || 4173);
 const contentTypes = {
   '.css': 'text/css; charset=utf-8',
