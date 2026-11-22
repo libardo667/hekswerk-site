@@ -13,16 +13,26 @@
 }
 
 :root {
-  color: #24332a;
-  background: #f9f5ed;
+  color-scheme: dark;
+  --ink: #09090e;
+  --indigo: #293656;
+  --violet: #4a4b78;
+  --lavender: #8c7699;
+  --cyan: #7095b7;
+  --gold: #c0a990;
+  --cream: #f5f5f2;
+  --hairline: color-mix(in srgb, var(--lavender) 36%, transparent);
+  color: var(--cream);
+  background-color: var(--ink);
   font-family: Outfit, system-ui, sans-serif;
   font-synthesis: none;
 }
 
 body {
+  min-height: 100svh;
   margin: 0;
-  border-block-start: 0.375rem solid #285440;
-  line-height: 1.55;
+  background: radial-gradient(ellipse at 80% 10%, color-mix(in srgb, var(--violet) 36%, var(--ink)), transparent 58%);
+  line-height: 1.5;
 }
 
 .wrap {
@@ -30,45 +40,56 @@ body {
   margin-inline: auto;
 }
 
+header {
+  border-block-end: 1px solid var(--hairline);
+}
+
 .brand {
-  margin-block: 0;
-  padding-block: 1.6rem;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin: 0;
+  padding-block: 1.25rem;
   font-size: 1.125rem;
   font-weight: 600;
 }
 
 main {
   display: grid;
-  gap: clamp(2rem, 6vw, 5rem);
-  padding-block: clamp(2.5rem, 9vw, 8rem) 4rem;
+  gap: clamp(2rem, 5vw, 4rem);
+  padding-block: clamp(2.75rem, 9vw, 8rem) 4rem;
 }
 
 h1 {
+  max-width: 15ch;
   margin: 0;
-  max-width: 13ch;
   font-family: Fraunces, Georgia, serif;
   font-weight: 540;
-  font-size: clamp(2.75rem, 6.9vw, 6.25rem);
-  line-height: 1.04;
-  letter-spacing: -0.035em;
+  font-size: clamp(2.5rem, 5.15vw, 4.5rem);
+  line-height: 1.12;
+  letter-spacing: -0.028em;
   overflow-wrap: anywhere;
+  text-wrap: balance;
 }
 
 .lead {
-  max-width: 37ch;
-  margin-block: 1.6rem 0;
-  font-size: clamp(1.2rem, 2vw, 1.45rem);
+  max-width: 45ch;
+  margin-block: 1.5rem 0;
+  color: color-mix(in srgb, var(--cream) 88%, var(--lavender));
+  font-size: clamp(1.125rem, 1.8vw, 1.375rem);
 }
 
 .contact {
   align-self: end;
-  border-block-start: 1px solid #9da79b;
-  padding-block-start: 1.4rem;
-  max-width: 36ch;
+  max-width: 40ch;
+  border: 1px solid var(--hairline);
+  border-radius: 0.875rem;
+  padding: clamp(1.25rem, 3vw, 2rem);
+  background: color-mix(in srgb, var(--indigo) 75%, var(--ink));
 }
 
 .contact p {
-  margin-block: 0 1.35rem;
+  margin-block: 0 1.25rem;
 }
 
 .button {
@@ -76,29 +97,33 @@ h1 {
   min-height: 3rem;
   align-items: center;
   padding-inline: 1.25rem;
-  border-radius: 0.25rem;
-  background: #285440;
-  color: #fff;
+  border: 1px solid var(--gold);
+  border-radius: 0.4rem;
+  background: var(--ink);
+  color: var(--cream);
   font-weight: 590;
   text-decoration: none;
+  box-shadow: 0 0 1.25rem color-mix(in srgb, var(--gold) 14%, transparent);
 }
 
 .button:hover {
-  background: #193e2d;
+  border-color: var(--cyan);
 }
 
 .button:focus-visible {
-  outline: 2px solid #285440;
+  outline: 2px solid var(--cyan);
   outline-offset: 4px;
 }
 
 .contact .note {
   margin-block: 1rem 0;
-  color: #46594e;
+  color: color-mix(in srgb, var(--cream) 84%, var(--lavender));
+  font-size: 0.875rem;
+  line-height: 1.43;
 }
 
 @media (min-width: 52rem) {
   main {
-    grid-template-columns: minmax(0, 1fr) minmax(15rem, 0.42fr);
+    grid-template-columns: minmax(0, 1fr) minmax(18rem, 0.59fr);
   }
 }

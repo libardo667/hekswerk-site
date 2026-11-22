@@ -8,7 +8,10 @@ test('the relocation page describes the service and links to an email draft', as
   await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', 'https://move.hekswerk.com/');
   await expect(page.locator('meta[property="og:title"]')).toHaveAttribute('content', await page.title());
   await expect(page.locator('meta[property="og:description"]')).toHaveAttribute('content', /Planning a move abroad/);
-  await expect(page.locator('body')).toHaveCSS('border-top-width', '6px');
+  await expect(page.locator('html')).toHaveCSS('background-color', 'rgb(9, 9, 14)');
+  const mark = page.locator('.brand img');
+  await expect(mark).toBeVisible();
+  await expect.poll(() => mark.evaluate((image) => image.naturalWidth)).toBeGreaterThan(0);
   expect(
     await page.evaluate(async () => {
       const faces = await document.fonts.load('540 44px Fraunces');
